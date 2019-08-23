@@ -1,0 +1,29 @@
+<!--index.wxml-->
+<view class="container">
+  <swiper indicator-dots="true" autoplay="true" interval="2000" duration="200" circular='true' class="bannerTit">
+    <block wx:for="{{ads}}" wx:key="{{index}}">
+      <swiper-item>
+        <image src="{{item.thumb}}" onerror="" class="slide-image"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="cd" data-id="{{row.id}}" data-path="/pages/bannerDealis/bannerDealis" catchtap="toRouter">
+    <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+    <!-- <image src="{{row.thumb}}"></image> -->
+  </view>
+  <cover-view class="fs_17 tc fcF1 look">亲，观看视频可获得代金券哦11~</cover-view>
+  <swiper vertical="true"  class="logs_swiper" autoplay="true" interval="2000" duration="200" bindchange="bindchange" circular='true'>
+    <block wx:for="{{logsList}}" wx:key="{{index}}">
+      <swiper-item>
+        <view class="logs fs_14 flex flex_m flex_lr box_zing">
+          <view>
+            <text class="./iconfont/iconlaba:before icon" style="font-size:30rpx;color:#F19022;margin:0 10rpx 0 0"></text>
+            <text>{{item.user.username}}观看广告领取了{{item.total_money}}代金券</text>
+          </view>
+          <text class="ter" style="width:30%">{{item.created_at}}</text>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="model" style="height:{{height-774}}rpx"></view>
+</view>

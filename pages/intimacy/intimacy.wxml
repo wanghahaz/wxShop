@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="container">
+  <view style="line-height:90rpx " class="width90 fs_12 ter">
+    最近更新日期:2019年08月13日
+  </view>
+  <view style="line-height:56rpx " class="width90 fs_17">只有不回避痛苦和迷茫的人，才有资格去 谈乐观与坚定。命运不会厚待谁，悲喜也不会 单为你准备。那些貌似宽宏大量的人，不是没 有情绪，而是清楚目标远比情绪重要。没脾气， 不是与生俱来，而是肩上的责任压倒一切。在 成为你想要成为的人之前，你必须谨记，情绪 必须屈从于目标。
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "one_shop": "../../element/oneShop/oneShop"
+  },
+  "navigationBarTitleText": "我的"
+}

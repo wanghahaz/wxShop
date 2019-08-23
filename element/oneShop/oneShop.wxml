@@ -1,0 +1,10 @@
+<view class="one_shop flex">
+  <image src="{{obj.goods_thumb}}"></image>
+  <text class="title box_zing clamp_2 fs_13">{{obj.goods_name}}</text>
+  <view class="flex">
+    <text class="old  fs_13">￥{{obj.goods_market_price}}</text>
+    <text class="new fs_13">￥{{obj.goods_price}}</text>
+  </view>
+
+  <!-- <text class="ticket fs_13 tc">用券立省</text> -->
+</view>

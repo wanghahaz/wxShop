@@ -1,0 +1,27 @@
+.shopTitle image {
+  width: 118rpx;
+  height: 118rpx;
+  border-radius: 50%;
+  margin: 0 30rpx 0 0;
+}
+
+.shopTitle {
+  padding: 30rpx 0;
+}
+.titleSelect{
+  padding: 20rpx 0;
+}
+.titleSelect text{
+  width: 200rpx;
+ padding-bottom: 20rpx;
+}
+.titleSelect>.fcF1{
+  border-bottom: 1px solid #F18E1E;
+}
+.collect {
+  background: #f18e1e;
+  color: #fff;
+  width: 148rpx;
+  line-height: 58rpx;
+  border-radius: 28rpx;
+}

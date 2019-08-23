@@ -1,0 +1,25 @@
+@import "../../common/css/index.wxss";
+
+.model .size_model {
+  width: 70%;
+  background: #fff;
+  position: fixed;
+  height: 220rpx;
+  border-radius: 10rpx;
+}
+
+.model .size_model>text {
+  height: 140rpx;
+  line-height: 120rpx;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.bth>view {
+  width: 50%;
+  line-height: 80rpx;
+}
+.getInfo{
+  font-size: 30rpx;
+  height: 80rpx;
+  width:50%;
+}

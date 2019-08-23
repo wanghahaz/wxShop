@@ -1,0 +1,57 @@
+.invaBox {
+  height: 330rpx;
+}
+
+.invaBox {
+  position: absolute;
+  top: 470rpx;
+  width: 92%;
+  left: 4%;
+  align-items:center;
+}
+.invaBox image{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.invaBox >view{
+  width: 80%;
+  z-index: 9;
+}
+.invaBox >view>view:nth-of-type(1){
+  border-right:1px solid #E4E4E4; 
+}
+.invaBox .invita{
+  width: 55%;
+  line-height: 84rpx;
+  color: #fff;
+  background: #8FC31F;
+  border-radius: 40rpx;
+}
+.num_box{
+  height: 140rpx;
+}
+.recommended{
+  margin-top:240rpx;
+}
+.recommended::after ,.recommended::before{
+  width: 30%;
+} 
+.noInva{
+  margin-top: 60rpx;
+}
+.noInva image{
+  width: 126rpx;
+  height: 110rpx;
+}
+.friend {
+  height: 590rpx;
+}
+.userList image{
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+}
+.userList>view{
+  margin: 14rpx 0;
+}

@@ -1,0 +1,98 @@
+.container {
+  padding-bottom: 120rpx;
+}
+
+.goodsDealis {
+  border-radius: 18rpx;
+  background: #fff;
+  padding: 30rpx 24rpx;
+  margin: 20rpx auto;
+}
+.swiper_box{
+  position: relative;
+}
+.swiper_box .time{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10rpx 0;
+  background:rgba(241,142,30,0.8); 
+  height: 100rpx;
+  z-index: 99;
+}
+.swiper_box .leftTime{
+  border-left: 1px solid #fff;
+  width: 250rpx;
+  padding-left: 20rpx ;
+}
+.swiper_box .leftTime>view:nth-of-type(1) >text{
+ width: 40rpx;
+ background: #fff;
+ margin: 0 10rpx;
+ line-height: 40rpx; 
+ color:#DB0F0F;
+ text-align: center;
+}
+.flex_bottom {
+  height: 112rpx;
+  position: fixed;
+  background: #fff;
+  padding: 0% 3%;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid #e4e4e4;
+}
+
+.flex_bottom .imgGoods {
+  width: 80rpx;
+  height: 80%;
+  margin-right: 20rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn_bottom text {
+  flex: 1;
+}
+
+.btn_bottom text:nth-of-type(1) {
+  background: linear-gradient(#fdd118, #f18e1e); /* 标准的语法 */
+}
+
+.btn_bottom text:nth-of-type(2) {
+  background: #f18e1e; /* 标准的语法 */
+}
+
+.btn_bottom {
+  line-height: 66rpx;
+  width: 352rpx;
+  color: #fff;
+  overflow: hidden;
+  border-radius: 32rpx;
+  position: absolute;
+  right: 10%;
+}
+
+.maskContent >.btn_bottom {
+  position: fixed;
+  bottom: 20rpx;
+  width: 60%;
+  line-height: 70rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 评价 */
+
+.coment .comentTx {
+  width: 98rpx;
+  height: 98rpx;
+  margin-right: 24rpx;
+}
+
+.coment .comentImg {
+  width: 30%;
+  margin: 10rpx 2%  0 0;
+  height: 140rpx;
+}

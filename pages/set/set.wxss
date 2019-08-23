@@ -1,0 +1,14 @@
+.box{
+  background: #fff;
+  border-radius: 18rpx;
+  margin-top: 30rpx;
+}
+.box_size{
+  padding: 20rpx;
+}
+.b2{
+  color: #B2B2B2;
+}
+.border{
+  border-bottom: 1px solid #E4E4E4;
+}

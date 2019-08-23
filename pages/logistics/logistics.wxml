@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="goods width90 flex ">
+    <image class="goodImg" src="../../image/domo.jpg"></image>
+    <view class="flex column fs_15 flex_lr">
+      <text>物流公司:快递公司</text>
+      <text>运单编号:0123456789</text>
+      <text>物流电话:0351-12345678</text>
+    </view>
+  </view>
+  <view class="h1 width94 box_zing">
+    订单追踪
+  </view>
+  <view class="fs_14 content width90 flex_b column">
+    <block wx:for="{{list}}" wx:key="{{index}}">
+      <view class="one flex column ">
+        <text>{{item.name}}</text>
+        <text style="margin-top:30rpx;">{{item.time}}</text>
+      </view>
+    </block>
+  </view>
+</view>

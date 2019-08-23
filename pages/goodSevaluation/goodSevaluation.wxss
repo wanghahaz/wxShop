@@ -1,0 +1,27 @@
+.sub {
+  position: fixed;
+  bottom: 50rpx;
+  background: #f18e1e;
+  color: #fff;
+  border-radius: 40rpx;
+  width: 82%;
+  line-height: 84rpx;
+  left: 9%;
+}
+
+.evaluation {
+  margin: 30rpx 0;
+}
+
+.goods {
+  padding: 48rpx 10rpx 48rpx 0;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.goodImg {
+  width: 170rpx;
+  height: 170rpx;
+  margin-right: 30rpx;
+}
+
+

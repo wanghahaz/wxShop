@@ -1,0 +1,50 @@
+@import "../../common/css/index.wxss";
+
+.one_shop {
+  padding-bottom: 10rpx;
+  width: 100%;
+  background: #fff;
+  margin-top: 16rpx;
+  position: relative;
+  border-radius: 18rpx;
+  flex-direction: column;
+}
+
+.one_shop image {
+  border-radius: 18rpx 18rpx 0 0;
+  width: 100%;
+  height: 280rpx;
+}
+
+.title {
+  padding: 4rpx;
+  color: #010000;
+  width: 100%;
+}
+
+.old {
+  color: #b2b2b2;
+  text-decoration: line-through;
+}
+
+.one_shop .new {
+  color: #f18e1e;
+  padding: 6rpx 0rpx 6rpx 60rpx;
+}
+
+.one_shop text {
+  padding: 6rpx 0 0 6rpx;
+}
+
+.ticket {
+  position: absolute;
+  display: inline-block;
+  width: 134rpx;
+  line-height: 36rpx;
+  padding: 0;
+  background: #f18e1e;
+  color: #fff;
+  border-radius: 18rpx;
+  bottom: 18rpx;
+  right: 20rpx;
+}

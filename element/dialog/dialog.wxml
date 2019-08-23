@@ -1,0 +1,12 @@
+<view >
+  <view class="mask model" wx:if="{{isInfo}}">
+    <view class="size_model flex cm column">
+      <text class="box_zing tc">请您先登录！</text>
+      <view class="bth flex fs_15">
+        <view bindtap="cancel" class="tc box_zing" style="border-right: 1px solid #E4E4E4;">取消</view>
+        <button  openType="getUserInfo" bindgetuserinfo="getInfo"  hover-class="none" style="line-height: 80rpx" class="tc getInfo">确认</button>
+      </view>
+    </view>
+  </view>
+
+</view>

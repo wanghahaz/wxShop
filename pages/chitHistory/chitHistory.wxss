@@ -1,0 +1,3 @@
+.box_big{
+  margin: 34rpx auto;
+}

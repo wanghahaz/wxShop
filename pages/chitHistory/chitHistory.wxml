@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container">
+  <block wx:for="{{5}}" wx:key="{{index}}">
+      <view class="width94 flex fs_14 box_big">
+        <text class="clamp_1" style="flex:1">观看视频广告：啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</text>
+        <text class="fcF1">+0.03 1小时前</text>
+      </view>
+  </block>
+</view>

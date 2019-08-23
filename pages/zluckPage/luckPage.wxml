@@ -1,0 +1,5 @@
+<view>
+  <!-- 引用组件↓↓↓ -->
+  <lucky bind:myevent="myevent"></lucky>
+  <!-- 引用组件↑↑↑ -->
+</view>

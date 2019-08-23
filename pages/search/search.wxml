@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="search_box width90 flex">
+    <view class="search width90">
+      <text class="./iconfont/iconsousuo:before icon" style="font-size:28rpx"></text>
+      <text class="border"></text>
+      <input type="text" bindinput="bindinput" class="fs_15" placeholder="请输入关键词"></input>
+    </view>
+    <text bindtap="seach" data-type="1" wx:if="{{!!searchText}}" class="flex_nosize fcF1">搜索</text>
+    <text wx:else bindtap="goBack" class="flex_nosize">取消</text>
+  </view>
+
+  <view class="hotlist" wx:if="{{isHot}}">
+    <view class="width90 fs_16">热门搜索</view>
+    <view class="flex_wrap width90">
+      <block wx:for="{{hotList}}" wx:key="{{index}}">
+        <text bindtap="bindinput" data-text="{{item}}"  class="hotText fs_13">{{item}}</text>
+      </block>
+    </view>
+  </view>
+
+  <view class="shop_list flex_wrap width90" style="width:92%">
+    <block wx:for="{{shopList}}" wx:key="{{index}}">
+      <one_shop data-id="{{item.id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+    </block>
+  </view>
+  <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
+</view>

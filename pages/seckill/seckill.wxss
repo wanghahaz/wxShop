@@ -1,0 +1,96 @@
+.titleTime {
+  height: 90rpx;
+  padding: 25rpx 0;
+}
+
+.timeActive {
+  color: #f18e1e;
+  border-bottom: 2px solid #f18e1e;
+}
+
+.timeHint {
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  padding: 0 3%;
+  height: 106rpx;
+}
+
+.recommended {
+  margin: 0；;
+}
+
+.recommended::after, .recommended::before {
+  background: #f8f6f7;
+  width: 28%;
+  /* border-bottom: 1px solid #000; */
+}
+
+.goodsDealis {
+  position: relative;
+  background: #fff;
+  height: 254rpx;
+  border-radius: 18rpx;
+  padding: 32rpx 24rpx;
+  margin-top: 20rpx;
+}
+
+.goodsDealis .end {
+  position: absolute;
+  font-size: 60rpx;
+  color: #f20c00;
+  top: 80rpx;
+  left: 7%;
+  transform: rotate(330deg);
+  -ms-transform: rotate(330deg); /* IE 9 */
+  -moz-transform: rotate(330deg); /* FirefoY */
+  -webkit-transform: rotate(330deg); /* Safari 和 Chrome */
+  -o-transform: rotate(330deg);
+}
+
+.goodsDealis .buySame {
+  position: absolute;
+  width: 146rpx;
+  line-height: 46rpx;
+  border-radius: 24rpx;
+  color: #fff;
+  right: 24rpx;
+  bottom: 48rpx;
+}
+.goodsDealis .slider{
+  position: relative;
+  width: 280rpx;
+  height: 10rpx;
+  margin: 16rpx 0;
+  border-radius: 6rpx;
+  background: #e4e4e4;
+}
+.goodsDealis .slider>view{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #F18E1E;
+   border-radius: 6rpx;
+}
+.goodsDealis .buy {
+  background: #f18e1e;
+}
+
+.goodsDealis .sky {
+  background: #E4E4E4;
+}
+
+.goodsDealis .goodsImg {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 4rpx 24rpx 0 0;
+}
+
+.goodsDealis .price {
+  margin: 16rpx 0;
+}
+
+.goodsDealis .price>text {
+  display: inline-block;
+  margin-right: 20rpx;
+}

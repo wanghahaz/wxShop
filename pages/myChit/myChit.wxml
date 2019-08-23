@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container">
+  <view style="margin-top:12rpx;" class="fs_18 chit flex column flex_lr_m  width94">
+    <text style="margin-top:100rpx">当前余额</text>
+    <text>￥999</text>
+    <view class="history flex tc">
+      <text data-path="/pages/chitHistory/chitHistory" bindtap="toRouter" style="border-right: 1px solid #E4E4E4;" class="fcF1">领券记录</text>
+      <text class=" fcF1">去领代金券</text>
+    </view>
+  </view>
+  <!-- <view class="openMen width94 box_zing flex column flex_sa">
+    <text class="fcF1 fs_20">开通会员即可领取双倍代金券！</text>
+    <text class="fs_16">点我立即开通></text>
+  </view> -->
+  <view class="fs_19 tc recommended">0元秒杀专区</view>
+  <view class="shop_list flex_wrap" style="width:92%">
+    <block wx:for="{{shopList}}" wx:key="{{index}}">
+      <one_shop class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+    </block>
+  </view>
+</view>

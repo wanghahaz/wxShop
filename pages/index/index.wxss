@@ -1,0 +1,83 @@
+.title {
+  height: 314rpx;
+  position: relative;
+}
+
+.title .bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.swiper_ab {
+  height: 280rpx;
+  position: absolute;
+  left: 3%;
+  top: 140rpx;
+  /* top: ; */
+}
+
+swiper image {
+  width: 100%;
+  height: 100%;
+}
+
+.seckill {
+  /* border-bottom: 2rpx solid #E4E4E4; */
+  padding: 28rpx 0;
+  margin-top: 120rpx;
+}
+
+.seckill .image {
+  width: 86rpx;
+  height: 86rpx;
+  border-radius: 50%;
+  background: linear-gradient(#f49a96, #e5004f);
+}
+
+.seckillList {
+  width: 20%;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*  */
+
+.activity {
+  border-radius: 18rpx;
+  background: #fff;
+  padding: 32rpx 32rpx;
+}
+
+.activity .activity_img {
+  width: 100%;
+  height: 147rpx;
+}
+
+.activity_box {
+  width: 148rpx;
+  margin: 40rpx 0 0 0;
+}
+
+.activity_box>view {
+  padding: 0;
+  margin: 6rpx 0;
+}
+
+.activity .rob {
+  line-height: 36rpx;
+  width: 100rpx; 
+  color: #fff;
+  background:-webkit-linear-gradient(left,#8706ff,#d3bce8);
+	background:-o-linear-gradient(right,#8706ff,#d3bce8);
+	background:-moz-linear-gradient(right,#8706ff,#d3bce8);
+	background:linear-gradient(to right,#8706ff,#d3bce8);
+  border-radius: 16rpx;
+  margin: 0 auto;
+}
+
+.activity_box>view >text:nth-of-type(1) {
+  text-decoration: line-through;
+}

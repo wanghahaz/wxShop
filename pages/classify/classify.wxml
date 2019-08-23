@@ -1,0 +1,52 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="search width90" bindtap="toRouter" data-path="/pages/search/search">
+    <text class="./iconfont/iconsousuo:before icon" style="font-size:28rpx"></text>
+    <text class="border"></text>
+    <text class="seaText fs_15">请输入关键词</text>
+    <!-- <input class="fs_15" placeholder="请输入关键词"></input> -->
+  </view>
+
+  <view class="content" style="height:{{height-104}}rpx">
+    <view class="left flex ">
+      <block wx:for="{{fyList}}" wx:key="{{index}}">
+        <text bindtap="changelf" data-index="{{index}}" class="{{leftIndex==index?'lfActive':''}} fs_18 tc">{{item.name}}</text>
+      </block>
+    </view>
+    <scroll-view scroll-y class="right" style="height:{{height-104}}rpx" bindscrolltolower="lower">
+      <view wx:for="{{1}}" wx:key="{{index}}" class="goods box_zing">
+        <view class="goodsTitle">男装</view>
+        <view class="flex flex_wrap goodsList">
+          <view style="width:33%" class="flex column flex_c_m" wx:for="{{4}}" wx:key="{{ind}}" wx:for-item="value" wx:for-index="ind" data-id="11" data-name="上衣{{ind}}" data-path="/pages/classfyGoods/classfyGoods" bindtap="toRouter">
+            <image style="width:75rpx;height:86rpx" class="flex_nosize" src="../../image/domo.jpg"></image>
+            <text>上衣{{ind}}</text>
+          </view>
+        </view>
+        <!-- <image class="flex_nosize" src="../../image/domo.jpg"></image>
+        <view class="goodsDealis flex">
+          <text class="name fs_18 clamp_2">我是商品我是商品我是商品我是商品商品</text>
+          <text class="old fs_18">￥99.99</text>
+          <text class="new fs_18">￥99.99</text>
+          <image bindtap="callMask" data-type="1" class="add" src="../../image/add.png"></image>
+        </view> -->
+      </view>
+    </scroll-view>
+  </view>
+  <image bindtap="switchTab" data-path="/pages/advertising/advertising" class="chit" src="../../image/chit.png"></image>
+
+  <view hidden="{{showMask}}" class="mask add_goods">
+  </view>
+  <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
+    <view class="flex goodsDe box_zing">
+      <image class="goodsImg flex_nosize" src="../../image/domo.jpg"></image>
+      <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
+        <text class="clamp_1">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
+        <text style="" class="goodsPr fs_20">￥99.99</text>
+        <text class="fs_14">已选 红色 L</text>
+      </view>
+      <text class="addCard tc fs_22" catchtap="callMask" class="./iconfont/iconguanbi:before icon close fs_18"></text>
+    </view>
+    <view class="addCard tc fs_22" catchtap="callMask" data-type="2">加入购物车</view>
+  </view>
+
+</view>

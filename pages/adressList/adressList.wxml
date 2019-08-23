@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="getWx flex flex_m box_zing" bindtap="getAddress">
+    <view class="flex flex_m">
+      <text class="./iconfont/iconweixin:before icon wx"></text>
+      <text>获取微信收货地址</text>
+    </view>
+    <text class=" ./iconfont/iconarrow-right-copy:before icon " style="font-size:30rpx "></text>
+  </view>
+  <radio-group class="radio-group box_zing flex column" bindchange="radioChange">
+    <label class="radio flex flex_m" wx:for="{{items}}" wx:key="{{item.id}}">
+      <radio wx:if="{{!type}}" color="#F18E1E" value="{{item.id}}" />{{item.value}}
+      <view class="fs_12 adress flex_sa flex column ">
+        <text>{{item.name}} {{item.tel}}</text>
+        <text>收货地址：{{item.adress}}</text>
+      </view>
+      <text data-path="/pages/addAdress/addAdress" data-id="{{item.id}}" catchtap="toRouter" class=" ./iconfont/iconbianji:before icon " style="font-size:50rpx"></text>
+    </label>
+  </radio-group>
+  <view class="add fs_17 tc" data-path="/pages/addAdress/addAdress" bindtap="toRouter">新增收货地址</view>
+</view>

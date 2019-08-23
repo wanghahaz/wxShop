@@ -1,0 +1,50 @@
+.goods {
+  padding: 48rpx 10rpx 20rpx 0;
+}
+
+.goodImg {
+  width: 170rpx;
+  height: 170rpx;
+  margin-right: 30rpx;
+}
+
+.content {
+  align-items: flex-end;
+}
+
+.h1 {
+  padding-left: 10rpx;
+  line-height: 90rpx;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.one {
+  position: relative;
+  padding: 24rpx 0;
+  width: 85%;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.one::after {
+  content: '';
+  position: absolute;
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 50%;
+  background: #e4e4e4;
+  top: 40%;
+  left: -60rpx;
+}
+
+.one::before {
+  content: '';
+  position: absolute;
+  width:1px;
+  height:100%;
+  background: #e4e4e4;
+  top: 41%;
+  left: -42rpx;
+}
+.content >view:nth-last-of-type(1)::before{
+  display: none;
+}

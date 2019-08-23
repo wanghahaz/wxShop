@@ -1,0 +1,77 @@
+.title>.active {
+  color: #f18e1e;
+  border-bottom: 1px solid #f18e1e;
+}
+
+swiper {
+  display: flex;
+  height: 100%;
+}
+
+swiper-item {
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.title>text {
+  line-height: 98rpx;
+  width: 34%;
+}
+
+.shop {
+  background: #fff;
+  padding: 35rpx 40rpx;
+  border: 18rpx;
+  margin: 26rpx auto;
+  position: relative;
+}
+
+.shop .end {
+  position: absolute;
+  font-size: 60rpx;
+  color: #f20c00;
+  top: 80rpx;
+  left: 9%;
+  transform: rotate(330deg);
+  -ms-transform: rotate(330deg); /* IE 9 */
+  -moz-transform: rotate(330deg); /* FirefoY */
+  -webkit-transform: rotate(330deg); /* Safari 和 Chrome */
+  -o-transform: rotate(330deg);
+}
+
+.shopTx {
+  width: 176rpx;
+  height: 176rpx;
+  border-radius: 50%;
+  margin-right: 28rpx;
+}
+
+.goodsTx {
+  border-radius: 0;
+}
+
+.shopDealis {
+  width: 100%;
+  line-height: 48rpx;
+}
+
+.goodsDealis {
+  position: relative;
+}
+
+.goodsDealis .add {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.shopDealis .close {
+  width: 186rpx;
+  color: #fff;
+  padding: 4rpx 0;
+  background: #f18e1e;
+  border-radius: 20rpx;
+}

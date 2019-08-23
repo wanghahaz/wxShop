@@ -1,0 +1,52 @@
+.imgTitle .quit {
+  width: 83rpx;
+  height: 76rpx;
+}
+
+.imgTitle {
+  margin: 10rpx auto 20rpx auto;
+}
+
+.imgTitle .swop {
+  width: 75rpx;
+  height: 76rpx;
+}
+
+.goods {
+  padding: 48rpx 10rpx 48rpx 0;
+}
+
+.goodImg {
+  width: 170rpx;
+  height: 170rpx;
+  margin-right: 30rpx;
+}
+
+.h1 {
+  margin: 36rpx auto 30rpx auto;
+}
+
+.h1 input {
+  padding: 4rpx 6rpx;
+  background: #e6e6e6;
+  flex: 1;
+  border-radius: 16rpx;
+  margin-left: 30rpx;
+}
+
+.adress {
+  height: 60rpx;
+}
+
+.sub {
+  z-index: 99;
+  position: fixed;
+  bottom: 30rpx;
+  background: #f18e1e;
+  color: #fff;
+  border-radius: 40rpx;
+  width: 82%;
+  line-height: 84rpx;
+  left: 9%;
+  font-size: 50rpx;
+}

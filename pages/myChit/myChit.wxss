@@ -1,0 +1,37 @@
+.chit {
+  position: relative;
+  background: linear-gradient(#fdd118, #f1911e); /* 标准的语法 */
+  height: 400rpx;
+  border-radius: 50rpx;
+}
+.chit>text{
+  color: #fff;
+}
+.history{
+  background: #fff;
+  border-radius:18rpx;
+  margin-bottom: -56rpx;
+  width: 74%; 
+  line-height: 96rpx;
+  padding: 15rpx 0;
+}
+.history >text{
+  flex: 1;
+}
+.openMen{
+  height: 160rpx;
+  background: #3B3836;
+  padding: 0 40rpx 0 70rpx;
+  border-radius:18rpx; 
+  margin: 64rpx auto 40rpx auto;
+}
+.openMen>text:nth-of-type(2){
+  text-align: right;
+  color: #fff;
+}
+.recommended{
+  margin-top: 100rpx;
+}
+.recommended::after,.recommended::before{
+  width: 35%;
+}

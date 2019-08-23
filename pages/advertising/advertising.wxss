@@ -1,0 +1,39 @@
+.container {
+  overflow: hidden;
+}
+
+.bannerTit {
+  height: 194rpx;
+}
+
+.cd {
+  margin-top: 10rpx;
+  height: 480rpx;
+  position: relative;
+  z-index: 999;
+}
+
+.look {
+  padding: 20rpx 0;
+}
+
+.look, .cd, .scroll {
+  background: #fff;
+}
+.logs_swiper{
+  margin-top: 10rpx;
+  height: 80rpx;
+}
+
+.logs{
+  height: 100%;
+  line-height: 80rpx;
+  background: #fff;
+  padding: 0 4%;
+}
+.model {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}

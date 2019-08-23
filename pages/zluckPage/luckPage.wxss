@@ -1,0 +1,24 @@
+.wheel {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700rpx;
+  height: 600rpx;
+  background: red;
+}
+
+.wheel .box_img {
+  position: absolute;
+  width: 500rpx;
+  top: 50rpx;
+  left: 100rpx;
+}
+.wheel .wheel_pointer{
+  position: absolute;
+  left:300rpx;
+  top:230rpx; 
+}
+.wheel .pointer_img{
+  width: 100rpx;
+}

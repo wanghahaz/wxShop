@@ -1,0 +1,56 @@
+<!--index.wxml-->
+<view class="container" style="padding-bottom: 124rpx;">
+  <view class="imgTitle width90 flex flex_sa">
+    <view class="flex column flex_lr flex_m" data-index="1" bindtap="changeTitle">
+      <image class="swop" src="../../image/swop.png" wx:if="{{titleIndex==2}}"></image>
+      <image class="swop" src="../../image/swopAc.png" wx:else></image>
+      <text class="{{titleIndex==1?'fcF1':''}} fs_19">换货</text>
+    </view>
+    <view class="flex column flex_lr flex_m" data-index="2" bindtap="changeTitle">
+      <image class="quit" src="../../image/quit.png" wx:if="{{titleIndex==1}}"></image>
+      <image class="quit" src="../../image/quitAc.png" wx:else></image>
+      <text class="{{titleIndex==2?'fcF1':''}} fs_19">退货</text>
+    </view>
+  </view>
+  <view class="goods width90 flex ">
+    <image class="goodImg" src="../../image/domo.jpg"></image>
+    <view class="flex column flex_lr">
+      <text class="clamp_2">我是商品我是商品我是商品我我是商品我是商品我是商品我是商品我是商品我是商品</text>
+      <view class="flex flex_lr">
+        <text class="fcF1">￥99</text>
+        <text>x1</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="h1 fs_20 width90">申请原因</view>
+  <view class="content_evaluation width90 flex column">
+    <textarea placeholder="请描述申请售后服务的具体原因"></textarea>
+    <view class="flex_wrap">
+      <block wx:for="{{imgList}}" wx:key="{{index}}">
+        <view class="upImg" style="position: relative">
+          <image src="{{item}}"></image>
+          <text data-index="{{index}}" bindtap="delImg" class="del tc" style="font-size:30rpx">x</text>
+        </view>
+      </block>
+      <view bindtap="addImg" class="addImg flex_line_c_m ">
+        <text style="font-size:60rpx">+</text>
+        <text class="fs_14">添加图片</text>
+      </view>
+    </view>
+  </view>
+  <view class="h1 fs_20 width90">返回方式</view>
+  <view class="h1 width90 flex flex_m">
+    <text class="fs_20">寄至</text>
+    <input class="fs_12" placeholder="待审核通过后，客服会主动联系您~"></input>
+  </view>
+  <view class="h1 fs_20 width90" wx:if="{{titleIndex==1}}">收货地址</view>
+  <view class="width90 flex flex_m adress" wx:if="{{titleIndex==1}}" bindtap="changeAddress">
+    <text class="./iconfont/iconlocation:before icon" style="font-size:40rpx"></text>
+    <text style="flex:1;margin:0 10rpx 0 14rpx" class="clamp_1 fs_14">{{address.userName?address.provinceName+address.cityName+address.countyName+address.detailInfo:'请选择'}}</text>
+    <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx"></text>
+  </view>
+  <view class="sub tc ">
+    提交
+  </view>
+</view>

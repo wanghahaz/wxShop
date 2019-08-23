@@ -1,0 +1,40 @@
+page {
+  background: #fff;
+  padding-bottom: 110rpx;
+}
+
+.getWx {
+  height: 98rpx;
+  border-top: 10rpx solid #f8f6f7;
+  border-bottom: 10rpx solid #f8f6f7;
+  padding: 0 4%;
+}
+
+.getWx .wx {
+  margin-top: 10rpx;
+  color: #6eb344;
+  font-size: 60rpx;
+}
+
+.add {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  line-height: 104rpx;
+  background: #f18e1e;
+  color: #fff;
+  width: 100%;
+}
+
+.radio {
+  padding: 20rpx 0;
+}
+
+.radio-group {
+  width: 100%;
+  padding: 0 4%;
+}
+.adress{
+  height: 90rpx;
+  margin-left: 20rpx;
+}

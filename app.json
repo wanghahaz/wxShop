@@ -1,0 +1,82 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/classify/classify",
+    "pages/classfyGoods/classfyGoods",
+    "pages/advertising/advertising",
+    "pages/shopCard/shopCard",
+    "pages/mine/mine",
+    "pages/shopDetails/shopDetails",
+    "pages/search/search",
+    "pages/goodSettle/goodSettle",
+    "pages/bannerDealis/bannerDealis",
+    "pages/myChit/myChit",
+    "pages/myCollect/myCollect",
+    "pages/myOrder/myOrder",
+    "pages/chitHistory/chitHistory",
+    "pages/goodSevaluation/goodSevaluation",
+    "pages/mySales/mySales",
+    "pages/logistics/logistics",
+    "pages/orderDealis/orderDealis",
+    "pages/goodsDealis/goodsDealis",
+    "pages/intimacy/intimacy",
+    "pages/set/set",
+    "pages/seckill/seckill",
+    "pages/invitation/invitation",
+    "pages/adressList/adressList",
+    "pages/addAdress/addAdress",
+    "pages/websocket/websocket",
+    "pages/zluckPage/luckPage"
+  ],
+  "tabBar": {
+    "custom": false,
+    "color": "#000",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#19d646",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/image/index.png",
+        "selectedIconPath": "/image/indexAc.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/classify/classify",
+        "iconPath": "/image/classfiy.png",
+        "selectedIconPath": "/image/classfiyAc.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/advertising/advertising",
+        "iconPath": "/image/banner.png",
+        "selectedIconPath": "/image/bannerAc.png",
+        "text": "广告"
+      },
+      {
+        "pagePath": "pages/shopCard/shopCard",
+        "iconPath": "/image/cardt.png",
+        "selectedIconPath": "/image/cardAc.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "/image/mine.png",
+        "selectedIconPath": "/image/mineAc.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false,
+  "sitemapLocation": "sitemap.json"
+}

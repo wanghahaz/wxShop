@@ -1,0 +1,100 @@
+scroll-view .active {
+  color: #f18e1e;
+  border-bottom: 1px solid #f18e1e;
+}
+
+.title {
+  height: 98rpx;
+}
+
+swiper {
+  display: flex;
+  height: 100%;
+}
+
+swiper-item {
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.title text {
+  display: inline-block;
+  flex-shrink: 0;
+  margin: auto 30rpx auto 0;
+  padding: 30rpx 10rpx 4rpx 10rpx;
+}
+
+.dealis_order {
+  border-radius: 18rpx;
+  background: #fff;
+  padding: 30rpx 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.dealis_order .goodsImg {
+  height: 175rpx;
+  width: 175rpx;
+}
+
+.dealis_order .coding {
+  margin: 30rpx 0 24rpx;
+}
+
+.dealis_order .btn {
+  justify-content: flex-end;
+}
+
+.dealis_order .goods_Dealis {
+  margin-bottom: 20rpx;
+}
+
+.dealis_order .evaluation {
+  border-radius: 24rpx;
+  padding: 8rpx 26rpx;
+  border: 1px solid #f18e1e;
+}
+
+.dealis_order .count {
+  margin-top: 30rpx;
+  align-items: flex-end;
+}
+.dealis_order .allCheck,.submit .allCheck{
+  width: 38rpx;
+  height: 38rpx;
+  margin-right: 10rpx;
+}
+.dealis_order .goodsImg {
+  margin-right: 40rpx;
+}
+
+.dealis_order .goodsName {
+  flex: 1;
+}
+.dealis_order .btn>text{
+  margin-left: 20rpx;
+}
+.submit{
+  height: 110rpx;
+  background: #fff;
+  z-index: 999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.submit{
+  padding:0 5%;
+  height: 100rpx;
+}
+.count_sum{
+  width: 220rpx;
+  line-height: 64rpx;
+  background: #F18E1E;
+  border-radius: 32rpx;
+  color: #fff;
+  margin-left: 20rpx;
+}
+.title_name {
+  margin-bottom: 20rpx;
+}

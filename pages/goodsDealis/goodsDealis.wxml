@@ -1,0 +1,131 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="swiper_box">
+    <swiper autoplay="true" interval="2000" duration="200" circular='true' style="height:660rpx">
+      <block wx:for="{{3}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="../../image/domo.jpg" class="slide-image"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="time flex" style="color:#fff">
+      <view style="flex:1">
+        <text class="fs_22" style="line-height: 100rpx;margin: 0 16rpx 0 20rpx ">￥9.00</text>
+        <text class="fs_16">秒杀</text>
+      </view>
+      <view class="leftTime flex column box_zing flex_sa">
+        <text class="fs_14">距秒杀结束还剩：</text>
+        <view class="flex flex_m fs_15">
+          <text>01</text>:
+          <text>59</text>:
+          <text>59</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="width94">
+    <text style="margin:30rpx 0 20rpx 0;display: inline-block" class="fcF1 fs_20">￥999.00</text>
+    <view class="flex flex_lr flex_m">
+      <text style="width:60%" class="clamp_2">我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
+      <!-- <text class="./iconfont/iconxin1:before icon" style="font-size:48rpx"></text> -->
+      <text class="./iconfont/iconxin:before icon" style="font-size:52rpx;color:#F44444"></text>
+    </view>
+     <view style="margin:20rpx 0" class="flex flex_lr fs_12">
+      <text>运费</text>
+      <text >免运费</text>
+    </view>
+    <view bindtap="showModel" style="margin:20rpx 0" class="flex flex_lr fs_12">
+      <text>选择：规格</text>
+      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:2=38rpx"></text>
+    </view>
+    <view bindtap="toRouter" data-path="/pages/shopDetails/shopDetails" style="margin:20rpx 0" class="flex flex_lr">
+      <text style="width:50%">我是一个店铺</text>
+      <view class="fcb2 flex flex_m flex_end ">
+        <text class="fs_14">进店逛逛</text>
+        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx"></text>
+      </view>
+
+    </view>
+  </view>
+  <view class="goodsDealis width94 flex column box_zing">
+    <view class="fs_14 flex flex_lr">
+      <text style="width:50%">评价（999+）</text>
+      <view class="flex flex_m flex_end">
+        <text>好评率</text>
+        <text style="padding:0 10rpx" class="fcF1">98%</text>
+        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+      </view>
+    </view>
+    <block>
+      <view style="margin:20rpx 0 0 0" class="coment flex">
+        <image src="../../image/domo.jpg" class="comentTx"></image>
+        <view class="flex column fs_14">
+          <view class="flex flex_lr_m">
+            <text>满意啊啊啊</text>
+            <text>2019年8月6日</text>
+          </view>
+          <view class="flex flex_m ">
+            <text style="margin:20rpx 0">评分</text>
+            <block wx:for="{{5}}" wx:key="{{index}}">
+              <text data-index="{{index}}" bindtap="changeStar" wx:if="{{3<index}}" class="./iconfont/iconwujiaoxing:before icon" style="font-size:50rpx;margin-left:10rpx;color:#C0C0C0"></text>
+              <text wx:else data-index="{{index}}" bindtap="changeStar" class="./iconfont/iconshiwujiaoxing:before icon" style="font-size:50rpx;margin-left:10rpx;color:#F18E1E"></text>
+            </block>
+          </view>
+          <text>评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容
+            </text>
+          <view class="flex flex_wrap">
+            <block wx:for="{{5}}" wx:key="{{index}}">
+              <image src="../../image/domo.jpg" class="comentImg"></image>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="goodsDealis width94 flex column  box_zing">
+    <text>商品详情</text>
+  </view>
+  <view class="fs_19 tc recommended">好物推荐</view>
+  <view class="shop_list flex_wrap" style="width:92%">
+    <block wx:for="{{shopList}}" wx:key="{{index}}">
+      <one_shop data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+    </block>
+  </view>
+  <view class="flex flex_bottom flex_m ">
+    <view data-path="/pages/index/index" bindtap="switchTab" class="imgGoods flex  column fs_12 ">
+      <image style="width:49rpx;height:50rpx flex_c" src="../../image/goodH.png"></image>
+      <text class="fcF1">首页</text>
+    </view>
+    <view class="imgGoods flex column fs_12 ">
+      <image style="width:49rpx;height:49rpx" src="../../image/goodW.png"></image>
+      <text>客服</text>
+    </view>
+    <view data-path="/pages/shopCard/shopCard" bindtap="switchTab" class="imgGoods flex column fs_12 ">
+      <image style="width:56rpx;height:54rpx" src="../../image/goodC.png"></image>
+      <text>购物车</text>
+    </view>
+    <view bindtap="showModel" class="btn_bottom fs_14 flex">
+      <text class="tc">加入购物车</text>
+      <text class="tc">立即购买</text>
+    </view>
+  </view>
+  <view bindtap="showModel" catch:touchmove hidden="{{showMask}}" class="mask add_goods">
+  </view>
+  <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
+    <view class="flex goodsDe box_zing">
+      <image class="goodsImg flex_nosize" src="../../image/domo.jpg"></image>
+      <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
+        <text class="clamp_1">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
+        <text style="" class="goodsPr fs_20">￥99.99</text>
+        <text class="fs_14">剩余99件</text>
+      </view>
+      <text class="addCard tc fs_22" catchtap="showModel" class="./iconfont/iconguanbi:before icon close fs_18"></text>
+    </view>
+    <view bindtap="showModel" class="btn_bottom fs_14 flex">
+      <text class="tc">加入购物车</text>
+      <text class="tc">立即购买</text>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,83 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title fs_20 flex flex_sa">
+    <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">商品</text>
+    <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">店铺</text>
+  </view>
+  <!--  -->
+  <swiper current="{{titleIndex}}" bindchange="bindchange" style="height:{{height-98}}rpx">
+    <swiper-item>
+      <!--logs.wxml-->
+      <scroll-view scroll-y="true" style="height:{{height-98}}rpx" bind:scrolltolower="lower">
+        <block wx:for="{{8}}" wx:key="{{index}}">
+          <view wx:if="{{index%2==0}}" bindlongtap="longtap" class="flex width94 box_zing shop goods">
+            <image class="shopTx goodsTx flex_nosize" src="../../image/domo.jpg"></image>
+            <view class="shopDealis goodsDealis flex column flex_lr">
+              <text class="clamp_2">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
+              <text class="fs_12 fcb2">剩余666件</text>
+              <view class="flex flex_lr">
+                <text class="fs_19 fcF1">￥99</text>
+                <image catchtap="showModel" class="add" src="../../image/have_goods.png"></image>
+              </view>
+            </view>
+          </view>
+          <view wx:else bindlongtap="longtap" class="flex width94 box_zing shop goods">
+            <image class="shopTx goodsTx flex_nosize" src="../../image/n_goods.png"></image>
+            <text class="end">售罄</text>
+            <view class="shopDealis goodsDealis flex column flex_lr">
+              <text class="clamp_2">我是商品1</text>
+              <text class="fs_12 fcb2">已售空</text>
+              <view class="flex flex_lr">
+                <text class="fs_19 fcF1">￥99</text>
+                <image  class="add" src="../../image/no_goods.png"></image>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view>
+          <view class="downLoding"></view>
+          <view style="height:50rpx"></view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <!--logs.wxml-->
+      <scroll-view scroll-y="true" style="height:{{height-98}}rpx" bind:scrolltolower="lower">
+        <block wx:for="{{10}}" wx:key="{{index}}">
+          <view class="flex width94 box_zing shop">
+            <image class="shopTx flex_nosize" src="../../image/domo.jpg"></image>
+            <view class="shopDealis flex column flex_lr">
+              <text class="clamp_2">我是名字我是名字我是名字我是名字我是名字我是名字我是名字我是名字</text>
+              <view class="flex flex_lr">
+                <text class="fs_19 fcF1">3250人关注</text>
+                <text class="fs_16 close tc">取消关注</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view>
+          <view class="downLoding"></view>
+          <view style="height:50rpx"></view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+
+   <view bindtap="showModel" catch:touchmove hidden="{{showMask}}" class="mask add_goods">
+  </view>
+  <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
+    <view class="flex goodsDe box_zing">
+      <image class="goodsImg flex_nosize" src="../../image/domo.jpg"></image>
+      <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
+        <text class="clamp_1">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
+        <text style="" class="goodsPr fs_20">￥99.99</text>
+        <text class="fs_14">剩余99件</text>
+      </view>
+      <text class="addCard tc fs_22" catchtap="showModel" class="./iconfont/iconguanbi:before icon close fs_18"></text>
+    </view>
+    <view bindtap="showModel" class="btn_bottom fs_14 flex">
+      <text class="tc">加入购物车</text>
+      <text class="tc">立即购买</text>
+    </view>
+  </view>
+</view>
