@@ -18,11 +18,11 @@
         <view class="goodsTitle">男装</view>
         <view class="flex flex_wrap goodsList">
           <view style="width:33%" class="flex column flex_c_m" wx:for="{{4}}" wx:key="{{ind}}" wx:for-item="value" wx:for-index="ind" data-id="11" data-name="上衣{{ind}}" data-path="/pages/classfyGoods/classfyGoods" bindtap="toRouter">
-            <image style="width:75rpx;height:86rpx" class="flex_nosize" src="../../image/domo.jpg"></image>
+            <image style="width:75rpx;height:86rpx" class="flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
             <text>上衣{{ind}}</text>
           </view>
         </view>
-        <!-- <image class="flex_nosize" src="../../image/domo.jpg"></image>
+        <!-- <image class="flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
         <view class="goodsDealis flex">
           <text class="name fs_18 clamp_2">我是商品我是商品我是商品我是商品商品</text>
           <text class="old fs_18">￥99.99</text>
@@ -38,7 +38,7 @@
   </view>
   <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
     <view class="flex goodsDe box_zing">
-      <image class="goodsImg flex_nosize" src="../../image/domo.jpg"></image>
+      <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
       <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
         <text class="clamp_1">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
         <text style="" class="goodsPr fs_20">￥99.99</text>

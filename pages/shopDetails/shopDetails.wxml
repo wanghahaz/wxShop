@@ -2,8 +2,8 @@
 <view class="container">
   <view class="shopTitle width90 flex flex_lr flex_m ">
     <view class="flex">
-      <image src="../../image/domo.jpg" class="slide-image"></image>
-      <text class="fs_22 flex flex_m">店铺名称 ></text>
+      <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="slide-image"></image>
+      <text class="fs_20 flex flex_m">店铺名称 ></text>
     </view>
     <view class="collect fs_14 tc">收藏</view>
   </view>

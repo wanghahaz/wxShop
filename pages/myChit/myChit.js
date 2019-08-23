@@ -1,8 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp();
-    import until from "../../utils/util.js";
-    import http from "../../common/js/http.js";
+import until from "../../utils/util.js";
+import http from "../../common/js/http.js";
 
 Page({
 
@@ -10,17 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shopList: [{
-      title: '西瓜',
-      old: '100',
-      newPrice: "80",
-      imgsrc: '../../image/domo.jpg'
-    }, {
-      title: '西瓜',
-      old: '100',
-      newPrice: "80",
-      imgsrc: '../../image/domo.jpg'
-    }]
+    shopList: [],
+    isPullDownRefresh: true,
+    page: 1
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -37,55 +29,79 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    
+  switchTab(e) {
+    wx.switchTab({
+      url: e.currentTarget.dataset.path,
+    })
+  },
+  getGoods() {
+    http.getReq('/index/goods', {
+      page: this.data.page
+    }, true).then(res => {
+      this.setData({
+        shopList: [...this.data.shopList, ...res.data.data]
+      })
+      if (res.data.last_page == this.data.page) {
+        this.setData({
+          isPullDownRefresh: false
+        })
+      } else {
+        this.setData({
+          page: this.data.page + 1
+        })
+      }
+    })
+  },
+  onLoad: function(options) {
+    this.getGoods()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
+  onReachBottom: function() {
+    if (this.data.isPullDownRefresh) {
+      this.getGoods()
+    }
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
+  onShareAppMessage: function() {
+
   }
 })

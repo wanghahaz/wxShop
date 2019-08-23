@@ -2,7 +2,7 @@
 <view class="container">
   <view class="info">
     <image class="bg" src="../../image/bg.png"></image>
-    <image bindtap="scanCode" class="tx" src="../../image/domo.jpg"></image>
+    <open-data type="userAvatarUrl"></open-data>
     <text data-path="/pages/set/set" bindtap="toRouter" class="./iconfont/iconshezhi:before icon set" style="font-size:42rpx"></text>
     <button class="getinfo" openType="getUserInfo" bindgetuserinfo="getInfo"  hover-class="none">登录/注册</button>
   </view>

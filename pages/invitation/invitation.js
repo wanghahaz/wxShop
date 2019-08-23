@@ -8,8 +8,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    sIndex: 0,
     userList: [],
     bannerList: []
+  },
+  selectIndex(e) {
+    this.setData({
+      sIndex: e.currentTarget.dataset.index
+    })
   },
   // 邀请首页上部
   getImgList() {

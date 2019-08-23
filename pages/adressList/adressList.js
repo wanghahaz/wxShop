@@ -78,54 +78,19 @@ Page({
   getAddress() {
     var _this = this;
     wx.getSetting({
-      success: (res) => {
-        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
-          //未授权
-          wx.showModal({
-            title: '请求授权当前位置',
-            content: '需要获取您的地理位置，请确认授权',
-            success: function(res) {
-              if (res.cancel) {
-                //取消授权
-                wx.showToast({
-                  title: '拒绝授权',
-                  icon: 'none',
-                  duration: 1000
-                })
-              } else if (res.confirm) {
-                //确定授权，通过wx.openSetting发起授权请求
-                wx.openSetting({
-                  success: function(res) {
-                    if (res.authSetting["scope.userLocation"] == true) {
-                      wx.showToast({
-                        title: '授权成功',
-                        icon: 'success',
-                        duration: 1000
-                      })
-                      //再次授权，调用wx.getLocation的API
-                      _this.getLocation();
-
-                    } else {
-                      wx.showToast({
-                        title: '授权失败',
-                        icon: 'none',
-                        duration: 1000
-                      })
-                    }
-                  }
-                })
-              }
+      success(res) {
+        if (res.authSetting["scope.address"]==false) {
+          wx.openSetting({
+            success(res) {
+              _this.getLocation()
             }
           })
-        } else if (res.authSetting['scope.userLocation'] == undefined) {
-          //用户首次进入页面,调用wx.getLocation的API
-          _this.getLocation();
         } else {
-          //调用wx.getLocation的API
-          _this.getLocation();
+          _this.getLocation()
         }
       }
     })
+
   },
   /**
    * 生命周期函数--监听页面加载

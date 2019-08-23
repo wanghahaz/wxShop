@@ -1,3 +1,10 @@
+/* 设置头像 */
+
+open-data[type="userAvatarUrl"] {
+  display: inline-block;
+  overflow: hidden;
+}
+
 /* 吸顶 */
 
 .suckTop {
@@ -446,6 +453,9 @@ image {
   font-size: 44rpx;
 }
 
+.fs_24{
+font-size: 48rpx;
+}
 .fs_28 {
   font-size: 56rpx;
 }

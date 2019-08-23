@@ -21,7 +21,7 @@
     <block wx:for="{{navList}}" wx:key="{{index}}">
       <view  class="seckillList flex flex_nosize">
         <image class="image" src="{{item.icon}}"></image>
-        <text class="fs_13" style="color:#F18E1E;margin:4rpx 0 0 0">{{item.name}}</text>
+        <text class="fs_13 clamp_1 tc" style="color:#F18E1E;margin:4rpx 0 0 0;width:95%">{{item.name}}</text>
       </view>
     </block>
   </view>
@@ -40,7 +40,7 @@
     <view class="flex flex_lr">
       <block wx:for="{{4}}" wx:key="{{index}}">
         <view class="flex column activity_box" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter">
-          <image src="../../image/domo.jpg" class="activity_img"></image>
+          <image src="../../image/moneyBg.png" class="activity_img"></image>
           <text style="margin-top:4rpx" class="fs_12 clamp_1">我是商品我是商品我.</text>
           <view class="fs_14 flex flex_lr">
             <text class="fcb2">￥99</text>

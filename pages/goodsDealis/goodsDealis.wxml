@@ -4,7 +4,7 @@
     <swiper autoplay="true" interval="2000" duration="200" circular='true' style="height:660rpx">
       <block wx:for="{{3}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="../../image/domo.jpg" class="slide-image"></image>
+          <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="slide-image"></image>
         </swiper-item>
       </block>
     </swiper>
@@ -59,7 +59,7 @@
     </view>
     <block>
       <view style="margin:20rpx 0 0 0" class="coment flex">
-        <image src="../../image/domo.jpg" class="comentTx"></image>
+        <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentTx"></image>
         <view class="flex column fs_14">
           <view class="flex flex_lr_m">
             <text>满意啊啊啊</text>
@@ -76,7 +76,7 @@
             </text>
           <view class="flex flex_wrap">
             <block wx:for="{{5}}" wx:key="{{index}}">
-              <image src="../../image/domo.jpg" class="comentImg"></image>
+              <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentImg"></image>
             </block>
           </view>
         </view>
@@ -114,7 +114,7 @@
   </view>
   <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
     <view class="flex goodsDe box_zing">
-      <image class="goodsImg flex_nosize" src="../../image/domo.jpg"></image>
+      <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
       <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
         <text class="clamp_1">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
         <text style="" class="goodsPr fs_20">￥99.99</text>

@@ -14,12 +14,12 @@ Page({
       title: '西瓜',
       old: '100',
       newPrice: "80",
-      imgsrc: '../../image/domo.jpg'
+      imgsrc: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg'
     }, {
       title: '冬瓜',
       old: '100',
       newPrice: "80",
-      imgsrc: '../../image/domo.jpg'
+        imgsrc: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg'
     }]
   },
   selectTitle(e) {

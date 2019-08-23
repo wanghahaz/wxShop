@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="title fs_20 flex flex_sa">
+  <view class="title fs_18 flex flex_sa">
     <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">商品</text>
     <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">店铺</text>
   </view>
@@ -11,9 +11,9 @@
       <scroll-view scroll-y="true" style="height:{{height-98}}rpx" bind:scrolltolower="lower">
         <block wx:for="{{8}}" wx:key="{{index}}">
           <view wx:if="{{index%2==0}}" bindlongtap="longtap" class="flex width94 box_zing shop goods">
-            <image class="shopTx goodsTx flex_nosize" src="../../image/domo.jpg"></image>
+            <image class="shopTx goodsTx flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
             <view class="shopDealis goodsDealis flex column flex_lr">
-              <text class="clamp_2">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
+              <text class="fs_14 clamp_2">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
               <text class="fs_12 fcb2">剩余666件</text>
               <view class="flex flex_lr">
                 <text class="fs_19 fcF1">￥99</text>
@@ -45,12 +45,12 @@
       <scroll-view scroll-y="true" style="height:{{height-98}}rpx" bind:scrolltolower="lower">
         <block wx:for="{{10}}" wx:key="{{index}}">
           <view class="flex width94 box_zing shop">
-            <image class="shopTx flex_nosize" src="../../image/domo.jpg"></image>
+            <image class="shopTx flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
             <view class="shopDealis flex column flex_lr">
-              <text class="clamp_2">我是名字我是名字我是名字我是名字我是名字我是名字我是名字我是名字</text>
+              <text class="clamp_2 fs_14">我是名字我是名字我是名字我是名字我是名字我是名字我是名字我是名字</text>
               <view class="flex flex_lr">
-                <text class="fs_19 fcF1">3250人关注</text>
-                <text class="fs_16 close tc">取消关注</text>
+                <text class="fcF1">3250人关注</text>
+                <text class="fs_15 close tc">取消关注</text>
               </view>
             </view>
           </view>
@@ -67,7 +67,7 @@
   </view>
   <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
     <view class="flex goodsDe box_zing">
-      <image class="goodsImg flex_nosize" src="../../image/domo.jpg"></image>
+      <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
       <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
         <text class="clamp_1">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
         <text style="" class="goodsPr fs_20">￥99.99</text>

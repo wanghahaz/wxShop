@@ -83,14 +83,6 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  scanCode() {
-    wx.scanCode({
-      success(res) {
-        console.log(res)
-      }
-    })
-
-  },
   getGoods() {
     http.getReq('/rec/goods', {
       page: this.data.page

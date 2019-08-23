@@ -43,7 +43,7 @@
     </view>
     <view class="goodsDealis box_zing width94 flex" wx:if="{{index%2==0}}">
       <image class="goodsImg flex_nosize" src="../../image/n_goods.png"></image>
-      <text class="end">售罄</text>
+      <text class="end">已抢完</text>
       <view>
         <text class="clamp_2 fs_14">我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
         <view class="price">
@@ -54,7 +54,7 @@
           <view style="width:100%"></view>
         </view>
       </view>
-      <view class="sky buySame tc fs_13">已售空</view>
+      <view class="sky buySame tc fs_13">已抢完</view>
     </view>
   </block>
 </view>

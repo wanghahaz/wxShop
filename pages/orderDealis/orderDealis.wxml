@@ -10,7 +10,7 @@
           <text>我是第{{index}}个店铺></text>
         </view>
         <view class="goods_Dealis flex flex_nosize" wx:for="{{3}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="../../image/domo.jpg"></image>
+          <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
           <view class="goodsDealis">
             <view class="flex">
               <text class="fs_14 clamp_2">我是第{{ind}}商品我是第{{ind}}商第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>

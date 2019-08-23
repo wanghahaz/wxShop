@@ -36,9 +36,9 @@
 
 .goodsDealis .end {
   position: absolute;
-  font-size: 60rpx;
+  font-size: 40rpx;
   color: #f20c00;
-  top: 80rpx;
+  top: 100rpx;
   left: 7%;
   transform: rotate(330deg);
   -ms-transform: rotate(330deg); /* IE 9 */

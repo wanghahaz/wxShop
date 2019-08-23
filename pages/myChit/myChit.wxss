@@ -1,19 +1,27 @@
 .chit {
   position: relative;
-  background: linear-gradient(#fdd118, #f1911e); /* 标准的语法 */
-  height: 400rpx;
-  border-radius: 50rpx;
+  height: 410rpx;
 }
-.chit>text{
-  color: #fff;
+.chit .box_bg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.chit .logs_box{
+  width: 76%;
+  position: absolute;
+  left: 12%;
+  top: 40rpx;
+  background: #fff;
+  height: 430rpx;
+  border-radius: 12rpx;
 }
 .history{
+  position: absolute;
   background: #fff;
-  border-radius:18rpx;
-  margin-bottom: -56rpx;
-  width: 74%; 
-  line-height: 96rpx;
-  padding: 15rpx 0;
+  width: 100%; 
+  bottom: 6rpx;
+  line-height: 80rpx;
 }
 .history >text{
   flex: 1;

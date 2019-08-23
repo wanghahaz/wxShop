@@ -20,13 +20,14 @@
   top: 32rpx;
 }
 
-.info .tx {
+open-data[type="userAvatarUrl"] {
   position: absolute;
   width: 142rpx;
   height: 142rpx;
   border-radius: 50%;
   top: 54rpx;
   left: 51rpx;
+  box-shadow: 3px 3px 8px rgba(58, 66, 89, 0.2);
 }
 
 .getinfo {
@@ -125,7 +126,7 @@
 }
 
 .comment {
- font-size: 58rpx;
+  font-size: 58rpx;
 }
 
 .sales {

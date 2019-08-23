@@ -4,21 +4,22 @@
   <view class="invaBox flex column flex_sa box_zing">
     <image src="../../image/invaBox.png"></image>
     <view class="fcF1 flex ">
-      <view class="flex column num_box flex_m flex_sa box_zing">
-        <text class="fs_22">0</text>
-        <text>成功邀请好友</text>
+      <view data-index="0" bindtap="selectIndex" class="flex column num_box flex_m flex_sa box_zing">
+        <text class="{{sIndex==0?'fs_24':'fs_20'}}">0</text>
+        <text class="{{sIndex==0?'fs_18':''}}">成功邀请好友</text>
       </view>
-      <view class="flex column num_box flex_m flex_sa box_zing ">
-        <text class="fs_22">0</text>
-        <text>已获得代金券</text>
+      <view data-index="1" bindtap="selectIndex" class="flex column num_box flex_m flex_sa box_zing ">
+        <text class="{{sIndex==1?'fs_24':'fs_20'}}">0</text>
+        <text class="{{sIndex==1?'fs_18':''}}">我的双倍收益卡</text>
       </view>
     </view>
-    <button class="fs_18 invita tc">发邀请赚代金券</button>
+    <button class="invita fs_16 tc">发邀请领双倍收益卡</button>
   </view>
-  <view class="fs_19 tc recommended" style="color:#B2B2B2">邀请的朋友</view>
+  <view class="tc recommended" style="color:#B2B2B2">{{index==0?'邀请的朋友':'双倍收益卡'}}</view>
   <view wx:if="{{userList.length==0}}" class="noInva flex column flex_m">
     <image src="../../image/noInva.png"></image>
-    <text style="margin:30rpx 0 0 0" class="fs_15 fcb2">还没有邀请朋友哦~</text>
+    <text wx:if="{{sIndex==0}}" style="margin:30rpx 0 0 0" class="fs_15 fcb2">还没有邀请朋友哦~</text>
+    <text wx:else style="margin:30rpx 0 0 0" class="fs_15 fcb2">还没有双倍收益卡哦~</text>
   </view>
   <view class="width90">
     <block wx:for="{{userList}}" wx:key="{{index}}">
