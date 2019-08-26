@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<view class="container" style="padding-bottom: 124rpx;">
+  <view class="goods width94 flex  box_zing">
+    <image class="goodImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+    <view class="flex column fs_14">
+      <text class="clamp_2 goods_name ">我是商品我是商品我是商品我我是商品我是商品我是商品我是商品我是商品我是商品</text>
+      <text class="fs_10 tc clamp_1 class_fiy">134号牛油果绿  L</text>
+      <view class="goodPrice ter">
+        <view>￥99</view>
+        <view>x1</view>
+      </view>
+    </view>
+  </view>
+  <view class="content width94 box_zing">
+    <view  bindtap="select" style="height:90rpx" class="flex flex_lr_m fs_14">
+      <text class="flex_nosize">请选择{{titleName}}原因</text>
+      <view class="ter">
+        <text wx:if="{{radioIndex!=null}}">{{checkList[radioIndex]}}</text>
+        <text class="./iconfont/iconarrow-right-copy:before icon {{noSales?'noSales':''}}" style="font-size:26rpx"></text>
+      </view>
+    </view>
+    <textarea class="fs_14 box_zing" placeholder="请描述{{titleName}}的具体原因"></textarea>
+  </view>
+  <view class="sub tc">提交</view>
+  <view bindtap="select" wx:if="{{show_model}}" class="mask"></view>
+  <view class="salesContent box_zing {{show_model?'activeModel':''}}">
+    <view class="fs_15 tc" style="line-height:80rpx;">{{titleName}}原因</view>
+    <view class="radioList box_zing">
+      <radio-group class="radio-group flex column" bindchange="radioChange">
+        <label class="radio fs_14" wx:for="{{checkList}}" wx:key="{{index}}">
+          <radio value="{{index}}" />{{item}}
+        </label>
+      </radio-group>
+    </view>
+    <view catchtap="select" class="close tc">关闭</view>
+  </view>
+</view>

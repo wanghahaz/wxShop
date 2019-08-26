@@ -1,15 +1,31 @@
 //index.js
 //获取应用实例
-import http from "../../common/js/http.js";
+const app = getApp();
 import until from "../../utils/util.js";
-const app = getApp()
+import http from "../../common/js/http.js";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: app.globalData.goodsList
+    noSales: 0,
+    show_model: false,
+    titleName: null,
+    radioIndex:null,
+    checkList: ['商品无货', '发货时间问题', '不想要了', '商品信息填写有误', '其他',
+      '不想要了', '商品信息填写有误', '其他'
+    ]
+  },
+  select() {
+    this.setData({
+      show_model: !this.data.show_model
+    })
+  },
+  radioChange(e) {
+    this.setData({
+      radioIndex:e.detail.value
+    })
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -23,19 +39,23 @@ Page({
       })
     }
   },
+  changeTitle(e) {
+    this.setData({
+      titleIndex: e.currentTarget.dataset.index,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(this.data.list)
-  },
-  setClip(e) {
-    wx.setClipboardData({
-      data: e.currentTarget.dataset.content,
-      success(res) {},
-      fail(err) {}
+    this.setData({
+      titleName: options.name
+    })
+    wx.setNavigationBarTitle({
+      title: options.name,
     })
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

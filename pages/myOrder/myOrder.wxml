@@ -6,13 +6,13 @@
     <text data-index="2" bindtap="bindchange" class="{{titleIndex==2?'active':''}} tc">待发货</text>
     <text data-index="3" bindtap="bindchange" class="{{titleIndex==3?'active':''}} tc">待收货</text>
     <text data-index="4" bindtap="bindchange" class="{{titleIndex==4?'active':''}} tc">待评价</text>
-    <!-- <text data-index="5" bindtap="bindchange" class="{{titleIndex==5?'active':''}} tc">退款/售后</text> -->
+    <text data-index="5" bindtap="bindchange" class="{{titleIndex==5?'active':''}} tc">退款/售后</text>
   </scroll-view>
 
   <block wx:if="{{titleIndex==0}}">
     <block wx:for="{{2}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/orderDealis/orderDealis" bindtap="toRouter">
-        <view data-path="" catchtap="toRouter" class="title_name flex flex_lr">
+        <view class="title_name flex flex_lr">
           <text>我是第{{index}}个店铺></text>
           <text class="fs_14 fcF1">买家已付款</text>
         </view>
@@ -112,7 +112,7 @@
           创建时间：2019.08.01 12:59:50
         </view> -->
         <view class="btn count flex fs_13">
-          <text data-id="111" data-path="/pages/mySales/mySales" catchtap="toRouter" class="evaluation" style="border-color:#B2B2B2">申请退款</text>
+          <text data-id="111" data-path="/pages/salesSub/salesSub" data-name="退款" catchtap="toRouter" class="evaluation" style="border-color:#B2B2B2">申请退款</text>
           <text catchtap="alertGoods" class="evaluation fcF1">提醒发货</text>
         </view>
       </view>
@@ -199,7 +199,7 @@
       <view style="height:50rpx"></view>
     </view>
   </block>
-  <!-- <block wx:elif="{{titleIndex==5}}">
+  <block wx:elif="{{titleIndex==5}}">
     <block wx:for="{{2}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing">
         <view style="margin-bottom:24rpx" class="title_name flex flex_lr">
@@ -217,7 +217,7 @@
             </view>
             <text class="fs_12 fcb2">134号牛油果绿  L</text>
             <view class="btn flex fs_13">
-              <text data-path="/pages/mySales/mySales" bindtap="toRouter" class="evaluation fcF1">申请售后</text>
+              <text data-path="/pages/selectSales/selectSales" bindtap="toRouter" class="evaluation fcF1">申请售后</text>
             </view>
 
           </view>
@@ -228,7 +228,7 @@
       <view class="downLoding"></view>
       <view style="height:50rpx"></view>
     </view>
-  </block> -->
+  </block>
 
 
 

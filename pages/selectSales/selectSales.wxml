@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view class="container" style="padding-bottom: 124rpx;">
+  <view class="goods width94 flex  box_zing">
+    <image class="goodImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+    <view class="flex column fs_14">
+      <text class="clamp_2 goods_name ">我是商品我是商品我是商品我我是商品我是商品我是商品我是商品我是商品我是商品</text>
+      <text class="fs_10 tc clamp_1 class_fiy">134号牛油果绿  L</text>
+      <view class="goodPrice ter">
+        <view>￥99</view>
+        <view>x1</view>
+      </view>
+    </view>
+  </view>
+  <view bindtap="toRouter" data-name="退货" data-path="/pages/salesSub/salesSub" class="select flex fs_15 width94 box_zing flex_lr_m">
+    <view class="flex_m flex">
+      <text class="./iconfont/iconicon5:before icon {{noSales?'noSales':''}}" style="font-size:44rpx;margin-right:8rpx"></text>
+      <text class="{{noSales?'noSales':''}}">退货</text>
+    </view>
+    <text class="./iconfont/iconarrow-right-copy:before icon {{noSales?'noSales':''}}" style="font-size:40rpx"></text>
+  </view>
+  <view bindtap="toRouter" data-name="换货"  data-path="/pages/salesSub/salesSub"  class="select flex fs_15 width94 box_zing flex_lr_m">
+    <view class="flex_m flex">
+      <text class="./iconfont/icontuihuanhuo:before icon {{noSales?'noSales':''}}" style="font-size:46rpx;margin-right:8rpx"></text>
+      <text class="{{noSales?'noSales':''}}">换货</text>
+    </view>
+    <text  class="./iconfont/iconarrow-right-copy:before icon {{noSales?'noSales':''}} " style="font-size:40rpx"></text>
+  </view>
+</view>

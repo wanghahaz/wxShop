@@ -1,15 +1,15 @@
 //index.js
 //获取应用实例
-import http from "../../common/js/http.js";
+const app = getApp();
 import until from "../../utils/util.js";
-const app = getApp()
+import http from "../../common/js/http.js";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: app.globalData.goodsList
+    noSales:0
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -23,19 +23,18 @@ Page({
       })
     }
   },
+  changeTitle(e) {
+    this.setData({
+      titleIndex: e.currentTarget.dataset.index,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(this.data.list)
+
   },
-  setClip(e) {
-    wx.setClipboardData({
-      data: e.currentTarget.dataset.content,
-      success(res) {},
-      fail(err) {}
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

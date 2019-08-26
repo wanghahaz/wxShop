@@ -4,7 +4,7 @@
     <image class="bg" src="../../image/bg.png"></image>
     <open-data type="userAvatarUrl"></open-data>
     <text data-path="/pages/set/set" bindtap="toRouter" class="./iconfont/iconshezhi:before icon set" style="font-size:42rpx"></text>
-    <button class="getinfo" openType="getUserInfo" bindgetuserinfo="getInfo"  hover-class="none">登录/注册</button>
+    <button class="getinfo" openType="getUserInfo" bindgetuserinfo="getInfo" hover-class="none">登录/注册</button>
   </view>
   <!-- <view class="members" data-path="/pages/myChit/myChit" bindtap="toRouter">
     <text class="fs_16 tit">精选会员</text>
@@ -28,16 +28,20 @@
 
   <view style="margin_top:-20rpx" class="width90 flex_wrap flex_sa">
     <block wx:for="{{btList}}" wx:key="{{index}}">
-      <view data-path="{{item.path}}" bindtap="toRouter" class="{{index>1?'mt':''}} box_big flex_nosize flex flex_c flex_m">
+      <view wx:if="{{index<3}}" data-path="{{item.path}}" bindtap="toRouter" class="{{index>1?'mt':''}} box_big flex_nosize flex flex_c flex_m">
         <image class="{{item.clas}}" style="{{item.style}}" src="{{item.src}}"></image>
         <text style="width:140rpx" class="fs_12 tc">{{item.name}}</text>
       </view>
+      <button open-type="contact" style="margin:28rpx 0 0 0" wx:else hover-class="none" class="{{index>1?'mt':''}} box_big flex_nosize flex flex_c flex_m">
+        <image class="{{item.clas}}" style="{{item.style}}" src="{{item.src}}"></image>
+        <text style="width:140rpx" class="fs_12 tc">{{item.name}}</text>
+      </button>
     </block>
   </view>
   <view class="fs_19 tc recommended" data-path="/pages/websocket/websocket" bindtap="toRouter">为您推荐</view>
   <view class="shop_list flex_wrap" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
-      <one_shop class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+      <one_shop data-id="{{item.id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
     </block>
   </view>
   <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>

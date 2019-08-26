@@ -10,13 +10,34 @@ Page({
    */
   data: {
     shopList: [],
-    goodsList: app.globalData.goodsList,
+    goodsList:[],
     totalPrice: 0,
     count: 0,
     allCheck: true,
     page: 1,
     isPullDownRefresh: true,
   },
+  // 获取购物车商品
+  getCard() {
+    http.getReq('/cart').then(res => {
+      this.setData({
+        goodsList: res.data != "null" ? res.data : []
+      })
+    })
+  },
+  // 删除购物车
+  delGoods(e) {
+    http.postReq(`/cart/del/${e.currentTarget.dataset.id}`).then(res => {
+      if (res.code == 200) {
+        this.getCard()
+      } else {
+        until.toast({
+          title: '删除失败'
+        })
+      }
+    })
+  },
+  // 获取推荐商品
   getGoods() {
     http.getReq('/index/goods', {
       page: this.data.page
@@ -35,15 +56,11 @@ Page({
       }
     })
   },
-  getShopList() {
-    http.getReq('/cart', {}, true).then(res => {
-      console.log(res)
-    })
-  },
   // 设置选择
   setShopCheck(e) {
     let list = [];
     if (e.currentTarget.dataset.ind != undefined) {
+      // goods选中
       this.data.goodsList[e.currentTarget.dataset.index].goods[e.currentTarget.dataset.ind].check = !e.currentTarget.dataset.check;
       list = this.data.goodsList;
       this.setData({
@@ -51,6 +68,7 @@ Page({
         allCheck: app.setCheck(list, '1').allCheck,
       })
     } else {
+      // shop选择
       this.data.goodsList[e.currentTarget.dataset.index].check = !e.currentTarget.dataset.check;
       list = this.data.goodsList;
       this.setData({
@@ -61,11 +79,11 @@ Page({
   },
   // 全选切换
   selectAll() {
+    console.log('全选')
     this.setData({
       allCheck: !this.data.allCheck,
       goodsList: app.setCheck(this.data.goodsList, '', !this.data.allCheck).list
     })
-    app.getPrice()
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -83,8 +101,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getShopList()
-    this.getGoods();//好物推荐
+    if (wx.getStorageSync('token')){
+      this.getCard()
+    }
+    this.getGoods(); //好物推荐
   },
 
   /**

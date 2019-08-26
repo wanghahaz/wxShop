@@ -12,7 +12,10 @@ App({
     }
   },
   onLaunch: function() {
-  
+    wx.setStorage({
+      key: "key",
+      data: "value"
+    })
     this.setBadge();
     this.getPrice()
     // 获取屏幕高度
@@ -60,6 +63,7 @@ App({
   },
   //设置全选
   setCheck(list, type, boolean) {
+    // type 1：商品选择  2：商店选择 under：全选 
     let allCheck = true;
     let isCheck = false;
     let goodsList = list || this.globalData.goodsList;
@@ -117,13 +121,13 @@ App({
       check: true,
       goods: [{
         name: '我是商品我是商品',
-        src: '../../image/domo.jpg',
+        src: '../../image/moneyBg.png',
         amount: 2,
         price: '30',
         check: true,
       }, {
         name: '我是商品我是商品',
-        src: '../../image/domo.jpg',
+        src: '../../image/moneyBg.png',
         amount: 2,
         price: '30',
         check: true,
@@ -133,7 +137,7 @@ App({
       check: true,
       goods: [{
         name: '我是商品我是商品我是商品我是商品我是商品我是商品商品我是商品',
-        src: '../../image/domo.jpg',
+        src: '../../image/moneyBg.png',
         amount: 2,
         price: '20',
         check: true,

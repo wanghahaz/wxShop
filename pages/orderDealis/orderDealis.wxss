@@ -6,13 +6,30 @@
   border-radius: 18rpx;
   margin: 10rpx auto 20rpx auto;
 }
-.orderDealis{
-  margin-top: 20rpx;
+
+.adress_box{
+  margin: 20rpx auto;
+  padding: 30rpx 24rpx;
+  background: #fff;
+  border-radius: 18rpx;
+}
+.adress_box>view{
+  height: 100rpx;
+}
+.gps{
+  width: 30rpx;
+  height: 42rpx;
+  margin-right: 20rpx;
 }
 .orderDealis, .goodspDealis {
   border-radius: 18rpx;
-  padding: 30rpx 10rpx;
+  padding: 30rpx 20rpx;
   background: #fff;
+}
+
+.orderDealis {
+  margin-top: 20rpx;
+  padding-top: 0;
 }
 
 .goodspDealis {
@@ -103,4 +120,18 @@
   border-radius: 32rpx;
   background: #f18e1e;
   color: #fff;
+}
+
+.callShop {
+  margin: 20rpx auto;
+  background: #fff;
+  border-radius: 18rpx;
+  line-height: 66rpx;
+}
+
+.callShop>text {
+  flex: 1;
+}
+.callShop>text:nth-of-type(1){
+  border-right: 1px solid #E4E4E4;
 }

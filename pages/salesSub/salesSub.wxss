@@ -1,0 +1,116 @@
+.goods, .content {
+  height: 256rpx;
+  background: #fff;
+  border-radius: 18rpx;
+  margin-top: 20rpx;
+  padding: 28rpx 30rpx;
+  position: relative;
+}
+
+.goodPrice {
+  width: 100rpx;
+  position: absolute;
+  right: 30rpx;
+  top: 28rpx;
+}
+
+.class_fiy {
+  display: inline-block;
+  color: #b2b2b2;
+  background: #f8f6f7;
+  padding: 2rpx 4rpx;
+  border-radius: 18rpx;
+  margin-top: 10rpx;
+  width: 200rpx;
+}
+
+.goods_name {
+  width: 60%;
+}
+
+.goodImg {
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 30rpx;
+}
+
+.content {
+  height: 400rpx;
+  padding: 0 30rpx 20rpx 30rpx;
+}
+
+textarea {
+  border-radius: 18rpx;
+  width: 100%;
+  background: #f8f6f7;
+  padding: 10rpx;
+}
+
+.sub {
+  position: fixed;
+  bottom: 50rpx;
+  line-height: 86rpx;
+  width: 74%;
+  left: 13%;
+  background: #f18e1e;
+  border-radius: 42rpx;
+  color: #fff;
+}
+
+.salesContent {
+  z-index: 99;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 86rpx;
+  background: #fff;
+  height: 480rpx;
+  transform: translateY(110%);
+  -webkit-transform: translateY(110%);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+}
+
+.radioList {
+  height: 314rpx;
+  padding:0 30rpx;
+}
+
+.radioList >radio-group {
+  height: 100%;
+  overflow-y: auto;
+}
+radio-group label{
+  margin: 20rpx 0;
+}
+radio .wx-radio-input {
+  height: 32rpx;
+  width: 32rpx;
+  border-radius: 50%;
+  background: transparent;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.salesContent .close {
+  background: #f18e1e;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 86rpx;
+}
+
+.activeModel {
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+}

@@ -18,7 +18,8 @@
           <text data-check="{{value.check}}" data-ind="{{ind}}" data-index="{{index}}" bindtap="setShopCheck" wx:else class="nocheck box_zing check flex_nosize"></text>
           <image class="goodsImg flex_nosize" src="{{value.src}}"></image>
           <view class="box_right" style=" margin: 0 0 0 6rpx;">
-            <text class="goodsName width94 fs_14 clamp_2">{{value.name}}</text>
+            <text class="delGoods fs_10" data-id="{{1}}" bindtap="delGoods">删除</text>
+            <text style="width:70%" class="goodsName fs_14 clamp_2">{{value.name}}</text>
             <text class="remark fs_12 clamp_1 tc">134号牛油果绿  L</text>
             <text class="price">￥99</text>
             <view class="count flex">
@@ -48,8 +49,8 @@
   </view>
 
   <view wx:if="{{goodsList.length>0}}" class="bottom flex">
-    <view bindtap="selectAll" class="flex flex_m" style="width:30%">
-      <image bindtap="selectAll" wx:if="{{allCheck}}" class="check" src="../../image/check.png"></image>
+    <view catchtap="selectAll" class="flex flex_m" style="width:30%">
+      <image wx:if="{{allCheck}}" class="check" src="../../image/check.png"></image>
       <text wx:else class="nocheck box_zing check"></text>
       <text class="fcb2">全选</text>
     </view>
