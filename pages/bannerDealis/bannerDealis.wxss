@@ -28,3 +28,7 @@ video {
   width: 180rpx;
   line-height: 60rpx;
 }
+.cover{
+  flex: 1;
+  line-height: 60rpx;
+}

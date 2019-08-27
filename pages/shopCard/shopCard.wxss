@@ -1,3 +1,7 @@
+.container {
+  padding-bottom: 106rpx;
+}
+
 .noGoods {
   flex-direction: column;
 }
@@ -62,15 +66,17 @@
   padding: 20rpx 0;
   position: relative;
 }
-.dealis .delGoods{
+
+.dealis .delGoods {
   display: inline-block;
   position: absolute;
   color: red;
   right: 0;
   height: 50rpx;
   width: 70rpx;
-  top: 4rpx
+  top: 4rpx;
 }
+
 .goodsImg {
   width: 218rpx;
   height: 188rpx;

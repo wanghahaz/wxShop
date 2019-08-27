@@ -1,9 +1,12 @@
 <!--index.wxml-->
 <view class="container box_video">
-  <cover-view class="box_tit width94 flex flex_lr" >
-    <cover-view  style="color:#fff" class="tc close fs_15"> 关闭({{time}}s) </cover-view>
-    <cover-view style="color:#fff" class="tc next fs_13">广告 | 下一条</cover-view>
+  <cover-view class="box_tit width94 flex flex_lr ">
+    <cover-view style="color:#fff" catchtap="back" class="tc close fs_15"> 关闭</cover-view>
+    <cover-view style="color:#fff" class="flex tc next fs_13">
+      <cover-view  class="cover ter"> 广告 | </cover-view>
+      <cover-view style="flex:1.2" catchtap="getNext" class="cover"> {{time>0?'('+time+'s)':' 下一条' }}</cover-view>
+    </cover-view>
   </cover-view>
 
-  <video style="object-fit: fill;" id="myVideo" src="{{src}}" show-play-btn="{{false}}"  controls="{{false}}"  show-fullscreen-btn="{{true}}" bindended="bindended" bindtimeupdate="bindtimeupdate" bindprogress="bindprogress"></video>
+  <video style="object-fit: fill;" id="myVideo" src="{{video}}" show-play-btn="{{false}}" controls="{{false}}" show-fullscreen-btn="{{true}}" bindended="bindended" bindtimeupdate="bindtimeupdate" bindprogress="bindprogress"></video>
 </view>

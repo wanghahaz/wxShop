@@ -10,7 +10,7 @@ Page({
   data: {
     sIndex: 0,
     userList: [],
-    bannerList: []
+    ads: {}
   },
   selectIndex(e) {
     this.setData({
@@ -20,13 +20,23 @@ Page({
   // 邀请首页上部
   getImgList() {
     http.getReq('/user/share', {}, true).then(res => {
-      console.log(res)
+      if (res.code == 200) {
+        this.setData({
+          ads: res.data
+        })
+      }else{
+        until.toast({'title':'加载失败'})
+      }
     })
   },
   // 我的邀请列表
   getShare_list() {
     http.getReq('/user/share/share_list', {}, true).then(res => {
-      console.log(res)
+      // if(res.code==200){
+      //   this.setData({
+      //     userList:res.data
+      //   })
+      // }
     })
   },
   toRouter(e) {

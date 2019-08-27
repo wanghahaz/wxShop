@@ -1,15 +1,15 @@
 <!--index.wxml-->
 <view class="container">
-  <image class="friend" src="../../image/friend.png"></image>
+  <image class="friend" src="{{ads.ads.thumb}}"></image>
   <view class="invaBox flex column flex_sa box_zing">
     <image src="../../image/invaBox.png"></image>
     <view class="fcF1 flex ">
       <view data-index="0" bindtap="selectIndex" class="flex column num_box flex_m flex_sa box_zing">
-        <text class="{{sIndex==0?'fs_24':'fs_20'}}">0</text>
+        <text class="{{sIndex==0?'fs_24':'fs_20'}}">{{ads.share_num}}</text>
         <text class="{{sIndex==0?'fs_18':''}}">成功邀请好友</text>
       </view>
       <view data-index="1" bindtap="selectIndex" class="flex column num_box flex_m flex_sa box_zing ">
-        <text class="{{sIndex==1?'fs_24':'fs_20'}}">0</text>
+        <text class="{{sIndex==1?'fs_24':'fs_20'}}">{{ads.share_money}}</text>
         <text class="{{sIndex==1?'fs_18':''}}">我的双倍收益卡</text>
       </view>
     </view>

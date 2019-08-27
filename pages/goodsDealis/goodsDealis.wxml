@@ -1,14 +1,14 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" wx:if="{{goodsData.row}}">
   <view class="swiper_box">
     <swiper autoplay="true" interval="2000" duration="200" circular='true' style="height:660rpx">
-      <block wx:for="{{3}}" wx:key="{{index}}">
+      <block wx:for="{{goodsData.row.goods_images}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="slide-image"></image>
+          <image src="{{item}}" class="slide-image"></image>
         </swiper-item>
       </block>
     </swiper>
-    <view class="time flex" style="color:#fff">
+    <view wx:if="{{false}}" class="time flex" style="color:#fff">
       <view style="flex:1">
         <text class="fs_22" style="line-height: 100rpx;margin: 0 16rpx 0 20rpx ">￥9.00</text>
         <text class="fs_16">秒杀</text>
@@ -25,22 +25,22 @@
   </view>
 
   <view class="width94">
-    <text style="margin:30rpx 0 20rpx 0;display: inline-block" class="fcF1 fs_20">￥999.00</text>
+    <text style="margin:30rpx 0 20rpx 0;display: inline-block" class="fcF1 fs_20">￥{{goodsData.row.goods_price}}</text>
     <view class="flex flex_lr flex_m">
-      <text style="width:60%" class="clamp_2">我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
-      <!-- <text class="./iconfont/iconxin1:before icon" style="font-size:48rpx"></text> -->
-      <text class="./iconfont/iconxin:before icon" style="font-size:52rpx;color:#F44444"></text>
+      <text style="width:60%" class="clamp_2">{{goodsData.row.goods_name}}</text>
+      <text wx:if="{{is_collect==1}}" catchtap="collectGoods" class="./iconfont/iconxin:before icon" style="font-size:52rpx; color:#F44444"></text>
+      <text wx:else catchtap="collectGoods" class="./iconfont/iconxin1:before icon" style="font-size:52rpx; color:#F44444"></text>
     </view>
-     <view style="margin:20rpx 0" class="flex flex_lr fs_12">
+    <view style="margin:20rpx 0" class="flex flex_lr fs_12">
       <text>运费</text>
-      <text >免运费</text>
+      <text>免运费</text>
     </view>
     <view bindtap="showModel" style="margin:20rpx 0" class="flex flex_lr fs_12">
       <text>选择：规格</text>
       <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:2=38rpx"></text>
     </view>
-    <view bindtap="toRouter" data-path="/pages/shopDetails/shopDetails" style="margin:20rpx 0" class="flex flex_lr">
-      <text style="width:50%">我是一个店铺</text>
+    <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/shopDetails/shopDetails" style="margin:20rpx 0" class="flex flex_lr">
+      <text style="width:50%">{{goodsData.store.store_name}}</text>
       <view class="fcb2 flex flex_m flex_end ">
         <text class="fs_14">进店逛逛</text>
         <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx"></text>
@@ -57,7 +57,8 @@
         <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
       </view>
     </view>
-    <block>
+    <view style="margin:20rpx 0 0 0" class="fs_14" wx:if="{{commentList.length==0}}">暂无评价</view>
+    <block wx:else>
       <view style="margin:20rpx 0 0 0" class="coment flex">
         <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentTx"></image>
         <view class="flex column fs_14">
@@ -84,14 +85,16 @@
     </block>
   </view>
   <view class="goodsDealis width94 flex column  box_zing">
-    <text>商品详情</text>
+    <text style="margin:0 0 20rpx 0">商品详情</text>
+    <rich-text nodes="{{goodsData.row.goods_body}}"></rich-text>
   </view>
   <view class="fs_19 tc recommended">好物推荐</view>
   <view class="shop_list flex_wrap" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
-      <one_shop data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+      <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
     </block>
   </view>
+  <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
   <view class="flex flex_bottom flex_m ">
     <view data-path="/pages/index/index" bindtap="switchTab" class="imgGoods flex  column fs_12 ">
       <image style="width:49rpx;height:50rpx flex_c" src="../../image/goodH.png"></image>
@@ -105,26 +108,45 @@
       <image style="width:56rpx;height:54rpx" src="../../image/goodC.png"></image>
       <text>购物车</text>
     </view>
-    <view bindtap="showModel" class="btn_bottom fs_14 flex">
-      <text class="tc">加入购物车</text>
-      <text class="tc">立即购买</text>
+    <view class="btn_bottom fs_14 flex">
+      <text catchtap="showModel" data-type="add" class="tc">加入购物车</text>
+      <text catchtap="showModel" data-type="buy" class="tc">立即购买</text>
     </view>
   </view>
   <view bindtap="showModel" catch:touchmove hidden="{{showMask}}" class="mask add_goods">
   </view>
   <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
     <view class="flex goodsDe box_zing">
-      <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+      <image class="goodsImg flex_nosize" src="{{goodsData.row.goods_images[0]}}"></image>
       <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
-        <text class="clamp_1">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
-        <text style="" class="goodsPr fs_20">￥99.99</text>
-        <text class="fs_14">剩余99件</text>
+        <text class="clamp_1">{{goodsData.row.goods_name}}</text>
+        <text style="" class="goodsPr fs_20">￥{{goods_price}}</text>
+        <text class="fs_14">剩余{{goods_storage}}件</text>
       </view>
       <text class="addCard tc fs_22" catchtap="showModel" class="./iconfont/iconguanbi:before icon close fs_18"></text>
     </view>
-    <view bindtap="showModel" class="btn_bottom fs_14 flex">
-      <text class="tc">加入购物车</text>
-      <text class="tc">立即购买</text>
+    <view wx:if="{{skuObj.spec.length>0}}" class="skuObj box_zing">
+      <view>
+        <block wx:for="{{skuObj.spec}}" wx:key="{{index}}">
+          <view style="color:#8A8A8A;">{{item.name}}</view>
+          <view class="sku_value flex flex_wrap">
+            <block wx:for="{{item.sub}}" wx:for-item="value" wx:for-index="ind" wx:key="{{ind}}">
+              <text class="{{value.check?'activeText':''}} box_zing fs_13" data-index="{{index}}" data-ind="{{ind}}" catchtap="selectSku">{{value.name}}</text>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view style="padding:10rpx 30rpx">
+      <view style="color:#8A8A8A;margin:10rpx 0">数量</view>
+      <view class="flex add_odd flex_m">
+        <text data-type="odd" catchtap="addOdd" class="tc">-</text>{{goods_num}}
+        <text data-type="add" catchtap="addOdd" class="tc">+</text>
+      </view>
+    </view>
+    <view class="btn_bottom fs_14 flex">
+      <text catchtap="addCard" class="tc">加入购物车</text>
+      <text catchtap="addBuy" class="tc">立即购买</text>
     </view>
   </view>
 

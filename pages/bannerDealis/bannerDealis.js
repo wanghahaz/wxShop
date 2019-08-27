@@ -9,21 +9,52 @@ Page({
    * 页面的初始数据
    */
   data: {
-    time: 0,
+    time: 1,
     video: '',
     id: 0,
-    obj: {},
-    src: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'
+  },
+  back() {
+    if (this.data.time > 0) {
+      until.modal({
+        content: '您还没有观看完成,确认退出么？'
+      }).then(res => {
+        wx.navigateBack()
+      })
+    } else {
+      wx.navigateBack()
+    }
+  },
+  // 获取下一条广告
+  getNext() {
+    if (this.data.time > 0) {
+      return;
+    }
+    http.getReq('/advert/get_next_advert', {}).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          id: res.data
+        })
+        this.getAdvert()
+      } else {
+        until.toast({
+          title: '获取失败'
+        })
+      }
+    })
   },
   // 查看广告
   getAdvert() {
-    http.getReq(`/advert/check/${this.data.id}`, {}).then(res => {
-      console.log(res)
+    http.getReq(`/advert/check/${this.data.id}`, {}, true).then(res => {
+      this.setData({
+        video: res.data.video
+      })
+      console.log(res.data)
     })
   },
   // 获取观看奖励 (登录)  播放结束触发
   bindended() {
-    http.getReq(`/advert/get_reward/${this.data.obj.id}`, {}).then(res => {
+    let that = this;
+    http.getReq(`/advert/get_reward/${this.data.id}`, {}).then(res => {
       if (res.code == '200') {
         wx.showModal({
           title: '观看完成',
@@ -33,14 +64,17 @@ Page({
           cancelText: '去购物',
           success(res) {
             if (res.confirm) {
+              that.getNext()
               console.log('用户点击确定')
             } else if (res.cancel) {
-              console.log('用户点击取消')
+              wx.navigateBack()
             }
           }
         })
-      }else{
-        until.toast({title:res.msg})
+      } else {
+        until.toast({
+          title: res.msg
+        })
       }
 
     })
@@ -68,7 +102,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
     let video = wx.createVideoContext("myVideo")
     this.setData({
       id: options.id
@@ -100,7 +133,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    console.log(1)
     return;
   },
 

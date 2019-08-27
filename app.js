@@ -1,21 +1,46 @@
 //app.js
 import until from "./utils/util.js";
+import http from "./common/js/http.js";
 App({
   setBadge() {
     let that = this;
-    if (that.globalData.totalCount > 0) {
-      wx.setTabBarBadge({
-        index: 3,
-        text: String(that.globalData.totalCount > 9 ? '9+' : that.globalData.totalCount),
-        success: function(res) {},
-      })
-    }
+    wx.setTabBarBadge({
+      index: 3,
+      text: String(that.globalData.totalCount > 9 ? '9+' : that.globalData.totalCount),
+      success: function(res) {},
+    })
+  },
+  getCard() {
+    http.getReq('/cart').then(res => {
+      let list = res.data;
+      if (list == 'null') {
+        list = []
+      } else {
+        list.forEach(item => {
+          item.store.check = true;
+          item.goods.forEach(value => {
+            value.check = true
+          })
+        })
+      }
+      this.getPrice(list)
+    })
   },
   onLaunch: function() {
-    wx.setStorage({
-      key: "key",
-      data: "value"
+    this.getCard()
+    http.postReq('/login', {
+      nickname: ' ',
+      openid: 'oyfPD5MS6N9seMtBWHWoukWtAQNw',
+      avatar: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIaiclFechtV4KtywqVho7ibo1oGf30FaAF6bUG3oHj1cWer8grX89txujEtoiaricyNVjnibY9ozbu5DA/132"
+    }).then(res => {
+      this.globalData.userInfo = res.data.user;
+      this.globalData.token = res.data.token;
+      wx.setStorage({
+        key: "token",
+        data: res.data.token
+      })
     })
+
     this.setBadge();
     this.getPrice()
     // 获取屏幕高度
@@ -70,23 +95,24 @@ App({
     if (type == 1) {
       goodsList.forEach(item => {
         isCheck = item.goods.every(item => item.check);
-        item.check = isCheck;
+        item.store.check = isCheck;
       })
     } else if (type == 2) {
       goodsList.forEach(item => {
         item.goods.forEach(value => {
-          value.check = item.check
+          value.check = item.store.check
         })
       })
     } else {
       goodsList.forEach(item => {
-        item.check = boolean;
+        item.store.check = boolean;
         item.goods.forEach(value => {
           value.check = boolean
         })
       })
     }
-    allCheck = goodsList.every(item => item.check);
+    allCheck = goodsList.every(item => item.store.check);
+    this.getPrice(list)
     return {
       list: list,
       allCheck: allCheck
@@ -100,49 +126,24 @@ App({
     goodsList.forEach(item => {
       item.goods.forEach(value => {
         if (value.check) {
-          sum += value.price * value.amount;
-          count += value.amount
+          sum += value.goods_num * value.goods_price;
+          count += value.goods_num
         }
       })
     })
     this.globalData.totalPrice = sum;
     this.globalData.totalCount = count;
     this.setBadge();
-    return {
-      sum: sum,
-      count: count
-    }
+    // return {
+    //   sum: sum,
+    //   count: count
+    // }
   },
   globalData: {
     clientHeight: 0,
     userInfo: null,
-    goodsList: [{
-      name: '007商铺',
-      check: true,
-      goods: [{
-        name: '我是商品我是商品',
-        src: '../../image/moneyBg.png',
-        amount: 2,
-        price: '30',
-        check: true,
-      }, {
-        name: '我是商品我是商品',
-        src: '../../image/moneyBg.png',
-        amount: 2,
-        price: '30',
-        check: true,
-      }]
-    }, {
-      name: '008商铺',
-      check: true,
-      goods: [{
-        name: '我是商品我是商品我是商品我是商品我是商品我是商品商品我是商品',
-        src: '../../image/moneyBg.png',
-        amount: 2,
-        price: '20',
-        check: true,
-      }]
-    }],
+    token: null,
+    goodsList: [],
     totalPrice: 0,
     totalCount: 0,
   }

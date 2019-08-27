@@ -9,10 +9,45 @@ Page({
    * 页面的初始数据
    */
   data: {
+    is_collect: 1,
     showMask: true,
     shopList: [],
-    isPullDownRefresh:true,
-    page:1
+    commentList: [],
+    isPullDownRefresh: true,
+    page: 1,
+    data: {},
+    goodsData: {},
+    skuObj: {},
+    goods_num: 1,
+    goods_storage: 0,
+    goods_price: 0,
+    selectSku: {}
+  },
+  // 收藏商品
+  collectGoods() {
+    http.postReq('/collect', {
+      id: this.data.data.id,
+      type: 1
+    }, true).then(res => {
+      let is_collect = res.msg == '收藏成功' ? 1 : 0
+      this.setData({
+        is_collect: is_collect
+      })
+    })
+  },
+  // 商品加减
+  addOdd(e) {
+    if (e.currentTarget.dataset.type == 'add') {
+      this.setData({
+        goods_num: this.data.goods_num + 1
+      })
+    } else {
+      let num = this.data.goods_num;
+      num = num-- > 1 ? num : 1;
+      this.setData({
+        goods_num: num
+      })
+    }
   },
   // 获取好物推荐
   getGoods() {
@@ -33,7 +68,7 @@ Page({
       }
     })
   },
-  showModel() {
+  showModel(e) {
     this.setData({
       showMask: !this.data.showMask
     })
@@ -55,12 +90,170 @@ Page({
       url: e.currentTarget.dataset.path,
     })
   },
+  // 获取商品详情
+  getGoodDealis() {
+    http.getReq('/goods', this.data.data, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          goodsData: res.data,
+          is_collect: res.data.is_collect,
+          goods_storage: res.data.row.goods_storage,
+          goods_price: res.data.row.goods_price
+        })
+      } else {
+        until.toast({
+          title: '加载失败'
+        })
+      }
+    })
+  },
+  // 立即购买
+  addBuy() {
+    if (this.data.skuObj.spec) {
+      if (!this.data.selectSku.goods_price) {
+        until.toast({
+          title: '请您先选择商品规则'
+        })
+        return false;
+      }
+    }
+    let list = [{
+      store: {
+        store_name: this.data.goodsData.store.store_name,
+        store_id: this.data.goodsData.store.id,
+        check: true
+      },
+      goods: [{
+        check: true,
+        id: this.data.goodsData.row.id,
+        goods_num: this.data.goods_num,
+        goods_name: this.data.goodsData.row.goods_name,
+        goods_thumb: this.data.goodsData.row.goods_images[0],
+        goods_price: this.data.selectSku.goods_price || this.data.goodsData.row.goods_price,
+        goods_storage: this.data.selectSku.goods_storage || this.data.goodsData.row.goods_storage,
+        is_mult: this.data.goodsData.row.is_mult,
+        sku_id: this.data.selectSku.id || this.data.data.id,
+        spec_name: this.data.selectSku.spec_name || ''
+      }]
+    }];
+    app.globalData.goodsList = list;
+    wx.navigateTo({
+      url: '/pages/goodSettle/goodSettle'
+    })
+  },
+  // 加入购物车
+  addCard() {
+    if (this.data.skuObj.spec) {
+      if (!this.data.selectSku.goods_price) {
+        until.toast({
+          title: '请您先选择商品规则'
+        })
+        return false;
+      }
+    }
+    let data = JSON.parse(JSON.stringify(this.data.data));
+    data.goods_spec = this.data.selectSku.id || data.sku_id;
+    data.goods_id = data.id;
+    data.goods_num = this.data.goods_num;
+    delete data.sku_id;
+    delete data.id;
+    delete data.user_id;
+    http.postReq('/cart/add', data, true).then(res => {
+      if (res.code == 200) {
+        until.toast({
+          title: '已加入购物车！'
+        })
+      } else {
+        until.toast({
+          title: '加入购物车失败！'
+        })
+      }
+    })
+  },
+  // 选择规格
+  selectSku(e) {
+    let list = JSON.parse(JSON.stringify(this.data.skuObj.spec));
+    let obj = JSON.parse(JSON.stringify(this.data.skuObj));
+    list[e.currentTarget.dataset.index].sub.forEach((item, index) => {
+      if (index == e.currentTarget.dataset.ind) {
+        item.check = !item.check
+      } else {
+        item.check = false;
+      }
+    })
+    obj.spec = list;
+    this.setData({
+      skuObj: obj
+    })
+    let specList = this.data.skuObj.spec;
+    let skuList = this.data.skuObj.sku;
+    let selectSpec = [];
+    if (specList) {
+      specList.forEach(item => {
+        item.sub.forEach(value => {
+          if (value.check) {
+            selectSpec.push(value.id)
+          }
+        })
+      })
+      if (selectSpec.length == specList.length) {
+        let str = selectSpec.join('_');
+        this.setData({
+          selectSku: skuList.find(item => item.spec == str),
+          goods_storage: skuList.find(item => item.spec == str).goods_storage,
+          goods_price: skuList.find(item => item.spec == str).goods_price
+        })
+      } else {
+        this.setData({
+          selectSku: {},
+        })
+      }
+    }
+  },
+  // 商品评价
+  getComment() {
+    http.getReq(`/goods/get_eval_list/${this.data.data.id}`, {}).then(res => {
+      // console.log(res)
+      if (res.code == 200) {
+        this.setData({
+          commentList: res.data
+        })
+      }
+    })
+  },
+  // 获取商品规格
+  getSku() {
+    http.getReq(`/goods/get_sku/${this.data.data.id}`, {}).then(res => {
+      if (res.code == 200) {
+        let obj = res.data;
+        if (obj.spec.length > 0) {
+          obj.spec.forEach(item => {
+            item.sub.forEach(val => {
+              val.check = false;
+            })
+          })
+        }
+        this.setData({
+          skuObj: obj
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    this.setData({
+      data: {
+        id: options.id,
+        sku_id: options.skuid ? options.skuid : 0,
+        user_id: app.globalData.userInfo.id ? app.globalData.userInfo.id : '0'
+      }
+    })
     this.getGoods()
+    this.getComment()
+    this.getSku()
+    this.getGoodDealis()
   },
 
   /**
@@ -73,7 +266,11 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function() {
+    this.setData({
+      showMask: true
+    })
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -19,7 +19,7 @@
   </swiper>
   <view class="flex flex_sa seckill width94 flex_wrap">
     <block wx:for="{{navList}}" wx:key="{{index}}">
-      <view  class="seckillList flex flex_nosize">
+      <view class="seckillList flex flex_nosize">
         <image class="image" src="{{item.icon}}"></image>
         <text class="fs_13 clamp_1 tc" style="color:#F18E1E;margin:4rpx 0 0 0;width:95%">{{item.name}}</text>
       </view>
@@ -39,7 +39,7 @@
     </view>
     <view class="flex flex_lr">
       <block wx:for="{{4}}" wx:key="{{index}}">
-        <view class="flex column activity_box" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter">
+        <view class="flex column activity_box" data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter">
           <image src="../../image/moneyBg.png" class="activity_img"></image>
           <text style="margin-top:4rpx" class="fs_12 clamp_1">我是商品我是商品我.</text>
           <view class="fs_14 flex flex_lr">
@@ -55,7 +55,7 @@
   <view data-path="/pages/zluckPage/luckPage" bindtap="toRouter" class="fs_19 tc recommended" style="color:#B2B2B2">好物推荐</view>
   <view class="shop_list flex_wrap width90" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
-      <one_shop data-id="{{item.id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+      <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
     </block>
   </view>
   <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>

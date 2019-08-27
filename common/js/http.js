@@ -13,7 +13,8 @@ let getReq = function(url, data, show) {
       method: 'GET',
       data: data,
       header: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': wx.getStorageSync('token') ? wx.getStorageSync('token') : null
       },
       success: function(res) {
         wx.hideLoading();
@@ -53,7 +54,7 @@ let postReq = function(url, data, show) {
       data: data,
       header: {
         'Content-Type': 'application/x-www-form-urlencoded', // 默认值
-        'Authorization': wx.getStorageSync('token') ? 'Bearer ' + wx.getStorageSync('token') : null,
+        'Authorization': wx.getStorageSync('token') ? wx.getStorageSync('token') : null,
       },
       success: function(res) {
         wx.hideLoading();

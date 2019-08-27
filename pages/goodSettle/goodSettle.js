@@ -9,10 +9,11 @@ Page({
   data: {
     maskType: 0,
     address: {},
-    goodsList: app.globalData.goodsList,
-    is_jifen:true
+    goodsList: [],
+    is_jifen: true,
+    totalPrice: 0,
   },
-  setShopCheck(){
+  setShopCheck() {
     this.setData({
       is_jifen: !this.data.is_jifen
     })
@@ -49,7 +50,25 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
+    let totalPrice = 0;
+    list.forEach(item => {
+      let check = item.goods.some(val => val.check);
+      item.store.check = check
+      let sum = 0;
+      item.goods.forEach(value => {
+        sum += value.goods_num * value.goods_price;
+      })
+      item.sum = sum;
+      totalPrice += item.sum;
+    })
+    this.setData({
+      goodsList: list,
+      totalPrice: totalPrice
+    })
+    console.log(list)
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

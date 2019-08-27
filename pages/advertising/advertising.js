@@ -45,7 +45,7 @@ Page({
   getIndex() {
     // 广告首页
     http.getReq('/advert/index', {
-      user_id: 0
+      user_id: app.globalData.userInfo.id
     }).then(res => {
       this.setData({
         ads: res.data.ads,

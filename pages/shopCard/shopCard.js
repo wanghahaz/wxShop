@@ -10,18 +10,51 @@ Page({
    */
   data: {
     shopList: [],
-    goodsList:[],
+    goodsList: [],
     totalPrice: 0,
     count: 0,
     allCheck: true,
     page: 1,
     isPullDownRefresh: true,
   },
+  // 编辑购物车商品加减
+  addOdd(e) {
+    let num = e.currentTarget.dataset.num;
+    if (e.currentTarget.dataset.type == 'add') {
+      num = num + 1;
+    } else {
+      num = num-- > 1 ? num : 1;
+    }
+    http.postReq(`/cart/edit/${e.currentTarget.dataset.id}`, {
+      goods_num: num,
+      goods_spec: e.currentTarget.dataset.skuid
+    }).then(res => {
+      if(res.code==200){
+        this.getCard()
+      }else{
+        until.toast({title:'编辑失败'})
+      }
+    })
+  },
   // 获取购物车商品
   getCard() {
     http.getReq('/cart').then(res => {
+      let list = res.data;
+      if (list == 'null') {
+        list = []
+      } else {
+        list.forEach(item => {
+          item.store.check = true;
+          item.goods.forEach(value => {
+            value.check = true
+          })
+        })
+      }
+      app.getPrice(list)
       this.setData({
-        goodsList: res.data != "null" ? res.data : []
+        goodsList: list,
+        totalPrice: app.globalData.totalPrice,
+        count: app.globalData.totalCount,
       })
     })
   },
@@ -66,23 +99,28 @@ Page({
       this.setData({
         goodsList: app.setCheck(list, '1').list,
         allCheck: app.setCheck(list, '1').allCheck,
+        totalPrice: app.globalData.totalPrice,
+        count: app.globalData.totalCount,
       })
     } else {
       // shop选择
-      this.data.goodsList[e.currentTarget.dataset.index].check = !e.currentTarget.dataset.check;
+      this.data.goodsList[e.currentTarget.dataset.index].store.check = !e.currentTarget.dataset.check;
       list = this.data.goodsList;
       this.setData({
         goodsList: app.setCheck(list, '2').list,
         allCheck: app.setCheck(list, '2').allCheck,
+        totalPrice: app.globalData.totalPrice,
+        count: app.globalData.totalCount,
       })
     }
   },
   // 全选切换
   selectAll() {
-    console.log('全选')
     this.setData({
       allCheck: !this.data.allCheck,
-      goodsList: app.setCheck(this.data.goodsList, '', !this.data.allCheck).list
+      goodsList: app.setCheck(this.data.goodsList, '', !this.data.allCheck).list,
+      totalPrice: app.globalData.totalPrice,
+      count: app.globalData.totalCount,
     })
   },
   toRouter(e) {
@@ -101,7 +139,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (wx.getStorageSync('token')){
+    if (wx.getStorageSync('token')) {
       this.getCard()
     }
     this.getGoods(); //好物推荐
@@ -130,7 +168,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    app.globalData.goodsList = this.data.goodsList;
   },
 
   /**
