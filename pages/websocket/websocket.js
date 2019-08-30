@@ -1,178 +1,192 @@
-var app = getApp();
-var socketOpen = false;
-var frameBuffer_Data, session, SocketTask;
-var url = 'ws://请填写您的长链接接口地址';
-var upload_url = '请填写您的图片上传接口地址'
-Page({
-  data: {
-    user_input_text: '', //用户输入文字
-    inputValue: '',
-    returnValue: '',
-    addImg: false,
-    //格式示例数据，可为空
-    allContentList: [],
-    num: 0
-  },
-  // 页面加载
-  onLoad: function() {
-    this.bottom();
-  },
-  onShow: function(e) {
-    if (!socketOpen) {
-      this.webSocket()
+var that = this;
+var query = wx.createSelectorQuery();
+query.select('.scrollMsg').boundingClientRect(function(rect) {
+  that.setData({
+    scrollTop: rect.height + 'px'
+  });
+}).exec();
+const app = getApp();
+var inputVal = '';
+var msgList = [];
+var windowWidth = wx.getSystemInfoSync().windowWidth;
+var windowHeight = wx.getSystemInfoSync().windowHeight;
+var keyHeight = 0;
+
+import until from "../../utils/util.js";
+/**
+ * 初始化数据
+ */
+function initData(that) {
+  inputVal = '';
+
+  msgList = [{
+      time: '12:12:23',
+      speaker: 'server',
+      contentType: 'text',
+      content: '欢迎来到英雄联盟，敌军还有30秒到达战场，请做好准备！'
+    },
+    {
+      time: '12:15:58',
+      speaker: 'customer',
+      contentType: 'text',
+      content: '我怕是走错片场了...'
     }
-  },
-  // 页面加载完成
-  onReady: function() {
-    var that = this;
-    SocketTask.onOpen(res => {
-      socketOpen = true;
-      console.log('监听 WebSocket 连接打开事件。', res)
-    })
-    SocketTask.onClose(onClose => {
-      console.log('监听 WebSocket 连接关闭事件。', onClose)
-      socketOpen = false;
-      this.webSocket()
-    })
-    SocketTask.onError(onError => {
-      console.log('监听 WebSocket 错误。错误信息', onError)
-      socketOpen = false
-    })
-    SocketTask.onMessage(onMessage => {
-      console.log('监听WebSocket接受到服务器的消息事件。服务器返回的消息', JSON.parse(onMessage.data))
-      var onMessage_data = JSON.parse(onMessage.data)
-      if (onMessage_data.cmd == 1) {
-        that.setData({
-          link_list: text
-        })
-        console.log(text, text instanceof Array)
-        // 是否为数组
-        if (text instanceof Array) {
-          for (var i = 0; i < text.length; i++) {
-            text[i]
-          }
-        } else {
-
-        }
-        that.data.allContentList.push({
-          is_ai: true,
-          text: onMessage_data.body
-        });
-        that.setData({
-          allContentList: that.data.allContentList
-        })
-        that.bottom()
-      }
-    })
-  },
-  webSocket: function() {
-    // 创建Socket
-    SocketTask = wx.connectSocket({
-      url: url,
-      data: 'data',
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'post',
-      success: function(res) {
-        console.log('WebSocket连接创建', res)
-      },
-      fail: function(err) {
-        wx.showToast({
-          title: '网络异常！',
-        })
-        console.log(err)
-      },
-    })
-  },
-
-  // 提交文字
-  submitTo: function(e) {
-    let that = this;
-    var data = {
-      body: that.data.inputValue,
-    }
-    if (socketOpen) {
-      // 如果打开了socket就发送数据给服务器
-      sendSocketMessage(data)
-      this.data.allContentList.push({
-        is_my: {
-          text: this.data.inputValue
-        }
-      });
-      this.setData({
-        allContentList: this.data.allContentList,
-        inputValue: ''
-      })
-
-      that.bottom()
-    }
-  },
-  bindKeyInput: function(e) {
-    this.setData({
-      inputValue: e.detail.value
-    })
-  },
-
-  onHide: function() {
-    SocketTask.close(function(close) {
-      console.log('关闭 WebSocket 连接。', close)
-    })
-  },
-  upimg: function() {
-    var that = this;
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      success: function(res) {
-        that.setData({
-          img: res.tempFilePaths
-        })
-        wx.uploadFile({
-          url: upload_url,
-          filePath: res.tempFilePaths,
-          name: 'img',
-          success: function(res) {
-            console.log(res)
-            wx.showToast({
-              title: '图片发送成功！',
-              duration: 3000
-            });
-          }
-        })
-        that.data.allContentList.push({
-          is_my: {
-            img: res.tempFilePaths
-          }
-        });
-        that.setData({
-          allContentList: that.data.allContentList,
-        })
-        that.bottom();
-      }
-    })
-  },
-  addImg: function() {
-    this.setData({
-      addImg: !this.data.addImg
-    })
-
-  },
-  // 获取hei的id节点然后屏幕焦点调转到这个节点  
-  bottom: function() {
-    var that = this;
-    this.setData({
-      scrollTop: 1000000
-    })
-  },
-})
-
-//通过 WebSocket 连接发送数据，需要先 wx.connectSocket，并在 wx.onSocketOpen 回调之后才能发送。
-function sendSocketMessage(msg) {
-  var that = this;
-  console.log('通过 WebSocket 连接发送数据', JSON.stringify(msg))
-  SocketTask.send({
-    data: JSON.stringify(msg)
-  }, function(res) {
-    console.log('已发送', res)
+  ]
+  that.setData({
+    msgList,
+    inputVal
   })
 }
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    scrollHeight: '100vh',
+    inputBottom: 0
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    initData(this);
+    this.setData({
+      cusHeadIcon: app.globalData.userInfo.avatarUrl,
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+
+  },
+  lookImg(e) {
+    wx.previewImage({
+      current: e.currentTarget.dataset.src, // 当前显示图片的http链接
+      urls: [e.currentTarget.dataset.src] // 需要预览的图片http链接列表
+    })
+  },
+  addImg(e) {
+    let that = this;
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function(res) {
+        let time = until.formatTime(new Date()).substring(until.formatTime(new Date()).length, 11);
+        msgList.push({
+          time: time,
+          speaker: 'customer',
+          contentType: 'img',
+          content: res.tempFilePaths[0]
+        })
+        that.setData({
+          msgList,
+          inputVal
+        });
+        that.setData({
+          scrollHeight: '100vh',
+          inputBottom: 0
+        })
+        that.setData({
+          toView: 'msg-' + (msgList.length - 1)
+        })
+
+        // wx.uploadFile({
+        //   url: 'https://cardname.yunpaas.cn/phase/image', //仅为示例，非真实的接口地址
+        //   filePath: res.tempFilePaths[0],
+        //   name: 'file',
+        //   header: {
+        //     "Content-Type": "multipart/form-data",
+        //   },
+        //   formData: {
+        //     file: res.tempFilePaths[0]
+        //   },
+        //   success: function(res) {
+        //     that.setData({
+        //       logoSrc: JSON.parse(res.data).data
+        //     })
+        //   },
+        //   fail: function(e) {
+        //     console.log(e)
+        //   }
+        // })
+
+      }
+    })
+  },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+
+  },
+
+  /**
+   * 获取聚焦
+   */
+  focus: function(e) {
+    keyHeight = e.detail.height;
+    this.setData({
+      scrollHeight: (windowHeight - keyHeight) + 'px'
+    });
+    this.setData({
+      toView: 'msg-' + (msgList.length - 1),
+      inputBottom: keyHeight + 'px'
+    })
+  },
+
+  //失去聚焦(软键盘消失)
+  blur: function(e) {
+    this.setData({
+      scrollHeight: '100vh',
+      inputBottom: 0
+    })
+    this.setData({
+      toView: 'msg-' + (msgList.length - 1)
+    })
+
+  },
+
+  /**
+   * 发送点击监听
+   */
+  bindinput(e) {
+    console.log(e)
+    this.setData({
+      inputVal: e.detail.value
+    })
+  },
+  sendClick: function(e) {
+    let time = until.formatTime(new Date()).substring(until.formatTime(new Date()).length, 11);
+    msgList.push({
+      time: time,
+      speaker: 'customer',
+      contentType: 'text',
+      content: this.data.inputVal || e.detail.value
+    })
+    inputVal = '';
+    this.setData({
+      msgList,
+      inputVal
+    });
+  },
+
+  /**
+   * 退回上一页
+   */
+  toBackClick: function() {
+    wx.navigateBack({})
+  }
+
+})
