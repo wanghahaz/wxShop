@@ -6,6 +6,15 @@ video {
   object-fit: fill;
 }
 
+.time {
+  position: absolute;
+  top: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  color: #fff;
+}
+
 .box_video {
   position: fixed;
   top: 0;
@@ -18,7 +27,7 @@ video {
 .box_tit {
   position: fixed;
   left: 3%;
-  top: 30rpx;
+  top: 50rpx;
   z-index: 99;
 }
 
@@ -28,7 +37,8 @@ video {
   width: 180rpx;
   line-height: 60rpx;
 }
-.cover{
+
+.cover {
   flex: 1;
   line-height: 60rpx;
 }

@@ -6,16 +6,18 @@
       <text>获取微信收货地址</text>
     </view>
     <text class=" ./iconfont/iconarrow-right-copy:before icon " style="font-size:30rpx "></text>
-  </button> 
+  </button>
   <radio-group class="radio-group box_zing flex column" bindchange="radioChange">
-    <label class="radio flex flex_m" wx:for="{{items}}" wx:key="{{item.id}}">
+    <label style="padding: 28rpx 4%;" class="radio flex flex_m" wx:for="{{items}}" wx:key="{{item.id}}">
       <radio wx:if="{{!type}}" color="#F18E1E" value="{{item.id}}" />{{item.value}}
       <view class="fs_12 adress flex_sa flex column ">
-        <text>{{item.name}} {{item.tel}} <text class="fs_10" style="color:red">(默认)</text> </text>
-        <text>收货地址：{{item.adress}}</text>
+        <text>{{item.name}} {{item.phone}} <text wx:if="{{item.is_default==1}}" class="fs_10" style="color:red">(默认)</text> </text>
+        <text>收货地址：{{item.address_info}}</text>
       </view>
       <text data-path="/pages/addAdress/addAdress" data-id="{{item.id}}" catchtap="toRouter" class=" ./iconfont/iconbianji:before icon " style="font-size:50rpx"></text>
     </label>
   </radio-group>
+  <view data-path="/pages/addAdress/addAdress" bindtap="toRouter" style="margin:30rpx 0;" wx:if="{{items.length==0&&!isLoding}}" class="tc fs_14 fcF1">您还没有添加地址，请您先去添加地址哦！</view>
+  <view wx:if="{{items.length!=0&&!isLoding}}" class="noMore">已加载全部..</view>
   <view class="add fs_17 tc" data-path="/pages/addAdress/addAdress" bindtap="toRouter">新增收货地址</view>
 </view>

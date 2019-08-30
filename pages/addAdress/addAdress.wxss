@@ -1,3 +1,5 @@
+@import '../../element/area/area.wxss';
+
 .section {
   font-size: 30rpx;
   position: relative;
@@ -58,6 +60,19 @@
   width: 100%;
   font-size: 34rpx;
 }
-.btn-area .del{
-  background: #B2B2B2;
+
+.btn-area .del {
+  background: #b2b2b2;
+}
+
+.area {
+  position: relative;
+}
+
+.area .animation-button {
+  width: 80%;
+  right: 0;
+  top: 0;
+  position: absolute;
+  height: 100%;
 }

@@ -11,32 +11,39 @@ Page({
   data: {
     type: false,
     address: {},
-    items: [{
-      id: 1,
-      name: "张三",
-      adress: '山西省太原市小店区',
-      tel: '15700001234',
-      checked: true
-    }, {
-      id: 2,
-      name: "李四",
-      adress: '山西省太原市小店区',
-      tel: '15700001234'
-    }]
+    isLoding: true,
+    page: 1,
+    items: []
+  },
+  // 收货地址列表
+  getItems() {
+    http.getReq('/address/index', {
+      page: this.data.page
+    }, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          items: [...this.data.items, ...res.data.data]
+        })
+        if (this.data.page >= res.data.last_page) {
+          this.setData({
+            isLoding: false
+          })
+        } else {
+          this.setData({
+            page: this.data.page + 1
+          })
+        }
+      } else {
+        this.setData({
+          isLoding: false
+        })
+      }
+    })
   },
   radioChange: function(e) {
-    var obj1 = {
-      address_id: '1',
-      list: [{
-        name: '张三',
-        age: 12
-      }]
-    }
-    console.log(obj1)
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页面
     var prevPage = pages[pages.length - 2];
-    console.log(prevPage)
     let obj = this.data.items.find(value => value.id == e.detail.value)
     prevPage.setData({
       address: obj
@@ -79,7 +86,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success(res) {
-        if (res.authSetting["scope.address"]==false) {
+        if (res.authSetting["scope.address"] == false) {
           wx.openSetting({
             success(res) {
               _this.getLocation()
@@ -99,6 +106,7 @@ Page({
     this.setData({
       type: options.type || false
     })
+
   },
 
   /**
@@ -112,7 +120,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.setData({
+      items: []
+    })
+    this.getItems()
   },
 
   /**
@@ -140,7 +151,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if (this.data.isLoding) {
+      this.getItems()
+    }
   },
 
   /**

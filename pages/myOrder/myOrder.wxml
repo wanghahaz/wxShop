@@ -8,23 +8,23 @@
     <text data-index="4" bindtap="bindchange" class="{{titleIndex==4?'active':''}} tc">待评价</text>
     <text data-index="5" bindtap="bindchange" class="{{titleIndex==5?'active':''}} tc">退款/售后</text>
   </scroll-view>
-
+  <view class="noMore" wx:if="{{goodsList.length==0&&!isLoading}}">您还没有订单哦！</view>
   <block wx:if="{{titleIndex==0}}">
-    <block wx:for="{{2}}" wx:key="{{index}}">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/orderDealis/orderDealis" bindtap="toRouter">
         <view class="title_name flex flex_lr">
-          <text>我是第{{index}}个店铺></text>
+          <text>{{item.store.store_name}}</text>
           <text class="fs_14 fcF1">买家已付款</text>
         </view>
         <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{3}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
+          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
           <view class="goodsDealis">
             <view class="flex">
               <text class="clamp_2 fs_14">我是第{{ind}}商品我是第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>
-              <view style="width:70rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_16 ter">￥99</text>
-                <text class="fs_14 ter">×2</text>
+              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
+                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
+                <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
             <text class="fs_12 fcb2">134号牛油果绿  L</text>
@@ -32,8 +32,8 @@
         </view>
 
         <view class="flex count flex_end">
-          <text class="fs_12" style="margin-right:30rpx">共2件商品</text>
-          <text class="fs_16">实付金额：￥198</text>
+          <text class="fs_12" style="margin-right:30rpx">共{{item.orderdata.length}}件商品</text>
+          <text class="fs_16">实付金额：￥{{item.goods_amount}}</text>
         </view>
         <view class="btn count flex fs_13">
           <text data-id="111" catchtap="cancel" class="evaluation" style="border-color:#B2B2B2">取消订单</text>
@@ -41,29 +41,25 @@
         </view>
       </view>
     </block>
-    <view wx:if="{{isLoading}}">
-      <view class="downLoding"></view>
-      <view style="height:50rpx"></view>
-    </view>
   </block>
   <block wx:elif="{{titleIndex==1}}">
-    <block wx:for="{{2}}" wx:key="{{index}}">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view data-path="/pages/orderDealis/orderDealis" bindtap="toRouter" class="dealis_order width94 box_zing">
         <view class="title_name flex flex_lr">
           <view class="flex flex_m">
-            <image class="allCheck" src="../../image/noCheck.png"></image>
-            <text>我是第{{index}}个店铺></text>
+            <!-- <image class="allCheck" src="../../image/noCheck.png"></image> -->
+            <text>{{item.store.store_name}}</text>
           </view>
           <text class="fs_14 fcF1 flex_nosize">待付款</text>
         </view>
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{3}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
+          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
           <view class="goodsDealis">
             <view class="flex">
               <text class="clamp_2 fs_14">我是第{{ind}}商品我是第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>
-              <view style="width:70rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_16 ter">￥99</text>
-                <text class="fs_14 ter">×2</text>
+              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
+                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
+                <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
             <text class="fs_12 fcb2">134号牛油果绿  L</text>
@@ -78,26 +74,22 @@
         </view>
       </view>
     </block>
-    <view>
-      <view class="downLoding"></view>
-      <view style="height:50rpx"></view>
-    </view>
   </block>
   <block wx:elif="{{titleIndex==2}}">
-    <block wx:for="{{2}}" wx:key="{{index}}">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view data-path="/pages/orderDealis/orderDealis" bindtap="toRouter" class="dealis_order width94 box_zing">
         <view class="title_name flex flex_lr">
-          <text>我是第{{index}}个店铺></text>
+          <text>{{item.store.store_name}}</text>
           <text class="fs_14 fcF1">待发货</text>
         </view>
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{3}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
+          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
           <view class="goodsDealis">
             <view class="flex">
               <text class="clamp_2 fs_14">我是第{{ind}}商品我是第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>
-              <view style="width:70rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_16 ter">￥99</text>
-                <text class="fs_14 ter">×2</text>
+              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
+                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
+                <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
             <text class="fs_12 fcb2">134号牛油果绿  L</text>
@@ -105,8 +97,8 @@
         </view>
 
         <view class="flex count flex_end">
-          <text class="fs_12" style="margin-right:30rpx">共2件商品</text>
-          <text class="fs_16">实付金额：￥198</text>
+          <text class="fs_12" style="margin-right:30rpx">共{{item.orderdata.length}}件商品</text>
+          <text class="fs_16">实付金额：￥{{item.goods_amount}}</text>
         </view>
         <!-- <view style="margin:30rpx 0 20rpx 0" class="creatTime fs_14 fcb2 ">
           创建时间：2019.08.01 12:59:50
@@ -117,26 +109,22 @@
         </view>
       </view>
     </block>
-    <view>
-      <view class="downLoding"></view>
-      <view style="height:50rpx"></view>
-    </view>
   </block>
   <block wx:elif="{{titleIndex==3}}">
-    <block wx:for="{{2}}" wx:key="{{index}}">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view data-path="/pages/orderDealis/orderDealis" bindtap="toRouter" class="dealis_order width94 box_zing">
         <view class="title_name flex flex_lr">
-          <text>我是第{{index}}个店铺></text>
+          <text>{{item.store.store_name}}</text>
           <text class="fs_14 fcF1">待收货</text>
         </view>
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{3}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
+          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
           <view class="goodsDealis">
             <view class="flex">
               <text class="clamp_2 fs_14">我是第{{ind}}商品我是第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>
-              <view style="width:70rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_16 ter">￥99</text>
-                <text class="fs_14 ter">×2</text>
+              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
+                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
+                <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
             <text class="fs_12 fcb2">134号牛油果绿  L</text>
@@ -144,8 +132,8 @@
         </view>
 
         <view class="flex count flex_end">
-          <text class="fs_12" style="margin-right:30rpx">共2件商品</text>
-          <text class="fs_16">实付金额：￥198</text>
+          <text class="fs_12" style="margin-right:30rpx">共{{item.orderdata.length}}件商品</text>
+          <text class="fs_16">实付金额：￥{{item.goods_amount}}</text>
         </view>
         <view class="btn count flex fs_13">
           <text data-path="/pages/logistics/logistics" catchtap="toRouter" class="evaluation" style="border-color:#B2B2B2">查看物流</text>
@@ -154,26 +142,22 @@
         </view>
       </view>
     </block>
-    <view>
-      <view class="downLoding"></view>
-      <view style="height:50rpx"></view>
-    </view>
   </block>
   <block wx:elif="{{titleIndex==4}}">
-    <block wx:for="{{2}}" wx:key="{{index}}">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing">
         <view class="title_name flex flex_lr">
-          <text>我是第{{index}}个店铺></text>
+          <text>{{item.store.store_name}}</text>
           <text class="fs_14 fcF1">已完成</text>
         </view>
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{3}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
+          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
           <view class="goodsDealis">
             <view class="flex">
               <text class="clamp_2 fs_14">我是第{{ind}}商品我是第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>
-              <view style="width:70rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_16 ter">￥99</text>
-                <text class="fs_14 ter">×2</text>
+              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
+                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
+                <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
             <text class="fs_12 fcb2">134号牛油果绿  L</text>
@@ -184,8 +168,8 @@
           </view>
         </view>
         <view class="flex count flex_end">
-          <text class="fs_12" style="margin-right:30rpx">共2件商品</text>
-          <text class="fs_16">实付金额：￥198</text>
+          <text class="fs_12" style="margin-right:30rpx">共{{item.orderdata.length}}件商品</text>
+          <text class="fs_16">实付金额：￥{{item.goods_amount}}</text>
         </view>
         <view class="btn count flex fs_13">
           <text catchtap="delOrder" class="evaluation" style="border-color:#B2B2B2">删除订单</text>
@@ -194,25 +178,21 @@
       </view>
 
     </block>
-    <view>
-      <view class="downLoding"></view>
-      <view style="height:50rpx"></view>
-    </view>
   </block>
   <block wx:elif="{{titleIndex==5}}">
-    <block wx:for="{{2}}" wx:key="{{index}}">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing">
         <view style="margin-bottom:24rpx" class="title_name flex flex_lr">
-          <text>我是第{{index}}个店铺></text>
+          <text>{{item.store.store_name}}</text>
         </view>
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{3}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
+          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
           <view class="goodsDealis">
             <view class="flex">
               <text class="clamp_2 fs_14">我是第{{ind}}商品我是第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>
-              <view style="width:70rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_16 ter">￥99</text>
-                <text class="fs_14 ter">×2</text>
+              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
+                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
+                <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
             <text class="fs_12 fcb2">134号牛油果绿  L</text>
@@ -224,12 +204,12 @@
         </view>
       </view>
     </block>
-    <view>
-      <view class="downLoding"></view>
-      <view style="height:50rpx"></view>
-    </view>
   </block>
-
+  <view wx:if="{{isLoading}}">
+    <view class="downLoding"></view>
+    <view style="height:50rpx"></view>
+  </view>
+  <view class="noMore" wx:if="{{goodsList.length>0&&!isLoading}}">已加载全部</view>
 
 
 
@@ -272,7 +252,7 @@
     </swiper-item> -->
   <!-- </swiper> -->
   <!-- 提交按钮 -->
-  <view class="submit flex box_zing" wx:if="{{titleIndex==1}}">
+  <!-- <view class="submit flex box_zing" wx:if="{{titleIndex==1}}">
     <view style="flex:1" class="flex flex_m ">
       <image class="allCheck" src="../../image/noCheck.png"></image>
       <text class="fcb2">全选</text>
@@ -282,5 +262,5 @@
       <text class="fs_10">(含运费￥0)</text></text>
       <text bindtap="sumSubmit" class="count_sum tc">结算(0)</text>
     </view>
-  </view>
+  </view> -->
 </view>

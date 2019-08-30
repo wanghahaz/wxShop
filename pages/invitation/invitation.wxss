@@ -1,57 +1,108 @@
-.invaBox {
-  height: 330rpx;
+.rule {
+  position: absolute;
+  right: 0;
+  top: 34rpx;
+  width: 20%;
+  height: 60rpx;
+  color: #fff;
+  line-height: 60rpx;
+  border-radius: 28rpx 0 0 28rpx;
+  background: #8fc31f;
 }
 
 .invaBox {
+  height: 330rpx;
   position: absolute;
   top: 470rpx;
   width: 92%;
   left: 4%;
-  align-items:center;
+  align-items: center;
 }
-.invaBox image{
+
+.invaBox image {
   position: absolute;
   top: 0;
   left: 0;
 }
-.invaBox >view{
+
+.invaBox >view {
   width: 80%;
   z-index: 9;
 }
-.invaBox >view>view:nth-of-type(1){
-  border-right:1px solid #E4E4E4; 
+
+.invaBox >view>view:nth-of-type(1) {
+  border-right: 1px solid #e4e4e4;
 }
-.invaBox .invita{
+
+.invaBox .invita {
   width: 55%;
   line-height: 84rpx;
   color: #fff;
-  background: #8FC31F;
+  background: #8fc31f;
   border-radius: 40rpx;
 }
-.num_box{
+
+.num_box {
   height: 140rpx;
 }
-.recommended{
-  margin-top:240rpx;
+
+.recommended {
+  margin-top: 240rpx;
 }
-.recommended::after ,.recommended::before{
+
+.recommended::after, .recommended::before {
   width: 30%;
-} 
-.noInva{
+}
+
+.noInva {
   margin-top: 60rpx;
 }
-.noInva image{
+
+.noInva image {
   width: 126rpx;
   height: 110rpx;
 }
+
 .friend {
   height: 590rpx;
 }
-.userList image{
+
+.userList image {
   width: 64rpx;
   height: 64rpx;
   border-radius: 50%;
 }
-.userList>view{
+
+.userList>view {
   margin: 14rpx 0;
+}
+
+.swiper {
+  width: 70%;
+  height: 300rpx;
+  margin: 0 auto;
+}
+
+.ruleModel {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  z-index: 99;
+  transform: translateY(110%);
+  -webkit-transform: translateY(110%);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+}
+
+.ruleModel .sumbit {
+  line-height: 80rpx;
+  color: white;
+  background: #f18e1e;
+}
+
+.activeRule {
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
 }

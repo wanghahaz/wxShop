@@ -49,7 +49,7 @@
     </view>
   </view>
   <view class="goodsDealis width94 flex column box_zing">
-    <view class="fs_14 flex flex_lr">
+    <view catchtap="toRouter" data-id="{{data.id}}" data-path="/pages/evaluateList/evaluateList"  class="fs_14 flex flex_lr">
       <text style="width:50%">评价（999+）</text>
       <view class="flex flex_m flex_end">
         <text>好评率</text>
@@ -149,5 +149,8 @@
       <text catchtap="addBuy" class="tc">立即购买</text>
     </view>
   </view>
-
+<!-- 吸顶 -->
+  <view catchtap="suckTop" wx:if="{{scrollTop>clientHeight}}" class="suckTop">
+    <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx;color:#fff"></text>
+  </view>
 </view>

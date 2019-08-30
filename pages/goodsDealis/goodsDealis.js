@@ -9,19 +9,33 @@ Page({
    * 页面的初始数据
    */
   data: {
+    clientHeight: app.globalData.clientHeight / 2,
+    scrollTop: 0,
     is_collect: 1,
     showMask: true,
-    shopList: [],
-    commentList: [],
     isPullDownRefresh: true,
     page: 1,
+    shopList: [],
+    commentList: [],
     data: {},
     goodsData: {},
     skuObj: {},
+    selectSku: {},
     goods_num: 1,
     goods_storage: 0,
     goods_price: 0,
-    selectSku: {}
+  },
+  // 吸顶
+  onPageScroll(e) {
+    this.setData({
+      scrollTop: e.scrollTop
+    })
+  },
+  suckTop() {
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300
+    })
   },
   // 收藏商品
   collectGoods() {
@@ -119,11 +133,12 @@ Page({
     }
     let list = [{
       store: {
-        store_name: this.data.goodsData.store.store_name,
+        store_name: this.data.goodsData.store.store_name||'',
         store_id: this.data.goodsData.store.id,
         check: true
       },
       goods: [{
+        cart_id:0,
         check: true,
         id: this.data.goodsData.row.id,
         goods_num: this.data.goods_num,

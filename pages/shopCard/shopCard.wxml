@@ -6,11 +6,11 @@
       <view class="title flex flex_m width94">
         <image data-check="{{item.store.check}}" data-index="{{index}}" bindtap="setShopCheck" wx:if="{{item.store.check}}" class="check" src="../../image/check.png"></image>
         <text data-check="{{item.store.check}}" data-index="{{index}}" bindtap="setShopCheck" wx:else class="nocheck box_zing check"></text>
-        <text> {{item.store.store_name}} <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:30rpx;margin:auto 0"></text></text>
+        <text catchtap="toRouter" data-id="{{item.store.store_id}}" data-path="/pages/shopDetails/shopDetails"> {{item.store.store_name}} <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:30rpx;margin:auto 0"></text></text>
 
       </view>
       <view class="width94" style="background:#fff; border-radius: 18rpx;">
-        <view class="dealis  flex" wx:for="{{item.goods}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
+        <view class="dealis  flex" wx:for="{{item.goods}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}' data-id="{{value.id}}" data-skuId="{{value.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter">
           <image data-check="{{value.check}}" data-ind="{{ind}}" data-index="{{index}}" bindtap="setShopCheck" wx:if="{{value.check}}" class="check flex_nosize" src="../../image/check.png"></image>
           <text data-check="{{value.check}}" data-ind="{{ind}}" data-index="{{index}}" bindtap="setShopCheck" wx:else class="nocheck box_zing check flex_nosize"></text>
           <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>

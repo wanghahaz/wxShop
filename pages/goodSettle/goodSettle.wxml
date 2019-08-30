@@ -10,8 +10,8 @@
   <view wx:else class="box_adress flex box_zing flex_m" data-path="/pages/adressList/adressList" bind:tap="toRouter">
     <image class="gps flex_nosize" src="../../image/gps.png"></image>
     <view class="flex_tb adress_co fs_15">
-      <text>收货人：{{address.name}} {{address.tel}}</text>
-      <text style="width:100%" class="clamp_2">收获地址: {{address.adress}}{{address.countyName}}{{address.countyName}}</text>
+      <text style="margin-bottom:14rpx">收货人：{{address.name}} {{address.phone}}</text>
+      <text style="width:100%" class="clamp_2">收获地址: {{address.address_info}}</text>
     </view>
     <text class="./iconfont/iconarrow-right-copy:before icon flex_nosize " style="font-size:36rpx;float: right; "></text>
   </view>
@@ -38,7 +38,7 @@
         </view>
         <view class="width94 fs_14 box_size flex flex_m ">
           <text class="flex_nosize ">买家留言</text>
-          <input class="fs_14 width90" placeholder="点击给商家留言 "></input>
+          <input  data-index="{{index}}" bindinput="bindinput" class="fs_14 width90" placeholder="点击给商家留言 "></input>
         </view>
         <view style="padding: 10rpx 0 30rpx 0 " class="width94 flex flex_m flex_lr fs_15">
           <text></text>

@@ -16,7 +16,6 @@ Page({
     page: 1,
     goodsList: []
   },
-  lower(e) {},
   // 取消订单
   cancel(e) {
     until.modal({
@@ -30,14 +29,14 @@ Page({
     }).catch(err => {})
   },
   // 提醒发货
-  alertGoods(e){
+  alertGoods(e) {
     until.toast({
       icon: 'success',
       title: '已提醒卖家发货'
     })
   },
   // 删除订单
-  delOrder(e){
+  delOrder(e) {
     until.modal({
       title: '删除订单',
       content: '您确认删除订单吗？'
@@ -49,35 +48,41 @@ Page({
     })
   },
   // 确认收货
-  affirmGoods(e){
+  affirmGoods(e) {
     console.log('确认收货')
   },
   // 合并付款
-  sumSubmit(e){
+  sumSubmit(e) {
     console.log('合并付款')
   },
   // 确认付款
-  submitMoney(e){
+  submitMoney(e) {
     console.log('确认付款')
   },
   getMyOrder() {
     http.getReq('/order/order_list', {
       page: this.data.page,
-      type: this.data.titleIndex/1-1
+      type: this.data.titleIndex / 1 - 1
     }, true).then(res => {
-      console.log(res)
-      // this.setData({
-      //   goodsList: [...this.data.goodsList, ...res.data.data]
-      // })
-      // if (res.data.last_page == this.data.page) {
-      //   this.setData({
-      //     isLoading: false
-      //   })
-      // } else {
-      //   this.setData({
-      //     page: this.data.page++
-      //   })
-      // }
+      if (res.code == 200) {
+        this.setData({
+          goodsList: [...this.data.goodsList, ...res.data.data]
+        })
+        if (res.data.last_page == this.data.page) {
+          this.setData({
+            isLoading: false
+          })
+        } else {
+          this.setData({
+            page: this.data.page + 1
+          })
+        }
+      } else {
+        this.setData({
+          isLoading: false
+        })
+      }
+
     })
   },
   toRouter(e) {
@@ -96,7 +101,8 @@ Page({
     this.setData({
       titleIndex: e.currentTarget.dataset.index || e.detail.current,
       isLoading: true,
-      page:1
+      page: 1,
+      goodsList:[]
     })
     this.getMyOrder()
     if (this.data.titleIndex == 0 || this.data.titleIndex == 1) {
@@ -174,15 +180,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function(e) {
-    if (!this.data.isLoading) {
-      return false;
-    } else {
+    if (this.data.isLoading) {
       this.getMyOrder()
     }
-    console.log(1)
-    // this.setData({
-    //   isLoading:false
-    // })
   },
 
   /**

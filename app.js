@@ -4,32 +4,42 @@ import http from "./common/js/http.js";
 App({
   setBadge() {
     let that = this;
-    wx.setTabBarBadge({
-      index: 3,
-      text: String(that.globalData.totalCount > 9 ? '9+' : that.globalData.totalCount),
-      success: function(res) {},
-    })
+    if (that.globalData.totalCount > 0) {
+      wx.setTabBarBadge({
+        index: 3,
+        text: String(that.globalData.totalCount > 9 ? '9+' : that.globalData.totalCount),
+        success: function(res) {},
+      })
+    } else {
+      wx.hideTabBarRedDot({
+        index: 3,
+      })
+    }
+
   },
   getCard() {
     http.getReq('/cart').then(res => {
-      let list = res.data;
-      if (list == 'null') {
-        list = []
-      } else {
+      let list = [];
+      if (res.code == 200) {
         list.forEach(item => {
           item.store.check = true;
           item.goods.forEach(value => {
             value.check = true
           })
         })
+      } else {
+        list = []
       }
       this.getPrice(list)
     })
   },
   onLaunch: function() {
-    this.getCard()
+    if (wx.getStorageSync('token')) {
+      this.getCard()
+    }
     http.postReq('/login', {
       nickname: ' ',
+      share_user: wx.getStorageSync('share_id') ? wx.getStorageSync('share_id') : 0,
       openid: 'oyfPD5MS6N9seMtBWHWoukWtAQNw',
       avatar: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIaiclFechtV4KtywqVho7ibo1oGf30FaAF6bUG3oHj1cWer8grX89txujEtoiaricyNVjnibY9ozbu5DA/132"
     }).then(res => {
@@ -41,8 +51,6 @@ App({
       })
     })
 
-    this.setBadge();
-    this.getPrice()
     // 获取屏幕高度
     wx.getSystemInfo({
       success: res => {
@@ -120,7 +128,13 @@ App({
   },
   // 获取价钱和数量
   getPrice(list) {
-    let goodsList = list || this.globalData.goodsList;
+    console.log(list)
+    let goodsList = list;
+    if (list.legnth == 0) {
+      this.globalData.totalPrice = 0;
+      this.globalData.totalCount = 0;
+      return;
+    }
     let sum = 0;
     let count = 0;
     goodsList.forEach(item => {
@@ -134,10 +148,6 @@ App({
     this.globalData.totalPrice = sum;
     this.globalData.totalCount = count;
     this.setBadge();
-    // return {
-    //   sum: sum,
-    //   count: count
-    // }
   },
   globalData: {
     clientHeight: 0,

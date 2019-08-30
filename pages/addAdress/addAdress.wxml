@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<import src="../../element/area/area.wxml" />
 <view class="container">
   <!-- <form class="fs_15" bindsubmit="formSubmit" bindreset="formReset"> -->
 
@@ -9,6 +10,12 @@
   <view class="section flex box-zing flex_m">
     <view style="width:80rpx" class="section__title">电话</view>
     <input bindinput="bindinput" data-name="phone" value="{{form.phone}}" placeholder="收货人手机号码" />
+  </view>
+  <view class="section area flex box-zing flex_m">
+    <view class="animation-button" bindtap="translate"></view>
+    <view style="width:80rpx" class="section__title">地区</view>
+    <view style="flex:1" wx:if="{{form.provinceName}}">{{form.provinceName}} {{form.cityName}} {{form.areaName}}</view>
+    <view style="flex:1;color:#808080" wx:else>选择省/市/区</view>
   </view>
   <view class="section flex box-zing textarea">
     <view class="section__title">详细地址</view>
@@ -22,5 +29,7 @@
     <button bindtap="submit">保存并使用</button>
     <button wx:if="{{id}}" class="del" bindtap="del">删除收货地址</button>
   </view>
+  <view wx:if="{{item.show}}" class="mask"></view>
+  <template is="areaData" data="{{...item}}" />
   <!-- </form> -->
 </view>

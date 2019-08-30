@@ -4,48 +4,12 @@ const app = getApp();
 import http from "../../common/js/http.js";
 import until from "../../utils/util.js";
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    sIndex: 0,
-    userList: [],
-    ads: {},
-    showMask: true
-  },
-  showModel() {
-    this.setData({
-      showMask: !this.data.showMask
-    })
-  },
-  selectIndex(e) {
-    this.setData({
-      sIndex: e.currentTarget.dataset.index
-    })
-  },
-  // 邀请首页上部
-  getImgList() {
-    http.getReq('/user/share', {}, true).then(res => {
-      if (res.code == 200) {
-        this.setData({
-          ads: res.data
-        })
-      } else {
-        until.toast({
-          'title': '加载失败'
-        })
-      }
-    })
-  },
-  // 我的邀请列表
-  getShare_list() {
-    http.getReq('/user/share/share_list', {}, true).then(res => {
-      // if(res.code==200){
-      //   this.setData({
-      //     userList:res.data
-      //   })
-      // }
-    })
+
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -63,8 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getImgList()
-    this.getShare_list()
+
   },
 
   /**

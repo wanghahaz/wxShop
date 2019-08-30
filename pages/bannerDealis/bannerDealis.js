@@ -13,10 +13,21 @@ Page({
     video: '',
     id: 0,
   },
+  // 双倍收益结束
+  double() {
+    until.modal({
+      title: '提示',
+      content: '您的双倍收益卡时长已用完，是否使用下一张收益卡？'
+    }).then(res => {
+
+    })
+  },
+  // 右上角关闭
   back() {
     if (this.data.time > 0) {
       until.modal({
-        content: '您还没有观看完成,确认退出么？'
+        title: '确定要退出吗？',
+        content: '看完即获得0.03元代金券，退出将无法获得哦!'
       }).then(res => {
         wx.navigateBack()
       })
@@ -67,7 +78,9 @@ Page({
               that.getNext()
               console.log('用户点击确定')
             } else if (res.cancel) {
-              wx.navigateBack()
+              wx.switchTab({
+                url:'/pages/index/index',
+              })
             }
           }
         })

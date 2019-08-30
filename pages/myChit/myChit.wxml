@@ -18,7 +18,7 @@
   <view class="fs_19 tc recommended">好物推荐</view>
   <view class="shop_list flex_wrap" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
-      <one_shop class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+      <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
     </block>
   </view>
   <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>

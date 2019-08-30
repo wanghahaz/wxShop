@@ -29,10 +29,12 @@ Page({
       goods_num: num,
       goods_spec: e.currentTarget.dataset.skuid
     }).then(res => {
-      if(res.code==200){
+      if (res.code == 200) {
         this.getCard()
-      }else{
-        until.toast({title:'编辑失败'})
+      } else {
+        until.toast({
+          title: '编辑失败'
+        })
       }
     })
   },
@@ -40,15 +42,15 @@ Page({
   getCard() {
     http.getReq('/cart').then(res => {
       let list = res.data;
-      if (list == 'null') {
-        list = []
-      } else {
+      if (res.code == 200) {
         list.forEach(item => {
           item.store.check = true;
           item.goods.forEach(value => {
             value.check = true
           })
         })
+      } else {
+        list = []
       }
       app.getPrice(list)
       this.setData({
@@ -139,9 +141,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (wx.getStorageSync('token')) {
-      this.getCard()
-    }
+
     this.getGoods(); //好物推荐
   },
 
@@ -156,6 +156,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (wx.getStorageSync('token')) {
+      this.getCard()
+    }
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({

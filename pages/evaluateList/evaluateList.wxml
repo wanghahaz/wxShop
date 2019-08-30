@@ -1,0 +1,35 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="width94 flex flex_wrap evalTitle box_zing fs_14">
+    <text class="{{eavlIndex==0?'activeEavl':''}}">全部</text>
+    <text>满意</text>
+    <text>一般</text>
+    <text>差评</text>
+  </view>
+  <view wx:if="{{commentList.length==0}}" class="noMore">暂无商品评价...</view>
+  <block wx:for="{{4}}">
+    <view class="width94 coment box_zing flex">
+      <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentTx"></image>
+      <view class="flex column fs_14">
+        <view class="flex flex_lr_m">
+          <text>满意啊啊啊</text>
+          <text>2019年8月6日</text>
+        </view>
+        <view class="flex flex_m ">
+          <text style="margin:20rpx 0">评分</text>
+          <block wx:for="{{5}}" wx:key="{{index}}">
+            <text data-index="{{index}}" bindtap="changeStar" wx:if="{{3<index}}" class="./iconfont/iconwujiaoxing:before icon" style="font-size:50rpx;margin-left:10rpx;color:#C0C0C0"></text>
+            <text wx:else data-index="{{index}}" bindtap="changeStar" class="./iconfont/iconshiwujiaoxing:before icon" style="font-size:50rpx;margin-left:10rpx;color:#F18E1E"></text>
+          </block>
+        </view>
+        <text>评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容
+            </text>
+        <view class="flex flex_wrap">
+          <block wx:for="{{5}}" wx:key="{{index}}">
+            <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentImg"></image>
+          </block>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

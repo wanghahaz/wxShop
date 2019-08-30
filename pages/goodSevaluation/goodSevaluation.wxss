@@ -1,6 +1,26 @@
-.container{
+.container {
   padding-bottom: 140rpx;
 }
+
+.shopView, .goodView {
+  border-radius: 18rpx;
+  background: #fff;
+  padding: 20rpx 40rpx;
+  margin: 20rpx auto;
+}
+
+textarea {
+  background: #fff;
+  padding: 10rpx;
+  font-size: 28rpx;
+}
+
+.content_evaluation {
+  margin: 20px 0;
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+}
+
 .sub {
   position: fixed;
   bottom: 50rpx;
@@ -16,17 +36,8 @@
   margin: 30rpx 0;
 }
 
-.goods {
-  padding: 48rpx 10rpx 30rpx 0;
-}
-
 .goodImg {
   width: 170rpx;
   height: 170rpx;
   margin-right: 30rpx;
-}
-
-.border {
-  margin-top: 30rpx;
-  border-bottom: 1px solid #e4e4e4;
 }

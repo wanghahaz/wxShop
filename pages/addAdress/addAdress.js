@@ -3,12 +3,18 @@
 const app = getApp();
 import http from "../../common/js/http.js";
 import until from "../../utils/util.js";
+var model = require('../../element/area/area.js')
+var show = false;
+var item = {};
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    item: {
+      show: show
+    },
     id: null,
     adress: {},
     form: {
@@ -24,6 +30,29 @@ Page({
       areaName: '',
     }
   },
+  //点击选择城市按钮显示picker-view
+  translate: function(e) {
+    model.animationEvents(this, 0, true, 200);
+  },
+  //隐藏picker-view
+  hiddenFloatView: function(e) {
+    model.animationEvents(this, 200, false, 400);
+  },
+  //滑动事件
+  bindChange: function(e) {
+    model.updateAreaData(this, 1, e);
+    item = this.data.item;
+    let data = JSON.parse(JSON.stringify(this.data.form))
+    data.area = item.countys[item.value[2]].code;
+    data.areaName = item.countys[item.value[2]].name;
+    data.city = item.citys[item.value[1]].code;
+    data.cityName = item.citys[item.value[1]].name;
+    data.province = item.provinces[item.value[0]].code;
+    data.provinceName = item.provinces[item.value[0]].name;
+    this.setData({
+      form: data
+    })
+  },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
@@ -36,9 +65,58 @@ Page({
       })
     }
   },
-
+  // 删除地址
+  del() {
+    http.postReq(`/address/del/${this.data.id}`, {}, true).then(res => {
+      if (res.code == 200) {
+        until.toast({
+          title: '删除成功'
+        })
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 1500)
+      } else {
+        until.toast({
+          title: '操作失败'
+        })
+      }
+    })
+  },
+  // 提交新增编辑
   submit: function(e) {
-    console.log(this.data.form)
+    let api = this.data.id ? `/address/edit/${this.data.id}` : `/address/add`;
+    let data = {
+      province: this.data.form.province,
+      city: this.data.form.city,
+      area: this.data.form.area,
+      address_detail: this.data.form.address_detail,
+      name: this.data.form.name,
+      phone: this.data.form.phone,
+      is_default: this.data.form.is_default ? 1 : 0,
+    }
+    console.log(data)
+    for (let i in data) {
+      if (i != 'is_default' && !data[i]) {
+        until.toast({
+          title: '请您填写完整信息'
+        })
+        return false;
+      }
+    }
+    http.postReq(api, data, true).then(res => {
+      if (res.code == 200) {
+        until.toast({
+          title: this.data.id ? '修改成功' : '添加成功'
+        })
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 1500)
+      } else {
+        until.toast({
+          title: '操作失败'
+        })
+      }
+    })
   },
   bindinput(e) {
     let form = this.data.form;
@@ -58,6 +136,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let that = this;
+    if (options.id) {
+      http.getReq(`/address/edit/${options.id}`, {}, true).then(res => {
+        if (res.code == 200) {
+          let data = JSON.parse(JSON.stringify(this.data.form))
+          data.address_detail = res.data.address_detail;
+          data.area = res.data.area;
+          data.city = res.data.city;
+          data.name = res.data.name;
+          data.phone = res.data.phone;
+          data.province = res.data.province;
+          data.is_default = res.data.is_default ? true : false;
+          item = this.data.item;
+          this.setData({
+            form: data
+          })
+          model.updateAreaData(that, 0);
+        }
+      })
+    } else {
+      model.updateAreaData(that, 0);
+    }
     this.setData({
       id: options.id || null
     })
@@ -68,7 +168,6 @@ Page({
       form['address_detail'] = `${options.countyName} ${options.detailInfo}`;
       form['provinceName'] = options.provinceName;
       form['cityName'] = options.cityName;
-      console.log(form)
       this.setData({
         form: form
       })
@@ -78,9 +177,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
-  },
+  onReady: function(e) {},
 
   /**
    * 生命周期函数--监听页面显示

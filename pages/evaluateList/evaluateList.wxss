@@ -1,0 +1,39 @@
+.evalTitle, .coment {
+  border-radius: 18rpx;
+  padding: 26rpx 34rpx 0 34rpx;
+  background: #fff;
+  margin: 20rpx auto;
+}
+
+.evalTitle text {
+  border: 1px solid #b2b2b2;
+  color: #b2b2b2;
+  border-radius: 30rpx;
+  width: 29%;
+  line-height: 60rpx;
+  text-align: center;
+  margin: 0 3% 24rpx 0;
+}
+
+.evalTitle .activeEavl {
+  border-color: #f18e1e;
+  color: #f18e1e;
+}
+
+/* 评价 */
+
+.coment {
+  padding-bottom: 26rpx;
+}
+
+.coment .comentTx {
+  width: 98rpx;
+  height: 98rpx;
+  margin-right: 24rpx;
+}
+
+.coment .comentImg {
+  width: 30%;
+  margin: 10rpx 2% 0 0;
+  height: 140rpx;
+}

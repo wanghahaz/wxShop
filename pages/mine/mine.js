@@ -66,7 +66,9 @@ Page({
     ],
     shopList: [],
     isPullDownRefresh: true,
-    page: 1
+    page: 1,
+    token: true,
+    userInfo: {}
   },
   getInfo() {
     wx.getUserInfo({
@@ -103,6 +105,10 @@ Page({
   },
   onLoad: function(options) {
     this.getGoods()
+    this.setData({
+      token: wx.getStorageSync('token') ? false : true,
+      userInfo: app.globalData.userInfo
+    })
   },
   toRouter(e) {
     // if (e.currentTarget.dataset.path != "/pages/goodsDealis/goodsDealis") {

@@ -78,7 +78,6 @@ const cutShift = (obj) => {
 }
 
 const base64_encode = (str) => { // 编码，配合encodeURIComponent使用
-  console.log(str)
   var c1, c2, c3;
   var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
   var i = 0,

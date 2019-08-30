@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp();
 import until from "../../utils/util.js";
+import http from "../../common/js/http.js";
 Page({
   /**
    * 页面的初始数据
@@ -13,9 +14,27 @@ Page({
     is_jifen: true,
     totalPrice: 0,
   },
+  // 获取收货地址
+  getAdress() {
+    http.getReq('/address/get_my_default_address', {}, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          address: res.data
+        })
+      }
+    })
+  },
+  // 代金券设置
   setShopCheck() {
     this.setData({
       is_jifen: !this.data.is_jifen
+    })
+  },
+  bindinput(e) {
+    let list = JSON.parse(JSON.stringify(this.data.goodsList))
+    list[e.currentTarget.dataset.index].store.msg = e.detail.value;
+    this.setData({
+      goodsList: list
     })
   },
   toRouter(e) {
@@ -46,6 +65,50 @@ Page({
         success(res) {}
       })
     }
+    let data = {
+      address_id: this.data.address.id, //地址id
+      payment: '1', //默认1 微信支付
+      is_jifen: '0',
+      jifen_num: '0',
+      goods_info: [],
+    }
+    let list = JSON.parse(JSON.stringify(this.data.goodsList))
+    list.forEach((item, index) => {
+      data.goods_info.push({
+        store_id: item.store.store_id,
+        msg: item.store.msg,
+        delivery: 1,
+        goods: []
+      })
+      item.goods.forEach(value => {
+        data.goods_info[index].goods.push({
+          goods_id: value.id,
+          sku_id: value.sku_id,
+          goods_num: value.goods_num,
+          cart_id: value.cart_id
+        })
+      })
+    })
+    let str = until.base64_encode(JSON.stringify(data));
+    http.postReq('/order/submit', {
+      order: str
+    }, true).then(res => {
+      if (res.code == 200) {
+
+      } else if (res.code == 300) {
+        wx.requestPayment({
+          timeStamp: '',
+          nonceStr: '',
+          package: '',
+          signType: '',
+          paySign: '',
+          success: (res) => {},
+          fail: function(err) {}
+        })
+      } else {
+
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -54,8 +117,9 @@ Page({
     let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
     let totalPrice = 0;
     list.forEach(item => {
+      item.store.msg = '';
       let check = item.goods.some(val => val.check);
-      item.store.check = check
+      item.store.check = check;
       let sum = 0;
       item.goods.forEach(value => {
         sum += value.goods_num * value.goods_price;
@@ -67,7 +131,7 @@ Page({
       goodsList: list,
       totalPrice: totalPrice
     })
-    console.log(list)
+    this.getAdress()
   },
 
   /**

@@ -9,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allCheck: 4,
     imgList: [],
+    mannerStatus: 4, //满意度
+    satisfyStatus: 4, //态度
   },
   submit() {
     until.toast({
@@ -31,9 +32,15 @@ Page({
     }
   },
   changeStar(e) {
-    this.setData({
-      allCheck: e.currentTarget.dataset.index,
-    })
+    if (e.currentTarget.dataset.satisfystatus != undefined) {
+      this.setData({
+        'satisfyStatus': e.currentTarget.dataset.satisfystatus,
+      })
+    } else if (e.currentTarget.dataset.mannerstatus != undefined) {
+      this.setData({
+        'mannerStatus': e.currentTarget.dataset.mannerstatus,
+      })
+    }
   },
   // 删除图片
   delImg(e) {
@@ -91,7 +98,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(until)
   },
 
   /**

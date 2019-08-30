@@ -1,10 +1,11 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="info">
+  <view  class="info">
     <image class="bg" src="../../image/bg.png"></image>
     <open-data type="userAvatarUrl"></open-data>
     <text data-path="/pages/set/set" bindtap="toRouter" class="./iconfont/iconshezhi:before icon set" style="font-size:42rpx"></text>
-    <button class="getinfo" openType="getUserInfo" bindgetuserinfo="getInfo" hover-class="none">登录/注册</button>
+    <button class="getinfo" openType="getUserInfo" bindgetuserinfo="getInfo" hover-class="none" wx:if="{{token}}">登录/注册</button>
+    <view class="getinfo" wx:else>{{userInfo.username}}</view>
   </view>
   <!-- <view class="members" data-path="/pages/myChit/myChit" bindtap="toRouter">
     <text class="fs_16 tit">精选会员</text>
