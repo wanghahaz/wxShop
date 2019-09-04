@@ -24,6 +24,8 @@ Page({
     goods_num: 1,
     goods_storage: 0,
     goods_price: 0,
+    goods_body: '',
+    goods_thumb:''
   },
   // 吸顶
   onPageScroll(e) {
@@ -53,7 +55,7 @@ Page({
   addOdd(e) {
     if (e.currentTarget.dataset.type == 'add') {
       this.setData({
-        goods_num: this.data.goods_num + 1
+        goods_num: this.data.goods_num + 1 > this.data.goods_storage ? this.data.goods_storage : this.data.goods_num + 1
       })
     } else {
       let num = this.data.goods_num;
@@ -77,7 +79,7 @@ Page({
         })
       } else {
         this.setData({
-          page: this.data.page++
+          page: this.data.page + 1
         })
       }
     })
@@ -108,12 +110,16 @@ Page({
   getGoodDealis() {
     http.getReq('/goods', this.data.data, true).then(res => {
       if (res.code == 200) {
+        console.log(res)
         this.setData({
           goodsData: res.data,
+          goods_body: res.data.row.goods_body.replace(/\<img/g, '<img style="width:100%;height:auto;display:block;margin:10px 0 10px 0" '),
           is_collect: res.data.is_collect,
           goods_storage: res.data.row.goods_storage,
-          goods_price: res.data.row.goods_price
+          goods_price: res.data.row.goods_price,
+          goods_thumb: res.data.row.goods_images[0]
         })
+        console.log(this.data.is_collect)
       } else {
         until.toast({
           title: '加载失败'
@@ -126,24 +132,24 @@ Page({
     if (this.data.skuObj.spec) {
       if (!this.data.selectSku.goods_price) {
         until.toast({
-          title: '请您先选择商品规则'
+          title: '请您选择商品'
         })
         return false;
       }
     }
     let list = [{
       store: {
-        store_name: this.data.goodsData.store.store_name||'',
+        store_name: this.data.goodsData.store.store_name || '',
         store_id: this.data.goodsData.store.id,
         check: true
       },
       goods: [{
-        cart_id:0,
+        cart_id: 0,
         check: true,
         id: this.data.goodsData.row.id,
         goods_num: this.data.goods_num,
         goods_name: this.data.goodsData.row.goods_name,
-        goods_thumb: this.data.goodsData.row.goods_images[0],
+        goods_thumb: this.data.goods_thumb,
         goods_price: this.data.selectSku.goods_price || this.data.goodsData.row.goods_price,
         goods_storage: this.data.selectSku.goods_storage || this.data.goodsData.row.goods_storage,
         is_mult: this.data.goodsData.row.is_mult,
@@ -161,7 +167,7 @@ Page({
     if (this.data.skuObj.spec) {
       if (!this.data.selectSku.goods_price) {
         until.toast({
-          title: '请您先选择商品规则'
+          title: '请您选择商品'
         })
         return false;
       }
@@ -198,7 +204,8 @@ Page({
     })
     obj.spec = list;
     this.setData({
-      skuObj: obj
+      skuObj: obj,
+      selectSku: {}
     })
     let specList = this.data.skuObj.spec;
     let skuList = this.data.skuObj.sku;
@@ -213,10 +220,18 @@ Page({
       })
       if (selectSpec.length == specList.length) {
         let str = selectSpec.join('_');
+        if (!skuList.find(item => item.spec == str)) {
+          until.toast({
+            title: '此商品暂无库存,请您重新选择'
+          })
+          return false;
+        }
         this.setData({
           selectSku: skuList.find(item => item.spec == str),
           goods_storage: skuList.find(item => item.spec == str).goods_storage,
-          goods_price: skuList.find(item => item.spec == str).goods_price
+          goods_price: skuList.find(item => item.spec == str).goods_price,
+          goods_thumb: skuList.find(item => item.spec == str).goods_thumb,
+          goods_num:1
         })
       } else {
         this.setData({

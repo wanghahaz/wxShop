@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cate_id: 1,
+    cate_id: null,
     page: 1,
     shopList: [],
     isPullDownRefresh: true
@@ -18,18 +18,26 @@ Page({
     http.getReq(`/cate/get_goods_list/${this.data.cate_id}`, {
       page: this.data.page
     }, true).then(res => {
-      this.setData({
-        shopList: [...this.data.shopList, ...res.data.data]
-      })
-      if (res.data.last_page == this.data.page || this.data == null) {
+      if (res.code == 200) {
         this.setData({
-          isPullDownRefresh: false
+          shopList: [...this.data.shopList, ...res.data.data]
         })
+        if (res.data.last_page == this.data.page || this.data == null) {
+          this.setData({
+            isPullDownRefresh: false
+          })
+        } else {
+          this.setData({
+            page: this.data.page++
+          })
+        }
       } else {
         this.setData({
-          page: this.data.page++
+          isPullDownRefresh: false,
+          shopList: []
         })
       }
+
     })
   },
   toRouter(e) {
@@ -52,10 +60,9 @@ Page({
       title: options.name, //页面标题为路由参数
     })
     this.setData({
-      cate_id: 2 || options.id
+      cate_id: options.id
     })
     this.getGoods()
-    console.log(options)
   },
 
   /**

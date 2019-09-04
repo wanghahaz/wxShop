@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view  class="info">
+  <view class="info">
     <image class="bg" src="../../image/bg.png"></image>
     <open-data type="userAvatarUrl"></open-data>
     <text data-path="/pages/set/set" bindtap="toRouter" class="./iconfont/iconshezhi:before icon set" style="font-size:42rpx"></text>
@@ -15,10 +15,10 @@
   <view class="order_box box_zing">
     <view class="orderTitle fs_16 flex_lr flex">
       <text>我的订单</text>
-      <text data-index="0" data-path="/pages/myOrder/myOrder" bindtap="toRouter">全部订单<text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:32rpx"></text></text>
+      <text data-index="-1" data-path="/pages/myOrder/myOrder" bindtap="toRouter">全部订单<text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:32rpx"></text></text>
     </view>
     <view class="orderList fs_12 flex  flex_lr">
-      <view class="flex flex_line_c flex_lr " wx:for="{{orderList}}" wx:key="{{index}}" data-index="{{index+1}}" data-path="{{item.path}}" bindtap="toRouter">
+      <view class="flex flex_line_c flex_lr " wx:for="{{orderList}}" wx:key="{{index}}" data-index="{{item.status}}" data-path="{{item.path}}" bindtap="toRouter">
         <text wx:if="{{item.type==1}}" class="{{item.src}} {{item.clas}} icon_text"></text>
         <image wx:else src="{{item.src}}" class="{{item.clas}}"></image>
         <text style="color:#B2B2B2">{{item.name}}</text>

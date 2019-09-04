@@ -1,20 +1,20 @@
 <!--index.wxml-->
 <view class="container">
   <scroll-view scroll-x scroll-left="{{scrollLeft}}" style="width: 100%;white-space: nowrap" class="title">
-    <text data-index="0" style="margin-left:36rpx" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">全部</text>
-    <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">待付款</text>
-    <text data-index="2" bindtap="bindchange" class="{{titleIndex==2?'active':''}} tc">待发货</text>
-    <text data-index="3" bindtap="bindchange" class="{{titleIndex==3?'active':''}} tc">待收货</text>
-    <text data-index="4" bindtap="bindchange" class="{{titleIndex==4?'active':''}} tc">待评价</text>
-    <text data-index="5" bindtap="bindchange" class="{{titleIndex==5?'active':''}} tc">退款/售后</text>
+    <text data-index="-1" style="margin-left:36rpx" bindtap="bindchange" class="{{titleIndex=='-1'?'active':''}} tc">全部</text>
+    <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">待付款</text>
+    <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">待发货</text>
+    <text data-index="2" bindtap="bindchange" class="{{titleIndex==2?'active':''}} tc">待收货</text>
+    <text data-index="8" bindtap="bindchange" class="{{titleIndex==8?'active':''}} tc">待评价</text>
+    <text data-index="4" bindtap="bindchange" class="{{titleIndex==4?'active':''}} tc">退款/售后</text>
   </scroll-view>
   <view class="noMore" wx:if="{{goodsList.length==0&&!isLoading}}">您还没有订单哦！</view>
-  <block wx:if="{{titleIndex==0}}">
+  <block wx:if="{{titleIndex=='-1'}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/orderDealis/orderDealis" bindtap="toRouter">
         <view class="title_name flex flex_lr">
           <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">买家已付款</text>
+          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
         </view>
         <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
         <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
@@ -42,7 +42,7 @@
       </view>
     </block>
   </block>
-  <block wx:elif="{{titleIndex==1}}">
+  <block wx:elif="{{titleIndex==0}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view data-path="/pages/orderDealis/orderDealis" bindtap="toRouter" class="dealis_order width94 box_zing">
         <view class="title_name flex flex_lr">
@@ -75,7 +75,7 @@
       </view>
     </block>
   </block>
-  <block wx:elif="{{titleIndex==2}}">
+  <block wx:elif="{{titleIndex==1}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view data-path="/pages/orderDealis/orderDealis" bindtap="toRouter" class="dealis_order width94 box_zing">
         <view class="title_name flex flex_lr">
@@ -110,7 +110,7 @@
       </view>
     </block>
   </block>
-  <block wx:elif="{{titleIndex==3}}">
+  <block wx:elif="{{titleIndex==2}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view data-path="/pages/orderDealis/orderDealis" bindtap="toRouter" class="dealis_order width94 box_zing">
         <view class="title_name flex flex_lr">
@@ -143,7 +143,7 @@
       </view>
     </block>
   </block>
-  <block wx:elif="{{titleIndex==4}}">
+  <block wx:elif="{{titleIndex==8}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing">
         <view class="title_name flex flex_lr">
@@ -179,7 +179,7 @@
 
     </block>
   </block>
-  <block wx:elif="{{titleIndex==5}}">
+  <block wx:elif="{{titleIndex==4}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing">
         <view style="margin-bottom:24rpx" class="title_name flex flex_lr">

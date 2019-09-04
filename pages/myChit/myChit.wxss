@@ -1,45 +1,83 @@
-.chit {
+.my_chit {
   position: relative;
-  height: 410rpx;
+  width: 100%;
+  height: 430rpx;
 }
-.chit .box_bg{
+
+.container {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+.my_chit .box_bg {
   position: absolute;
   width: 100%;
   height: 100%;
 }
-.chit .logs_box{
-  width: 76%;
-  position: absolute;
-  left: 12%;
-  top: 40rpx;
-  background: #fff;
-  height: 430rpx;
-  border-radius: 12rpx;
-}
-.history{
-  position: absolute;
-  background: #fff;
-  width: 100%; 
-  bottom: 6rpx;
-  line-height: 80rpx;
-}
-.history >text{
+
+.history>view {
+  box-sizing: border-box;
+  padding: 0 4%;
   flex: 1;
+  display: flex;
+  justify-content: space-between;
 }
-.openMen{
-  height: 160rpx;
-  background: #3B3836;
-  padding: 0 40rpx 0 70rpx;
-  border-radius:18rpx; 
-  margin: 64rpx auto 40rpx auto;
+
+.history>view>text {
+  font-size: 28rpx;
+  margin: auto 0;
 }
-.openMen>text:nth-of-type(2){
-  text-align: right;
-  color: #fff;
+
+.history>view:nth-of-type(1) {
+  border-bottom: 1px solid #e4e4e4;
 }
-.recommended{
-  margin-top: 100rpx;
+
+.history {
+  height: 196rpx;
+  position: absolute;
+  left: 3%;
+  bottom: -98rpx;
+  background: #fff;
+  border-radius: 18rpx;
+  z-index: 9;
 }
-.recommended::after,.recommended::before{
-  width: 35%;
+
+.chitNum {
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 100rpx;
+}
+
+.chitNum >view>view {
+  justify-content: center;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+}
+
+.ruleModel {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  z-index: 99;
+  transform: translateY(110%);
+  -webkit-transform: translateY(110%);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+}
+
+.ruleModel .sumbit {
+  line-height: 80rpx;
+  color: white;
+  background: #f18e1e;
+}
+
+.activeRule {
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
 }

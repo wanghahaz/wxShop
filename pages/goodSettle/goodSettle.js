@@ -93,6 +93,7 @@ Page({
     http.postReq('/order/submit', {
       order: str
     }, true).then(res => {
+      console.log(res)
       if (res.code == 200) {
 
       } else if (res.code == 300) {

@@ -22,6 +22,9 @@ Page({
     let num = e.currentTarget.dataset.num;
     if (e.currentTarget.dataset.type == 'add') {
       num = num + 1;
+      if (num > e.currentTarget.dataset.storage) {
+        return false;
+      }
     } else {
       num = num-- > 1 ? num : 1;
     }
@@ -86,7 +89,7 @@ Page({
         })
       } else {
         this.setData({
-          page: this.data.page++
+          page: this.data.page + 1
         })
       }
     })
@@ -185,16 +188,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    if (this.data.isPullDownRefresh && this.data.goodsList.length == 0) {
-      this.getGoods()
-    }
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if (this.data.isPullDownRefresh && this.data.goodsList.length == 0) {
+      this.getGoods()
+    }
   },
 
   /**

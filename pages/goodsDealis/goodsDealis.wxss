@@ -2,13 +2,22 @@
   padding-bottom: 120rpx;
 }
 
-.goodsDealis {
-  border-radius: 18rpx;
+.box_Big>view,.box_Big>text,.shop_box{
+  padding: 0 3%;
+  box-sizing: border-box;
   background: #fff;
-  padding: 30rpx 24rpx;
-  margin: 20rpx auto;
 }
 
+.goodsDealis {
+  background: #fff;
+  padding: 14rpx 3% 24rpx 3%;
+  margin-bottom:30rpx ;
+}
+.text_right{
+  display: inline-block;
+  padding-left: 24rpx;
+  color: #000;
+}
 .swiper_box {
   position: relative;
 }
@@ -104,4 +113,9 @@
 
 .suckTop {
   bottom: 140rpx;
+}
+
+.containerAc {
+  height: 100%;
+  overflow: hidden;
 }

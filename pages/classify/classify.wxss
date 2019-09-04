@@ -36,8 +36,7 @@
   line-height: 108rpx;
 }
 .goods .goodsList{
-  padding: 20rpx 0;
-  height: 326rpx;
+  padding: 30rpx 0;
   background: #F8F6F7;
   border-radius: 18rpx;
 }
@@ -76,10 +75,3 @@
   color: #f18e1e;
 } */
 
-.chit {
-  width: 159rpx;
-  height: 166rpx;
-  position: fixed;
-  right: 28rpx;
-  bottom: 52rpx;
-}

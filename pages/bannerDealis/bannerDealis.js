@@ -79,7 +79,7 @@ Page({
               console.log('用户点击确定')
             } else if (res.cancel) {
               wx.switchTab({
-                url:'/pages/index/index',
+                url: '/pages/index/index',
               })
             }
           }
@@ -133,7 +133,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function() {
+
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -166,7 +168,4 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
-  }
 })

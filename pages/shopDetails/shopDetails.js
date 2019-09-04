@@ -9,23 +9,76 @@ Page({
    * 页面的初始数据
    */
   data: {
+    is_collect: 0,
+    shopId: null,
+    shopObj: {},
     titleIndex: 1,
-    shopList: [{
-      title: '西瓜',
-      old: '100',
-      newPrice: "80",
-      imgsrc: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg'
-    }, {
-      title: '冬瓜',
-      old: '100',
-      newPrice: "80",
-        imgsrc: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg'
-    }]
+    shopList: [],
+    page: 1,
+    isPullDownRefresh: true
+  },
+  getShopDealis() {
+    http.getReq(`/store/info/${this.data.shopId}`, {
+      user_id: app.globalData.userInfo.id ? app.globalData.userInfo.id : '0'
+    }).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          is_collect: res.data.is_collect,
+          shopObj: res.data.row
+        })
+      } else {
+        until.taost({
+          title: res.msg || '获取数据失败，请您重新获取'
+        })
+      }
+    })
+  },
+  getList(e) {
+    http.getReq(`/store/info/goods_list/${this.data.shopId}`, {
+      type: this.data.titleIndex,
+      page: this.data.page
+    }, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          shopList: [...this.data.shopList, ...res.data.data]
+        })
+        if (res.data.last_page == this.data.page) {
+          this.setData({
+            isPullDownRefresh: false
+          })
+        } else {
+          this.setData({
+            page: this.data.page + 1
+          })
+        }
+      } else {
+        this.setData({
+          shopList: [],
+          isPullDownRefresh: false
+        })
+      }
+
+    })
+  },
+  collectGoods() {
+    http.postReq('/collect', {
+      id: this.data.shopId,
+      type: 2
+    }, true).then(res => {
+      let is_collect = res.msg == '收藏成功' ? 1 : 0
+      this.setData({
+        is_collect: is_collect
+      })
+    })
   },
   selectTitle(e) {
     this.setData({
-      titleIndex: e.currentTarget.dataset.index
+      titleIndex: e.currentTarget.dataset.index,
+      page: 1,
+      shopList:[],
+      isPullDownRefresh: true
     })
+    this.getList()
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -43,7 +96,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    this.setData({
+      shopId: options.id
+    })
+    this.getShopDealis()
+    this.getList()
   },
 
   /**
@@ -83,7 +140,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if (this.data.isPullDownRefresh) {
+      this.getList()
+    }
   },
 
   /**

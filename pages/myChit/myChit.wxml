@@ -1,25 +1,38 @@
-<!--index.wxml-->
 <view class="container">
-  <view class="fs_18 chit flex column flex_lr_m">
+  <view class="fs_18 my_chit">
     <image src="../../image/moneyBg.png" class="box_bg"></image>
-    <view class="logs_box">
-      <view class="fs_15 tc" style="margin:80rpx 0 40rpx 0">当前余额</view>
-      <view class="tc">￥999</view>
-      <view class="history flex tc fs_15">
-        <text data-path="/pages/chitHistory/chitHistory" bindtap="toRouter" style="border-right: 1px solid #E4E4E4;" class="fcF1">领券记录</text>
-        <text class=" fcF1" data-path="/pages/advertising/advertising" bindtap="switchTab">去领代金券</text>
+    <view class="chitNum flex">
+      <view class="flex column flex_m">
+        <text class="fs_24">99.99</text>
+        <view class="flex flex_m">
+          <text>可使用</text>
+        </view>
+      </view>
+      <view class="flex column flex_m">
+        <text class="fs_24">99.99</text>
+        <view catchtap="showModel" class="flex flex_m">
+          <text>已冻结</text>
+          <text class="./iconfont/icontishi:before icon" style="font-size:30rpx;margin:6rpx 0 0  4rpx"></text>
+        </view>
+      </view>
+    </view>
+
+    <view class="history width94 flex column">
+      <view data-title="领取记录" data-path="/pages/chitHistory/chitHistory" bindtap="toRouter">
+        <text>领取记录</text>
+        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+      </view>
+      <view data-title="使用记录" data-path="/pages/chitHistory/chitHistory" bindtap="toRouter">
+        <text>使用记录</text>
+        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
       </view>
     </view>
   </view>
-  <!-- <view class="openMen width94 box_zing flex column flex_sa">
-    <text class="fcF1 fs_20">开通会员即可领取双倍代金券！</text>
-    <text class="fs_16">点我立即开通></text>
-  </view> -->
-  <view class="fs_19 tc recommended">好物推荐</view>
-  <view class="shop_list flex_wrap" style="width:92%">
-    <block wx:for="{{shopList}}" wx:key="{{index}}">
-      <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
-    </block>
+  <view bindtap="showModel" catch:touchmove hidden="{{showMask}}" class="mask">
   </view>
-  <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
+  <view class="ruleModel {{!showMask?'activeRule':''}}">
+    <view style="line-height:70rpx;" class="tc">说明</view>
+    <view style="line-height:50rpx;margin:20rpx auto;" class="width94 fs_14">若提交订单时为多家店铺的商品，且选择使用代金券后未支付时，已使用的代金券为冻结状态;若超时仍未支付，则已冻结代金券返还至可用余额</view>
+    <view bindtap="showModel" class="sumbit tc">确认</view>
+  </view>
 </view>

@@ -1,4 +1,4 @@
-.wheel {
+/* .wheel {
   position: fixed;
   top: 20%;
   left: 50%;
@@ -21,4 +21,31 @@
 }
 .wheel .pointer_img{
   width: 100rpx;
+} */
+
+.example {
+  display: block;
+  width: 100%;
+  background: red;
+  height: 200rpx;
+}
+
+.marquee_box {
+  width: 100%;
+  position: relative;
+}
+
+.marquee_text {
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+}
+
+.box text {
+  display: block;
+  line-height: 60rpx;
+}
+
+.marquee_text text {
+  line-height: 2;
 }

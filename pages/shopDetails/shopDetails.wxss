@@ -21,7 +21,8 @@
 .collect {
   background: #f18e1e;
   color: #fff;
-  width: 148rpx;
+  padding: 0 30rpx;
+  height: 58rpx;
   line-height: 58rpx;
   border-radius: 28rpx;
 }

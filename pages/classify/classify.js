@@ -9,15 +9,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    fyList: ['全部商品', '促销', '水果', '服装', '化妆品', '零食'],
+    fyList: [],
+    leftList: [],
     leftIndex: 0,
     pid: null,
     height: 0,
-    showMask: true,
   },
   // 顶级分类
   getIndex() {
-    http.getReq('/cate/index', {}, true).then(res => {
+    http.getReq('/cate/index', {}).then(res => {
       // console.log(res)
       let id = res.data[this.data.leftIndex].id;
       this.setData({
@@ -36,6 +36,15 @@ Page({
   getCate() {
     http.getReq(`/cate/get_cate/${this.data.pid}`, {}, true).then(res => {
       console.log(res)
+      if (res.code == 200) {
+        this.setData({
+          leftList: res.data
+        })
+      } else {
+        until.toast({
+          title: res.msg || '加载失败'
+        })
+      }
     }).catch(err => {})
   },
   changelf(e) {
@@ -64,19 +73,6 @@ Page({
       }
     });
 
-  },
-  callMask(e) {
-    if (e.currentTarget.dataset.type == 1) {
-      this.setData({
-        showMask: false
-      })
-      wx.hideTabBar()
-    } else {
-      this.setData({
-        showMask: true
-      })
-      wx.showTabBar()
-    }
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);

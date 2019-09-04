@@ -1,10 +1,28 @@
 <!--index.wxml-->
 <view class="container">
-  <block wx:for="{{list}}" wx:key="{{index}}">
-      <view class="width94 flex fs_14 box_big">
-        <text class="clamp_1" style="flex:1">观看视频广告：啊啊啊啊</text>
-        <text class="fcF1">{{item.money}} 1小时前</text>
-      </view>
+  <block wx:for="{{3}}" wx:key="{{index}}">
+    <view class="box width94 box_zing">
+      <block wx:if="{{title=='领取记录'}}">
+        <view>
+          <text>领取时间：</text>
+          <text>2012:12:12 12:12:12</text>
+        </view>
+        <view>
+          <text>代金券：</text>
+          <text>10元</text>
+        </view>
+      </block>
+      <block wx:if="{{title=='使用记录'}}">
+        <view>
+          <text>订单编号：</text>
+          <text>E11122233344455566</text>
+        </view>
+        <view>
+          <text>共使用代金券：</text>
+          <text>10元</text>
+        </view>
+      </block>
+    </view>
   </block>
-   <view class="noMore" wx:if="{{!isDownRefresh}}">没有更多数据了...</view>
+  <view class="noMore" wx:if="{{!isDownRefresh}}">没有更多数据了...</view>
 </view>

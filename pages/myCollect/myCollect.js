@@ -13,6 +13,10 @@ Page({
     page: 1,
     list: [],
     collId: null,
+    showObj: {},
+    selectSku: {},
+    skuObj: {},
+    goods_num: 1
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -26,10 +30,176 @@ Page({
       })
     }
   },
-  showModel() {
-    this.setData({
-      showMask: !this.data.showMask
+  // 商品加减
+  addOdd(e) {
+    if (this.data.skuObj.spec) {
+      if (!this.data.selectSku.goods_price) {
+        until.toast({
+          title: '请您选择商品'
+        })
+        return false;
+      }
+    }
+    if (e.currentTarget.dataset.type == 'add') {
+      this.setData({
+        goods_num: this.data.goods_num + 1 > this.data.goods_storage ? this.data.goods_storage : this.data.goods_num + 1
+      })
+    } else {
+      let num = this.data.goods_num;
+      num = num-- > 1 ? num : 1;
+      this.setData({
+        goods_num: num
+      })
+    }
+  },
+  // 加入购物车
+  addCard() {
+    if (this.data.skuObj.spec) {
+      if (!this.data.selectSku.goods_price) {
+        until.toast({
+          title: '请您选择商品'
+        })
+        return false;
+      }
+    }
+    let data = {};
+    data.goods_spec = this.data.selectSku.id || '';
+    data.goods_id = this.data.goodsId;
+    data.goods_num = this.data.goods_num;
+
+    http.postReq('/cart/add', data, true).then(res => {
+      if (res.code == 200) {
+        until.toast({
+          title: '已加入购物车！'
+        })
+      } else {
+        until.toast({
+          title: '加入购物车失败！'
+        })
+      }
     })
+  },
+  // 立即购买
+  addBuy() {
+    if (this.data.skuObj.spec) {
+      if (!this.data.selectSku.goods_price) {
+        until.toast({
+          title: '请选择选择商品'
+        })
+        return false;
+      }
+    }
+    console.log(this.data.showObj)
+    let list = [{
+      store: {
+        store_name: this.data.showObj.store.store_name,
+        store_id: this.data.showObj.store.id,
+        check: true
+      },
+      goods: [{
+        cart_id: 0,
+        check: true,
+        id: this.data.goodsId,
+        goods_num: this.data.goods_num,
+        goods_name: this.data.showObj.goods.goods_name,
+        goods_thumb: this.data.goods_thumb,
+        goods_price: this.data.goods_price,
+        goods_storage: this.data.goods_storage,
+        sku_id: this.data.selectSku.id || '',
+        spec_name: this.data.selectSku.spec_name || ''
+      }]
+    }];
+    app.globalData.goodsList = list;
+    wx.navigateTo({
+      url: '/pages/goodSettle/goodSettle'
+    })
+  },
+  // 选择规格
+  selectSku(e) {
+    let list = JSON.parse(JSON.stringify(this.data.skuObj.spec));
+    let obj = JSON.parse(JSON.stringify(this.data.skuObj));
+    list[e.currentTarget.dataset.index].sub.forEach((item, index) => {
+      if (index == e.currentTarget.dataset.ind) {
+        item.check = !item.check
+      } else {
+        item.check = false;
+      }
+    })
+    obj.spec = list;
+    this.setData({
+      skuObj: obj,
+      selectSku: {}
+    })
+    let specList = this.data.skuObj.spec;
+    let skuList = this.data.skuObj.sku;
+    let selectSpec = [];
+    if (specList) {
+      specList.forEach(item => {
+        item.sub.forEach(value => {
+          if (value.check) {
+            selectSpec.push(value.id)
+          }
+        })
+      })
+      if (selectSpec.length == specList.length) {
+        let str = selectSpec.join('_');
+        if (!skuList.find(item => item.spec == str)) {
+          until.toast({
+            title: '此商品暂无库存,请您重新选择'
+          })
+          return false;
+        }
+        this.setData({
+          selectSku: skuList.find(item => item.spec == str),
+          goods_storage: skuList.find(item => item.spec == str).goods_storage,
+          goods_price: skuList.find(item => item.spec == str).goods_price,
+          goods_thumb: skuList.find(item => item.spec == str).goods_thumb,
+          goods_num: 1
+        })
+      } else {
+        this.setData({
+          selectSku: {},
+        })
+      }
+    }
+  },
+  // 购物车
+  showModel(e) {
+    if (!e.currentTarget.dataset.obj) {
+      this.setData({
+        showMask: !this.data.showMask,
+      })
+    } else {
+      http.getReq(`/goods/get_sku/${e.currentTarget.dataset.obj.goods.id}`, {}, true).then(res => {
+        if (res.code == 200) {
+          let obj = res.data;
+          if (obj.spec.length > 0) {
+            obj.spec.forEach(item => {
+              item.sub.forEach(val => {
+                val.check = false;
+              })
+            })
+          }
+          this.setData({
+            skuObj: obj
+          })
+        } else {
+          this.setData({
+            skuObj: {}
+          })
+        }
+        this.setData({
+          goodsId: e.currentTarget.dataset.obj.goods.id,
+          showObj: e.currentTarget.dataset.obj,
+          showMask: !this.data.showMask,
+          goods_thumb: e.currentTarget.dataset.obj.goods.goods_thumb,
+          goods_storage: e.currentTarget.dataset.obj.goods.goods_storage,
+          goods_price: e.currentTarget.dataset.obj.goods.goods_price,
+        })
+      })
+    }
+
+    // console.log(this.data.showObj)
   },
   // 获取商品 0
   getGoodsColl() {
@@ -39,6 +209,7 @@ Page({
       page: this.data.page,
       type: type
     }, true).then(res => {
+      console.log(res)
       if (res.code == 200) {
         this.setData({
           list: [...this.data.list, ...res.data.data],
@@ -54,10 +225,11 @@ Page({
         }
       } else {
         this.setData({
-          goosList: [],
+          list: [],
           isLoading: false
         })
       }
+
     }).catch(err => {})
   },
   // 切换title
@@ -71,7 +243,7 @@ Page({
     this.getGoodsColl()
   },
   onLoad: function() {
-    this.getGoodsColl()
+    console.log(wx.getStorageSync('userInfo'))
   },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function(e) {
@@ -154,7 +326,9 @@ Page({
       }
     })
   },
-  onShow: function() {},
+  onShow: function() {
+    this.getGoodsColl()
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

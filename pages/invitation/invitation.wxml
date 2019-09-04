@@ -14,7 +14,7 @@
         <text class="{{sIndex==1?'fs_18':''}}">我的双倍收益卡</text>
       </view>
     </view>
-    <button class="invita fs_16 tc">发邀请领双倍收益卡</button>
+    <button catchtap="toRouter" data-path="/pages/share/share" class="invita fs_16 tc">发邀请领双倍收益卡</button>
   </view>
   <view class="tc recommended" style="color:#B2B2B2">{{index==0?'邀请的朋友':'双倍收益卡'}}</view>
   <view wx:if="{{userList.length==0}}" class="noInva flex column flex_m">

@@ -1,5 +1,19 @@
-<view>
-  <!-- 引用组件↓↓↓ -->
+<!-- <view>
   <lucky bind:myevent="myevent"></lucky>
-  <!-- 引用组件↑↑↑ -->
+</view> -->
+<view>2 出现白边后即显示</view>
+<view class="example">
+  <view class="marquee_box">
+    <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
+      <view class="box">
+        <text wx:for="{{text}}" wx:key="{{index}}">{{item}}{{index}}</text>
+      </view>
+      <view class="box" style="margin-bottom:{{marquee2_margin}}rpx" wx:if="{{marquee2copy_status}}">
+        <text wx:for="{{text}}" wx:key="{{index}}">{{item}}{{index}}</text>
+        <!-- <text wx:for="{{text}}" wx:key="{{index}}" style="">{{item}}</text> -->
+      </view>
+
+    </view>
+  </view>
 </view>
+<view catchtap="click">哈哈哈</view>

@@ -24,28 +24,28 @@ Page({
   },
   getLogs() {
     // 广告获得奖励列表
-    http.getReq('/advert/jifen_logs', {
-      page: this.data.page,
-    }).then(res => {
-      this.setData({
-        logsList: [...this.data.logsList, ...res.data.data]
-      })
-      if (res.data.last_page == this.data.page) {
-        this.setData({
-          isDownRefresh: false,
-        })
-      } else {
-        let page = this.data.page + 1;
-        this.setData({
-          page: page
-        })
-      }
-    })
+    // http.getReq('/advert/jifen_logs', {
+    //   page: this.data.page,
+    // }).then(res => {
+    //   this.setData({
+    //     logsList: [...this.data.logsList, ...res.data.data]
+    //   })
+    //   if (res.data.last_page == this.data.page) {
+    //     this.setData({
+    //       isDownRefresh: false,
+    //     })
+    //   } else {
+    //     let page = this.data.page + 1;
+    //     this.setData({
+    //       page: page
+    //     })
+    //   }
+    // })
   },
   getIndex() {
     // 广告首页
     http.getReq('/advert/index', {
-      user_id: app.globalData.userInfo.id
+      user_id: app.globalData.userInfo.id ? app.globalData.userInfo.id : '0'
     }).then(res => {
       this.setData({
         ads: res.data.ads,
@@ -54,7 +54,6 @@ Page({
     })
   },
   toRouter(e) {
-    console.log(1)
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
       wx.navigateTo({

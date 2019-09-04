@@ -1,0 +1,4 @@
+<!--index.wxml-->
+<view class="container">
+  <image class="box_bg" src="../../image/intavl.png"></image>
+</view>

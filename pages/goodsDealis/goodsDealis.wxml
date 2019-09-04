@@ -24,32 +24,36 @@
     </view>
   </view>
 
-  <view class="width94">
-    <text style="margin:30rpx 0 20rpx 0;display: inline-block" class="fcF1 fs_20">￥{{goodsData.row.goods_price}}</text>
-    <view class="flex flex_lr flex_m">
-      <text style="width:60%" class="clamp_2">{{goodsData.row.goods_name}}</text>
+  <view class="box_Big box_zing" style="background: #fff;">
+    <text style="margin:20rpx 0 10rpx 0;display: inline-block" class="fcF1 fs_20">￥{{goodsData.row.goods_price}}</text>
+    <view class="flex flex_lr flex_m" style="padding-bottom:20rpx;">
+      <text style="width:75%" class="clamp_2">{{goodsData.row.goods_name}}</text>
       <text wx:if="{{is_collect==1}}" catchtap="collectGoods" class="./iconfont/iconxin:before icon" style="font-size:52rpx; color:#F44444"></text>
       <text wx:else catchtap="collectGoods" class="./iconfont/iconxin1:before icon" style="font-size:52rpx; color:#F44444"></text>
     </view>
-    <view style="margin:20rpx 0" class="flex flex_lr fs_12">
-      <text>运费</text>
-      <text>免运费</text>
+    <view style="padding:20rpx 3% 16rpx 3%;border-top:18rpx solid #f8f6f7" class="flex flex_lr fs_12">
+      <text class="fcb2">服务 <text class="text_right">7天退货·48小时发货</text></text>
     </view>
-    <view bindtap="showModel" style="margin:20rpx 0" class="flex flex_lr fs_12">
-      <text>选择：规格</text>
-      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:2=38rpx"></text>
-    </view>
-    <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/shopDetails/shopDetails" style="margin:20rpx 0" class="flex flex_lr">
-      <text style="width:50%">{{goodsData.store.store_name}}</text>
-      <view class="fcb2 flex flex_m flex_end ">
-        <text class="fs_14">进店逛逛</text>
-        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx"></text>
-      </view>
+    <view style="margin:0rpx 0 20rpx 0;" class="flex flex_lr fs_12">
+      <text class="fcb2">快递  <text class="text_right">免运费</text></text>
 
     </view>
+    <view bindtap="showModel" style="margin:20rpx 0;padding:0rpx 3% 20rpx 3%" class="flex flex_lr fs_12">
+      <text class="fcb2">选择 <text class="text_right">选择商品属性</text> </text>
+      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+    </view>
   </view>
-  <view class="goodsDealis width94 flex column box_zing">
-    <view catchtap="toRouter" data-id="{{data.id}}" data-path="/pages/evaluateList/evaluateList"  class="fs_14 flex flex_lr">
+
+  <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/shopDetails/shopDetails" style="margin-top:20rpx;padding:30rpx 3% 0 3%;" class="flex flex_lr shop_box fs_14">
+    <text style="width:50%">{{goodsData.store.store_name}}</text>
+    <view class="fcb2 flex flex_m flex_end ">
+      <text>进店逛逛</text>
+      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+    </view>
+  </view>
+
+  <view class="goodsDealis flex column box_zing">
+    <view catchtap="toRouter" data-id="{{data.id}}" data-path="/pages/evaluateList/evaluateList" class="fs_14 flex flex_lr">
       <text style="width:50%">评价（999+）</text>
       <view class="flex flex_m flex_end">
         <text>好评率</text>
@@ -57,7 +61,7 @@
         <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
       </view>
     </view>
-    <view style="margin:20rpx 0 0 0" class="fs_14" wx:if="{{commentList.length==0}}">暂无评价</view>
+    <view style="margin:14rpx 0 0 0" class="fs_14" wx:if="{{commentList.length==0}}">暂无评价</view>
     <block wx:else>
       <view style="margin:20rpx 0 0 0" class="coment flex">
         <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentTx"></image>
@@ -84,9 +88,9 @@
       </view>
     </block>
   </view>
-  <view class="goodsDealis width94 flex column  box_zing">
-    <text style="margin:0 0 20rpx 0">商品详情</text>
-    <rich-text nodes="{{goodsData.row.goods_body}}"></rich-text>
+  <view class="goodsDealis  flex column  box_zing">
+    <text style="padding:10rpx 0 6rpx 0">商品详情</text>
+    <rich-text nodes="{{goods_body}}"></rich-text>
   </view>
   <view class="fs_19 tc recommended">好物推荐</view>
   <view class="shop_list flex_wrap" style="width:92%">
@@ -96,15 +100,15 @@
   </view>
   <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
   <view class="flex flex_bottom flex_m ">
-    <view data-path="/pages/index/index" bindtap="switchTab" class="imgGoods flex  column fs_12 ">
-      <image style="width:49rpx;height:50rpx flex_c" src="../../image/goodH.png"></image>
+    <view data-path="/pages/index/index" bindtap="switchTab" class="imgGoods flex_nosize flex  column fs_12 ">
+      <image style="width:49rpx;height:50rpx" src="../../image/goodH.png"></image>
       <text class="fcF1">首页</text>
     </view>
-    <view class="imgGoods flex column fs_12 ">
+    <view class="imgGoods flex column fs_12  flex_nosize">
       <image style="width:49rpx;height:49rpx" src="../../image/goodW.png"></image>
       <text>客服</text>
     </view>
-    <view data-path="/pages/shopCard/shopCard" bindtap="switchTab" class="imgGoods flex column fs_12 ">
+    <view data-path="/pages/shopCard/shopCard" bindtap="switchTab" class="imgGoods flex column fs_12 flex_nosize">
       <image style="width:56rpx;height:54rpx" src="../../image/goodC.png"></image>
       <text>购物车</text>
     </view>
@@ -117,7 +121,7 @@
   </view>
   <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
     <view class="flex goodsDe box_zing">
-      <image class="goodsImg flex_nosize" src="{{goodsData.row.goods_images[0]}}"></image>
+      <image class="goodsImg flex_nosize" src="{{goods_thumb}}"></image>
       <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
         <text class="clamp_1">{{goodsData.row.goods_name}}</text>
         <text style="" class="goodsPr fs_20">￥{{goods_price}}</text>
@@ -149,8 +153,8 @@
       <text catchtap="addBuy" class="tc">立即购买</text>
     </view>
   </view>
-<!-- 吸顶 -->
+  <!-- 吸顶 -->
   <view catchtap="suckTop" wx:if="{{scrollTop>clientHeight}}" class="suckTop">
-    <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx;color:#fff"></text>
+    <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:46rpx;color:#fff"></text>
   </view>
 </view>

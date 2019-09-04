@@ -10,9 +10,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shopList: [],
-    isPullDownRefresh: true,
-    page: 1
+    showMask:true
+  },
+  showModel() {
+    this.setData({
+      showMask: !this.data.showMask
+    })
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -29,32 +32,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  switchTab(e) {
-    wx.switchTab({
-      url: e.currentTarget.dataset.path,
-    })
-  },
-  getGoods() {
-    http.getReq('/index/goods', {
-      page: this.data.page
-    }, true).then(res => {
-      this.setData({
-        shopList: [...this.data.shopList, ...res.data.data]
-      })
-      if (res.data.last_page == this.data.page) {
-        this.setData({
-          isPullDownRefresh: false
-        })
-      } else {
-        this.setData({
-          page: this.data.page + 1
-        })
-      }
-    })
-  },
-  onLoad: function(options) {
-    this.getGoods()
-  },
+
+  onLoad: function(options) {},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -92,11 +71,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
-    if (this.data.isPullDownRefresh) {
-      this.getGoods()
-    }
-  },
+  onReachBottom: function() {},
 
   /**
    * 用户点击右上角分享

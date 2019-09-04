@@ -26,25 +26,25 @@
     </block>
   </view>
   <view catchtap="suckTop" wx:if="{{scrollTop>clientHeight}}" class="suckTop">
-    <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx;color:#fff"></text>
+    <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:46rpx;color:#fff"></text>
   </view>
   <!-- 活动专区 -->
   <view class="activity width94 flex column box_zing">
     <view class="flex flex_sa" bindtap="toRouter" data-path="/pages/seckill/seckill">
       <text style="width:40%" class="fs_19">限时秒杀</text>
       <view class="flex flex_m flex_end">
-        <text class="fs_12">02:02:02</text>
+        <text  class="fs_12">{{h}}:{{m}}:{{s}}</text>
         <text style="margin:0 0 0 20rpx" class="fs_14 fcb2">更多秒杀></text>
       </view>
     </view>
     <view class="flex flex_lr">
-      <block wx:for="{{4}}" wx:key="{{index}}">
-        <view class="flex column activity_box" data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter">
-          <image src="../../image/moneyBg.png" class="activity_img"></image>
-          <text style="margin-top:4rpx" class="fs_12 clamp_1">我是商品我是商品我.</text>
-          <view class="fs_14 flex flex_lr">
-            <text class="fcb2">￥99</text>
-            <text class="fcF1">￥9</text>
+      <block wx:for="{{seckillList}}" wx:key="{{index}}">
+        <view class="flex column activity_box" data-id="{{item.goods_id}}" data-skuId="{{item.goods_sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter">
+          <image src="{{item.goods.goods_thumb}}" class="activity_img"></image>
+          <text style="margin-top:4rpx" class="fs_12 clamp_1">{{item.goods.goods_name}}</text>
+          <view class="fs_11 flex flex_lr">
+            <text class="fcb2">￥{{item.goods.goods_market_price}}</text>
+            <text class="fcF1">￥{{item.goods_promotion_price}}</text>
           </view>
           <text class="rob fs_12 tc">马上抢</text>
         </view>
@@ -59,4 +59,5 @@
     </block>
   </view>
   <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
+  <image bindtap="switchTab" data-path="/pages/advertising/advertising" class="chit" src="../../image/chit1.png"></image>
 </view>

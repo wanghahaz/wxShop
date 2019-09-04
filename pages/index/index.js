@@ -3,6 +3,7 @@
 const app = getApp();
 import http from "../../common/js/http.js";
 import until from "../../utils/util.js";
+let timers = null;
 Page({
 
   /**
@@ -14,6 +15,7 @@ Page({
     bannerList: [],
     navList: [],
     page: 1,
+    is_on: 0,
     clientHeight: app.globalData.clientHeight / 2,
     shopList: [],
     isPullDownRefresh: true,
@@ -52,17 +54,50 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // until.modal({
-    //   content: '您还没有登录,请先登录'
-    // }).then(res => {
-    //  
-    // }).catch(err => {
-
-    // })
     this.getBanner();
     this.getNav()
     this.getGoods()
+    this.getseckill()
   },
+  countDown() {
+    timers = setInterval(() => {
+      let time = until.diffTime(new Date().getTime(), this.data.endTime);
+      if (time.hours == "00" && time.minutes == "00" && time.seconds == "00") {
+        this.setData({
+          is_on: 0
+        })
+        clearInterval(times)
+      } else {
+        this.setData({
+          h: time.hours,
+          m: time.minutes,
+          s: time.seconds
+        })
+      }
+    }, 1000)
+  },
+  // 秒杀活动
+  getseckill() {
+    http.getReq('/index/seckill ', {}).then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        this.setData({
+          is_on: res.data.is_on,
+          seckillList: res.data.row,
+          endTime: res.data.endtime + new Date().getTime()
+        })
+        if (res.data.is_on == 1) {}
+        let time = until.diffTime(new Date().getTime(), this.data.endTime);
+        this.setData({
+          h: time.hours,
+          m: time.minutes,
+          s: time.seconds
+        })
+        this.countDown()
+      }
+    })
+  },
+  // 首页商品推荐
   getGoods() {
     http.getReq('/index/goods', {
       page: this.data.page
@@ -76,7 +111,7 @@ Page({
         })
       } else {
         this.setData({
-          page: this.data.page++
+          page: this.data.page + 1
         })
       }
     })

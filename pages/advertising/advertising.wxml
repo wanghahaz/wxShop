@@ -7,12 +7,15 @@
       </swiper-item>
     </block>
   </swiper>
+  <view class="fs_15 tc fcF1 look">亲，观看视频可获得代金券哦</view>
   <view class="cd" data-id="{{row.id}}" data-path="/pages/bannerDealis/bannerDealis" catchtap="toRouter">
-    <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
-    <!-- <image src="{{row.thumb}}"></image> -->
+    <image src="{{row.thumb}}"></image>
   </view>
-  <cover-view class="fs_17 tc fcF1 look">亲，观看视频可获得代金券哦11~</cover-view>
-  <swiper vertical="true"  class="logs_swiper" autoplay="true" interval="2000" duration="200" bindchange="bindchange" circular='true'>
+  <view class="fs_15 intal flex flex_c_m">
+    <text>您有双倍收益卡0张可使用</text>
+    <button style="width:240rpx;" class="fcF1 fs_15">立即去邀请好友!</button>
+  </view>
+  <swiper vertical="true" class="logs_swiper" autoplay="true" interval="2000" duration="200" bindchange="bindchange" circular='true'>
     <block wx:for="{{logsList}}" wx:key="{{index}}">
       <swiper-item>
         <view class="logs fs_14 flex flex_m flex_lr box_zing">
@@ -25,5 +28,5 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class="model" style="height:{{height-774}}rpx"></view>
+  <!-- <view class="model" style="height:{{height-774}}rpx"></view> -->
 </view>

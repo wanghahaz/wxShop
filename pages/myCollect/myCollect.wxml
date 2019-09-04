@@ -4,10 +4,11 @@
     <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">商品</text>
     <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">店铺</text>
   </view>
-  <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" data-id="{{item.store_id||item.goods_id}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{list}}" wx:key="">
-    <view wx:if="{{list.length==0&&isLoading==false}}" class="noMore">您还没有收藏任何{{title==0?'商品':'店铺'}}哦！</view>
+  <view wx:if="{{list.length==0&&isLoading==false}}" style="margin-top:20rpx" class="noMore">您还没有收藏任何{{titleIndex==0?'商品':'店铺'}}哦</view>
+  <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" data-id="{{item.store_id||item.goods_id}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{list}}" wx:key="{{index}}">
     <!-- 商品 -->
     <view class="content" wx:if="{{titleIndex==0}}">
+
       <view data-id="{{item.goods_id}}" data-skuId="{{item.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" catchtap="toRouter" wx:if="{{item.goods.goods_storage>0}}" class="flex box_zing shop goods">
         <image class="shopTx goodsTx flex_nosize" src="{{item.goods.goods_thumb}}"></image>
         <view class="shopDealis goodsDealis flex column flex_lr">
@@ -15,7 +16,7 @@
           <text class="fs_12 fcb2">剩余{{item.goods.goods_storage}}件</text>
           <view class="flex flex_lr">
             <text class="fs_19 fcF1">￥{{item.goods.goods_price}}</text>
-            <image catchtap="showModel" class="add" src="../../image/have_goods.png"></image>
+            <image data-obj="{{item}}" catchtap="showModel" class="add" src="../../image/have_goods.png"></image>
           </view>
         </view>
       </view>
@@ -36,8 +37,8 @@
     <view class="content" wx:else>
       <view class="flex box_zing shop">
         <image class="shopTx flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
-        <view class="shopDealis flex column flex_lr">
-          <text class="clamp_2 fs_14">{{item.store.store_name}}</text>
+        <view class="shopDealis flex column flex_sa">
+          <text class="clamp_2 fs_16">{{item.store.store_name}}</text>
           <view class="flex flex_lr">
             <text class="fcF1">{{item.store.store_collects}}人关注</text>
           </view>
@@ -56,17 +57,36 @@
   </view>
   <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
     <view class="flex goodsDe box_zing">
-      <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+      <image class="goodsImg flex_nosize" src="{{goods_thumb}}"></image>
       <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
-        <text class="clamp_1">我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
-        <text style="" class="goodsPr fs_20">￥99.99</text>
-        <text class="fs_14">剩余99件</text>
+        <text class="clamp_1">{{showObj.goods.goods_name}}</text>
+        <text style="" class="goodsPr fs_20">￥{{goods_price}}</text>
+        <text class="fs_14">剩余{{goods_storage}}件</text>
       </view>
       <text class="addCard tc fs_22" catchtap="showModel" class="./iconfont/iconguanbi:before icon close fs_18"></text>
     </view>
-    <view bindtap="showModel" class="btn_bottom fs_14 flex">
-      <text class="tc">加入购物车</text>
-      <text class="tc">立即购买</text>
+    <view wx:if="{{skuObj.spec.length>0}}" class="skuObj box_zing">
+      <view>
+        <block wx:for="{{skuObj.spec}}" wx:key="{{index}}">
+          <view style="color:#8A8A8A;">{{item.name}}</view>
+          <view class="sku_value flex flex_wrap">
+            <block wx:for="{{item.sub}}" wx:for-item="value" wx:for-index="ind" wx:key="{{ind}}">
+              <text class="{{value.check?'activeText':''}} box_zing fs_13" data-index="{{index}}" data-ind="{{ind}}" catchtap="selectSku">{{value.name}}</text>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view style="padding:10rpx 30rpx">
+      <view style="color:#8A8A8A;margin:10rpx 0">数量</view>
+      <view class="flex add_odd flex_m">
+        <text data-type="odd" catchtap="addOdd" class="tc">-</text>{{goods_num}}
+        <text data-type="add" catchtap="addOdd" class="tc">+</text>
+      </view>
+    </view>
+    <view class="btn_bottom fs_14 flex">
+      <text catchtap="addCard" class="tc">加入购物车</text>
+      <text catchtap="addBuy" class="tc">立即购买</text>
     </view>
   </view>
 </view>

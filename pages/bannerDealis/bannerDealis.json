@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "广告平台"
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "white"
 }

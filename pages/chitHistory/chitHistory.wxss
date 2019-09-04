@@ -1,3 +1,14 @@
-.box_big{
-  margin: 34rpx auto;
+.container{
+  padding-bottom: 40rpx;
+}
+.box {
+  box-shadow: 0px 8rpx 22rpx 0px rgba(0, 0, 0, 0.39);
+  padding: 36rpx 40rpx;
+  margin-top: 28rpx;
+  background: #fff;
+  border-radius:18rpx;
+}
+.box >view{
+  font-size: 28rpx;
+  line-height: 54rpx;
 }

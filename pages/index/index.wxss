@@ -48,7 +48,7 @@ swiper image {
 .activity {
   border-radius: 18rpx;
   background: #fff;
-  padding: 32rpx 32rpx;
+  padding: 32rpx 32rpx 17rpx 32rpx;
 }
 
 .activity .activity_img {
@@ -57,8 +57,8 @@ swiper image {
 }
 
 .activity_box {
-  width: 148rpx;
-  margin: 40rpx 0 0 0;
+  width: 32%;
+  margin: 30rpx 0 0 0;
 }
 
 .activity_box>view {
@@ -68,7 +68,7 @@ swiper image {
 
 .activity .rob {
   line-height: 36rpx;
-  width: 100rpx; 
+  width:80%; 
   color: #fff;
   background:-webkit-linear-gradient(left,#8706ff,#d3bce8);
 	background:-o-linear-gradient(right,#8706ff,#d3bce8);

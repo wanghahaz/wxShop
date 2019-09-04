@@ -9,8 +9,22 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusObj: {
+      '-1': '全部',
+      '0': '未付款',
+      '1': '代发货',
+      '2': '待收货',
+      '3': '已完成',
+      "4": "申请售后",
+      '5': '拒绝售后',
+      '6': '同意售后',
+      '7': '完成售后',
+      '8': '待评价',
+      '9': '已取消',
+      '10': '已关闭'
+    },
     isLoading: true,
-    titleIndex: 0,
+    titleIndex: -1,
     height: 0,
     scrollLeft: 0,
     page: 1,
@@ -62,8 +76,9 @@ Page({
   getMyOrder() {
     http.getReq('/order/order_list', {
       page: this.data.page,
-      type: this.data.titleIndex / 1 - 1
+      type: this.data.titleIndex
     }, true).then(res => {
+
       if (res.code == 200) {
         this.setData({
           goodsList: [...this.data.goodsList, ...res.data.data]
@@ -77,6 +92,7 @@ Page({
             page: this.data.page + 1
           })
         }
+        console.log(this.data.goodsList)
       } else {
         this.setData({
           isLoading: false
@@ -102,10 +118,10 @@ Page({
       titleIndex: e.currentTarget.dataset.index || e.detail.current,
       isLoading: true,
       page: 1,
-      goodsList:[]
+      goodsList: []
     })
     this.getMyOrder()
-    if (this.data.titleIndex == 0 || this.data.titleIndex == 1) {
+    if (this.data.titleIndex == '-1' || this.data.titleIndex == 0) {
       this.setData({
         scrollLeft: 0
       })
@@ -119,8 +135,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getMyOrder()
-    if (options.index > 3) {
+    if (options.index > 2) {
       this.setData({
         scrollLeft: 100
       })
@@ -128,6 +143,7 @@ Page({
     this.setData({
       titleIndex: options.index
     })
+    this.getMyOrder()
     let that = this;
     wx.getSystemInfo({
       success: function(res) {

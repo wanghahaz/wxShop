@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container {{goodsList.length>0?'acContainer':''}}">
   <!-- 推荐商品列表 -->
   <view wx:if="{{goodsList.length>0}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}" wx:for-item="item" wx:for-index="index">
@@ -22,7 +22,7 @@
             <view class="count flex">
               <text data-skuId="{{value.sku_id}}" data-id="{{value.cart_id}}" data-type="odd" catchtap="addOdd" data-num="{{value.goods_num}}" class="text odd tc fs_13">-</text>
               <text class="text fs_12 tc">{{value.goods_num}}</text>
-              <text data-skuId="{{value.sku_id}}" data-id="{{value.cart_id}}" data-type="add" catchtap="addOdd" data-num="{{value.goods_num}}" class="text add tc fs_13">+</text>
+              <text data-skuId="{{value.sku_id}}" data-id="{{value.cart_id}}" data-type="add" catchtap="addOdd" data-storage="{{value.goods_storage}}" data-num="{{value.goods_num}}" class="text add tc fs_13">+</text>
             </view>
           </view>
         </view>

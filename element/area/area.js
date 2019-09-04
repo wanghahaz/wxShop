@@ -65,9 +65,12 @@ function updateAreaData(that, status, e) {
     form.province = provinces[vali[0]].code
     form.city = citys[vali[1]].code
     form.area = countys[vali[2]].code
-    that.setData({
-      form: form
-    })
+    if (that.data.form.province) {
+      that.setData({
+        form: form
+      })
+    }
+
     //赋值
     info = {
       item: {

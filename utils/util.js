@@ -27,7 +27,11 @@ const diffTime = function(startDate, endDate) {
   var leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数  
   var seconds = Math.round(leave3 / 1000);
   seconds = seconds > 9 ? seconds : `0${seconds}`;
-  return `${hours}:${minutes}:${seconds}`
+  return {
+    hours,
+    minutes,
+    seconds
+  }
   // var returnStr = seconds + "秒";
   // if (minutes > 0) {
   //   returnStr = minutes + "分" + returnStr;
@@ -47,8 +51,8 @@ const formatNumber = n => {
 const modal = (obj) => {
   return new Promise(function(resolve, reject) {
     wx.showModal({
-      title: obj.title||'',
-      content: obj.content||'',
+      title: obj.title || '',
+      content: obj.content || '',
       success(res) {
         if (res.confirm) {
           resolve('成功')

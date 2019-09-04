@@ -13,25 +13,30 @@ Page({
       name: '待付款',
       path: "/pages/myOrder/myOrder",
       clas: 'payment',
+      status: '0',
       src: '../../image/fukuan.png'
     }, {
       name: '待发货',
+      status: '1',
       path: "/pages/myOrder/myOrder",
       clas: "delivery",
       src: '../../image/fahuo.png'
     }, {
       name: '待收货',
+      status: '2',
       path: "/pages/myOrder/myOrder",
       clas: "harvest",
       src: '../../image/fukuan.png'
     }, {
       name: '待评价',
+      status: '8',
       path: "/pages/myOrder/myOrder",
       type: 1,
       clas: "comment",
       src: './iconfont/iconpingjia:before icon'
     }, {
       name: '退款/售后',
+      status: '4',
       path: "/pages/myOrder/myOrder",
       clas: "sales",
       src: '../../image/shouhou.png'
@@ -71,11 +76,32 @@ Page({
     userInfo: {}
   },
   getInfo() {
+    let that = this;
     wx.getUserInfo({
       success: function(res) {
-        console.log(res.userInfo)
-        // app.globalData.userInfo = res.userInfo
-        // app.globalData.nick_name = res.userInfo.nickName
+        http.postReq('/login', {
+          nickname: res.userInfo.nickName,
+          share_user: wx.getStorageSync('share_id') ? wx.getStorageSync('share_id') : 0,
+          openid: app.globalData.openid,
+          avatar: res.userInfo.avatarUrl
+        }).then(re => {
+          console.log(re)
+          app.globalData.userInfo = re.data.user;
+          app.globalData.token = re.data.token;
+          wx.setStorage({
+            key: "token",
+            data: re.data.token
+          })
+          wx.setStorage({
+            key: "userInfo",
+            data: re.data.user
+          })
+          that.setData({
+            token: re.data.token ? false : true,
+            userInfo: app.globalData.userInfo
+          })
+
+        })
       },
       fail: function(res) {
         // console.log(res)
@@ -98,17 +124,13 @@ Page({
         })
       } else {
         this.setData({
-          page: this.data.page++
+          page: this.data.page + 1
         })
       }
     })
   },
   onLoad: function(options) {
     this.getGoods()
-    this.setData({
-      token: wx.getStorageSync('token') ? false : true,
-      userInfo: app.globalData.userInfo
-    })
   },
   toRouter(e) {
     // if (e.currentTarget.dataset.path != "/pages/goodsDealis/goodsDealis") {
@@ -140,6 +162,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.setData({
+      token: wx.getStorageSync('token') ? false : true,
+      userInfo: app.globalData.userInfo
+    })
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
