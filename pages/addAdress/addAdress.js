@@ -94,7 +94,7 @@ Page({
       phone: this.data.form.phone,
       is_default: this.data.form.is_default ? 1 : 0,
     }
-    console.log(data)
+    console.log(this.data.form)
     for (let i in data) {
       if (i != 'is_default' && !data[i]) {
         until.toast({
@@ -171,6 +171,8 @@ Page({
       this.setData({
         form: form
       })
+      console.log(this.data.form)
+      model.updateAreaData(this, 0);
     }
   },
 

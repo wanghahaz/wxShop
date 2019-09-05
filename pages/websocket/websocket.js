@@ -23,7 +23,7 @@ function initData(that) {
       time: '12:12:23',
       speaker: 'server',
       contentType: 'text',
-      content: '欢迎来到英雄联盟，敌军还有30秒到达战场，请做好准备！'
+      content: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
     },
     {
       time: '12:15:58',
@@ -43,6 +43,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    shopName: null,
+    shopId: null,
     scrollHeight: '100vh',
     inputBottom: 0
   },
@@ -53,7 +55,9 @@ Page({
   onLoad: function(options) {
     initData(this);
     this.setData({
-      cusHeadIcon: app.globalData.userInfo.avatarUrl,
+      shopId: options.id,
+      shopName: options.name,
+      cusHeadIcon: app.globalData.userInfo.avatar,
     });
   },
 

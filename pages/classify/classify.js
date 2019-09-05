@@ -27,11 +27,6 @@ Page({
       this.getCate()
     })
   },
-  switchTab(e) {
-    wx.switchTab({
-      url: e.currentTarget.dataset.path,
-    })
-  },
   // 获取二三级
   getCate() {
     http.getReq(`/cate/get_cate/${this.data.pid}`, {}, true).then(res => {
@@ -59,6 +54,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if (!wx.getStorageSync('share_id')) {
+      wx.setStorage({
+        key: "share_id",
+        data: options.share_id ? options.share_id : 0
+      })
+    }
     this.getIndex()
     let that = this;
     wx.getSystemInfo({
@@ -138,6 +139,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    let share_id = null;
+    if (wx.getStorageSync('token')) {
+      share_id = wx.getStorageSync('userInfo').id;
+    } else {
+      share_id = 0;
+    }
+    return {
+      title: '您好，欢迎零元晋品',
+      path: '/pages/classify/classify?share_id=' + share_id,
+    }
   }
 })

@@ -79,6 +79,7 @@ Page({
     let that = this;
     wx.getUserInfo({
       success: function(res) {
+        console.log(res)
         http.postReq('/login', {
           nickname: res.userInfo.nickName,
           share_user: wx.getStorageSync('share_id') ? wx.getStorageSync('share_id') : 0,
@@ -133,12 +134,12 @@ Page({
     this.getGoods()
   },
   toRouter(e) {
-    // if (e.currentTarget.dataset.path != "/pages/goodsDealis/goodsDealis") {
-    //   if (!wx.getStorageSync('token')) {
-    //     until.toast({title:'请您先进行登录，然后继续操作'})
-    //     return false;
-    //   }
-    // }
+    if (e.currentTarget.dataset.path != "/pages/goodsDealis/goodsDealis") {
+      if (!wx.getStorageSync('token')) {
+        until.toast({title:'请您先进行登录，然后继续操作'})
+        return false;
+      }
+    }
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
       wx.navigateTo({

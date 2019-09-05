@@ -1,7 +1,7 @@
 <view>
 
   <scroll-view scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
-    <view class="chat-notice fs_14 tc">系统消息: 欢迎店铺 </view>
+    <view class="chat-notice fs_14 tc">系统消息: 欢迎来到{{shopName}}</view>
     <block wx:key wx:for='{{msgList}}' wx:for-index="index">
 
       <view class="tc fs_13" style="margin:40rpx 0 10rpx 0">{{item.time}}</view>
@@ -24,7 +24,7 @@
           <text wx:if="{{item.contentType=='text'}}" class="./iconfont/iconzuojiantou:before icon right" style="font-size:40rpx; color:#96eb6a"></text>
         </view>
         <view style='width: 11vw; height: 11vw;'>
-          <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg'></image>
+          <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='{{cusHeadIcon}}'></image>
         </view>
       </view>
 

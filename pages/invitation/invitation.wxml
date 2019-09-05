@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <image class="friend" src="{{ads.ads.thumb}}"></image>
-  <view  bindtap="showModel" class="rule tc fs_14">活动规则</view>
+  <view bindtap="showModel" class="rule tc fs_14">活动规则</view>
   <view class="invaBox flex column flex_sa box_zing">
     <image src="../../image/invaBox.png"></image>
     <view class="fcF1 flex ">
@@ -10,11 +10,12 @@
         <text class="{{sIndex==0?'fs_18':''}}">成功邀请好友</text>
       </view>
       <view data-index="1" bindtap="selectIndex" class="flex column num_box flex_m flex_sa box_zing ">
-        <text class="{{sIndex==1?'fs_24':'fs_20'}}">{{ads.share_money}}</text>
+        <text class="{{sIndex==1?'fs_24':'fs_20'}}">{{ads.gift_card_num}}</text>
         <text class="{{sIndex==1?'fs_18':''}}">我的双倍收益卡</text>
       </view>
     </view>
-    <button catchtap="toRouter" data-path="/pages/share/share" class="invita fs_16 tc">发邀请领双倍收益卡</button>
+    <!-- open-type="share" hover-class='none' -->
+    <button data-path="/pages/share/share" catchtap="toRouter" class="invita fs_16 tc">发邀请领双倍收益卡</button>
   </view>
   <view class="tc recommended" style="color:#B2B2B2">{{index==0?'邀请的朋友':'双倍收益卡'}}</view>
   <view wx:if="{{userList.length==0}}" class="noInva flex column flex_m">
@@ -33,8 +34,8 @@
       </view>
     </block>
   </view>
-  <swiper class="swiper" circular="{{true}}" previous-margin="10px" next-margin="10px" indicator-dots="{{true}}" autoplay="{{true}}">
-    <block wx:for="{{5}}" wx:key="{{index}}">
+  <swiper class="swiper" circular="{{true}}" previous-margin="10px" next-margin="10px">
+    <block wx:for="{{20}}" wx:key="{{index}}">
       <swiper-item>
         <image src="../../image/intvations.png" class="slide-image" height="150" />
       </swiper-item>

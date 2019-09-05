@@ -111,6 +111,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    let share_id = null;
+    if (wx.getStorageSync('token')) {
+      share_id = wx.getStorageSync('userInfo').id;
+    } else {
+      share_id = 0;
+    }
+    return {
+      title: '您好，欢迎零元晋品',
+      path: '/pages/share/share?share_id=' + share_id,
+    }
   }
 })

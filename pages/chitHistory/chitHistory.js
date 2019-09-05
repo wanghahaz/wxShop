@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title:null,
+    title: null,
     page: 1,
     list: [],
     isDownRefresh: true,
@@ -26,17 +26,48 @@ Page({
       })
     }
   },
+  getList() {
+    let path = null;
+    if (this.data.title == '领取记录') {
+      path = '/jifen/logs'
+    } else {
+      path = '/jifen/logs'
+    }
+    http.getReq(path, {
+      page: this.data.page
+    }, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          list: [...this.data.list, ...res.data.data]
+        })
+        if (res.data.last_page == this.data.page) {
+          this.setData({
+            isDownRefresh: false
+          })
+        } else {
+          this.setData({
+            page: this.data.page + 1
+          })
+        }
+      } else {
+        this.setData({
+          isDownRefresh: false,
+          list: []
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
     this.setData({
       title: options.title
     })
     wx.setNavigationBarTitle({
-      title:options.title
+      title: options.title
     })
+    this.getList()
   },
 
   /**
@@ -77,7 +108,6 @@ Page({
    */
   onReachBottom: function() {
     if (this.data.isDownRefresh) {
-      console.log(2)
       this.getList()
     }
   },

@@ -7,7 +7,7 @@
     <text>差评</text>
   </view>
   <view wx:if="{{commentList.length==0}}" class="noMore">暂无商品评价...</view>
-  <block wx:for="{{4}}">
+  <block wx:for="{{4}}" wx:key="{{index}}">
     <view class="width94 coment box_zing flex">
       <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentTx"></image>
       <view class="flex column fs_14">

@@ -65,59 +65,65 @@
 
 //   }
 // })
+import until from "../../utils/util.js";
+import http from "../../common/js/http.js";
 Page({
   data: {
-    text: ['这是一条会滚动的文字滚来滚去的文字跑马灯', '这是一条会滚动的文字滚来滚去的文字跑马灯', '这是一条会滚动的文字滚来滚去的文字跑马灯', '哈哈哈哈哈哈哈哈'],
-    marqueePace: 1, //滚动速度
-    marqueeDistance: 0, //初始滚动距离
-    marqueeDistance2: 0,
-    marquee2copy_status: false,
-    marquee2_margin:10,
-    size: 14,
-    orientation: 'top', //滚动方向
-    interval: 30 // 时间间隔
+    list: [],
+    topNum: 0,
+    isShow: false,
+    bomNum: 240
   },
   click(e) {
     console.log(e)
   },
   onShow: function() {
+    this.getList()
     // 页面显示
-    var vm = this;
-    var length = vm.data.text.length * 60; //文字长度
-    console.log(length)
-    vm.setData({
-      length: length,
-      windowWidth: 200,
-      marquee2_margin: length < 180 ? 180 - length : vm.data.marquee2_margin //当文字长度小于屏幕长度时，需要增加补白
-    });
-    vm.run2(); // 第一个字消失后立即从右边出现
   },
-  run2: function() {
-    var vm = this;
-    var interval = setInterval(function() {
-      if (-vm.data.marqueeDistance2 < vm.data.length) {
-        // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
-        vm.setData({
-          marqueeDistance2: vm.data.marqueeDistance2 - vm.data.marqueePace,
-          marquee2copy_status: vm.data.length + vm.data.marqueeDistance2 <= vm.data.windowWidth + vm.data.marquee2_margin,
-        });
-        clearInterval(interval);
-        vm.run2();
-      } else {
-        if (-vm.data.marqueeDistance2 >= vm.data.marquee2_margin) { // 当第二条文字滚动到最左边时
-          vm.setData({
-            marqueeDistance2: vm.data.marquee2_margin // 直接重新滚动
-          });
-          clearInterval(interval);
-          vm.run2();
-        } else {
-          clearInterval(interval);
-          vm.setData({
-            marqueeDistance2: -vm.data.windowWidth
-          });
-          vm.run2();
-        }
+  getList() {
+    http.getReq('/advert/jifen_logs', {
+      page: this.data.page,
+    }).then(res => {
+      this.setData({
+        list: res.data,
+      })
+      let length = this.data.list.length * 60;
+      this.setData({
+        length: length - 240
+      })
+      this.setTime()
+    })
+  },
+  setTime() {
+    let timers = setInterval(() => {
+      console.log(-this.data.length)
+      if (!this.data.isShow) {
+        this.setData({
+          topNum: this.data.topNum - 1,
+          bomNum: this.data.bomNum - 1,
+        })
       }
-    }, vm.data.interval);
-  }
+      if (this.data.isShow) {
+        this.setData({
+          bomNum: this.data.bomNum - 1,
+          topNum: this.data.topNum - 1,
+        })
+      }
+      if (this.data.bomNum == (-this.data.length)) {
+        console.log(1)
+        this.setData({
+          isShow: false,
+          bomNum: 240
+        })
+      }
+      if (this.data.topNum == (-this.data.length)) {
+        this.setData({
+          isShow: true,
+          topNum: 240
+        })
+      }
+    }, 20)
+  },
+
 })

@@ -7,26 +7,78 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class="fs_15 tc fcF1 look">亲，观看视频可获得代金券哦</view>
+  <view class="fs_15 tc fcF1 look">亲，观看视频可获得代金券哦~ </view>
   <view class="cd" data-id="{{row.id}}" data-path="/pages/bannerDealis/bannerDealis" catchtap="toRouter">
     <image src="{{row.thumb}}"></image>
   </view>
-  <view class="fs_15 intal flex flex_c_m">
-    <text>您有双倍收益卡0张可使用</text>
-    <button style="width:240rpx;" class="fcF1 fs_15">立即去邀请好友!</button>
+  <view wx:if="{{cardNum>0}}" class="fs_15 intal flex flex_c_m">
+    <text>您有双倍收益卡{{cardNum}}张可使用,</text>
+    <text catchtap="startCard" class="fcF1 fs_15">点击开启双倍收益！</text>
   </view>
-  <swiper vertical="true" class="logs_swiper" autoplay="true" interval="2000" duration="200" bindchange="bindchange" circular='true'>
-    <block wx:for="{{logsList}}" wx:key="{{index}}">
-      <swiper-item>
-        <view class="logs fs_14 flex flex_m flex_lr box_zing">
-          <view>
-            <text class="./iconfont/iconlaba:before icon" style="font-size:30rpx;color:#F19022;margin:0 10rpx 0 0"></text>
-            <text>{{item.user.username}}观看广告领取了{{item.total_money}}代金券</text>
+  <view wx:else class="fs_15 intal flex flex_c_m">
+    <text>您没有双倍收益卡哦,</text>
+    <view style="width:240rpx">
+      <button catchtap="toRouter" data-path="/pages/invitation/invitation" hover-class='none' class="fcF1 fs_15">立即去邀请好友!</button>
+    </view>
+  </view>
+  <!-- <view class="box" style="height:{{boxHeight}}rpx">
+    <view class="box_size" style="top:{{topNum}}rpx;">
+      <block wx:for="{{logsList}}" wx:key="{{index}}">
+        <view class="text_box box_zing">
+          <view class="flex box_list ">
+            <view class="flex flex_m" style="width:73%">
+              <text class="./iconfont/iconlaba:before icon" style="font-size:30rpx;color:#F19022;margin:0 10rpx 0 0"></text>
+              <text class="fcF1">恭喜</text>
+              <text class="clamp_1">{{item.user.username}}观看广告领取了{{item.total_money}}代金券</text>
+            </view>
+            <text class="ter clamp_1" style="width:25%">{{item.created_at}}</text>
           </view>
-          <text class="ter" style="width:30%">{{item.created_at}}</text>
         </view>
-      </swiper-item>
-    </block>
-  </swiper>
-  <!-- <view class="model" style="height:{{height-774}}rpx"></view> -->
+      </block>
+    </view>
+    <view wx:if="{{isShow}}" class="box_size" style="top:{{bomNum}}rpx;">
+      <block wx:for="{{logsList}}" wx:key="{{index}}">
+        <view class="text_box box_zing">
+          <view class="flex box_list ">
+            <view class="flex flex_m" style="width:73%">
+              <text class="./iconfont/iconlaba:before icon" style="font-size:30rpx;color:#F19022;margin:0 10rpx 0 0"></text>
+              <text class="fcF1">恭喜</text>
+              <text class="clamp_1">{{item.user.username}}观看广告领取了{{item.total_money}}代金券</text>
+            </view>
+            <text class="ter clamp_1" style="width:25%">{{item.created_at}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view> -->
+  <view class="scroll" style="height:{{height-878}}rpx">
+    <view class="marquee_box">
+      <view class="marquee_text" style="top:{{marqueeDistance2}}rpx;font-size: {{size}}px;">
+        <view class="box">
+          <block wx:for="{{logsList}}" wx:key="{{index}}">
+            <view class="flex box_list box_zing">
+              <view class="flex flex_m" style="width:73%">
+                <text class="./iconfont/iconlaba:before icon" style="font-size:30rpx;color:#F19022;margin:0 10rpx 0 0"></text>
+                <text class="fcF1">恭喜</text>
+                <text class="clamp_1">{{item.user.username}}观看广告领取了{{item.total_money}}代金券</text>
+              </view>
+              <text class="ter clamp_1" style="width:25%">{{item.created_at}}</text>
+            </view>
+          </block>
+        </view>
+        <view class="box" style="margin-bottom:{{marquee2_margin}}rpx" wx:if="{{marquee2copy_status}}">
+          <block wx:for="{{logsList}}" wx:key="{{index}}">
+            <view class="flex  box_list box_zing ">
+              <view class="flex flex_m" style="width:73%">
+                <text class="./iconfont/iconlaba:before icon" style="font-size:30rpx;color:#F19022;margin:0 10rpx 0 0"></text>
+                <text class="fcF1">恭喜</text>
+                <text class="clamp_1">{{item.user.username}}观看广告领取了{{item.total_money}}代金券</text>
+              </view>
+              <text class="ter clamp_1" style="width:25%">{{item.created_at}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

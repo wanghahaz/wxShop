@@ -1,4 +1,5 @@
 <!--index.wxml-->
 <view class="container">
   <image class="box_bg" src="../../image/intavl.png"></image>
+  <view  class="home" data-path="/pages/index/index" catchtap="switchTab">进入首页</view>
 </view>

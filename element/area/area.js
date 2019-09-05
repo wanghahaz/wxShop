@@ -39,25 +39,51 @@ function updateAreaData(that, status, e) {
         return;
       }
     })
+    if (!vali[0]) {
+      provinces.some((item, index) => {
+        let str = that.data.form.provinceName;
+        console.log(item.name.indexOf(str))
+        if (item.name.indexOf(str) != -1) {
+          vali[0] = index;
+          return;
+        }
+      })
+    }
     //初始化调一次传递索引值，传递省城数据
     //获取地级市数据
     getCityArr(vali[0]);
     //获取当前城市的索引值 广州市 可改成自己当前的城市
     citys.some((item, index) => {
-      if (item.code.indexOf(that.data.form.city || that.data.form.cityName || '110100') != -1) {
+      if (item.code.indexOf(that.data.form.city || '110100') != -1) {
         vali[1] = index;
         return;
       }
     })
+    // if (!vali[1]) {
+    //   citys.some((item, index) => {
+    //     if (item.name.indexOf(that.data.form.cityName) != -1) {
+    //       vali[1] = index;
+    //       return;
+    //     }
+    //   })
+    // }
     //  ""
     //获取区县数据
     getCountyInfo(vali[0], vali[1]);
     countys.some((item, index) => {
-      if (item.code.indexOf(that.data.form.area || that.data.form.areaName || '110101') != -1) {
+      if (item.code.indexOf(that.data.form.area || '110101') != -1) {
         vali[2] = index;
         return;
       }
     });
+    // if (!vali[2]) {
+    //   countys.some((item, index) => {
+    //     if (item.name.indexOf(that.data.form.areaName) != -1) {
+    //       vali[2] = index;
+    //       return;
+    //     }
+    //   });
+    // }
     let form = JSON.parse(JSON.stringify(that.data.form));
     form.provinceName = provinces[vali[0]].name
     form.cityName = citys[vali[1]].name

@@ -39,7 +39,7 @@
       </button>
     </block>
   </view>
-  <view class="fs_19 tc recommended" data-path="/pages/websocket/websocket" bindtap="toRouter">为您推荐</view>
+  <view class="fs_19 tc recommended">为您推荐</view>
   <view class="shop_list flex_wrap" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
       <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>

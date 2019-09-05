@@ -104,7 +104,7 @@
       <image style="width:49rpx;height:50rpx" src="../../image/goodH.png"></image>
       <text class="fcF1">首页</text>
     </view>
-    <view class="imgGoods flex column fs_12  flex_nosize">
+    <view data-path="/pages/websocket/websocket" data-id="{{goodsData.store.id}}" data-name="{{goodsData.store.store_name}}" bindtap="toRouter" class="imgGoods flex column fs_12  flex_nosize">
       <image style="width:49rpx;height:49rpx" src="../../image/goodW.png"></image>
       <text>客服</text>
     </view>

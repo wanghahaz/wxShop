@@ -75,7 +75,7 @@ Page({
     this.setData({
       titleIndex: e.currentTarget.dataset.index,
       page: 1,
-      shopList:[],
+      shopList: [],
       isPullDownRefresh: true
     })
     this.getList()
@@ -96,6 +96,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if (!wx.getStorageSync('share_id')) {
+      wx.setStorage({
+        key: "share_id",
+        data: options.share_id ? options.share_id : 0
+      })
+    }
     this.setData({
       shopId: options.id
     })
@@ -149,6 +155,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    let share_id = null;
+    if (wx.getStorageSync('token')) {
+      share_id = wx.getStorageSync('userInfo').id;
+    } else {
+      share_id = 0;
+    }
+    return {
+      title: '您好，欢迎零元晋品',
+      path: '/pages/shopDetails/shopDetails?share_id=' + share_id,
+    }
   }
 })

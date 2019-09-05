@@ -9,38 +9,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    scrollTop: 0,
+    marqueePace: 1, //滚动速度
+    marqueeDistance: 0, //初始滚动距离
+    marqueeDistance2: 0,
+    marquee2copy_status: false,
+    marquee2_margin: 10,
+    size: 14,
+    interval: 30,
     ads: [],
     row: {},
-    page: 1,
     logsList: [],
     height: 0,
-    isDownRefresh: true
+    cardNum: 0,
   },
-  bindchange(e) {
-    if (e.detail.current == this.data.logsList.length - 1 && this.data.isDownRefresh) {
-      this.getLogs()
-    }
+  //点击使用体验卡 
+  startCard(e) {
+
   },
+  // 广告获得奖励列表
   getLogs() {
-    // 广告获得奖励列表
-    // http.getReq('/advert/jifen_logs', {
-    //   page: this.data.page,
-    // }).then(res => {
-    //   this.setData({
-    //     logsList: [...this.data.logsList, ...res.data.data]
-    //   })
-    //   if (res.data.last_page == this.data.page) {
-    //     this.setData({
-    //       isDownRefresh: false,
-    //     })
-    //   } else {
-    //     let page = this.data.page + 1;
-    //     this.setData({
-    //       page: page
-    //     })
-    //   }
-    // })
+    http.getReq('/advert/jifen_logs', {
+      page: this.data.page,
+    }).then(res => {
+      console.log(res)
+      this.setData({
+        logsList: res.data
+      })
+
+      var length = this.data.logsList.length * 60; //文字长度
+      let windowWidth = this.data.height - 878
+      this.setData({
+        length: length,
+        windowWidth: windowWidth,
+        marquee2_margin: length < windowWidth ? windowWidth - length : this.data.marquee2_margin //当文字长度小于屏幕长度时，需要增加补白
+      });
+      this.run2()
+    })
   },
   getIndex() {
     // 广告首页
@@ -48,12 +52,21 @@ Page({
       user_id: app.globalData.userInfo.id ? app.globalData.userInfo.id : '0'
     }).then(res => {
       this.setData({
+        cardNum: res.data.gift_card_num,
         ads: res.data.ads,
         row: res.data.row,
       })
     })
   },
   toRouter(e) {
+    if (e.currentTarget.dataset.path == "/pages/invitation/invitation") {
+      if (!wx.getStorageSync('token')) {
+        until.toast({
+          title: "请您先登陆！"
+        })
+        return false;
+      }
+    }
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
       wx.navigateTo({
@@ -68,13 +81,42 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  run2: function() {
+    var vm = this;
+    var interval = setInterval(function() {
+      if (-vm.data.marqueeDistance2 < vm.data.length) {
+        // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
+        vm.setData({
+          marqueeDistance2: vm.data.marqueeDistance2 - vm.data.marqueePace,
+          marquee2copy_status: vm.data.length + vm.data.marqueeDistance2 <= vm.data.windowWidth + vm.data.marquee2_margin,
+        });
+        clearInterval(interval);
+        vm.run2();
+      } else {
+        if (-vm.data.marqueeDistance2 >= vm.data.marquee2_margin) { // 当第二条文字滚动到最左边时
+          vm.setData({
+            marqueeDistance2: vm.data.marquee2_margin // 直接重新滚动
+          });
+          clearInterval(interval);
+          vm.run2();
+        } else {
+          clearInterval(interval);
+          vm.setData({
+            marqueeDistance2: -vm.data.windowWidth
+          });
+          vm.run2();
+        }
+      }
+    }, vm.data.interval);
+  },
   onLoad: function(options) {
+    if (!wx.getStorageSync('share_id')) {
+      wx.setStorage({
+        key: "share_id",
+        data: options.share_id ? options.share_id : 0
+      })
+    }
     let that = this;
-    this.getIndex()
-    this.getLogs()
-    this.setData({
-      scrollTop: 0
-    })
     wx.getSystemInfo({
       success: function(res) {
         let clientHeight = res.windowHeight;
@@ -86,6 +128,12 @@ Page({
         });
       }
     });
+    this.getIndex()
+    this.getLogs()
+    this.setData({
+      scrollTop: 0
+    })
+
   },
 
   /**
@@ -138,7 +186,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(e) {
+    let share_id = null;
+    if (wx.getStorageSync('token')) {
+      share_id = wx.getStorageSync('userInfo').id;
+    } else {
+      share_id = 0;
+    }
+    return {
+      title: '您好，欢迎零元晋品',
+      path: '/pages/advertising/advertising?share_id=' + share_id,
+    }
   }
 })

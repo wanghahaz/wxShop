@@ -11,23 +11,19 @@ Page({
   data: {
 
   },
-  toRouter(e) {
-    let data = until.cutShift(e.currentTarget.dataset);
-    if (data) {
-      wx.navigateTo({
-        url: `${e.currentTarget.dataset.path}?${data}`,
-      })
-    } else {
-      wx.navigateTo({
-        url: e.currentTarget.dataset.path,
-      })
-    }
+  switchTab(e) {
+    wx.switchTab({
+      url: e.currentTarget.dataset.path,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    wx.setStorage({
+      key: "share_id",
+      data: options.share_id
+    })
   },
 
   /**
@@ -69,11 +65,4 @@ Page({
   onReachBottom: function() {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })

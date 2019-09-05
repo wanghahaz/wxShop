@@ -9,9 +9,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    time: 1,
+    time: null,
     video: '',
     id: 0,
+    ad_link: null,
+    ad_thumb: null,
   },
   // 双倍收益结束
   double() {
@@ -25,11 +27,15 @@ Page({
   // 右上角关闭
   back() {
     if (this.data.time > 0) {
+      let video = wx.createVideoContext("myVideo")
+      video.pause()
       until.modal({
         title: '确定要退出吗？',
-        content: '看完即获得0.03元代金券，退出将无法获得哦!'
+        content: '看完即获得代金券，退出将无法获得哦!'
       }).then(res => {
         wx.navigateBack()
+      }).catch(err => {
+        video.play()
       })
     } else {
       wx.navigateBack()
@@ -48,7 +54,7 @@ Page({
         this.getAdvert()
       } else {
         until.toast({
-          title: '获取失败'
+          title: res.msg || '获取失败'
         })
       }
     })
@@ -57,9 +63,14 @@ Page({
   getAdvert() {
     http.getReq(`/advert/check/${this.data.id}`, {}, true).then(res => {
       this.setData({
-        video: res.data.video
+        video: res.data.video,
+        ad_link: res.data.ad_link,
+        ad_thumb: res.data.ad_thumb,
       })
-      console.log(res.data)
+      let video = wx.createVideoContext("myVideo")
+      video.requestFullScreen()
+      video.play()
+      // console.log(res.data)
     })
   },
   // 获取观看奖励 (登录)  播放结束触发
@@ -115,12 +126,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let video = wx.createVideoContext("myVideo")
     this.setData({
       id: options.id
     })
     this.getAdvert()
-    // video.requestFullScreen()
   },
 
   /**

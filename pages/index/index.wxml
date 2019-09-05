@@ -29,11 +29,11 @@
     <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:46rpx;color:#fff"></text>
   </view>
   <!-- 活动专区 -->
-  <view class="activity width94 flex column box_zing">
+  <view wx:if="{{is_on!=2}}" class="activity width94 flex column box_zing">
     <view class="flex flex_sa" bindtap="toRouter" data-path="/pages/seckill/seckill">
       <text style="width:40%" class="fs_19">限时秒杀</text>
       <view class="flex flex_m flex_end">
-        <text  class="fs_12">{{h}}:{{m}}:{{s}}</text>
+        <text class="fs_12">{{h}}:{{m}}:{{s}}</text>
         <text style="margin:0 0 0 20rpx" class="fs_14 fcb2">更多秒杀></text>
       </view>
     </view>

@@ -42,7 +42,7 @@ open-data[type="userAvatarUrl"] {
 
 .shop_list {
   margin: 0 auto;
-  padding-bottom: 20rpx;
+  /* padding-bottom: 20rpx; */
 }
 
 .oneList {
@@ -672,10 +672,8 @@ button::after {
 }
 
 .maskContent .btn_bottom text:nth-of-type(1) {
-  background: -webkit-linear-gradient(left, #fdd118, #f18e1e);
-  background: -o-linear-gradient(right, #fdd118, #f18e1e);
-  background: -moz-linear-gradient(right, #fdd118, #f18e1e);
-  background: linear-gradient(to right, #fdd118, #f18e1e);
+  background: linear-gradient(#fdd118, #f18e1e);
+  /* border-right: 1rpx solid #fff; */
 }
 
 .maskContent .btn_bottom text:nth-of-type(2) {

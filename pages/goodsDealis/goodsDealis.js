@@ -25,7 +25,7 @@ Page({
     goods_storage: 0,
     goods_price: 0,
     goods_body: '',
-    goods_thumb:''
+    goods_thumb: ''
   },
   // 吸顶
   onPageScroll(e) {
@@ -110,7 +110,6 @@ Page({
   getGoodDealis() {
     http.getReq('/goods', this.data.data, true).then(res => {
       if (res.code == 200) {
-        console.log(res)
         this.setData({
           goodsData: res.data,
           goods_body: res.data.row.goods_body.replace(/\<img/g, '<img style="width:100%;height:auto;display:block;margin:10px 0 10px 0" '),
@@ -119,7 +118,6 @@ Page({
           goods_price: res.data.row.goods_price,
           goods_thumb: res.data.row.goods_images[0]
         })
-        console.log(this.data.is_collect)
       } else {
         until.toast({
           title: '加载失败'
@@ -231,7 +229,7 @@ Page({
           goods_storage: skuList.find(item => item.spec == str).goods_storage,
           goods_price: skuList.find(item => item.spec == str).goods_price,
           goods_thumb: skuList.find(item => item.spec == str).goods_thumb,
-          goods_num:1
+          goods_num: 1
         })
       } else {
         this.setData({
@@ -273,6 +271,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if (!wx.getStorageSync('share_id')) {
+      wx.setStorage({
+        key: "share_id",
+        data: options.share_id ? options.share_id : 0
+      })
+    }
     this.setData({
       data: {
         id: options.id,
@@ -336,6 +340,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    let share_id = null;
+    if (wx.getStorageSync('token')) {
+      share_id = wx.getStorageSync('userInfo').id;
+    } else {
+      share_id = 0;
+    }
+    return {
+      title: '您好，欢迎零元晋品',
+      path: '/pages/goodsDealis/goodsDealis?share_id=' + share_id,
+    }
   }
 })

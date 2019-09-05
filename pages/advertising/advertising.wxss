@@ -13,7 +13,7 @@
 }
 
 .intal {
-  line-height: 74rpx;
+  line-height: 78rpx;
   background: #fff;
 }
 
@@ -38,7 +38,26 @@
   padding: 0 4%;
 }
 
-.model {
+.marquee_box {
+  width: 100%;
+  position: relative;
+}
+.box_list {
+  padding: 0 20rpx;
+  height: 60rpx;
+}
+
+.marquee_text {
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+}
+
+.scroll {
+  overflow: hidden;
+}
+
+.model, .scroll {
   width: 100%;
   position: fixed;
   left: 0;
