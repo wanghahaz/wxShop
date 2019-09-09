@@ -8,7 +8,7 @@
     </block>
   </swiper>
   <view class="fs_15 tc fcF1 look">亲，观看视频可获得代金券哦~ </view>
-  <view class="cd" data-id="{{row.id}}" data-path="/pages/bannerDealis/bannerDealis" catchtap="toRouter">
+  <view class="cd" data-id="{{row.id}}" data-path="/pages/home/pages/bannerDealis/bannerDealis" catchtap="toRouter">
     <image src="{{row.thumb}}"></image>
   </view>
   <view wx:if="{{isLogin&&cardNum==0}}" class="fs_15 intal flex flex_c_m">
@@ -27,7 +27,7 @@
   </view>
   <view wx:else class="fs_15 intal flex flex_c_m">
     <text>您有双倍收益卡{{cardNum}}张可使用,</text>
-    <text data-id="{{row.id}}" data-path="/pages/bannerDealis/bannerDealis" catchtap="toRouter" class="fcF1">立即看视频</text>
+    <text data-id="{{row.id}}" data-path="/pages/home/pages/bannerDealis/bannerDealis" catchtap="toRouter" class="fcF1">立即看视频</text>
   </view>
 
   <view class="scroll" style="height:{{height-878}}rpx">

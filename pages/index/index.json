@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "one_shop":"../../element/oneShop/oneShop",
-    "dialog": "../../element/dialog/dialog"
-  },
-  "navigationBarTitleText": "首页"
-}

@@ -206,7 +206,7 @@ Page({
     }
     return {
       title: '您好，欢迎零元晋品',
-      path: '/pages/index/index?share_id=' + share_id,
+      path: '/pages/tabar/index/index?share_id=' + share_id,
     }
   }
 })

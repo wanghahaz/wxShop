@@ -71,7 +71,7 @@ Page({
     })
   },
   toRouter(e) {
-    if (e.currentTarget.dataset.path == "/pages/invitation/invitation" || e.currentTarget.dataset.login) {
+    if (e.currentTarget.dataset.path == "/pages/home/pages/invitation/invitation" || e.currentTarget.dataset.login) {
       if (!wx.getStorageSync('token')) {
         until.toast({
           title: "请您先登陆！"
@@ -202,7 +202,7 @@ Page({
     }
     return {
       title: '您好，欢迎零元晋品',
-      path: '/pages/advertising/advertising?share_id=' + share_id,
+      path: '/pages/tabar/advertising/advertising?share_id=' + share_id,
     }
   }
 })

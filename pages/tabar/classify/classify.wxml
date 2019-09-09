@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="search width90" bindtap="toRouter" data-path="/pages/search/search">
+  <view class="search width90" bindtap="toRouter" data-path="/pages/home/pages/search/search">
     <text class="./iconfont/iconsousuo:before icon" style="font-size:28rpx"></text>
     <text class="border"></text>
     <text class="seaText fs_15">请输入关键词</text>
@@ -18,7 +18,7 @@
         <view class="goodsTitle">{{item.name}}</view>
         <block wx:if="{{item.sub.length>0}}">
           <view class="flex flex_wrap goodsList">
-            <view style="width:33%" class="flex column flex_c_m" wx:for="{{item.sub}}" wx:key="{{ind}}" wx:for-item="value" wx:for-index="ind" data-id="{{value.id}}" data-name="{{value.name}}" data-path="/pages/classfyGoods/classfyGoods" bindtap="toRouter">
+            <view style="width:33%" class="flex column flex_c_m" wx:for="{{item.sub}}" wx:key="{{ind}}" wx:for-item="value" wx:for-index="ind" data-id="{{value.id}}" data-name="{{value.name}}" data-path="/pages/home/pages/classfyGoods/classfyGoods" bindtap="toRouter">
               <image style="width:75rpx;height:86rpx" class="flex_nosize" src="{{value.icon}}"></image>
               <text style="margin-top:8rpx;" class="fs_14">{{value.name}}</text>
             </view>

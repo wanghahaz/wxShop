@@ -22,7 +22,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.7",
+	"libVersion": "2.8.2",
 	"appid": "wx7c992f6103252836",
 	"projectname": "wxShop",
 	"debugOptions": {

@@ -1,36 +1,50 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/classify/classify",
-    "pages/classfyGoods/classfyGoods",
-    "pages/advertising/advertising",
-    "pages/shopCard/shopCard",
-    "pages/mine/mine",
-    "pages/shopDetails/shopDetails",
-    "pages/search/search",
-    "pages/goodSettle/goodSettle",
-    "pages/bannerDealis/bannerDealis",
-    "pages/myChit/myChit",
-    "pages/myCollect/myCollect",
-    "pages/myOrder/myOrder",
-    "pages/chitHistory/chitHistory",
-    "pages/goodSevaluation/goodSevaluation",
-    "pages/mySales/mySales", 
-    "pages/salesSub/salesSub",
-    "pages/selectSales/selectSales",
-    "pages/logistics/logistics",
-    "pages/orderDealis/orderDealis",
-    "pages/goodsDealis/goodsDealis",
-    "pages/intimacy/intimacy",
-    "pages/evaluateList/evaluateList",
-    "pages/set/set",
-    "pages/share/share",
-    "pages/seckill/seckill",
-    "pages/invitation/invitation",
-    "pages/adressList/adressList",
-    "pages/addAdress/addAdress",
-    "pages/websocket/websocket",
+    "pages/tabar/index/index",
+    "pages/tabar/classify/classify",
+    "pages/tabar/advertising/advertising",
+    "pages/tabar/shopCard/shopCard",
+    "pages/tabar/mine/mine",
+    "pages/tabar/share/share",
     "pages/zluckPage/luckPage"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/home/",
+      "name": "home",
+      "pages": [
+        "pages/search/search",
+        "pages/goodsDealis/goodsDealis",
+        "pages/shopDetails/shopDetails",
+        "pages/evaluateList/evaluateList",
+        "pages/myOrder/myOrder",
+        "pages/websocket/websocket",
+        "pages/bannerDealis/bannerDealis",
+        "pages/classfyGoods/classfyGoods",
+        "pages/goodSettle/goodSettle",
+        "pages/goodSevaluation/goodSevaluation",
+        "pages/mySales/mySales",
+        "pages/salesSub/salesSub",
+        "pages/selectSales/selectSales",
+        "pages/logistics/logistics",
+        "pages/orderDealis/orderDealis",
+        "pages/seckill/seckill"
+      ]
+    },
+    {
+      "root": "pages/myMsg/",
+      "name": "myMsg",
+      "pages": [
+        "pages/myChit/myChit",
+        "pages/myCollect/myCollect",
+        "pages/chitHistory/chitHistory",
+        "pages/adressList/adressList",
+        "pages/addAdress/addAdress",
+        "pages/invitation/invitation",
+        "pages/set/set",
+        "pages/intimacy/intimacy"
+      ]
+    }
   ],
   "tabBar": {
     "custom": false,
@@ -40,31 +54,31 @@
     "selectedColor": "#19d646",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/tabar/index/index",
         "iconPath": "/image/index.png",
         "selectedIconPath": "/image/indexAc.png",
         "text": "首页"
       },
       {
-        "pagePath": "pages/classify/classify",
+        "pagePath": "pages/tabar/classify/classify",
         "iconPath": "/image/classfiy.png",
         "selectedIconPath": "/image/classfiyAc.png",
         "text": "分类"
       },
       {
-        "pagePath": "pages/advertising/advertising",
+        "pagePath": "pages/tabar/advertising/advertising",
         "iconPath": "/image/banner.png",
         "selectedIconPath": "/image/bannerAc.png",
         "text": "广告"
       },
       {
-        "pagePath": "pages/shopCard/shopCard",
+        "pagePath": "pages/tabar/shopCard/shopCard",
         "iconPath": "/image/cardt.png",
         "selectedIconPath": "/image/cardAc.png",
         "text": "购物车"
       },
       {
-        "pagePath": "pages/mine/mine",
+        "pagePath": "pages/tabar/mine/mine",
         "iconPath": "/image/mine.png",
         "selectedIconPath": "/image/mineAc.png",
         "text": "我的"

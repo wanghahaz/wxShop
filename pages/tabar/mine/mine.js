@@ -11,62 +11,61 @@ Page({
   data: {
     orderList: [{
       name: '待付款',
-      path: "/pages/myOrder/myOrder",
-      clas: 'payment',
+      path: "/pages/home/pages/myOrder/myOrder",
       status: '0',
-      src: '../../image/fukuan.png'
+      src: '../../../image/fukuan.png',
+      style: 'width:58rpx;height:48rpx;margin-top:4rpx'
     }, {
       name: '待发货',
       status: '1',
-      path: "/pages/myOrder/myOrder",
-      clas: "delivery",
-      src: '../../image/fahuo.png'
+      path: "/pages/home/pages/myOrder/myOrder",
+      src: '../../../image/fahuo.png',
+      style: 'width:52rpx;height:48rpx;margin-top:4rpx'
     }, {
       name: '待收货',
       status: '2',
-      path: "/pages/myOrder/myOrder",
-      clas: "harvest",
-      src: '../../image/fukuan.png'
+      path: "/pages/home/pages/myOrder/myOrder",
+      src: '../../../image/shouhuo.png',
+      style: 'width:54rpx;height:52rpx'
     }, {
       name: '待评价',
       status: '8',
-      path: "/pages/myOrder/myOrder",
-      type: 1,
-      clas: "comment",
-      src: './iconfont/iconpingjia:before icon'
+      path: "/pages/home/pages/myOrder/myOrder",
+      src: '../../../image/pingjia.png',
+      style: 'width:54rpx;height:52rpx'
     }, {
       name: '退款/售后',
       status: '4',
-      path: "/pages/myOrder/myOrder",
-      clas: "sales",
-      src: '../../image/shouhou.png'
+      path: "/pages/home/pages/myOrder/myOrder",
+      src: '../../../image/shouhou.png',
+      style: 'width:58rpx;height:52rpx'
     }],
     btList: [{
         name: '我的代金券',
-        path: '/pages/myChit/myChit',
+        path: '/pages/myMsg/pages/myChit/myChit',
         clas: "money",
         style: 'margin:0 20rpx 0 0rpx',
-        src: '../../image/money.png'
+        src: '../../../image/money.png'
       },
       {
         name: '我的收藏',
-        path: "/pages/myCollect/myCollect",
+        path: "/pages/myMsg/pages/myCollect/myCollect",
         clas: "collection",
         style: 'margin:0 22rpx 0 0rpx',
-        src: '../../image/sc.png'
+        src: '../../../image/sc.png'
       }, {
         name: '邀请有礼',
-        path: '/pages/invitation/invitation',
+        path: '/pages/myMsg/pages/invitation/invitation',
         clas: "adress",
         style: 'margin:0 16rpx 0 0rpx',
-        src: '../../image/invita.png'
+        src: '../../../image/invita.png'
       },
       {
         name: '客服',
         path: '',
         clas: "people",
         style: 'margin:0 20rpx 0 0rpx',
-        src: '../../image/peopel.png'
+        src: '../../../image/peopel.png'
       }
     ],
     shopList: [],
@@ -136,7 +135,9 @@ Page({
   toRouter(e) {
     if (e.currentTarget.dataset.path != "/pages/goodsDealis/goodsDealis") {
       if (!wx.getStorageSync('token')) {
-        until.toast({title:'请您先进行登录，然后继续操作'})
+        until.toast({
+          title: '请您先进行登录，然后继续操作'
+        })
         return false;
       }
     }

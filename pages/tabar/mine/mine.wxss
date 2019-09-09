@@ -110,29 +110,10 @@ open-data[type="userAvatarUrl"] {
   margin-bottom: 16rpx;
 }
 
-.payment {
-  width: 57rpx;
-  height: 54rpx;
-}
-
-.delivery {
-  width: 57rpx;
-  height: 60rpx;
-}
-
-.harvest {
-  width: 69rpx;
-  height: 56rpx;
-}
-
 .comment {
   font-size: 58rpx;
 }
 
-.sales {
-  width: 52rpx;
-  height: 52rpx;
-}
 
 .money {
   width: 48rpx;

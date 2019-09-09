@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="fs_18 my_chit">
+    <image src="../../image/moneyBg.png" class="box_bg"></image>
+    <view class="chitNum flex">
+      <view class="flex column flex_m">
+        <text class="fs_24">99.99</text>
+        <view class="flex flex_m">
+          <text>可使用</text>
+        </view>
+      </view>
+      <view class="flex column flex_m">
+        <text class="fs_24">99.99</text>
+        <view catchtap="showModel" class="flex flex_m">
+          <text>已冻结</text>
+          <text class="./iconfont/icontishi:before icon" style="font-size:30rpx;margin:6rpx 0 0  4rpx"></text>
+        </view>
+      </view>
+    </view>
+
+    <view class="history width94 flex column">
+      <view data-title="领取记录" data-path="/pages/myMsg/pages/chitHistory/chitHistory" bindtap="toRouter">
+        <text>领取记录</text>
+        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+      </view>
+      <view data-title="使用记录" data-path="/pages/myMsg/pages/chitHistory/chitHistory" bindtap="toRouter">
+        <text>使用记录</text>
+        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+      </view>
+    </view>
+  </view>
+  <view bindtap="showModel" catch:touchmove hidden="{{showMask}}" class="mask">
+  </view>
+  <view class="ruleModel {{!showMask?'activeRule':''}}">
+    <view style="line-height:70rpx;" class="tc">说明</view>
+    <view style="line-height:50rpx;margin:20rpx auto;" class="width94 fs_14">若提交订单时为多家店铺的商品，且选择使用代金券后未支付时，已使用的代金券为冻结状态;若超时仍未支付，则已冻结代金券返还至可用余额</view>
+    <view bindtap="showModel" class="sumbit tc">确认</view>
+  </view>
+</view>

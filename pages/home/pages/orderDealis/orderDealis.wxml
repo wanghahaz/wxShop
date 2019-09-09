@@ -1,0 +1,85 @@
+<!--index.wxml-->
+<view class="container" style="padding-bottom:100rpx">
+  <view class="status width94 box_zing">
+    订单状态：待支付
+  </view>
+  <view data-path="/pages/home/pages/logistics/logistics" catchtap="toRouter" class="adress adress_box width94 flex flex_m box_zing">
+    <text class="./iconfont/iconwuliu:before icon flex_nosize" style="font-size:64rpx"></text>
+    <view class="fs_14 flex column flex_sa">
+      <text class="fcF1">【广州越秀区转运中心】已收入</text>
+      <text>2019-08-21  15:2:22</text>
+    </view>
+    <text class="./iconfont/iconarrow-right-copy:before icon flex_nosize" style="font-size:40rpx"></text>
+  </view>
+  <view class="user adress_box width94 flex flex_m box_zing">
+    <image class="gps flex_nosize" src="../../../../image/gps.png"></image>
+    <view class="fs_14 flex column flex_sa width90">
+      <text>收货人：安安    15703415006</text>
+      <text class="clamp_1">收货地址：山西省太原市山西省太原市有一山西省太原市有一</text>
+    </view>
+  </view>
+  <view class="goodspDealis width94 box_zing">
+    <block wx:for="{{list}}" wx:key="{{index}}">
+      <view wx:if="{{index==0}}" class="dealis_order  box_zing">
+        <view data-path="" catchtap="toRouter" style="margin-bottom:20rpx;">
+          <text>我是店铺></text>
+        </view>
+        <view class="goods_Dealis flex flex_nosize" wx:for="{{3}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
+          <image class="goodsImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+          <view class="goodsDealis">
+            <view class="flex">
+              <text class="fs_14 clamp_2">我是第{{ind}}商品我是第{{ind}}商第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>
+              <view style="width:70rpx" class="flex column flex_nosize flex_lr">
+                <text class="fs_16 ter">￥99</text>
+                <text class="fs_14 ter">×2</text>
+              </view>
+            </view>
+            <text class="fs_12 fcb2">134号牛油果绿  L</text>
+            <!-- <view class="btn flex fs_13">
+              <text data-path="/pages/mySales/mySales" bindtap="toRouter" class="evaluation fcF1">申请售后</text>
+            </view> -->
+          </view>
+        </view>
+        <view class="flex count flex_end fcb2">
+          <text class="fs_16">商品总价:￥198</text>
+        </view>
+      </view>
+    </block>
+    <view class="com flex flex_lr fs_14 box_zing">
+      <text>运费</text>
+      <text>￥0.00</text>
+    </view>
+    <!-- <view class="com flex flex_lr fs_14 box_zing">
+      <text>代金券</text>
+      <text>￥9.00</text>
+    </view> -->
+    <view style="padding-bottom:20rpx" class="com fs_14 flex flex_lr box_zing">
+      <text>订单总价</text>
+      <text>￥99.00</text>
+    </view>
+    <view class="sum box_zing fs_14">
+      <view class="ter fcb2">支付明细</view>
+      <view class="flex flex_lr">
+        <text>需付款</text>
+        <text class="fcF1 fs_14">￥9.00</text>
+      </view>
+    </view>
+  </view>
+  <view class="orderDealis width94 flex column box_zing fs_12">
+    <text class="fs_16">订单信息</text>
+    <view class="flex flex_lr">
+      <text class="fcb2">订单编号：E12345687900000</text>
+      <text class="fcF1" data-content="E12345687900000" bindtap="setClip">复制</text>
+    </view>
+    <text class="fcb2">创建时间：2019-08-06  12:59:59</text>
+    <text class="fcb2">付款时间：2019-08-06  12:59:59</text>
+    <text class="fcb2">发货时间：2019-08-06  12:59:59</text>
+  </view>
+  <view class="width94 flex callShop fs_14">
+    <text class="tc">联系卖家</text>
+    <text class="tc">拨打电话</text>
+  </view>
+  <view class="submit flex flex_end flex_m ">
+    <text style="margin:0 20rpx 0 0" class="tc">立即支付</text>
+  </view>
+</view>

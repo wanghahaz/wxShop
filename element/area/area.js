@@ -33,70 +33,81 @@ function updateAreaData(that, status, e) {
       }
     }
     //获取当前省份的索引值 广东省 可改成自己当前的省份
-    provinces.some((item, index) => {
-      if (item.code.indexOf(that.data.form.province || that.data.form.provinceName || '110000') != -1) {
-        vali[0] = index;
-        return;
-      }
-    })
-    if (!vali[0]) {
+    if (that.data.form.province) {
       provinces.some((item, index) => {
-        let str = that.data.form.provinceName;
-        console.log(item.name.indexOf(str))
-        if (item.name.indexOf(str) != -1) {
+        if (item.code.indexOf(that.data.form.province || that.data.form.provinceName || '110000') != -1) {
           vali[0] = index;
           return;
         }
       })
+      getCityArr(vali[0]);
+    }
+    if (that.data.form.province) {
+      citys.some((item, index) => {
+        if (item.code.indexOf(that.data.form.city || '110100') != -1) {
+          vali[1] = index;
+          return;
+        }
+      })
+      getCountyInfo(vali[0], vali[1]);
+    }
+    if (that.data.form.province) {
+      countys.some((item, index) => {
+        if (item.code.indexOf(that.data.form.area || '110101') != -1) {
+          vali[2] = index;
+          return;
+        }
+      });
     }
     //初始化调一次传递索引值，传递省城数据
     //获取地级市数据
-    getCityArr(vali[0]);
     //获取当前城市的索引值 广州市 可改成自己当前的城市
-    citys.some((item, index) => {
-      if (item.code.indexOf(that.data.form.city || '110100') != -1) {
-        vali[1] = index;
-        return;
-      }
-    })
-    // if (!vali[1]) {
-    //   citys.some((item, index) => {
-    //     if (item.name.indexOf(that.data.form.cityName) != -1) {
-    //       vali[1] = index;
-    //       return;
-    //     }
-    //   })
-    // }
-    //  ""
     //获取区县数据
-    getCountyInfo(vali[0], vali[1]);
-    countys.some((item, index) => {
-      if (item.code.indexOf(that.data.form.area || '110101') != -1) {
-        vali[2] = index;
-        return;
+    setTimeout(() => {
+      if (that.data.form.provinceName) {
+        provinces.some((item, index) => {
+          let str = that.data.form.provinceName;
+          let is = item.name.indexOf(str)
+          if (is != -1) {
+            vali[0] = index;
+            return;
+          }
+        })
+        getCityArr(vali[0]);
+      };
+      if (that.data.form.provinceName) {
+        citys.some((item, index) => {
+          let str = that.data.form.cityName;
+          let is = item.name.indexOf(str)
+          if (is != -1) {
+            vali[1] = index;
+            return;
+          }
+        })
+        getCountyInfo(vali[0], vali[1]);
+      };
+      if (that.data.form.provinceName) {
+        countys.some((item, index) => {
+          if (item.name.indexOf(that.data.form.areaName) != -1) {
+            vali[2] = index;
+            return;
+          }
+        });
       }
-    });
-    // if (!vali[2]) {
-    //   countys.some((item, index) => {
-    //     if (item.name.indexOf(that.data.form.areaName) != -1) {
-    //       vali[2] = index;
-    //       return;
-    //     }
-    //   });
-    // }
-    let form = JSON.parse(JSON.stringify(that.data.form));
-    form.provinceName = provinces[vali[0]].name
-    form.cityName = citys[vali[1]].name
-    form.areaName = countys[vali[2]].name
-    form.province = provinces[vali[0]].code
-    form.city = citys[vali[1]].code
-    form.area = countys[vali[2]].code
-    if (that.data.form.province) {
-      that.setData({
-        form: form
-      })
-    }
-
+      let form = JSON.parse(JSON.stringify(that.data.form));
+      if (that.data.form.province || that.data.form.provinceName) {
+        form.provinceName = provinces[vali[0]].name
+        form.cityName = citys[vali[1]].name
+        form.areaName = countys[vali[2]].name
+        form.province = provinces[vali[0]].code
+        form.city = citys[vali[1]].code
+        form.area = countys[vali[2]].code
+        that.setData({
+          form: form
+        })
+      }
+    }, 30)
+    //
     //赋值
     info = {
       item: {
@@ -152,7 +163,7 @@ function updateAreaData(that, status, e) {
   //滑动事件
   var valueChange = function(e, that) {
     var val = e.detail.value
-    console.log(e)
+    // console.log(e)
     //判断滑动的是第几个column
     //若省份column做了滑动则定位到地级市和区县第一位
     if (value[0] != val[0]) {

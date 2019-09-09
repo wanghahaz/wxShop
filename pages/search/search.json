@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "one_shop": "../../element/oneShop/oneShop"
-  },
-  "navigationBarTitleText": "搜索"
-}

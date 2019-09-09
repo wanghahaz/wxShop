@@ -30,7 +30,6 @@ Page({
   // 获取二三级
   getCate() {
     http.getReq(`/cate/get_cate/${this.data.pid}`, {}, true).then(res => {
-      console.log(res)
       if (res.code == 200) {
         this.setData({
           leftList: res.data
@@ -147,7 +146,7 @@ Page({
     }
     return {
       title: '您好，欢迎零元晋品',
-      path: '/pages/classify/classify?share_id=' + share_id,
+      path: '/pages/tabar/classify/classify?share_id=' + share_id,
     }
   }
 })

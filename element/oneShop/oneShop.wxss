@@ -1,6 +1,7 @@
 @import "../../common/css/index.wxss";
 
 .one_shop {
+  height:410rpx;
   padding-bottom: 10rpx;
   width: 100%;
   background: #fff;
@@ -20,7 +21,6 @@
   padding: 4rpx;
   color: #010000;
   width: 100%;
-  height: 76rpx;
 }
 
 .old {
