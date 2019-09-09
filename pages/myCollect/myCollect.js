@@ -327,6 +327,9 @@ Page({
     })
   },
   onShow: function() {
+    this.setData({
+      list: []
+    })
     this.getGoodsColl()
   },
   /**

@@ -1,5 +1,8 @@
 <!--index.wxml-->
 <view class="container box_video">
+
+  <video vslide-gesture="{{true}}" style="object-fit: fill;" id="myVideo" src="{{video}}" show-play-btn="{{false}}" controls="{{false}}" show-fullscreen-btn="{{true}}" bindended="bindended" bindtimeupdate="bindtimeupdate" bindprogress="bindprogress"></video>
+  <cover-view class="mask"></cover-view>
   <cover-view class="fs_14 time">
     <cover-view>双倍收益倒计时</cover-view>
     <cover-view class="tc" style="margin:16rpx 0 0 0">00:28:06</cover-view>
@@ -11,8 +14,6 @@
       <cover-view style="flex:1.2" catchtap="getNext" class="cover"> {{time>0?'('+time+'s)':' 下一条' }}</cover-view>
     </cover-view>
   </cover-view>
-
-  <video vslide-gesture="{{true}}" style="object-fit: fill;" id="myVideo" src="{{video}}" show-play-btn="{{false}}" controls="{{false}}" show-fullscreen-btn="{{true}}" bindended="bindended" bindtimeupdate="bindtimeupdate" bindprogress="bindprogress"></video>
 
   <cover-image data-path="{{ad_link}}" catchtap="toRouter" class="ad_thumb" wx:if="{{ad_thumb}}" src="{{ad_thumb}}"></cover-image>
 </view>

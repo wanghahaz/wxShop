@@ -2,7 +2,7 @@
   padding-bottom: 120rpx;
 }
 
-.box_Big>view,.box_Big>text,.shop_box{
+.box_Big>view, .box_Big>text, .shop_box {
   padding: 0 3%;
   box-sizing: border-box;
   background: #fff;
@@ -11,13 +11,15 @@
 .goodsDealis {
   background: #fff;
   padding: 14rpx 3% 24rpx 3%;
-  margin-bottom:30rpx ;
+  margin-bottom: 30rpx;
 }
-.text_right{
+
+.text_right {
   display: inline-block;
   padding-left: 24rpx;
   color: #000;
 }
+
 .swiper_box {
   position: relative;
 }
@@ -113,6 +115,10 @@
 
 .suckTop {
   bottom: 140rpx;
+}
+
+.chit {
+  bottom: 230rpx;
 }
 
 .containerAc {

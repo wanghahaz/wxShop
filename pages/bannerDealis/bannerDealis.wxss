@@ -5,7 +5,13 @@ video {
   width: auto;
   object-fit: fill;
 }
-
+.mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 9;
+}
 .time {
   position: absolute;
   top: 40rpx;
@@ -44,6 +50,7 @@ video {
 }
 
 .ad_thumb {
+  z-index: 99;
   position: fixed;
   bottom: 0;
   left: 0;

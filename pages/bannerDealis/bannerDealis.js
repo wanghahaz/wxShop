@@ -68,7 +68,7 @@ Page({
         ad_thumb: res.data.ad_thumb,
       })
       let video = wx.createVideoContext("myVideo")
-      video.requestFullScreen()
+      // video.requestFullScreen()
       video.play()
       // console.log(res.data)
     })

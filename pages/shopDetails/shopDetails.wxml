@@ -1,15 +1,18 @@
 <!--index.wxml-->
 <view class="container" wx:if="{{shopObj.store_name}}">
-  <view class="shopTitle width90 flex flex_lr flex_m ">
-    <view class="flex">
-      <image src="{{shopObj.store_thumb}}" class="slide-image"></image>
-      <text class="fs_20 flex flex_m">{{shopObj.store_name}}</text>
+  <view class="titleBox">
+    <image class="bgImg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567767330059&di=7c19a24cdb7ab2007a497adb2b3a4e40&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F09%2F20180709181137_ftqjg.thumb.700_0.jpg"></image>
+    <view class="shopTitle width94 flex flex_lr flex_m ">
+      <view class="flex">
+        <image src="{{shopObj.store_thumb}}" class="slide-image"></image>
+        <text class="fs_20 flex flex_m">{{shopObj.store_name}}</text>
+      </view>
+      <text class="collect flex_nosize fs_14 tc" catchtap="collectGoods">{{is_collect?'取消收藏':'收藏'}}</text>
     </view>
-    <text class="collect flex_nosize fs_14 tc" catchtap="collectGoods">{{is_collect?'取消收藏':'收藏'}}</text>
-  </view>
-  <view class="titleSelect flex width90 flex_sa fs_20 fcb2">
-    <text bindtap="selectTitle" data-index="1" class="{{titleIndex==1?'fcF1':''}} tc">热销</text>
-    <text bindtap="selectTitle" data-index="2" class="{{titleIndex==2?'fcF1':''}} tc">新品</text>
+    <view class="titleSelect flex width90 flex_sa fs_20">
+      <text bindtap="selectTitle" data-index="1" class="{{titleIndex==1?'fcF1':''}} tc">热销</text>
+      <text bindtap="selectTitle" data-index="2" class="{{titleIndex==2?'fcF1':''}} tc">新品</text>
+    </view>
   </view>
   <!-- 商品列表 -->
   <view wx:if="{{shopList.length==0&&!isPullDownRefresh}}" class="noMore">暂无商品...</view>
@@ -23,4 +26,14 @@
     <view style="height:50rpx"></view>
   </view>
   <view class="noMore" wx:if="{{!isPullDownRefresh&&shopList.length>0}}">没有更多数据了...</view>
+  <view class="footer box_zing fs_11 flex">
+    <view class="flex column flex_c_m" style="border-right: 1px solid #e4e4e4;">
+      <image style="width:32rpx;height:26rpx;margin-bottom:4rpx" src="../../image/shopFiy.png"></image>
+      <text>分类</text>
+    </view>
+    <view class="flex column flex_c_m">
+      <image style="width:32rpx;height:32rpx;margin-bottom:4rpx" src="../../image/shopAll.png"></image>
+      <text>全部</text>
+    </view>
+  </view>
 </view>

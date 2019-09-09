@@ -1,8 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp();
-import until from "../../utils/util.js";
-import http from "../../common/js/http.js";
+import until from "../../../utils/util.js";
+import http from "../../../common/js/http.js";
 Page({
 
   /**

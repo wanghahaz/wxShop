@@ -11,7 +11,9 @@ Page({
     sIndex: 0,
     userList: [],
     ads: {},
-    showMask: true
+    showMask: true,
+    isBottom: true,
+    page: 1
   },
   showModel() {
     this.setData({
@@ -20,8 +22,12 @@ Page({
   },
   selectIndex(e) {
     this.setData({
+      isBottom: true,
+      page: 1,
+      userList: [],
       sIndex: e.currentTarget.dataset.index
     })
+    this.getShare_list()
   },
   // 邀请首页上部
   getImgList() {
@@ -37,14 +43,46 @@ Page({
       }
     })
   },
+  // 邀请规则
+  getRule() {
+    http.getReq('/user/share/share_rule', {}).then(res => {
+      this.setData({
+        rule: res.data.content
+      })
+    })
+  },
   // 我的邀请列表
   getShare_list() {
-    http.getReq('/user/share/share_list', {}, true).then(res => {
-      // if(res.code==200){
-      //   this.setData({
-      //     userList:res.data
-      //   })
-      // }
+    let url = null;
+    if (this.data.sIndex == 0) {
+      // 好友列表
+      url = '/user/share/share_list'
+    } else {
+      // 道具卡
+      url = '/user/share/gift_card'
+    }
+    http.getReq(url, {
+      page: this.data.page
+    }, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          userList: [...res.data.data, ...this.data.userList]
+        })
+        if (this.data.page == res.data.last_page) {
+          this.setData({
+            isBottom: false
+          })
+        } else {
+          this.setData({
+            page: this.data.page + 1
+          })
+        }
+      } else {
+        this.setData({
+          userList: [],
+          isBottom: false
+        })
+      }
     })
   },
   toRouter(e) {
@@ -65,6 +103,7 @@ Page({
   onLoad: function(options) {
     this.getImgList()
     this.getShare_list()
+    this.getRule()
   },
 
   /**
@@ -104,7 +143,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if (this.data.isBottom) {
+      this.getShare_list()
+    }
   },
 
   /**

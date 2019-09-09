@@ -1,23 +1,40 @@
-.shopTitle image {
+.container {
+  padding-bottom: 100rpx;
+}
+
+.shopTitle .slide-image {
   width: 118rpx;
   height: 118rpx;
   border-radius: 50%;
   margin: 0 30rpx 0 0;
 }
 
+.titleBox {
+  position: relative;
+  height: 270rpx;
+  margin-bottom: 20rpx;
+}
+
+.titleBox>view {
+  position: relative;
+  z-index: 9;
+}
+
 .shopTitle {
-  padding: 30rpx 0;
+  padding: 50rpx 20rpx 30rpx 20rpx;
 }
-.titleSelect{
-  padding: 20rpx 0;
-}
-.titleSelect text{
+
+.titleSelect text {
   width: 200rpx;
- padding-bottom: 20rpx;
+  color: #fff;
+  padding-bottom: 10rpx;
 }
-.titleSelect>.fcF1{
-  border-bottom: 1px solid #F18E1E;
+
+.titleSelect>.fcF1 {
+  color: #f18e1e;
+  border-bottom: 1px solid #f18e1e;
 }
+
 .collect {
   background: #f18e1e;
   color: #fff;
@@ -25,4 +42,15 @@
   height: 58rpx;
   line-height: 58rpx;
   border-radius: 28rpx;
+}
+
+.footer {
+  border-top: 1px solid #e4e4e4;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10rpx 0;
+  left: 0;
+  z-index: 99;
 }

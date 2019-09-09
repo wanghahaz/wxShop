@@ -157,4 +157,5 @@
   <view catchtap="suckTop" wx:if="{{scrollTop>clientHeight}}" class="suckTop">
     <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:46rpx;color:#fff"></text>
   </view>
+  <image bindtap="switchTab" data-path="/pages/advertising/advertising" class="chit" src="../../image/chit1.png"></image>
 </view>

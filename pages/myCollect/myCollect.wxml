@@ -34,7 +34,7 @@
       </view>
     </view>
     <!-- 店铺 -->
-    <view class="content" wx:else>
+    <view class="content" bindtap="toRouter" data-id="{{item.store_id}}" data-path="/pages/shopDetails/shopDetails" wx:else>
       <view class="flex box_zing shop">
         <image class="shopTx flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
         <view class="shopDealis flex column flex_sa">

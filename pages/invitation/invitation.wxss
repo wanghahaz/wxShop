@@ -77,10 +77,15 @@
   margin: 14rpx 0;
 }
 
-.swiper {
-  width: 70%;
-  height: 300rpx;
-  margin: 0 auto;
+.card_box {
+  position: relative;
+  width: 650rpx;
+  height: 140rpx;
+  margin: 30rpx auto;
+}
+.card_box  text {
+  position: absolute;
+  left: 50rpx;
 }
 
 .ruleModel {
