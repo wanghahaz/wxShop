@@ -12,7 +12,7 @@ Page({
     statusObj: {
       '-1': '全部',
       '0': '未付款',
-      '1': '代发货',
+      '1': '待发货',
       '2': '待收货',
       '3': '已完成',
       "4": "申请售后",
@@ -28,50 +28,66 @@ Page({
     height: 0,
     scrollLeft: 0,
     page: 1,
-    goodsList: []
+    goodsList: [],
+    orderType: {},
   },
-  // 取消订单
-  cancel(e) {
-    until.modal({
-      title: '取消订单',
-      content: '订单还未付款，确定要取消吗？'
-    }).then(res => {
-      until.toast({
-        icon: 'success',
-        title: '取消订单成功'
-      })
-    }).catch(err => {})
-  },
-  // 提醒发货
-  alertGoods(e) {
-    until.toast({
-      icon: 'success',
-      title: '已提醒卖家发货'
+  setType() {
+    let data = {
+      type: this.data.orderType.type
+    }
+    if (this.data.orderType.type == 4) {
+      data.use_jifen = this.data.orderType.jifen
+    }
+    http.postReq(`/order/deal/${this.data.orderType.id}`, data).then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        until.toast({
+          icon: 'success',
+          title: this.data.orderType.toast
+        })
+        setTimeout(() => {
+          this.setData({
+            isLoading: true,
+            page: 1,
+            goodsList: []
+          })
+          this.getMyOrder()
+        }, 1000)
+      } else {
+        until.toast({
+          title: res.msg || '操作失败'
+        })
+      }
     })
   },
-  // 删除订单
-  delOrder(e) {
+  editStatus(e) {
+    // type 1:确认收货 2:取消订单 3:删除订单 4:立即付款  5:提醒发货
+    this.setData({
+      orderType: e.currentTarget.dataset
+    });
     until.modal({
-      title: '删除订单',
-      content: '您确认删除订单吗？'
+      content: e.currentTarget.dataset.model,
+      confirmText: e.currentTarget.dataset.jifen ? '使用' : '',
+      cancelText: e.currentTarget.dataset.jifen ? '不使用' : ''
     }).then(res => {
-      until.toast({
-        icon: 'success',
-        title: '已删除'
-      })
+      if (e.currentTarget.dataset.jifen == 1) {
+        let data = JSON.parse(JSON.stringify(this.data.orderType))
+        data.jifen = 1;
+        this.setData({
+          orderType: data
+        });
+      }
+      this.setType()
+    }).catch(err => {
+      if (e.currentTarget.dataset.jifen==1) {
+        let data = JSON.parse(JSON.stringify(this.data.orderType))
+        data.jifen = 0;
+        this.setData({
+          orderType: data
+        });
+        this.setType()
+      }
     })
-  },
-  // 确认收货
-  affirmGoods(e) {
-    console.log('确认收货')
-  },
-  // 合并付款
-  sumSubmit(e) {
-    console.log('合并付款')
-  },
-  // 确认付款
-  submitMoney(e) {
-    console.log('确认付款')
   },
   getMyOrder() {
     http.getReq('/order/order_list', {
@@ -142,7 +158,6 @@ Page({
     this.setData({
       titleIndex: options.index
     })
-    this.getMyOrder()
     let that = this;
     wx.getSystemInfo({
       success: function(res) {
@@ -168,7 +183,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function() {
+    this.setData({
+      isLoading: true,
+      page: 1,
+      goodsList: []
+    })
+    this.getMyOrder()
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -29,13 +29,14 @@ Page({
   getList() {
     let path = null;
     if (this.data.title == '领取记录') {
-      path = '/jifen/logs'
+      path = '/jifen/get'
     } else {
-      path = '/jifen/logs'
+      path = '/jifen/use'
     }
     http.getReq(path, {
       page: this.data.page
     }, true).then(res => {
+      console.log(res)
       if (res.code == 200) {
         this.setData({
           list: [...this.data.list, ...res.data.data]

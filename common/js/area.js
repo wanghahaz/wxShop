@@ -6482,15 +6482,15 @@ function getAreaInfo(callBack) {
     {
       "code": "310200",
       "sheng": "31",
-      "di": "02",
+      "di": "01",
       "xian": "00",
-      "name": "县",
+      "name": "市辖区",
       "level": 2
     },
     {
       "code": "310230",
       "sheng": "31",
-      "di": "02",
+      "di": "01",
       "xian": "30",
       "name": "崇明县",
       "level": 3

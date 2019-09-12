@@ -133,7 +133,7 @@ Page({
     this.getGoods()
   },
   toRouter(e) {
-    if (e.currentTarget.dataset.path != "/pages/goodsDealis/goodsDealis") {
+    if (e.currentTarget.dataset.path != "/pages/home/pages/goodsDealis/goodsDealis") {
       if (!wx.getStorageSync('token')) {
         until.toast({
           title: '请您先进行登录，然后继续操作'

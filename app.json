@@ -6,7 +6,7 @@
     "pages/tabar/shopCard/shopCard",
     "pages/tabar/mine/mine",
     "pages/tabar/share/share",
-    "pages/zluckPage/luckPage"
+    "pages/websockets/websocket"
   ],
   "subpackages": [
     {

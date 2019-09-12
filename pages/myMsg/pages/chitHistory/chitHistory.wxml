@@ -6,7 +6,7 @@
       <block wx:if="{{title=='领取记录'}}">
         <view>
           <text>领取时间：</text>
-          <text>2019-09-04 12:12:12</text>
+          <text>{{item.created_at}}</text>
         </view>
         <view>
           <text>代金券：</text>

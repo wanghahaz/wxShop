@@ -22,10 +22,14 @@ Page({
     this.setData({
       sexIndex: e.detail.value
     })
-    http.postReq('/user/username', {
+    http.postReq('/user/gender', {
       gender: e.detail.value == 0 ? '1' : 2
     }).then(res => {
-      console.log(res)
+      if(res.code==200){
+        until.toast({title:'修改成功'})
+      }else{
+        until.toast({ title: '修改失败' })
+      }
     })
   },
   toRouter(e) {

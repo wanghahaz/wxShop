@@ -24,10 +24,10 @@
         <image class="shopTx goodsTx flex_nosize" src="../../image/n_goods.png"></image>
         <text class="end">售罄</text>
         <view class="shopDealis goodsDealis flex column flex_lr">
-          <text class="clamp_2">我是商品1</text>
+          <text class="clamp_2">{{item.goods.goods_name}}</text>
           <text class="fs_12 fcb2">已售空</text>
           <view class="flex flex_lr">
-            <text class="fs_19 fcF1">￥99</text>
+            <text class="fs_19 fcF1">￥{{item.goods.goods_price}}</text>
             <image class="add" src="../../../image/no_goods.png"></image>
           </view>
         </view>

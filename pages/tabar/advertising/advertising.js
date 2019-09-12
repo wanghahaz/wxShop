@@ -15,7 +15,7 @@ Page({
     marquee2copy_status: false,
     marquee2_margin: 10,
     size: 14,
-    interval: 40,
+    interval: 30,
     ads: [],
     row: {},
     logsList: [],

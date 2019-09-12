@@ -41,7 +41,7 @@
                 <text class="fcF1">恭喜</text>
                 <text class="clamp_1">{{item.user.username}}观看广告领取了{{item.total_money}}代金券</text>
               </view>
-              <text class="ter clamp_1" style="width:25%">{{item.created_at}}</text>
+              <text class="ter clamp_1" style="width:25%">{{item.time}}</text>
             </view>
           </block>
         </view>
@@ -53,7 +53,7 @@
                 <text class="fcF1">恭喜</text>
                 <text class="clamp_1">{{item.user.username}}观看广告领取了{{item.total_money}}代金券</text>
               </view>
-              <text class="ter clamp_1" style="width:25%">{{item.created_at}}</text>
+              <text class="ter clamp_1" style="width:25%">{{item.time}}</text>
             </view>
           </block>
         </view>

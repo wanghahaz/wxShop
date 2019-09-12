@@ -12,12 +12,21 @@ Page({
     cate_id: null,
     page: 1,
     shopList: [],
+    type: 0,
     isPullDownRefresh: true
   },
   getGoods() {
-    http.getReq(`/cate/get_goods_list/${this.data.cate_id}`, {
+    let url = null;
+    let data = {
       page: this.data.page
-    }, true).then(res => {
+    }
+    if (this.data.type == 1) {
+      url = `/store/info/goods/${this.data.cate_id}`
+      data.cate = this.data.clfiyId;
+    } else {
+      url = `/cate/get_goods_list/${this.data.cate_id}`
+    }
+    http.getReq(url, data, true).then(res => {
       if (res.code == 200) {
         this.setData({
           shopList: [...this.data.shopList, ...res.data.data]
@@ -60,6 +69,8 @@ Page({
       title: options.name, //页面标题为路由参数
     })
     this.setData({
+      type: options.type || 0,
+      clfiyId: options.clfiyid||0,
       cate_id: options.id
     })
     this.getGoods()

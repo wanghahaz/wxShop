@@ -9,9 +9,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: app.globalData.goodsList
+    statusObj: {
+      '0': '待付款',
+      '1': '待发货',
+      '2': '待收货',
+      '3': '已收货',
+      "4": "商家审核中",
+      '5': '已拒绝',
+      '6': '商家审核通过',
+      '7': '退款成功',
+      '8': '已收货',
+      '9': '已取消',
+      '10': '已关闭'
+    },
+    dealis: {},
+    id: null,
+    orderType: {}
   },
   toRouter(e) {
+    let goods = JSON.parse(JSON.stringify(this.data.dealis.order_data))
+    goods.forEach(item => {
+      item.check = true;
+      item.cart_id = 0;
+    })
+    if (e.currentTarget.dataset.path == '/pages/home/pages/goodSettle/goodSettle') {
+      let list = [{
+        store: {
+          store_name: this.data.dealis.store.store_name,
+          store_id: this.data.dealis.store.id,
+          store_thumb: this.data.dealis.store.store_thumb,
+          check: true
+        },
+        goods: goods
+      }];
+      app.globalData.goodsList = list;
+    }
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
       wx.navigateTo({
@@ -23,11 +55,92 @@ Page({
       })
     }
   },
+  getDealis() {
+    http.getReq(`/order/info/${this.data.id}`, {}, true).then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        this.setData({
+          dealis: res.data
+        })
+      } else {
+        until.toast({
+          title: "加载失败"
+        })
+      }
+    })
+  },
+  setType() {
+    let data = {
+      type: this.data.orderType.type
+    }
+    if (this.data.orderType.type == 4) {
+      data.use_jifen = this.data.orderType.jifen
+    }
+    http.postReq(`/order/deal/${this.data.orderType.id}`, data).then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        until.toast({
+          icon: 'success',
+          title: this.data.orderType.toast
+        })
+        if (this.data.orderType.toast == '已删除订单') {
+          setTimeout(() => {
+            wx.navigateBack({})
+          }, 1000)
+        } else {
+          setTimeout(() => {
+            this.getDealis()
+          }, 1000)
+        }
+
+      } else if (res.code == 300) {
+        until.toast({
+          title: '微信支付'
+        })
+      } else {
+        until.toast({
+          title: res.msg || '操作失败'
+        })
+      }
+    })
+  },
+  editStatus(e) {
+    // type 1:确认收货 2:取消订单 3:删除订单 4:立即付款  5:提醒发货
+    this.setData({
+      orderType: e.currentTarget.dataset
+    });
+    until.modal({
+      content: e.currentTarget.dataset.model,
+      confirmText: e.currentTarget.dataset.jifen ? '使用' : '',
+      cancelText: e.currentTarget.dataset.jifen ? '不使用' : ''
+    }).then(res => {
+      if (e.currentTarget.dataset.jifen && e.currentTarget.dataset.jifen != '0.00') {
+        let data = JSON.parse(JSON.stringify(this.data.orderType))
+        data.jifen = 1;
+        this.setData({
+          orderType: data
+        });
+      }
+      this.setType()
+    }).catch(err => {
+      let data = JSON.parse(JSON.stringify(this.data.orderType))
+      data.jifen = 0;
+      this.setData({
+        orderType: data
+      });
+      if (e.currentTarget.dataset.jifen && e.currentTarget.dataset.jifen != '0.00') {
+        this.setType()
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(this.data.list)
+    this.setData({
+      id: options.id
+    })
+    this.getDealis()
   },
   setClip(e) {
     wx.setClipboardData({

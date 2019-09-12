@@ -86,7 +86,8 @@ Page({
   },
   showModel(e) {
     this.setData({
-      showMask: !this.data.showMask
+      showMask: !this.data.showMask,
+      showType: e.currentTarget.dataset.type || 0
     })
   },
   toRouter(e) {
@@ -127,6 +128,12 @@ Page({
   },
   // 立即购买
   addBuy() {
+    if (!wx.getStorageSync('token')) {
+      until.toast({
+        title: '请您先进行登录，然后继续操作'
+      })
+      return false;
+    }
     if (this.data.skuObj.spec) {
       if (!this.data.selectSku.goods_price) {
         until.toast({
@@ -162,6 +169,12 @@ Page({
   },
   // 加入购物车
   addCard() {
+    if (!wx.getStorageSync('token')) {
+      until.toast({
+        title: '请您先进行登录，然后继续操作'
+      })
+      return false;
+    }
     if (this.data.skuObj.spec) {
       if (!this.data.selectSku.goods_price) {
         until.toast({

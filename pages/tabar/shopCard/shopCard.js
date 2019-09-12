@@ -49,7 +49,11 @@ Page({
         list.forEach(item => {
           item.store.check = true;
           item.goods.forEach(value => {
-            value.check = true
+            if (value.status == 1) {
+              value.check = true
+            } else {
+              value.check = false;
+            }
           })
         })
       } else {

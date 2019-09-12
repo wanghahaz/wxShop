@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "lucky": "../../element/lucky/lucky"
-  },
-  "navigationBarTitleText": "抽奖"
-}

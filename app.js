@@ -24,7 +24,11 @@ App({
         list.forEach(item => {
           item.store.check = true;
           item.goods.forEach(value => {
-            value.check = true
+            if (value.status == 1) {
+              value.check = true
+            } else {
+              value.check = false;
+            }
           })
         })
       } else {
@@ -131,7 +135,7 @@ App({
     let count = 0;
     goodsList.forEach(item => {
       item.goods.forEach(value => {
-        if (value.check) {
+        if (value.check && value.status == 1) {
           sum += value.goods_num * value.goods_price;
           count += value.goods_num
         }

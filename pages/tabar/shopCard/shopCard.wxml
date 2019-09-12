@@ -11,19 +11,30 @@
       </view>
       <view class="width94" style="background:#fff; border-radius: 18rpx;">
         <view class="dealis  flex" wx:for="{{item.goods}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}' data-id="{{value.id}}" data-skuId="{{value.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter">
-          <image data-check="{{value.check}}" data-ind="{{ind}}" data-index="{{index}}" bindtap="setShopCheck" wx:if="{{value.check}}" class="check flex_nosize" src="../../../image/check.png"></image>
-          <text data-check="{{value.check}}" data-ind="{{ind}}" data-index="{{index}}" bindtap="setShopCheck" wx:else class="nocheck box_zing check flex_nosize"></text>
+          <!-- 选择失效 -->
+          <view class="box_sale" catchtap>
+            <image wx:if="{{value.status==1&&value.check}}" data-check="{{value.check}}" data-ind="{{ind}}" data-index="{{index}}" bindtap="setShopCheck" class="check flex_nosize" src="../../../image/check.png"></image>
+            <text wx:elif="{{value.status==1&&!value.check}}" data-check="{{value.check}}" data-ind="{{ind}}" data-index="{{index}}" bindtap="setShopCheck" class="nocheck box_zing check flex_nosize"></text>
+            <text class="fs_12 sale_out ter box_zing" wx:elif="{{value.status==0}}">失效</text>
+          </view>
           <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
           <view class="box_right" style=" margin: 0 0 0 6rpx;">
             <text class="delGoods fs_10" data-id="{{value.cart_id}}" catchtap="delGoods">删除</text>
             <text style="width:70%" class="goodsName fs_14 clamp_2">{{value.goods_name}}</text>
-            <text class="remark fs_12 clamp_1 tc">134号牛油果绿  L</text>
-            <text class="price">￥{{value.goods_price}}</text>
-            <view class="count flex">
-              <text data-skuId="{{value.sku_id}}" data-id="{{value.cart_id}}" data-type="odd" catchtap="addOdd" data-num="{{value.goods_num}}" class="text odd tc fs_13">-</text>
-              <text class="text fs_12 tc">{{value.goods_num}}</text>
-              <text data-skuId="{{value.sku_id}}" data-id="{{value.cart_id}}" data-type="add" catchtap="addOdd" data-storage="{{value.goods_storage}}" data-num="{{value.goods_num}}" class="text add tc fs_13">+</text>
+            <text wx:if="{{value.spec_name}}" class="remark fs_12 clamp_1 tc">{{value.spec_name}}</text>
+            <!-- 商品正常 -->
+            <view wx:if="{{value.status==1}}">
+              <text class="price">￥{{value.goods_price}}</text>
+              <view class="count flex">
+                <text data-skuId="{{value.sku_id}}" data-id="{{value.cart_id}}" data-type="odd" catchtap="addOdd" data-num="{{value.goods_num}}" class="text odd tc fs_13">-</text>
+                <text class="text fs_12 tc">{{value.goods_num}}</text>
+                <text data-skuId="{{value.sku_id}}" data-id="{{value.cart_id}}" data-type="add" catchtap="addOdd" data-storage="{{value.goods_storage}}" data-num="{{value.goods_num}}" class="text add tc fs_13">+</text>
+              </view>
             </view>
+            <view class="price" style="bottom:0rpx" wx:elif="{{value.status==0}}">
+              <text class="fs_14 fcF1">商品已下架</text>
+            </view>
+
           </view>
         </view>
       </view>
@@ -36,7 +47,7 @@
       <image src="../../../image/card.png"></image>
       <text class="fs_19">购物车空空如也~</text>
     </view>
-    <view class="fs_19 tc recommended">好物推荐</view>
+    <view class="fs_16 tc recommended">好物推荐</view>
     <view class="shop_list flex_wrap" style="width:92%">
       <block wx:for="{{shopList}}" wx:key="{{index}}">
         <one_shop data-path="/pages/home/pages/goodsDealis/goodsDealis" data-id="{{item.id}}" data-skuId="{{item.sku_id}}" catchtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>

@@ -68,6 +68,8 @@ Page({
 
     this.getGoods()
     this.getseckill()
+    this.getBanner();
+    this.getNav()
   },
   countDown() {
     timers = setInterval(() => {
@@ -160,8 +162,6 @@ Page({
         selected: 0
       })
     }
-    this.getBanner();
-    this.getNav()
   },
 
   /**

@@ -1,4 +1,4 @@
-@import "../../common/css/index.wxss";
+/* @import "../../common/css/index.wxss";
 
 .model .size_model {
   width: 70%;
@@ -22,4 +22,4 @@
   font-size: 30rpx;
   height: 80rpx;
   width:50%;
-}
+} */

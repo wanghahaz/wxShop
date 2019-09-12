@@ -31,15 +31,16 @@
       <text wx:if="{{is_collect==1}}" catchtap="collectGoods" class="./iconfont/iconxin:before icon" style="font-size:52rpx; color:#F44444"></text>
       <text wx:else catchtap="collectGoods" class="./iconfont/iconxin1:before icon" style="font-size:52rpx; color:#F44444"></text>
     </view>
-    <view style="padding:20rpx 3% 16rpx 3%;border-top:18rpx solid #f8f6f7" class="flex flex_lr fs_12">
+    <view data-type="3" bindtap="showModel" style="padding:20rpx 3% 16rpx 3%;border-top:18rpx solid #f8f6f7" class="flex flex_lr fs_12">
       <text class="fcb2">服务 <text class="text_right">7天退货·48小时发货</text></text>
+      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
     </view>
-    <view style="margin:0rpx 0 20rpx 0;" class="flex flex_lr fs_12">
+    <view data-type="2" bindtap="showModel" style="margin:0rpx 0 20rpx 0;" class="flex flex_lr fs_12">
       <text class="fcb2">快递  <text class="text_right">免运费</text></text>
-
+      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
     </view>
-    <view bindtap="showModel" style="margin:20rpx 0;padding:0rpx 3% 20rpx 3%" class="flex flex_lr fs_12">
-      <text class="fcb2">选择 <text class="text_right">选择商品属性</text> </text>
+    <view data-type="1" bindtap="showModel" style="margin:20rpx 0;padding:0rpx 3% 20rpx 3%" class="flex flex_lr fs_12">
+      <text class="fcb2">选择 <text class="text_right">选择商品规格</text> </text>
       <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
     </view>
   </view>
@@ -113,13 +114,13 @@
       <text>购物车</text>
     </view>
     <view class="btn_bottom fs_14 flex">
-      <text catchtap="showModel" data-type="add" class="tc">加入购物车</text>
-      <text catchtap="showModel" data-type="buy" class="tc">立即购买</text>
+      <text catchtap="showModel" data-type="1" class="tc">加入购物车</text>
+      <text catchtap="showModel" data-type="1" class="tc">立即购买</text>
     </view>
   </view>
   <view bindtap="showModel" catch:touchmove hidden="{{showMask}}" class="mask add_goods">
   </view>
-  <view class="{{!showMask?'maskContentAc':''}} maskContent box_zing">
+  <view class="{{!showMask&&showType==1?'maskContentAc':''}} maskContent  box_zing">
     <view class="flex goodsDe box_zing">
       <image class="goodsImg flex_nosize" src="{{goods_thumb}}"></image>
       <view style="padding:0 0 0 20rpx;width:50%;" class="flex column flex_sa">
@@ -152,6 +153,14 @@
       <text catchtap="addCard" class="tc">加入购物车</text>
       <text catchtap="addBuy" class="tc">立即购买</text>
     </view>
+  </view>
+  <view class="{{!showMask&&showType==2?'maskContentAc':''}} maskContent maskSize box_zing">
+    免运费
+    <view class="sureBtn tc fs_15"  catchtap="showModel">确认</view>
+  </view>
+  <view class="{{!showMask&&showType==3?'maskContentAc':''}} maskContent maskSize box_zing">
+    七天退货
+    <view class="sureBtn tc fs_15"  catchtap="showModel">确认</view>
   </view>
   <!-- 吸顶 -->
   <view catchtap="suckTop" wx:if="{{scrollTop>clientHeight}}" class="suckTop">

@@ -31,7 +31,7 @@
       <image style="width:32rpx;height:26rpx;margin-bottom:4rpx" src="../../../../image/shopFiy.png"></image>
       <text>分类</text>
     </view>
-    <view class="flex column flex_c_m">
+    <view class="flex column flex_c_m" data-type="1" data-id="{{shopId}}" data-clfiyId="0" data-name="全部商品" data-path="/pages/home/pages/classfyGoods/classfyGoods" catchtap="toRouter">
       <image style="width:32rpx;height:32rpx;margin-bottom:4rpx" src="../../../../image/shopAll.png"></image>
       <text>全部</text>
     </view>

@@ -33,24 +33,24 @@ function updateAreaData(that, status, e) {
       }
     }
     //获取当前省份的索引值 广东省 可改成自己当前的省份
-    if (that.data.form.province) {
-      provinces.some((item, index) => {
-        if (item.code.indexOf(that.data.form.province || that.data.form.provinceName || '110000') != -1) {
-          vali[0] = index;
-          return;
-        }
-      })
-      getCityArr(vali[0]);
-    }
-    if (that.data.form.province) {
-      citys.some((item, index) => {
-        if (item.code.indexOf(that.data.form.city || '110100') != -1) {
-          vali[1] = index;
-          return;
-        }
-      })
-      getCountyInfo(vali[0], vali[1]);
-    }
+    // if (that.data.form.province) {
+    provinces.some((item, index) => {
+      if (item.code.indexOf(that.data.form.province || that.data.form.provinceName || '110000') != -1) {
+        vali[0] = index;
+        return;
+      }
+    })
+    getCityArr(vali[0]);
+    // }
+    // if (that.data.form.province) {
+    citys.some((item, index) => {
+      if (item.code.indexOf(that.data.form.city || '110100') != -1) {
+        vali[1] = index;
+        return;
+      }
+    })
+    getCountyInfo(vali[0], vali[1]);
+    // }
     if (that.data.form.province) {
       countys.some((item, index) => {
         if (item.code.indexOf(that.data.form.area || '110101') != -1) {
@@ -129,8 +129,9 @@ function updateAreaData(that, status, e) {
     for (var i = 0; i < areaInfo.length; i++) {
       c = areaInfo[i];
       if (c.xian == "00" && c.sheng == provinces[count].sheng && c.di != "00") {
-        citys[num] = c;
-        num++;
+        // citys[num] = c;
+        citys.push(c)
+        // num++;
       }
     }
     if (citys.length == 0) {

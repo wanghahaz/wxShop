@@ -52,7 +52,8 @@
     </view>
   </view> -->
   <!-- 商品列表 -->
-  <view data-path="/pages/zluckPage/luckPage" bindtap="toRouter" class="fs_19 tc recommended" style="color:#B2B2B2">好物推荐</view>
+  <!-- pages/websockets/websocket /pages/home/pages/websocket/websocket -->
+  <view data-path="/pages/websockets/websocket" bindtap="toRouter" class="fs_16 tc recommended" style="color:#B2B2B2">好物推荐</view>
   <view class="shop_list flex_wrap width90" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
       <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>

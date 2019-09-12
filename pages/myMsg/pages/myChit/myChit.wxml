@@ -3,13 +3,13 @@
     <image src="../../image/moneyBg.png" class="box_bg"></image>
     <view class="chitNum flex">
       <view class="flex column flex_m">
-        <text class="fs_24">99.99</text>
+        <text class="fs_24">{{money.jifen?money.jifen:'0'}}</text>
         <view class="flex flex_m">
           <text>可使用</text>
         </view>
       </view>
       <view class="flex column flex_m">
-        <text class="fs_24">99.99</text>
+        <text class="fs_24">{{money.freezen_jifen?money.freezen_jifen:'0'}}</text>
         <view catchtap="showModel" class="flex flex_m">
           <text>已冻结</text>
           <text class="./iconfont/icontishi:before icon" style="font-size:30rpx;margin:6rpx 0 0  4rpx"></text>

@@ -125,3 +125,16 @@
   height: 100%;
   overflow: hidden;
 }
+
+.maskSize {
+}
+
+.sureBtn {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  line-height: 90rpx;
+  color: white;
+  background: #f18e1e;
+}

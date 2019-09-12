@@ -7,20 +7,23 @@
   margin: 10rpx auto 20rpx auto;
 }
 
-.adress_box{
+.adress_box {
   margin: 20rpx auto;
   padding: 30rpx 24rpx;
   background: #fff;
   border-radius: 18rpx;
 }
-.adress_box>view{
+
+.adress_box>view {
   height: 100rpx;
 }
-.gps{
+
+.gps {
   width: 30rpx;
   height: 42rpx;
   margin-right: 20rpx;
 }
+
 .orderDealis, .goodspDealis {
   border-radius: 18rpx;
   padding: 30rpx 20rpx;
@@ -32,9 +35,25 @@
   padding-top: 0;
 }
 
+.remark {
+  position: absolute;
+  width: 200rpx;
+  display: block;
+  line-height: 38rpx;
+  background: #f8f6f7;
+  color: #b2b2b2;
+  left: 10rpx;
+  bottom: 50rpx;
+  border-radius: 16rpx;
+}
+
 .goodspDealis {
   background: #fff;
   padding-top: 0;
+}
+
+.goodsDealis {
+  position: relative;
 }
 
 .orderDealis>text, .orderDealis>view {
@@ -108,16 +127,24 @@
   bottom: 0;
   left: 0;
   width: 100%;
+  padding: 0 30rpx;
   border-top: 1px solid #e6e6e6;
   height: 94rpx;
   background: #fff;
   padding-right: 4%;
 }
 
-.submit >text {
+.submit >view:nth-of-type(2)>text {
   width: 168rpx;
-  line-height: 64rpx;
+  line-height: 60rpx;
   border-radius: 32rpx;
+  text-align: center;
+  margin: 0 0 0 20rpx;
+  color: #f18e1e;
+  border: 1px solid #f18e1e;
+}
+
+.submit >view:nth-of-type(2)>text:nth-last-of-type(1) {
   background: #f18e1e;
   color: #fff;
 }
@@ -132,6 +159,7 @@
 .callShop>text {
   flex: 1;
 }
-.callShop>text:nth-of-type(1){
-  border-right: 1px solid #E4E4E4;
+
+.callShop>text:nth-of-type(1) {
+  border-right: 1px solid #e4e4e4;
 }

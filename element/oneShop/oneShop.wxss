@@ -1,13 +1,37 @@
-@import "../../common/css/index.wxss";
-
 .one_shop {
-  height:410rpx;
+  height: 410rpx;
   padding-bottom: 10rpx;
   width: 100%;
   background: #fff;
   margin-top: 16rpx;
   position: relative;
   border-radius: 18rpx;
+  flex-direction: column;
+}
+
+.clamp_2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.flex {
+  display: flex;
+}
+
+.box_zing {
+  box-sizing: border-box;
+}
+
+.fs_13 {
+  font-size: 26rpx;
+}
+
+.flex_lr_m {
+  align-items: center;
+  justify-content: space-between;
   flex-direction: column;
 }
 
@@ -33,7 +57,7 @@
   padding: 6rpx 0rpx 6rpx 60rpx;
 }
 
-.one_shop text {
+.one_shop>view>text {
   padding: 6rpx 0 0 6rpx;
 }
 

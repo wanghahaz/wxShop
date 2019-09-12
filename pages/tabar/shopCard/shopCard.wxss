@@ -46,6 +46,10 @@
 
 /* ----goods */
 
+.box_sale {
+  width: 140rpx;
+}
+
 .check {
   width: 38rpx;
   height: 38rpx;
@@ -56,6 +60,12 @@
   display: inline-block;
   border-radius: 50%;
   border: 1px solid #b2b2b2;
+}
+
+.sale_out {
+  display: inline-block;
+  width: 100%;
+  padding:80% 10rpx 0 0;
 }
 
 .title {
@@ -84,14 +94,13 @@
 
 .remark {
   position: absolute;
-  max-width: 230rpx;
+  width: 200rpx;
   display: block;
   line-height: 38rpx;
   background: #f8f6f7;
   color: #b2b2b2;
   left: 10rpx;
   bottom: 50rpx;
-  /* margin: 4rpx 0 0 10rpx; */
   border-radius: 16rpx;
 }
 

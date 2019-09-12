@@ -53,6 +53,8 @@ const modal = (obj) => {
     wx.showModal({
       title: obj.title || '',
       content: obj.content || '',
+      cancelText: obj.cancelText || '取消',
+      confirmText: '确定',
       success(res) {
         if (res.confirm) {
           resolve('成功')

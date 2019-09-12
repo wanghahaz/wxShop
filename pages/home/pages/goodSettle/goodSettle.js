@@ -11,7 +11,7 @@ Page({
     maskType: 0,
     address: {},
     goodsList: [],
-    is_jifen: true,
+    is_jifen: false,
     totalPrice: 0,
   },
   // 获取收货地址
@@ -68,8 +68,8 @@ Page({
     let data = {
       address_id: this.data.address.id, //地址id
       payment: '1', //默认1 微信支付
-      is_jifen: '0',
-      jifen_num: '0',
+      is_jifen: this.data.is_jifen ? 1 : 0,
+      jifen_num: this.data.is_jifen ? this.data.money : 0,
       goods_info: [],
     }
     let list = JSON.parse(JSON.stringify(this.data.goodsList))
@@ -80,7 +80,6 @@ Page({
         delivery: 1,
         goods: []
       })
-      console.log(item)
       item.goods.forEach(value => {
         data.goods_info[index].goods.push({
           goods_id: value.id,
@@ -117,6 +116,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  getChit() {
+    http.getReq('/jifen/logs', {}, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          money: res.data.jifen
+        })
+      }
+    })
+  },
   onLoad: function(options) {
     let that = this;
     let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
@@ -137,6 +145,7 @@ Page({
       totalPrice: totalPrice
     })
     that.getAdress()
+    that.getChit()
   },
 
   /**

@@ -38,7 +38,7 @@
       </button>
     </block>
   </view>
-  <view class="fs_19 tc recommended">为您推荐</view>
+  <view  style="color:#B2B2B2" class="fs_16 tc recommended">为您推荐</view>
   <view class="shop_list flex_wrap" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
       <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>

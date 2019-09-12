@@ -1,7 +1,7 @@
 var app = getApp();
 var socketOpen = false;
 var frameBuffer_Data, session, SocketTask;
-var url = 'ws://请填写您的长链接接口地址';
+var url = 'ws://192.168.0.108:9501';
 var upload_url = '请填写您的图片上传接口地址'
 Page({
   data: {
@@ -17,14 +17,14 @@ Page({
   onLoad: function() {
     this.bottom();
   },
-  onShow: function(e) {
-    if (!socketOpen) {
-      this.webSocket()
-    }
-  },
+  onShow: function(e) {},
   // 页面加载完成
   onReady: function() {
     var that = this;
+    if (!socketOpen) {
+      console.log(1)
+      this.webSocket()
+    }
     SocketTask.onOpen(res => {
       socketOpen = true;
       console.log('监听 WebSocket 连接打开事件。', res)
@@ -92,9 +92,16 @@ Page({
     var data = {
       body: that.data.inputValue,
     }
+    let data_1 = {
+      uid: 10,
+      ruid: 3,
+      type: 1,
+      content: that.data.inputValue
+    }
     if (socketOpen) {
+      console.log(1)
       // 如果打开了socket就发送数据给服务器
-      sendSocketMessage(data)
+      sendSocketMessage(data_1)
       this.data.allContentList.push({
         is_my: {
           text: this.data.inputValue
@@ -168,6 +175,7 @@ Page({
 
 //通过 WebSocket 连接发送数据，需要先 wx.connectSocket，并在 wx.onSocketOpen 回调之后才能发送。
 function sendSocketMessage(msg) {
+  console.log(msg)
   var that = this;
   console.log('通过 WebSocket 连接发送数据', JSON.stringify(msg))
   SocketTask.send({

@@ -616,10 +616,11 @@ button::after {
 }
 
 .maskContent .add_odd text {
-  width: 40rpx;
-  font-size: 40rpx;
+  padding: 0;
+  width: 44rpx;
+  font-size: 36rpx;
   background: #f8f6f7;
-  line-height: 40rpx;
+  line-height: 44rpx;
   border-radius: 50%;
   margin: 0 14rpx;
 }

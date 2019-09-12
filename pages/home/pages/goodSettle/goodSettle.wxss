@@ -7,7 +7,7 @@
 }
 
 .box_big {
-  padding-bottom: 98rpx;
+  padding-bottom: 190rpx;
 }
 
 .box {
@@ -70,7 +70,7 @@
 }
 
 .box_size {
-  margin: 10rpx auto;
+  margin: 16rpx auto;
 }
 
 .box_size >input {
@@ -100,6 +100,7 @@
   width: 100%;
   bottom: 101rpx;
   padding: 0 30rpx;
+  z-index: 9;
   background: #fff;
 }
 

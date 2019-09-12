@@ -10,11 +10,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showMask:true
+    showMask: true,
+    money: {}
   },
   showModel() {
     this.setData({
       showMask: !this.data.showMask
+    })
+  },
+  getChit() {
+    http.getReq('/jifen/logs', {}, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          money: res.data
+        })
+      } else {
+        until.toast({
+          title: res.msg || '获取失败'
+        })
+      }
     })
   },
   toRouter(e) {
@@ -33,7 +47,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
 
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    this.getChit()
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
