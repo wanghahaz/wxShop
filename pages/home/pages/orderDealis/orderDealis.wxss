@@ -114,6 +114,7 @@
 }
 
 .dealis_order .btn {
+  margin-top: 14rpx;
   justify-content: flex-end;
 }
 

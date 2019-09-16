@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    list: [],
     imgList: [],
     mannerStatus: 4, //满意度
     satisfyStatus: 4, //态度
@@ -18,6 +19,9 @@ Page({
       icon: 'success',
       title: '评论成功'
     })
+    setTimeout(()=>{
+      wx.navigateBack()
+    },1500)
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -32,15 +36,20 @@ Page({
     }
   },
   changeStar(e) {
-    if (e.currentTarget.dataset.satisfystatus != undefined) {
-      this.setData({
-        'satisfyStatus': e.currentTarget.dataset.satisfystatus,
-      })
-    } else if (e.currentTarget.dataset.mannerstatus != undefined) {
-      this.setData({
-        'mannerStatus': e.currentTarget.dataset.mannerstatus,
-      })
-    }
+    let list = this.data.list;
+    list[e.currentTarget.dataset.index].star = e.currentTarget.dataset.ind;
+    this.setData({
+      list: list
+    })
+    // if (e.currentTarget.dataset.satisfystatus != undefined) {
+    //   this.setData({
+    //     'satisfyStatus': e.currentTarget.dataset.satisfystatus,
+    //   })
+    // } else if (e.currentTarget.dataset.mannerstatus != undefined) {
+    //   this.setData({
+    //     'mannerStatus': e.currentTarget.dataset.mannerstatus,
+    //   })
+    // }
   },
   // 删除图片
   delImg(e) {
@@ -97,7 +106,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    console.log(app.globalData.commentList)
+    let list = app.globalData.commentList;
+    list.forEach(item => {
+      item.star = 4
+    })
+    this.setData({
+      list: list
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -122,7 +140,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    app.globalData.commentList = []
   },
 
   /**

@@ -1,21 +1,21 @@
 <!--index.wxml-->
 <view class="container">
-  <block wx:for="{{2}}" wx:key="{{index}}">
+  <block wx:for="{{list}}" wx:key="{{index}}">
     <view class="goodView  width94 box_zing">
       <view class="goods flex ">
         <image class="goodImg flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
         <view class="flex column flex_lr">
-          <text class="clamp_2 fs_14">我是商品我是商品我是商品我我是商品我是商品我是商品我是商品我是商品我是商品</text>
+          <text class="clamp_2 fs_14">{{item.goods_name}}</text>
           <view class="flex flex_lr">
-            <text class="fcF1">￥99</text>
-            <text>x1</text>
+            <text class="fcF1">￥{{item.goods_price}}</text>
+            <text>x{{item.status}}</text>
           </view>
         </view>
       </view>
 
       <view class="content_evaluation flex column">
         <textarea maxlength="100" placeholder="您的建议是我们最大的宝贵..."></textarea>
-        <view class="flex_wrap">
+        <!-- <view class="flex_wrap">
           <block wx:for="{{imgList}}" wx:key="{{index}}">
             <view class="upImg" style="position: relative">
               <image class="flex_nosize" src="{{item}}"></image>
@@ -26,21 +26,21 @@
             <text style="font-size:60rpx" class="fcb2">+</text>
             <text class="fs_13 fcb2">添加图片</text>
           </view>
-        </view>
+        </view> -->
       </view>
       <view class="flex  evaluation">
         <text class="flex_nosize">商品满意度</text>
         <view class="flex">
-          <block wx:for="{{5}}" wx:key="{{index}}">
-            <text data-index="{{index}}" bindtap="changeStar" wx:if="{{allCheck<index}}" class="./iconfont/iconwujiaoxing:before icon" style="font-size:40rpx;margin-left:30rpx;color:#C0C0C0"></text>
-            <text wx:else data-index="{{index}}" bindtap="changeStar" class="./iconfont/iconshiwujiaoxing:before icon" style="font-size:40rpx;margin-left:30rpx;color:#f4ea2a"></text>
+          <block wx:for="{{5}}" wx:for-item="value" wx:for-index="ind" wx:key="{{ind}}">
+            <text data-index="{{index}}" data-ind="{{ind}}" bindtap="changeStar" wx:if="{{item.star<ind}}" class="./iconfont/iconwujiaoxing:before icon" style="font-size:40rpx;margin-left:30rpx;color:#C0C0C0"></text>
+            <text wx:else data-index="{{index}}" data-ind="{{ind}}" bindtap="changeStar" class="./iconfont/iconshiwujiaoxing:before icon" style="font-size:40rpx;margin-left:30rpx;color:#f4ea2a"></text>
           </block>
         </view>
       </view>
     </view>
 
   </block>
-  <view class="shopView width94 box_zing">
+  <!-- <view class="shopView width94 box_zing">
     <view class="flex  evaluation">
       <text class="flex_nosize">描述相符</text>
       <view class="flex">
@@ -59,7 +59,7 @@
         </block>
       </view>
     </view>
-  </view>
+  </view> -->
   <view bindtap="submit" class="sub fs_17 tc ">
     提交评价
   </view>

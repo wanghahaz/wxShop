@@ -35,6 +35,7 @@ swiper-item {
 .dealis_order .goodsImg {
   height: 175rpx;
   width: 175rpx;
+  margin-right: 30rpx;
 }
 
 .dealis_order .coding {
@@ -59,22 +60,22 @@ swiper-item {
   margin-top: 30rpx;
   align-items: flex-end;
 }
-.dealis_order .allCheck,.submit .allCheck{
+
+.dealis_order .allCheck, .submit .allCheck {
   width: 38rpx;
   height: 38rpx;
   margin-right: 10rpx;
-}
-.dealis_order .goodsImg {
-  margin-right: 40rpx;
 }
 
 .dealis_order .goodsName {
   flex: 1;
 }
-.dealis_order .btn>text{
+
+.dealis_order .btn>text {
   margin-left: 20rpx;
 }
-.submit{
+
+.submit {
   height: 110rpx;
   background: #fff;
   z-index: 999;
@@ -83,18 +84,21 @@ swiper-item {
   left: 0;
   width: 100%;
 }
-.submit{
-  padding:0 5%;
+
+.submit {
+  padding: 0 5%;
   height: 100rpx;
 }
-.count_sum{
+
+.count_sum {
   width: 220rpx;
   line-height: 64rpx;
-  background: #F18E1E;
+  background: #f18e1e;
   border-radius: 32rpx;
   color: #fff;
   margin-left: 20rpx;
 }
+
 .title_name {
   margin-bottom: 20rpx;
 }

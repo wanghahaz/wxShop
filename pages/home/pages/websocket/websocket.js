@@ -4,49 +4,49 @@ var websocket = require("../../../../common/js/websocket.js");
 let inputVal = "";
 const app = getApp();
 var msgList = [{
-    time: '12:12:23',
-    speaker: 'server',
-    contentType: 'text',
-    content: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
+    created_at: '12:12:23',
+    ziji: '0',
+    type: '1',
+    message: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
   },
   {
-    time: '12:15:58',
-    speaker: 'customer',
-    contentType: 'text',
-    content: '我怕是走错片场了...'
+    created_at: '12:15:58',
+    ziji: '1',
+    type: '1',
+    message: '我怕是走错片场了...'
   }, {
-    time: '12:12:23',
-    speaker: 'server',
-    contentType: 'text',
-    content: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
+    created_at: '12:12:23',
+    ziji: '0',
+    type: '1',
+    message: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
   },
   {
-    time: '12:15:58',
-    speaker: 'customer',
-    contentType: 'text',
-    content: '我怕是走错片场了...'
+    created_at: '12:15:58',
+    ziji: '1',
+    type: '1',
+    message: '我怕是走错片场了...'
   }, {
-    time: '12:12:23',
-    speaker: 'server',
-    contentType: 'text',
-    content: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
+    created_at: '12:12:23',
+    ziji: '0',
+    type: '1',
+    message: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
   },
   {
-    time: '12:15:58',
-    speaker: 'customer',
-    contentType: 'text',
-    content: '我怕是走错片场了...'
+    created_at: '12:15:58',
+    ziji: '1',
+    type: '1',
+    message: '我怕是走错片场了...'
   }, {
-    time: '12:12:23',
-    speaker: 'server',
-    contentType: 'text',
-    content: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
+    created_at: '12:12:23',
+    ziji: '0',
+    type: '1',
+    message: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
   },
   {
-    time: '12:15:58',
-    speaker: 'customer',
-    contentType: 'text',
-    content: '我怕是走错片场了...'
+    created_at: '12:15:58',
+    ziji: '1',
+    type: '1',
+    message: '我怕是走错片场了...'
   }
 ];
 var windowWidth = wx.getSystemInfoSync().windowWidth;
@@ -91,14 +91,23 @@ Page({
       shopName: options.name,
       cusHeadIcon: app.globalData.userInfo.avatar,
     });
-    _this.open()
+    websocket.connect(function(res) {
+      console.log()
+      let list = _this.data.msgList;
+      list.push(JSON.parse(res.data))
+      _this.setData({
+        msgList: list,
+        inputVal: ''
+      })
+      _this.setData({
+        toView: 'msg-' + (list.length - 1)
+      })
+    })
     _this.pageScrollToBottom()
     //
   },
   open() {
-    websocket.connect(function(res) {
-      console.log(res)
-    })
+
   },
   /**
    * 生命周期函数--监听页面显示
@@ -221,9 +230,10 @@ Page({
   sendClick: function(e) {
     let data = {
       uid: this.data.userObj.id,
-      ruid: 0,
+      ruid: 17,
       type: 1,
-      content: this.data.inputVal || e.detail.value
+      content: this.data.inputVal || e.detail.value,
+      cmd: 'msg'
     }
     websocket.send(data)
     // let time = until.formatTime(new Date()).substring(until.formatTime(new Date()).length, 11);
@@ -233,7 +243,6 @@ Page({
     //   contentType: 'text',
     //   content: this.data.inputVal || e.detail.value
     // })
-    inputVal = '';
     // this.setData({
     //   msgList,
     //   inputVal

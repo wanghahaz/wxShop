@@ -1,5 +1,6 @@
 // 域名
-let req_url = 'http://mall.com/api';
+let req_url = 'http://www.lyjp.shop/api';
+// http://mall.com/api
 // get请求
 let getReq = function(url, data, show) {
   if (show) {

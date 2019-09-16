@@ -1,0 +1,29 @@
+<!--index.wxml-->
+<view class="container">
+  <view wx:if="{{list.length==0&&!isLoading}}" class="niMore">您还有没有售后订单哦！</view>
+  <block wx:for="{{4}}">
+    <view class="width94 box_zing fs_13">
+      <view class="flex">
+        <image class="flex_nosize goodsImg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567767330059&di=7c19a24cdb7ab2007a497adb2b3a4e40&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F09%2F20180709181137_ftqjg.thumb.700_0.jpg"></image>
+        <view class="goods_delis flex flex_lr column">
+          <view class="flex flex_lr goods_name">
+            <text class="clamp_2" style="width:60%">我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
+            <text class="fcF1">退款处理中</text>
+          </view>
+          <view class="flex flex_lr">
+            <text>￥99.00</text>
+            <text>×1</text>
+          </view>
+        </view>
+      </view>
+      <view class="btn flex flex_end">
+        <text class="fcF1 tc">查看详情</text>
+      </view>
+    </view>
+  </block>
+  <view wx:if="{{isLoading}}">
+    <view class="downLoding"></view>
+    <view style="height:50rpx"></view>
+  </view>
+  <view wx:if="{{isLoading==false&&list.length!=0}}" class="noMore">已加载全部！</view>
+</view>

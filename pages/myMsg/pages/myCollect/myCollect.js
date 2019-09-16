@@ -327,6 +327,7 @@ Page({
   },
   onShow: function() {
     this.setData({
+      showMask: true,
       list: []
     })
     this.getGoodsColl()

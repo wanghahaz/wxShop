@@ -3,24 +3,24 @@
     <view class="chat-notice fs_14 tc">系统消息: 欢迎来到{{shopName}}</view>
     <block wx:key wx:for='{{msgList}}' wx:for-index="index">
 
-      <view class="tc fs_13" style="margin:40rpx 0 10rpx 0">{{item.time}}</view>
+      <view class="tc fs_13" style="margin:40rpx 0 10rpx 0">{{item.created_at}}</view>
       <!-- 单个消息1 客服发出（左） -->
-      <view wx:if='{{item.speaker=="server"}}' id='msg-{{index}}' style='display: flex; padding: 2vw 11vw 2vw 2vw;' class="box_zing">
+      <view wx:if='{{item.ziji=="0"}}' id='msg-{{index}}' style='display: flex; padding: 2vw 11vw 2vw 2vw;' class="box_zing">
         <view style='width: 11vw; height: 11vw;'>
           <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg'></image>
         </view>
         <view style='width: 4vw; height: 11vw; margin-left: 0.5vw; display: flex; align-items: center; z-index: 9; position: relative'>
           <text class="./iconfont/iconzuojiantou:before icon left" style="font-size:40rpx; color:#fff"></text>
         </view>
-        <view wx:if="{{item.contentType=='text'}}" class='leftMsg'>{{item.content}}</view>
+        <view wx:if="{{item.type=='1'}}" class='leftMsg'>{{item.message}}</view>
       </view>
 
       <!-- 单个消息2 用户发出（右） -->
       <view wx:else id='msg-{{index}}' style='display: flex; justify-content: flex-end; padding: 2vw 2vw 2vw 11vw;' class="box_zing">
-        <view wx:if="{{item.contentType=='text'}}" class='rightMsg'>{{item.content}}</view>
-        <image catchtap="lookImg" data-src="{{item.content}}" mode="widthFix" wx:else src="{{item.content}}" style="width:220rpx"></image>
+        <view wx:if="{{item.type=='1'}}" class='rightMsg'>{{item.message}}</view>
+        <image catchtap="lookImg" data-src="{{item.content}}" mode="widthFix" wx:elif="{{item.type=='3'}}" src="{{item.message}}" style="width:220rpx"></image>
         <view style='width: 4vw; height: 11vw; margin-right: 0.5vw; display: flex; align-items: center; z-index: 9;position: relative'>
-          <text wx:if="{{item.contentType=='text'}}" class="./iconfont/iconzuojiantou:before icon right" style="font-size:40rpx; color:#96eb6a"></text>
+          <text wx:if="{{item.type=='1'}}" class="./iconfont/iconzuojiantou:before icon right" style="font-size:40rpx; color:#96eb6a"></text>
         </view>
         <view style='width: 11vw; height: 11vw;'>
           <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='{{cusHeadIcon}}'></image>

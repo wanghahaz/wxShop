@@ -75,12 +75,6 @@ open-data[type="userAvatarUrl"] {
   border-radius: 50%;
   padding: 0;
 }
-
-.content_evaluation textarea {
-  height: 110rpx;
-  padding: 20rpx 0;
-}
-
 .content_evaluation .addImg, .upImg {
   margin: 0 30rpx 30rpx 0;
   background: #f0f0f0;

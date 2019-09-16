@@ -90,6 +90,7 @@
 .goodsImg {
   width: 218rpx;
   height: 188rpx;
+  margin-right: 10rpx;
 }
 
 .remark {

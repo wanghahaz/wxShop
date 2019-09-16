@@ -32,6 +32,7 @@ Page({
     orderType: {},
   },
   setType() {
+    let _this = this;
     let data = {
       type: this.data.orderType.type
     }
@@ -39,20 +40,48 @@ Page({
       data.use_jifen = this.data.orderType.jifen
     }
     http.postReq(`/order/deal/${this.data.orderType.id}`, data).then(res => {
-      console.log(res)
-      if (res.code == 200) {
+      if (res.code == 300) {
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success: (re) => {
+            _this.setData({
+              isLoading: true,
+              page: 1,
+              goodsList: []
+            })
+            _this.getMyOrder()
+          },
+          fail: function(err) {
+            console.log(err, 2)
+          }
+        })
+      } else if (res.code == 200) {
         until.toast({
           icon: 'success',
           title: this.data.orderType.toast
         })
+
         setTimeout(() => {
-          this.setData({
-            isLoading: true,
-            page: 1,
-            goodsList: []
-          })
-          this.getMyOrder()
+          if (this.data.orderType.type == 1) {
+            let list = this.data.goodsList.filter(item => item.id == this.data.orderType.id)
+            app.globalData.commentList = list[0].orderdata;
+            wx.redirectTo({
+              url: "/pages/home/pages/sureGoods/sureGoods",
+            })
+          } else {
+            this.setData({
+              isLoading: true,
+              page: 1,
+              goodsList: []
+            })
+            this.getMyOrder()
+          }
         }, 1000)
+
       } else {
         until.toast({
           title: res.msg || '操作失败'
@@ -79,7 +108,7 @@ Page({
       }
       this.setType()
     }).catch(err => {
-      if (e.currentTarget.dataset.jifen==1) {
+      if (e.currentTarget.dataset.jifen == 1) {
         let data = JSON.parse(JSON.stringify(this.data.orderType))
         data.jifen = 0;
         this.setData({

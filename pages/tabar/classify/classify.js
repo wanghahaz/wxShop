@@ -42,7 +42,7 @@ Page({
     }).catch(err => {})
   },
   changelf(e) {
-    let id = this.data.fyList[this.data.leftIndex].id;
+    let id = this.data.fyList[e.currentTarget.dataset.index].id;
     this.setData({
       leftIndex: e.currentTarget.dataset.index,
       pid: id

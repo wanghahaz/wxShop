@@ -36,11 +36,12 @@ Page({
     }, {
       name: '退款/售后',
       status: '4',
-      path: "/pages/home/pages/myOrder/myOrder",
+      path: "/pages/myMsg/pages/saleList/saleList",
       src: '../../../image/shouhou.png',
       style: 'width:58rpx;height:52rpx'
     }],
     btList: [{
+        // path: '/pages/home/pages/sureGoods/sureGoods',
         name: '我的代金券',
         path: '/pages/myMsg/pages/myChit/myChit',
         clas: "money",

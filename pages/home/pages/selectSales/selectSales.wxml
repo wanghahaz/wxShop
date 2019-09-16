@@ -11,18 +11,18 @@
       </view>
     </view>
   </view>
-  <view bindtap="toRouter" data-name="退货" data-path="/pages/salesSub/salesSub" class="select flex fs_15 width94 box_zing flex_lr_m">
+  <view bindtap="toRouter" data-name="退款" data-goodId="{{goodId}}" data-orderId="{{orderId}}" data-path="/pages/home/pages/salesSub/salesSub" class="select flex fs_15 width94 box_zing flex_lr_m">
     <view class="flex_m flex">
       <text class="./iconfont/iconicon5:before icon {{noSales?'noSales':''}}" style="font-size:44rpx;margin-right:8rpx"></text>
-      <text class="{{noSales?'noSales':''}}">退货</text>
+      <text class="{{noSales?'noSales':''}}">仅退款</text>
     </view>
     <text class="./iconfont/iconarrow-right-copy:before icon {{noSales?'noSales':''}}" style="font-size:40rpx"></text>
   </view>
-  <view bindtap="toRouter" data-name="换货"  data-path="/pages/salesSub/salesSub"  class="select flex fs_15 width94 box_zing flex_lr_m">
+  <view bindtap="toRouter" data-goodId="{{goodId}}" data-orderId="{{orderId}}" data-name="退款退货" data-path="/pages/home/pages/salesSub/salesSub" class="select flex fs_15 width94 box_zing flex_lr_m">
     <view class="flex_m flex">
       <text class="./iconfont/icontuihuanhuo:before icon {{noSales?'noSales':''}}" style="font-size:46rpx;margin-right:8rpx"></text>
-      <text class="{{noSales?'noSales':''}}">换货</text>
+      <text class="{{noSales?'noSales':''}}">退款退货</text>
     </view>
-    <text  class="./iconfont/iconarrow-right-copy:before icon {{noSales?'noSales':''}} " style="font-size:40rpx"></text>
+    <text class="./iconfont/iconarrow-right-copy:before icon {{noSales?'noSales':''}} " style="font-size:40rpx"></text>
   </view>
 </view>

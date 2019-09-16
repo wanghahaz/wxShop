@@ -36,10 +36,10 @@
             </view>
             <text wx:if="{{value.spec_name}}" class="remark clamp_1 fs_12 tc fcb2">{{value.spec_name}}</text>
             <view wx:if="{{dealis.status==2}}" class="btn flex fs_13">
-              <text data-path="/pages/mySales/mySales" bindtap="toRouter" class="evaluation fcF1">申请售后</text>
+              <text data-path="/pages/home/pages/selectSales/selectSales" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请售后</text>
             </view>
             <view wx:if="{{dealis.status==1}}" class="btn flex fs_13">
-              <text data-path="/pages/mySales/mySales" bindtap="toRouter" class="evaluation fcF1">申请退款</text>
+              <text data-path="/pages/home/pages/selectSales/selectSales" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
             </view>
           </view>
         </view>
@@ -60,13 +60,13 @@
       <text>订单总价</text>
       <text>￥{{dealis.total_fee}}</text>
     </view>
-    <view class="sum box_zing fs_14">
+    <!-- <view class="sum box_zing fs_14">
       <view class="ter fcb2">支付明细</view>
       <view class="flex flex_lr">
         <text>需付款</text>
         <text class="fcF1 fs_14">￥{{dealis.total_fee}}</text>
       </view>
-    </view>
+    </view> -->
   </view>
   <view class="orderDealis width94 flex column box_zing fs_12">
     <text class="fs_16">订单信息</text>

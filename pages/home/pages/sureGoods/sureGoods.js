@@ -1,15 +1,46 @@
 //index.js
 //获取应用实例
 const app = getApp();
-import until from "../../../../utils/util.js";
 import http from "../../../../common/js/http.js";
+import until from "../../../../utils/util.js";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    noSales: 0
+    isPullDownRefresh: true,
+    page: 1,
+    shopList: []
+  },
+  switchTab(e) {
+    wx.switchTab({
+      url: e.currentTarget.dataset.path
+    })
+  },
+  redirectTo(e) {
+    wx.redirectTo({
+      url: e.currentTarget.dataset.path,
+    })
+  },
+  // 首页商品推荐
+  getGoods() {
+    http.getReq('/index/goods', {
+      page: this.data.page
+    }, true).then(res => {
+      this.setData({
+        shopList: [...this.data.shopList, ...res.data.data]
+      })
+      if (res.data.last_page == this.data.page) {
+        this.setData({
+          isPullDownRefresh: false
+        })
+      } else {
+        this.setData({
+          page: this.data.page + 1
+        })
+      }
+    })
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -23,19 +54,11 @@ Page({
       })
     }
   },
-  changeTitle(e) {
-    this.setData({
-      titleIndex: e.currentTarget.dataset.index,
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      goodId: options.goodid,
-      orderId: options.orderid
-    })
+    this.getGoods()
   },
 
   /**
@@ -75,7 +98,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if (this.data.isPullDownRefresh) {
+      this.getGoods()
+    }
   },
 
   /**

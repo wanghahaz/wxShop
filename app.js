@@ -146,6 +146,7 @@ App({
     this.setBadge();
   },
   globalData: {
+    commentList:[],
     openid: '',
     clientHeight: 0,
     userInfo: {},

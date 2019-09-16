@@ -48,7 +48,7 @@
     </block>
   </view>
   <view class="fs_14  flex flex_m flex_lr money box_zing">
-    <text>可使用{{money}}元代金券</text>
+    <text>可使用{{totalPrice>money?money:totalPrice}}元代金券</text>
     <image bindtap="setShopCheck" wx:if="{{is_jifen}}" class="check" src="../../../../image/check.png"></image>
     <text bindtap="setShopCheck" wx:else class="nocheck box_zing check"></text>
   </view>

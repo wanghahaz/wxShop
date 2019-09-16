@@ -140,7 +140,7 @@
           <text class="fs_16">合计：￥{{item.goods_amount}}</text>
         </view>
         <view class="btn count flex fs_13">
-          <text wx:if='{{item.status==2}}' data-id="{{item.id}}" data-type="5" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">确认收货</text>
+          <text wx:if='{{item.status==2}}' data-id="{{item.id}}" data-type="1" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">确认收货</text>
           <text wx:if='{{item.status==9||item.status==10||item.status==1||item.status==2}}' class="evaluation fcF1">查看订单</text>
         </view>
       </view>

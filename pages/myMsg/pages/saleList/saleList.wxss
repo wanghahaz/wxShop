@@ -1,0 +1,24 @@
+.width94 {
+  margin-top: 18rpx;
+  background: #fff;
+  border-radius: 19rpx;
+  padding: 26rpx 30rpx;
+}
+
+.goodsImg {
+  width: 176rpx;
+  height: 176rpx;
+}
+.goods_name >text{
+  line-height: 1.6
+}
+.goods_delis {
+  margin-left: 16rpx;
+}
+.btn text{
+  width: 138rpx;
+  line-height: 50rpx;
+  border: 1px solid #F18E1E;
+  border-radius: 24rpx;
+  margin-top:40rpx;
+}

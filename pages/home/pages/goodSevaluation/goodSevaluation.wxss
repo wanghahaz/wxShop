@@ -9,9 +9,10 @@
   margin: 20rpx auto;
 }
 
-textarea {
+.content_evaluation textarea {
+  height: 180rpx;
   background: #fff;
-  padding: 10rpx;
+  padding: 20rpx 0;
   font-size: 28rpx;
 }
 

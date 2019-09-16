@@ -14,13 +14,13 @@
         </view>
       </block>
       <block wx:if="{{title=='使用记录'}}">
-        <view>
+        <view wx:for="{{item.order}}" wx:for-item="value" wx:for-index="ind" wx:key="{{ind}}">
           <text>订单编号：</text>
-          <text>E11122233344455566</text>
+          <text>{{value.pay_sn}}</text>
         </view>
         <view>
           <text>共使用代金券：</text>
-          <text>10元</text>
+          <text>{{item.money}}元</text>
         </view>
       </block>
     </view>

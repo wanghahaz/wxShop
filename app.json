@@ -28,7 +28,8 @@
         "pages/selectSales/selectSales",
         "pages/logistics/logistics",
         "pages/orderDealis/orderDealis",
-        "pages/seckill/seckill"
+        "pages/seckill/seckill",
+        "pages/sureGoods/sureGoods"
       ]
     },
     {
@@ -42,7 +43,8 @@
         "pages/addAdress/addAdress",
         "pages/invitation/invitation",
         "pages/set/set",
-        "pages/intimacy/intimacy"
+        "pages/intimacy/intimacy",
+        "pages/saleList/saleList"
       ]
     }
   ],

@@ -69,7 +69,7 @@ Page({
       address_id: this.data.address.id, //地址id
       payment: '1', //默认1 微信支付
       is_jifen: this.data.is_jifen ? 1 : 0,
-      jifen_num: this.data.is_jifen ? this.data.money : 0,
+      jifen_num: this.data.is_jifen ? (this.data.totalPrice > this.data.money ? this.data.money : this.data.totalPrice) : 0,
       goods_info: [],
     }
     let list = JSON.parse(JSON.stringify(this.data.goodsList))
@@ -95,16 +95,26 @@ Page({
     }, true).then(res => {
       console.log(res)
       if (res.code == 200) {
-
+        until.toast({
+          title: '支付成功'
+        });
+        setTimeout(() => {
+          wx.navigateBack();
+        },1000)
       } else if (res.code == 300) {
         wx.requestPayment({
-          timeStamp: '',
-          nonceStr: '',
-          package: '',
-          signType: '',
-          paySign: '',
-          success: (res) => {},
-          fail: function(err) {}
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success: (res) => {
+            console.log(res, 1)
+            wx.navigateBack()
+          },
+          fail: function(err) {
+            console.log(err, 2)
+          }
         })
       } else {
         until.toast({
@@ -144,6 +154,7 @@ Page({
       goodsList: list,
       totalPrice: totalPrice
     })
+    console.log(this.data.totalPrice)
     that.getAdress()
     that.getChit()
   },

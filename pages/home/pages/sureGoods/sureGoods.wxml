@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="icon_scuee fs_15 flex column flex_m">
+    <icon type="success" size="55" color="#F18E1E" />
+    <text>收货成功!</text>
+  </view>
+  <view class="router flex flex_sa  fs_15">
+    <text catchtap="switchTab" data-path="/pages/tabar/index/index">返回首页</text>
+    <text catchtap="redirectTo" data-path="/pages/home/pages/goodSevaluation/goodSevaluation">去评价</text>
+  </view>
+  <!-- <block wx:for="{{list}}" wx:key="{{index}}"> -->
+  <view class="fs_16 tc recommended" style="color:#B2B2B2">好物推荐</view>
+  <view class="shop_list flex_wrap width90" style="width:92%">
+    <block wx:for="{{shopList}}" wx:key="{{index}}">
+      <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+    </block>
+  </view>
+  <view class="noMore" wx:if="{{!isPullDownRefresh&&shopList.length>0}}">没有更多数据了...</view>
+  <!-- </block> -->
+</view>

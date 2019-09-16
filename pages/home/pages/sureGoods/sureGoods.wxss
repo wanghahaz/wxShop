@@ -1,0 +1,24 @@
+.icon_scuee {
+  background: #fff;
+  padding: 70rpx 0 50rpx 0;
+}
+
+.icon_scuee text {
+  margin-top: 38rpx;
+}
+.router{
+  background: #fff;
+  padding-bottom: 40rpx;
+}
+.router text {
+  border: 1px solid #000;
+  border-radius: 38rpx;
+  width: 190rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+
+.router text:nth-of-type(2) {
+  border-color: #f18e1e;
+  color: #f18e1e;
+}

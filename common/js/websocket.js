@@ -1,6 +1,10 @@
 var url = 'ws://192.168.0.108:9501'; //服务器地址
 let socketOpen = false;
 
+function aa(func) {
+
+}
+
 function connect(func) {
   wx.connectSocket({
     url: url,
@@ -22,7 +26,6 @@ function connect(func) {
 
   wx.onSocketOpen(function(res) {
     socketOpen = true;
-    console.log('~~~~~~~~~')
     //接受服务器消息
     wx.onSocketMessage(func); //func回调可以拿到服务器返回的数据
   });
@@ -40,9 +43,9 @@ function connect(func) {
 //发送消息
 function send(msg) {
   if (socketOpen) {
-    console.log(msg)
+    console.log(JSON.stringify(msg))
     wx.sendSocketMessage({
-      data: msg
+      data: JSON.stringify(msg)
     }, function(res) {
       console.log(res)
     });
