@@ -14,8 +14,9 @@
         <text class="{{sIndex==1?'fs_18':''}}">我的双倍收益卡</text>
       </view>
     </view>
-    <!-- data-path="/pages/share/share" -->
-    <button open-type="share" hover-class='none' catchtap="toRouter" class="invita fs_16 tc">发邀请领双倍收益卡</button>
+    <!--open-type="share"  -->
+    <!--  data-path="/pages/tabar/share/share"  catchtap="toRouter" -->
+    <button open-type="share" hover-class='none' class="invita fs_16 tc">发邀请领双倍收益卡</button>
   </view>
   <view class="tc recommended" style="color:#B2B2B2">{{index==0?'邀请的朋友':'双倍收益卡'}}</view>
   <view wx:if="{{userList.length==0}}" class="noInva flex column flex_m">
@@ -27,7 +28,7 @@
     <block wx:for="{{userList}}" wx:key="{{index}}">
       <view class="fs_15 userList flex flex_lr flex_m">
         <view class="flex flex_m">
-          <image  src="{{item.user.avatar}}"></image>
+          <image src="{{item.user.avatar}}"></image>
           <text style="margin:0 0 0 20rpx">{{item.user.username}}</text>
         </view>
         <text class="flex_nosize">{{item.created_at}}</text>

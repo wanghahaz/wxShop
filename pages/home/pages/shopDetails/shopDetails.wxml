@@ -18,7 +18,7 @@
   <view wx:if="{{shopList.length==0&&!isPullDownRefresh}}" class="noMore">暂无商品...</view>
   <view class="shop_list flex_wrap width90" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
-      <one_shop data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+      <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
     </block>
   </view>
   <view wx:if="{{isPullDownRefresh}}">
@@ -27,7 +27,7 @@
   </view>
   <view class="noMore" wx:if="{{!isPullDownRefresh&&shopList.length>0}}">没有更多数据了...</view>
   <view class="footer box_zing fs_11 flex">
-    <view class="flex column flex_c_m" style="border-right: 1px solid #e4e4e4;">
+    <view wx:if="{{store_cate.length>0}}" bindtap="showModel" class="flex column flex_c_m" style="border-right: 1px solid #e4e4e4;">
       <image style="width:32rpx;height:26rpx;margin-bottom:4rpx" src="../../../../image/shopFiy.png"></image>
       <text>分类</text>
     </view>
@@ -35,5 +35,20 @@
       <image style="width:32rpx;height:32rpx;margin-bottom:4rpx" src="../../../../image/shopAll.png"></image>
       <text>全部</text>
     </view>
+  </view>
+  <view class="mask" bindtap="showModel" catch:touchmove hidden="{{showMask}}"></view>
+  <view hidden="{{showMask}}" class="clsFiy">
+    <block wx:for="{{store_cate}}" wx:key="{{index}}">
+      <view class="fs_14">
+        <view data-type="1" data-id="{{shopId}}" data-clfiyId="{{item.id}}" data-name="{{item.name}}" data-path="/pages/home/pages/classfyGoods/classfyGoods" catchtap="toRouter" class="flex box_zing flex_lr first">
+          <text>{{item.name}}</text>
+          <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:34rpx"></text>
+        </view>
+        <view class="first box_zing sub flex_wrap" wx:if="{{item.sub}}">
+          <text data-type="1" data-id="{{shopId}}" data-clfiyId="{{value.id}}" data-name="{{value.name}}" data-path="/pages/home/pages/classfyGoods/classfyGoods" catchtap="toRouter" wx:for="{{item.sub}}" wx:key="{{ind}}" wx:for-item="value" wx:for-index="ind" class="tc clamp_1">{{value.name}}</text>
+        </view>
+      </view>
+    </block>
+    <view bindtap="showModel" class="btn tc fs_17">关闭</view>
   </view>
 </view>

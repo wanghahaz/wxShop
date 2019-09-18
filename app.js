@@ -146,6 +146,7 @@ App({
     this.setBadge();
   },
   globalData: {
+    webGoods:{},
     commentList: [], //评价商品列表
     saleGoods: {}, //售后商品
     goodsList: [], //再次购买的商品列表

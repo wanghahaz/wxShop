@@ -21,7 +21,7 @@ Page({
       list.push({
         goods_id: item.goods_id,
         sku_id: item.sku_id,
-        score: item.score,
+        score: item.score + 1,
         content: item.content
       })
     })

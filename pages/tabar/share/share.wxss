@@ -13,8 +13,49 @@
   width: 100%;
   height: 100%;
 }
-.home{
+
+.home {
   position: absolute;
   top: 10rpx;
   z-index: 99;
+}
+
+.box_img {
+  position: fixed;
+  z-index: 9;
+  width: 94%;
+  height: 46%;
+  bottom: 150rpx;
+  left: 3%;
+}
+
+.box_img img {
+  width: 100%;
+  height: 100%;
+}
+
+.box_img .msg {
+  position: absolute;
+  top: 220rpx;
+  left: 20%;
+  line-height: 1.8;
+}
+
+.box_img .inta_si {
+  position: absolute;
+  top: 40rpx;
+  width: 60%;
+  left: 22%;
+  height: 140rpx;
+}
+
+.box_img .to {
+  position: absolute;
+  bottom: 34rpx;
+  right: 18%;
+  color: #f18e10;
+}
+.box_img .to .icon{
+  position: relative;
+  top: 8rpx;
 }

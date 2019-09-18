@@ -8,7 +8,7 @@
     </block>
   </swiper>
   <view class="fs_15 tc fcF1 look">亲，观看视频可获得代金券哦~ </view>
-  <view class="cd" data-id="{{row.id}}" data-path="/pages/home/pages/bannerDealis/bannerDealis" catchtap="toRouter">
+  <view class="cd" data-id="{{row.id}}" data-time="{{time}}" data-path="/pages/home/pages/bannerDealis/bannerDealis" catchtap="toRouter">
     <image src="{{row.thumb}}"></image>
   </view>
   <view wx:if="{{isLogin&&cardNum==0}}" class="fs_15 intal flex flex_c_m">

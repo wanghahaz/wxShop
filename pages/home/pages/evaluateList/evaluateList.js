@@ -8,11 +8,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    eavlIndex: 0,
+    typeList: [{
+      id: 0,
+      name: '全部'
+    }, {
+      id: 1,
+      name: '满意'
+    }, {
+      id: 2,
+      name: '一般'
+    }, {
+      id: 3,
+      name: '差评'
+    }],
     goodsId: 0,
-    commentList: [1],
+    commentList: [],
     page: 1,
-    isLoding: true
+    isLoding: true,
+    eval_top: {},
+    type: 0
+  },
+  setType(e) {
+    this.setData({
+      type: e.currentTarget.dataset.type,
+      isLoding: true,
+      page: 1,
+      commentList: []
+    })
+    this.getComment()
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -26,12 +49,39 @@ Page({
       })
     }
   },
-  // 商品评价
-  getComment() {
-    http.getReq(`/goods/get_eval_list/${this.data.goodsId}`, {}, true).then(res => {
+  // 商品评价好评率等计算
+  getEval_top() {
+    http.getReq(`/goods/get_eval_top/${this.data.goodsId}`, {}).then(res => {
+      console.log(res)
       if (res.code == 200) {
         this.setData({
-          commentList: res.data
+          eval_top: res.data
+        })
+      }
+    })
+  },
+  // 商品评价
+  getComment() {
+    http.getReq(`/goods/get_eval_list/${this.data.goodsId}`, {
+      page: this.data.page,
+      type: this.data.type
+    }, true).then(res => {
+      if (res.code == 200) {
+        this.setData({
+          commentList: [...this.data.commentList, ...res.data.data]
+        })
+        if (res.data.last_page == this.data.page) {
+          this.setData({
+            isLoding: false
+          })
+        } else {
+          this.setData({
+            page: this.data.page + 1
+          })
+        }
+      } else {
+        this.setData({
+          isLoding: false
         })
       }
     })
@@ -44,6 +94,7 @@ Page({
       goodsId: options.id
     })
     this.getComment()
+    this.getEval_top()
   },
 
   /**
@@ -83,7 +134,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if (this.data.isLoding) {
+      this.getComment()
+    }
   },
 
   /**

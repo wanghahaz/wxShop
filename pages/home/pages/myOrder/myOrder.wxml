@@ -27,7 +27,11 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-            <text wx:if="{{value.spec_name}}" class="fs_12 fcb2">{{value.spec_name}}</text>
+             <view class="fs_12 flex flex_lr refund_type">
+              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
+              <text class="fcF1">{{refund_type[value.type]}}</text>
+            </view>
+            
           </view>
         </view>
 
@@ -65,7 +69,11 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-            <text wx:if="{{value.spec_name}}" class="fs_12 fcb2">{{value.spec_name}}</text>
+             <view class="fs_12 flex flex_lr refund_type">
+              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
+              <text class="fcF1">{{refund_type[value.type]}}</text>
+            </view>
+            
           </view>
         </view>
 
@@ -98,7 +106,14 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-            <text wx:if="{{value.spec_name}}" class="fs_12 fcb2">{{value.spec_name}}</text>
+            <view class="fs_12 flex flex_lr refund_type">
+              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
+              <text class="fcF1">{{refund_type[value.type]}}</text>
+            </view>
+             <view class="fs_12 flex flex_lr refund_type">
+              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
+              <text class="fcF1">{{refund_type[value.type]}}</text>
+            </view>
           </view>
         </view>
 
@@ -108,7 +123,7 @@
         </view>
         <view class="btn count flex fs_13">
           <text wx:if='{{item.status==1}}' data-id="{{item.id}}" data-type="5" data-toast="已提醒卖家发货！" data-model="提醒发货?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">提醒发货</text>
-          <text  class="evaluation fcF1">查看订单</text>
+          <text class="evaluation fcF1">查看订单</text>
         </view>
       </view>
     </block>
@@ -131,7 +146,11 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-            <text wx:if="{{value.spec_name}}" class="fs_12 fcb2">{{value.spec_name}}</text>
+             <view class="fs_12 flex flex_lr refund_type">
+              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
+              <text class="fcF1">{{refund_type[value.type]}}</text>
+            </view>
+            
           </view>
         </view>
 
@@ -164,7 +183,11 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-            <text wx:if="{{value.spec_name}}" class="fs_12 fcb2">{{value.spec_name}}</text>
+             <view class="fs_12 flex flex_lr refund_type">
+              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
+              <text class="fcF1">{{refund_type[value.type]}}</text>
+            </view>
+            
           </view>
         </view>
 

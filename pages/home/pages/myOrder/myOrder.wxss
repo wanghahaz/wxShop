@@ -38,6 +38,16 @@ swiper-item {
   margin-right: 30rpx;
 }
 
+.dealis_order .goodsDealis {
+  position: relative;
+}
+
+.dealis_order .refund_type {
+  position: absolute;
+  top: 100rpx;
+  width: 100%;
+}
+
 .dealis_order .coding {
   margin: 30rpx 0 24rpx;
 }

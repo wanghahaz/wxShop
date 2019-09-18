@@ -15,12 +15,13 @@ Page({
     marquee2copy_status: false,
     marquee2_margin: 10,
     size: 14,
-    interval: 30,
+    interval: 45,
     ads: [],
     row: {},
     logsList: [],
     height: 0,
     cardNum: 0,
+    time: ''
   },
   //点击使用体验卡 
   startCard(e) {
@@ -66,7 +67,8 @@ Page({
         cardNum: res.data.gift_card_num,
         ads: res.data.ads,
         row: res.data.row,
-        supNum: res.data.is_useing_gift_card
+        supNum: res.data.is_useing_gift_card,
+        time: res.data.left_time
       })
     })
   },
@@ -169,7 +171,9 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {},
+  onHide: function() {
+    clearInterval(timers)
+  },
 
   /**
    * 生命周期函数--监听页面卸载

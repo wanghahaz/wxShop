@@ -54,3 +54,44 @@
   left: 0;
   z-index: 99;
 }
+
+.clsFiy {
+  z-index: 99;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  max-height:510rpx;
+  width: 100%;
+  padding-bottom: 100rpx;
+}
+
+.first {
+  padding: 20rpx 5%;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.sub {
+  padding: 0rpx 5%;
+}
+
+.sub text {
+  line-height: 48rpx;
+  background: rgba(228, 228, 228, 1);
+  border-radius: 24rpx;
+  color: #8a8a8a;
+  margin-top: 14rpx;
+  width: 30%;
+  margin: 20rpx 3% 20rpx 0;
+}
+
+.clsFiy .btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 100rpx;
+  color: #fff;
+  background: #f18e1e;
+}

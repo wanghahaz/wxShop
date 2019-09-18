@@ -208,7 +208,6 @@ Page({
       page: this.data.page,
       type: type
     }, true).then(res => {
-      console.log(res)
       if (res.code == 200) {
         this.setData({
           list: [...this.data.list, ...res.data.data],

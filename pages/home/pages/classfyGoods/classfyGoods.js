@@ -20,10 +20,10 @@ Page({
     let data = {
       page: this.data.page
     }
-    if (this.data.type == 1) {
+    if (this.data.type == 1) { //商店跳转过来
       url = `/store/info/goods/${this.data.cate_id}`
       data.cate = this.data.clfiyId;
-    } else {
+    } else { //分类跳转过来
       url = `/cate/get_goods_list/${this.data.cate_id}`
     }
     http.getReq(url, data, true).then(res => {
@@ -70,7 +70,7 @@ Page({
     })
     this.setData({
       type: options.type || 0,
-      clfiyId: options.clfiyid||0,
+      clfiyId: options.clfiyid || 0,
       cate_id: options.id
     })
     this.getGoods()

@@ -18,13 +18,26 @@ Page({
       '5': '已拒绝',
       '6': '商家审核通过',
       '7': '退款成功',
-      '8': '已收货',
+      '8': '已完成',
       '9': '已取消',
       '10': '已关闭'
+    },
+    refund_type: {
+      '1_1': '退货中',
+      '1_2': '退货已拒绝',
+      '1_3': '已退货',
+      '3_1': '退款中',
+      '3_2': '退款已拒绝',
+      '1_3': '已退款',
     },
     dealis: {},
     id: null,
     orderType: {}
+  },
+  call(e) {
+    until.toast({
+      title: "商家没有绑定电话！"
+    })
   },
   toRouter(e) {
     let goods = JSON.parse(JSON.stringify(this.data.dealis.order_data))
@@ -67,8 +80,12 @@ Page({
     http.getReq(`/order/info/${this.data.id}`, {}, true).then(res => {
       // console.log(res)
       if (res.code == 200) {
+        let data = res.data;
+        data.order_data.forEach(item => {
+          item.type = `${item.refund_type}_${item.is_refund}`
+        })
         this.setData({
-          dealis: res.data
+          dealis: data
         })
       } else {
         until.toast({

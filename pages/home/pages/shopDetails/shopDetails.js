@@ -15,7 +15,14 @@ Page({
     titleIndex: 1,
     shopList: [],
     page: 1,
-    isPullDownRefresh: true
+    store_cate: [],
+    isPullDownRefresh: true,
+    showMask: true
+  },
+  showModel() {
+    this.setData({
+      showMask: !this.data.showMask
+    })
   },
   getShopDealis() {
     http.getReq(`/store/info/${this.data.shopId}`, {
@@ -24,7 +31,8 @@ Page({
       if (res.code == 200) {
         this.setData({
           is_collect: res.data.is_collect,
-          shopObj: res.data.row
+          shopObj: res.data.row,
+          store_cate: res.data.store_cate
         })
       } else {
         until.taost({
@@ -96,6 +104,9 @@ Page({
         url: e.currentTarget.dataset.path,
       })
     }
+    this.setData({
+      showMask: true
+    })
   },
   /**
    * 生命周期函数--监听页面加载

@@ -36,10 +36,16 @@
             </view>
             <text wx:if="{{value.spec_name}}" class="remark clamp_1 fs_12 tc fcb2">{{value.spec_name}}</text>
             <view wx:if="{{dealis.status==2}}" class="btn flex fs_13">
-              <text data-name="退货" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请售后</text>
+              <text wx:if="{{value.refund_type==0&&value.is_refund==0}}" data-name="退货" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请售后</text>
+              <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis" wx:else>{{refund_type[value.type]}}</text>
             </view>
             <view wx:if="{{dealis.status==1}}" class="btn flex fs_13">
-              <text data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
+              <text wx:if="{{value.refund_type==0&&value.is_refund==0}}" data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
+              <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis" wx:else>{{refund_type[value.type]}}</text>
+            </view>
+            <view wx:if="{{value.is_refund!=0}}" class="btn flex fs_13">
+              <!-- <text wx:if="{{value.refund_type==0&&value.is_refund==0}}" data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text> -->
+              <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis">{{refund_type[value.type]}}</text>
             </view>
           </view>
         </view>
@@ -80,8 +86,8 @@
     <text wx:if="{{dealis.check_time}}" class="fcb2">成交时间：{{dealis.check_time}}</text>
   </view>
   <view class="width94 flex callShop fs_14">
-    <text class="tc">联系卖家</text>
-    <text class="tc">拨打电话</text>
+    <text data-path="/pages/home/pages/websocket/websocket" data-id="{{dealis.store.id}}" data-name="{{dealis.store.store_name}}" bindtap="toRouter" class="tc">联系卖家</text>
+    <text catchtap="call" class="tc fcb2">拨打电话</text>
   </view>
   <view class="submit flex  box_zing  fs_14">
     <view style="flex:1" class="flex flex_m">

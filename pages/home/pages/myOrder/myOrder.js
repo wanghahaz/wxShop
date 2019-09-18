@@ -23,6 +23,14 @@ Page({
       '9': '已取消',
       '10': '已关闭'
     },
+    refund_type: {
+      '1_1': '退货中',
+      '1_2': '退货已拒绝',
+      '1_3': '已退货',
+      '3_1': '退款中',
+      '3_2': '退款已拒绝',
+      '1_3': '已退款',
+    },
     isLoading: true,
     titleIndex: -1,
     height: 0,
@@ -125,10 +133,15 @@ Page({
       page: this.data.page,
       type: this.data.titleIndex
     }, true).then(res => {
-
       if (res.code == 200) {
+        let list = res.data.data;
+        list.forEach(item => {
+          item.orderdata.forEach(value => {
+            value.type = `${value.refund_type}_${value.is_refund}`
+          })
+        })
         this.setData({
-          goodsList: [...this.data.goodsList, ...res.data.data]
+          goodsList: [...this.data.goodsList, ...list]
         })
         if (res.data.last_page == this.data.page) {
           this.setData({

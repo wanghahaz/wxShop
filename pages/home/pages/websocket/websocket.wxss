@@ -77,3 +77,22 @@ input {
   border: 1px solid #1afa29;
   color: #1afa29;
 }
+
+.goods {
+  width: 84%;
+  margin: 30rpx auto;
+  padding: 26rpx;
+  background: #fff;
+}
+
+.goods image {
+  width: 134rpx;
+  height: 134rpx;
+}
+
+.goods text {
+  margin-left: 20rpx;
+  width: 60%;
+  height: 100%;
+  line-height: 1.6;
+}

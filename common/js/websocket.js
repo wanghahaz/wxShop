@@ -1,10 +1,5 @@
 var url = 'ws://192.168.0.108:9501'; //服务器地址
 let socketOpen = false;
-
-function aa(func) {
-
-}
-
 function connect(func) {
   wx.connectSocket({
     url: url,
@@ -43,12 +38,9 @@ function connect(func) {
 //发送消息
 function send(msg) {
   if (socketOpen) {
-    console.log(JSON.stringify(msg))
     wx.sendSocketMessage({
       data: JSON.stringify(msg)
-    }, function(res) {
-      console.log(res)
-    });
+    }, function(res) {});
   } else {
     wx.showToast({
       title: '请您检查网络！',

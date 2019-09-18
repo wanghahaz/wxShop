@@ -54,37 +54,36 @@
   </view>
 
   <view class="goodsDealis flex column box_zing">
-    <view catchtap="toRouter" data-id="{{data.id}}" data-path="/pages/home/pages/evaluateList/evaluateList" class="fs_14 flex flex_lr">
-      <text style="width:50%">评价（999+）</text>
+    <view catchtap="toRouter" data-id="{{dataObj.id}}" data-path="/pages/home/pages/evaluateList/evaluateList" class="fs_14 flex flex_lr">
+      <text style="width:50%">评价（{{commentList.length>99?'99+':commentList.length}}）</text>
       <view class="flex flex_m flex_end">
         <text>好评率</text>
-        <text style="padding:0 10rpx" class="fcF1">98%</text>
+        <text style="padding:0 10rpx" class="fcF1">{{eval_top.percent}}%</text>
         <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
       </view>
     </view>
     <view style="margin:14rpx 0 0 0" class="fs_14" wx:if="{{commentList.length==0}}">暂无评价</view>
     <block wx:else>
       <view style="margin:20rpx 0 0 0" class="coment flex">
-        <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentTx"></image>
-        <view class="flex column fs_14">
+        <image src="{{commentList[0].user.avatar}}" class="comentTx"></image>
+        <view class="flex column fs_13">
           <view class="flex flex_lr_m">
-            <text>满意啊啊啊</text>
-            <text>2019年8月6日</text>
+            <text>{{commentList[0].user.username}}</text>
+            <text>{{commentList[0].created_at}}</text>
           </view>
           <view class="flex flex_m ">
             <text style="margin:20rpx 0">评分</text>
             <block wx:for="{{5}}" wx:key="{{index}}">
-              <text data-index="{{index}}" bindtap="changeStar" wx:if="{{3<index}}" class="./iconfont/iconwujiaoxing:before icon" style="font-size:50rpx;margin-left:10rpx;color:#C0C0C0"></text>
-              <text wx:else data-index="{{index}}" bindtap="changeStar" class="./iconfont/iconshiwujiaoxing:before icon" style="font-size:50rpx;margin-left:10rpx;color:#F18E1E"></text>
+              <text data-index="{{index}}" bindtap="changeStar" wx:if="{{commentList[0].score-1<index}}" class="./iconfont/iconwujiaoxing:before icon" style="font-size:40rpx;margin-left:10rpx;color:#C0C0C0"></text>
+              <text wx:else data-index="{{index}}" bindtap="changeStar" class="./iconfont/iconshiwujiaoxing:before icon" style="font-size:40rpx;margin-left:10rpx;color:#F18E1E"></text>
             </block>
           </view>
-          <text>评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容
-            </text>
-          <view class="flex flex_wrap">
+          <text>{{commentList[0].content}}</text>
+          <!-- <view class="flex flex_wrap">
             <block wx:for="{{5}}" wx:key="{{index}}">
               <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentImg"></image>
             </block>
-          </view>
+          </view> -->
         </view>
       </view>
     </block>
@@ -105,7 +104,7 @@
       <image style="width:49rpx;height:50rpx" src="../../../../image/goodH.png"></image>
       <text class="fcF1">首页</text>
     </view>
-    <view data-path="/pages/home/pages/websocket/websocket" data-id="{{goodsData.store.id}}" data-name="{{goodsData.store.store_name}}" bindtap="toRouter" class="imgGoods flex column fs_12  flex_nosize">
+    <view data-type="1" data-path="/pages/home/pages/websocket/websocket" data-id="{{goodsData.store.id}}" data-name="{{goodsData.store.store_name}}" bindtap="toRouter" class="imgGoods flex column fs_12  flex_nosize">
       <image style="width:49rpx;height:49rpx" src="../../../../image/goodW.png"></image>
       <text>客服</text>
     </view>
@@ -156,11 +155,11 @@
   </view>
   <view class="{{!showMask&&showType==2?'maskContentAc':''}} maskContent maskSize box_zing">
     免运费
-    <view class="sureBtn tc fs_15"  catchtap="showModel">确认</view>
+    <view class="sureBtn tc fs_15" catchtap="showModel">确认</view>
   </view>
   <view class="{{!showMask&&showType==3?'maskContentAc':''}} maskContent maskSize box_zing">
     七天退货
-    <view class="sureBtn tc fs_15"  catchtap="showModel">确认</view>
+    <view class="sureBtn tc fs_15" catchtap="showModel">确认</view>
   </view>
   <!-- 吸顶 -->
   <view catchtap="suckTop" wx:if="{{scrollTop>clientHeight}}" class="suckTop">

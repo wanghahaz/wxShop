@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view wx:if="{{list.length==0&&!isLoading}}" class="niMore">您还有没有售后订单哦！</view>
+  <view wx:if="{{list.length==0&&!isLoading}}" class="noMore">您还有没有售后订单哦！</view>
   <block wx:for="{{list}}" wx:key="{{index}}">
     <view class="width94 box_zing fs_13" data-id="{{item.id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis" catchtap="toRouter">
       <view class="flex">

@@ -14,39 +14,6 @@ var msgList = [{
     ziji: '1',
     type: '1',
     message: '我怕是走错片场了...'
-  }, {
-    created_at: '12:12:23',
-    ziji: '0',
-    type: '1',
-    message: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
-  },
-  {
-    created_at: '12:15:58',
-    ziji: '1',
-    type: '1',
-    message: '我怕是走错片场了...'
-  }, {
-    created_at: '12:12:23',
-    ziji: '0',
-    type: '1',
-    message: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
-  },
-  {
-    created_at: '12:15:58',
-    ziji: '1',
-    type: '1',
-    message: '我怕是走错片场了...'
-  }, {
-    created_at: '12:12:23',
-    ziji: '0',
-    type: '1',
-    message: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
-  },
-  {
-    created_at: '12:15:58',
-    ziji: '1',
-    type: '1',
-    message: '我怕是走错片场了...'
   }
 ];
 var windowWidth = wx.getSystemInfoSync().windowWidth;
@@ -82,7 +49,24 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  toRouter(e) {
+    let data = until.cutShift(e.currentTarget.dataset);
+    if (data) {
+      wx.navigateTo({
+        url: `${e.currentTarget.dataset.path}?${data}`,
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.path,
+      })
+    }
+  },
   onLoad: function(options) {
+    if (options.type) {
+      this.setData({
+        goods: app.globalData.webGoods
+      })
+    }
     let _this = this;
     let userObj = wx.getStorageSync('userInfo');
     _this.setData({
@@ -92,9 +76,12 @@ Page({
       cusHeadIcon: app.globalData.userInfo.avatar,
     });
     websocket.connect(function(res) {
-      console.log()
+      let obj = JSON.parse(res.data);
+      if (obj.type == 3) {
+        obj.message = `http://www.lyjp.shop/${obj.message}`
+      }
       let list = _this.data.msgList;
-      list.push(JSON.parse(res.data))
+      list.push(obj)
       _this.setData({
         msgList: list,
         inputVal: ''
@@ -135,44 +122,37 @@ Page({
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
       success: function(res) {
-        let time = until.formatTime(new Date()).substring(until.formatTime(new Date()).length, 11);
-        msgList.push({
-          time: time,
-          speaker: 'customer',
-          contentType: 'img',
-          content: res.tempFilePaths[0]
-        })
-        that.setData({
-          msgList,
-          inputVal
-        });
-        that.setData({
-          scrollHeight: '100vh',
-          inputBottom: 0
-        })
-        that.setData({
-          toView: 'msg-' + (msgList.length - 1)
-        })
+        wx.uploadFile({
+          url: 'http://www.lyjp.shop/file/upload', //仅为示例，非真实的接口地址
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          header: {
+            "Content-Type": "multipart/form-data",
+          },
+          formData: {
+            file: res.tempFilePaths[0]
+          },
+          success: function(r) {
+            let re = JSON.parse(r.data);
+            if (re.code == 200) {
+              let data = {
+                uid: that.data.userObj.id,
+                ruid: 17,
+                type: 3,
+                content: re.data,
+                cmd: 'msg'
+              }
+              websocket.send(data)
+            } else {
+              until.toast({
+                title: '上传失败'
+              })
+            }
+          },
+          fail: function(e) {
 
-        // wx.uploadFile({
-        //   url: 'https://cardname.yunpaas.cn/phase/image', //仅为示例，非真实的接口地址
-        //   filePath: res.tempFilePaths[0],
-        //   name: 'file',
-        //   header: {
-        //     "Content-Type": "multipart/form-data",
-        //   },
-        //   formData: {
-        //     file: res.tempFilePaths[0]
-        //   },
-        //   success: function(res) {
-        //     that.setData({
-        //       logoSrc: JSON.parse(res.data).data
-        //     })
-        //   },
-        //   fail: function(e) {
-        //     console.log(e)
-        //   }
-        // })
+          }
+        })
 
       }
     })
@@ -181,7 +161,6 @@ Page({
     wx.closeSocket({
       success(res) {
         console.log('已关闭')
-        console.log(res)
       }
     });
   },

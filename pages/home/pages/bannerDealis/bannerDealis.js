@@ -3,6 +3,7 @@
 const app = getApp();
 import until from "../../../../utils/util.js";
 import http from "../../../../common/js/http.js";
+let timers = null;
 Page({
 
   /**
@@ -76,32 +77,52 @@ Page({
   // 获取观看奖励 (登录)  播放结束触发
   bindended() {
     let that = this;
-    http.getReq(`/advert/get_reward/${this.data.id}`, {}).then(res => {
-      if (res.code == '200') {
-        wx.showModal({
-          title: '观看完成',
-          content: `恭喜您获得${res.data}元代金券！`,
-          confirmText: '下一条',
-          onfirmColor: '#223CC9',
-          cancelText: '去购物',
-          success(res) {
-            if (res.confirm) {
-              that.getNext()
-              console.log('用户点击确定')
-            } else if (res.cancel) {
-              wx.switchTab({
-                url: '/pages/index/index',
-              })
+    if (wx.getStorageSync('token')) {
+      http.getReq(`/advert/get_reward/${this.data.id}`, {}).then(res => {
+        if (res.code == '200') {
+          wx.showModal({
+            title: '观看完成',
+            content: `恭喜您获得${res.data}元代金券！`,
+            confirmText: '下一条',
+            onfirmColor: '#223CC9',
+            cancelText: '去购物',
+            success(res) {
+              if (res.confirm) {
+                that.getNext()
+                console.log('用户点击确定')
+              } else if (res.cancel) {
+                wx.switchTab({
+                  url: '/pages/tabar/index/index',
+                })
+              }
             }
-          }
-        })
-      } else {
-        until.toast({
-          title: res.msg
-        })
-      }
+          })
+        } else {
+          until.toast({
+            title: res.msg
+          })
+        }
 
-    })
+      })
+    } else {
+      wx.showModal({
+        title: '观看完成',
+        content: `您还未登陆,登录后观看可获得代金券哦~`,
+        confirmText: '下一条',
+        onfirmColor: '#223CC9',
+        cancelText: '去登录',
+        success(res) {
+          if (res.confirm) {
+            that.getNext()
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            wx.switchTab({
+              url: '/pages/tabar/mine/mine',
+            })
+          }
+        }
+      })
+    }
 
   },
   toRouter(e) {
@@ -126,9 +147,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options)
     this.setData({
       id: options.id
     })
+    timers = setInterval(() => {
+      console.log(new Date().getTime())
+      let times = until.diffTime(new Date().getTime(), options.time)
+      console.log(times)
+    }, 1000)
     this.getAdvert()
   },
 

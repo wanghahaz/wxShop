@@ -12,23 +12,24 @@ Page({
     id: null,
     dealis: {},
     statusObj: {
-      '1_4': '退款处理中',
-      '3_4': '售后处理中',
-      '1_6': '商家审核通过',
+      '3_4': '退款处理中',
+      '1_4': '售后处理中',
       '3_6': '商家审核通过',
-      '1_7': '退款已完成',
-      '3_7': '售后已完成',
-      '1_5': '退款申请拒绝',
-      '3_5': '售后申请拒绝',
+      '1_6': '商家审核通过',
+      '3_7': '退款已完成',
+      '1_7': '售后已完成',
+      '3_5': '退款申请拒绝',
+      '1_5': '售后申请拒绝',
     },
     form: {
       express_code: '',
       express_company: ''
     }
   },
+  // 撤回或者提交物流信息
   editStatus(e) {
     let data = {};
-    if (this.dealis.status == 4) {
+    if (this.data.dealis.status == 4) {
       data = {
         action: 1
       }
@@ -39,7 +40,7 @@ Page({
         express_company: this.data.form.express_company,
       }
     }
-    http.postReq(`/order/refund/deal/${this.data.id}`).then(res => {
+    http.postReq(`/order/refund/deal/${this.data.id}`, data, true).then(res => {
       if (res.code == 200) {
         until.toast({
           icon: 'success',

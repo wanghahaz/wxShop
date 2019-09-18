@@ -28,6 +28,7 @@ const diffTime = function(startDate, endDate) {
   var seconds = Math.round(leave3 / 1000);
   seconds = seconds > 9 ? seconds : `0${seconds}`;
   return {
+    days,
     hours,
     minutes,
     seconds

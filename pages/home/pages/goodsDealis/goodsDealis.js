@@ -91,6 +91,26 @@ Page({
     })
   },
   toRouter(e) {
+    if (e.currentTarget.dataset.path == '/pages/home/pages/evaluateList/evaluateList') {
+      if (this.data.commentList.length == 0) {
+        return;
+      }
+    }
+    if (e.currentTarget.dataset.path == '/pages/home/pages/websocket/websocket') {
+      let goods = {
+        goods_name: this.data.goodsData.row.goods_name,
+        goods_thumb: this.data.goodsData.row.goods_thumb,
+        goods_id: this.data.dataObj.id,
+        sku_id: this.data.dataObj.sku_id,
+      }
+      app.globalData.webGoods = goods;
+      if (!wx.getStorageSync('token')) {
+        until.toast({
+          title: '请您先进行登录，然后继续操作'
+        })
+        return false;
+      }
+    }
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
       wx.navigateTo({
@@ -251,13 +271,27 @@ Page({
       }
     }
   },
+  // 商品评价好评率等计算
+  getEval_top() {
+    http.getReq(`/goods/get_eval_top/${this.data.dataObj.id}`, {}).then(res => {
+      if (res.code == 200) {
+        let data = res.data;
+        data.percent = res.data.high_rate > 0 ? res.data.high_rate.substr(-2) : '0';
+        this.setData({
+          eval_top: data
+        })
+      }
+    })
+  },
   // 商品评价
   getComment() {
-    http.getReq(`/goods/get_eval_list/${this.data.dataObj.id}`, {}).then(res => {
-      console.log(res)
+    http.getReq(`/goods/get_eval_list/${this.data.dataObj.id}`, {
+      page: 1,
+      type: 0
+    }).then(res => {
       if (res.code == 200) {
         this.setData({
-          commentList: res.data
+          commentList: res.data.data
         })
       }
     })
@@ -302,6 +336,7 @@ Page({
     _this.getComment()
     _this.getSku()
     _this.getGoodDealis()
+    _this.getEval_top()
   },
 
   /**
