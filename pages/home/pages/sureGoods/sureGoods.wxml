@@ -6,7 +6,7 @@
   </view>
   <view class="router flex flex_sa  fs_15">
     <text catchtap="switchTab" data-path="/pages/tabar/index/index">返回首页</text>
-    <text catchtap="redirectTo" data-path="/pages/home/pages/goodSevaluation/goodSevaluation">去评价</text>
+    <text catchtap="redirectTo" data-id="{{id}}" data-path="/pages/home/pages/goodSevaluation/goodSevaluation">去评价</text>
   </view>
   <!-- <block wx:for="{{list}}" wx:key="{{index}}"> -->
   <view class="fs_16 tc recommended" style="color:#B2B2B2">好物推荐</view>

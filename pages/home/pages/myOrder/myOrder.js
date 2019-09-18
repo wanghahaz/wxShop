@@ -70,7 +70,7 @@ Page({
             let list = this.data.goodsList.filter(item => item.id == this.data.orderType.id)
             app.globalData.commentList = list[0].orderdata;
             wx.redirectTo({
-              url: "/pages/home/pages/sureGoods/sureGoods",
+              url: `/pages/home/pages/sureGoods/sureGoods?id=${this.data.orderType.id}`,
             })
           } else {
             this.setData({
@@ -89,6 +89,7 @@ Page({
       }
     })
   },
+  // 操作订单
   editStatus(e) {
     // type 1:确认收货 2:取消订单 3:删除订单 4:立即付款  5:提醒发货
     this.setData({
@@ -118,6 +119,7 @@ Page({
       }
     })
   },
+  // 获取订单列表
   getMyOrder() {
     http.getReq('/order/order_list', {
       page: this.data.page,
@@ -146,6 +148,10 @@ Page({
     })
   },
   toRouter(e) {
+    if (e.currentTarget.dataset.path == '/pages/home/pages/goodSevaluation/goodSevaluation') {
+      let list = this.data.goodsList.filter(item => item.id == e.currentTarget.dataset.id)
+      app.globalData.commentList = list[0].orderdata;
+    }
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
       wx.navigateTo({

@@ -146,13 +146,14 @@ App({
     this.setBadge();
   },
   globalData: {
-    commentList:[],
+    commentList: [], //评价商品列表
+    saleGoods: {}, //售后商品
+    goodsList: [], //再次购买的商品列表
     openid: '',
     clientHeight: 0,
     userInfo: {},
     user: {},
     token: null,
-    goodsList: [],
     totalPrice: 0,
     totalCount: 0,
   }

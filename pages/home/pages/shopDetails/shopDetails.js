@@ -33,6 +33,11 @@ Page({
       }
     })
   },
+  getFiyList() {
+    // http.getReq(`/store/info/goods/${this.data.shopId}`, {}).then(res => {
+    //   console.log(res)
+    // })
+  },
   getList(e) {
     http.getReq(`/store/info/goods_list/${this.data.shopId}`, {
       type: this.data.titleIndex,
@@ -107,6 +112,7 @@ Page({
     })
     this.getShopDealis()
     this.getList()
+    this.getFiyList()
   },
 
   /**

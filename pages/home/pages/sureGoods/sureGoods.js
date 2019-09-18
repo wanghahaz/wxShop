@@ -11,7 +11,8 @@ Page({
   data: {
     isPullDownRefresh: true,
     page: 1,
-    shopList: []
+    shopList: [],
+    id: null
   },
   switchTab(e) {
     wx.switchTab({
@@ -20,7 +21,7 @@ Page({
   },
   redirectTo(e) {
     wx.redirectTo({
-      url: e.currentTarget.dataset.path,
+      url: `${e.currentTarget.dataset.path}?id=${this.data.id}`,
     })
   },
   // 首页商品推荐
@@ -58,6 +59,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      id: options.id
+    })
     this.getGoods()
   },
 

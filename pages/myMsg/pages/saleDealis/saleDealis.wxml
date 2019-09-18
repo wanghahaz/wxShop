@@ -1,0 +1,76 @@
+<!--index.wxml-->
+<view class="container" wx:if="{{dealis.id}}" style="padding-bottom:100rpx">
+  <view class="status tc  width94 box_zing">
+    {{statusObj[dealis.status_]}}
+  </view>
+  <view class="user adress_box width94 flex flex_m box_zing">
+  </view>
+  <view class="goodspDealis width94 box_zing">
+    <block>
+      <view class="dealis_order  box_zing">
+        <!-- <view style="margin-bottom:20rpx;">
+          <text>{{dealis.store.store_name}} <text class="./iconfont/iconarrow-right-copy:before icon flex_nosize" style="font-size:30rpx"></text></text>
+        </view> -->
+        <view class="goods_Dealis flex flex_nosize">
+          <image class="goodsImg flex_nosize" src="{{dealis.goods.goods_thumb}}"></image>
+          <view class="goodsDealis">
+            <view class="flex flex_lr">
+              <text class="fs_14 clamp_2">{{dealis.goods.goods_name}}</text>
+              <view style="width:130rpx" class="flex column flex_nosize flex_lr fs_12 ter">
+                <text>￥{{dealis.goods.goods_price}}</text>
+                <text>×{{dealis.goods_num}}</text>
+              </view>
+            </view>
+            <text wx:if="{{dealis.goods.spec_name}}" class="remark clamp_1 fs_12 tc fcb2">{{dealis.goods.spec_name}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="com flex flex_lr fs_13 box_zing">
+      <text>退款金额</text>
+      <text>￥{{dealis.money}}</text>
+    </view>
+    <view class="com flex flex_lr fs_13 box_zing">
+      <text>退代金券</text>
+      <text>￥{{dealis.jifen}}</text>
+    </view>
+    <view class="com fs_13 flex flex_lr box_zing">
+      <text>申请原因</text>
+      <text>{{dealis.reason}}</text>
+    </view>
+    <view class="com  column flex flex_lr fs_13 box_zing">
+      <text>具体描述</text>
+      <text style="margin:12rpx 20rpx 0 20rpx;line-height:1.8">{{dealis.content}}</text>
+    </view>
+    <view style="padding-bottom:20rpx" class="com fs_13 flex flex_lr box_zing">
+      <text>申请时间</text>
+      <text>{{dealis.created_at}}</text>
+    </view>
+    <!-- <view class="sum box_zing fs_14">
+      <view class="ter fcb2">支付明细</view>
+      <view class="flex flex_lr">
+        <text>需付款</text>
+        <text class="fcF1 fs_14">￥{{dealis.total_fee}}</text>
+      </view>
+    </view> -->
+  </view>
+  <view wx:if="{{dealis.status==4}}" class="orderDealis width94 flex column box_zing fs_12">
+    <text class="fs_16">订单信息</text>
+    <view class="flex flex_lr">
+      <text class="fcb2">订单编号：{{dealis.order.order_id}}</text>
+      <text class="fcF1" data-content="E12345687900000" bindtap="setClip">复制</text>
+    </view>
+    <text class="fcb2">创建时间：{{dealis.order.created_at}}</text>
+  </view>
+  <view class="width94 flex callShop fs_14">
+    <text class="tc">联系卖家</text>
+    <text catchtap="call" class="tc fcb2">拨打电话</text>
+  </view>
+  <view class="submit flex  box_zing  fs_14">
+    <view style="flex:1" class="flex flex_m">
+    </view>
+    <view style="flex:1.5" class="flex flex_m flex_end">
+      <text catchtap="editStatus" class="evaluation">撤销申请</text>
+    </view>
+  </view>
+</view>

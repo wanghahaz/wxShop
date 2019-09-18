@@ -3,14 +3,14 @@
   <view class="status width94 box_zing">
     订单状态:{{statusObj[dealis.status]}}
   </view>
-  <view data-path="/pages/home/pages/logistics/logistics" catchtap="toRouter" class="adress adress_box width94 flex flex_m box_zing">
+  <!-- <view data-path="/pages/home/pages/logistics/logistics" catchtap="toRouter" class="adress adress_box width94 flex flex_m box_zing">
     <text class="./iconfont/iconwuliu:before icon flex_nosize" style="font-size:64rpx"></text>
     <view class="fs_14 flex column flex_sa">
       <text class="fcF1">【广州越秀区转运中心】已收入</text>
       <text>2019-08-21  15:2:22</text>
     </view>
     <text class="./iconfont/iconarrow-right-copy:before icon flex_nosize" style="font-size:40rpx"></text>
-  </view>
+  </view> -->
   <view class="user adress_box width94 flex flex_m box_zing">
     <image class="gps flex_nosize" src="../../../../image/gps.png"></image>
     <view class="fs_14 flex column flex_sa width90">
@@ -36,10 +36,10 @@
             </view>
             <text wx:if="{{value.spec_name}}" class="remark clamp_1 fs_12 tc fcb2">{{value.spec_name}}</text>
             <view wx:if="{{dealis.status==2}}" class="btn flex fs_13">
-              <text data-path="/pages/home/pages/selectSales/selectSales" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请售后</text>
+              <text data-name="退货" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请售后</text>
             </view>
             <view wx:if="{{dealis.status==1}}" class="btn flex fs_13">
-              <text data-path="/pages/home/pages/selectSales/selectSales" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
+              <text data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
             </view>
           </view>
         </view>
@@ -92,9 +92,9 @@
       <text wx:if='{{dealis.status==1}}' data-id="{{dealis.id}}" data-type="5" data-toast="已提醒卖家发货！" data-model="提醒发货?" catchtap="editStatus" class="evaluation">提醒发货</text>
       <text wx:if='{{dealis.status==2}}' data-id="{{dealis.id}}" data-type="1" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation">确认收货</text>
       <text wx:if='{{dealis.status==0}}' data-jifen="{{dealis.order_jifen}}" data-id="{{dealis.id}}" data-type="4" data-toast="付款成功" data-model="{{dealis.order_jifen!='0.00'?'您有冻结的代金券，是否使用':'您是否确认付款'}}?" catchtap="editStatus" class="evaluation fcF1">立即支付</text>
-      <text wx:if='{{dealis.status==9||dealis.status==10||dealis.status==8}}' data-id="{{dealis.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation">删除订单</text>
+      <text wx:if='{{dealis.status==9||dealis.status==10||dealis.status==8||dealis.status==3}}' data-id="{{dealis.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation">删除订单</text>
       <text wx:if='{{dealis.status==9||dealis.status==10}}' catchtap="toRouter" data-path="/pages/home/pages/goodSettle/goodSettle" class="evaluation fcF1">再次购买</text>
-      <text wx:if='{{dealis.status==8||dealis.status==3}}' data-id="{{dealis.id}}" catchtap="toRouter" data-path="/pages/home/pages/goodSevaluation/goodSevaluation" class="evaluation fcF1">评价</text>
+      <text wx:if='{{dealis.status==8}}' data-id="{{dealis.id}}" catchtap="toRouter" data-path="/pages/home/pages/goodSevaluation/goodSevaluation" class="evaluation fcF1">评价</text>
     </view>
   </view>
 </view>

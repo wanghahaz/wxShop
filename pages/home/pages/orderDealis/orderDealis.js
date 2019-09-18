@@ -32,6 +32,10 @@ Page({
       item.check = true;
       item.cart_id = 0;
     })
+    // 
+    if (e.currentTarget.dataset.path == '/pages/home/pages/goodSevaluation/goodSevaluation') {
+      app.globalData.commentList = this.data.dealis.order_data
+    }
     if (e.currentTarget.dataset.path == '/pages/home/pages/goodSettle/goodSettle') {
       let list = [{
         store: {
@@ -43,6 +47,10 @@ Page({
         goods: goods
       }];
       app.globalData.goodsList = list;
+    }
+    if (e.currentTarget.dataset.path === '/pages/home/pages/salesSub/salesSub') {
+      let saleGoods = this.data.dealis.order_data.filter(item => item.id == e.currentTarget.dataset.goodid)[0]
+      app.globalData.saleGoods = saleGoods;
     }
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
@@ -57,7 +65,7 @@ Page({
   },
   getDealis() {
     http.getReq(`/order/info/${this.data.id}`, {}, true).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
         this.setData({
           dealis: res.data
@@ -94,8 +102,23 @@ Page({
         }
 
       } else if (res.code == 300) {
-        until.toast({
-          title: '微信支付'
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success: (re) => {
+            _this.setData({
+              isLoading: true,
+              page: 1,
+              goodsList: []
+            })
+            _this.getDealis()
+          },
+          fail: function(err) {
+            console.log(err, 2)
+          }
         })
       } else {
         until.toast({
@@ -128,6 +151,7 @@ Page({
       this.setData({
         orderType: data
       });
+      console.log(111)
       if (e.currentTarget.dataset.jifen && e.currentTarget.dataset.jifen != '0.00') {
         this.setType()
       }

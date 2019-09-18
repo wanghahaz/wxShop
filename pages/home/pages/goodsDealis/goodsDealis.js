@@ -254,7 +254,7 @@ Page({
   // 商品评价
   getComment() {
     http.getReq(`/goods/get_eval_list/${this.data.dataObj.id}`, {}).then(res => {
-      // console.log(res)
+      console.log(res)
       if (res.code == 200) {
         this.setData({
           commentList: res.data

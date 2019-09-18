@@ -65,7 +65,6 @@ Page({
         data: options.share_id ? options.share_id : 0
       })
     }
-
     this.getGoods()
     this.getseckill()
     this.getBanner();

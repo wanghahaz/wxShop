@@ -1,18 +1,18 @@
 <!--index.wxml-->
 <view class="container">
   <view wx:if="{{list.length==0&&!isLoading}}" class="niMore">您还有没有售后订单哦！</view>
-  <block wx:for="{{4}}">
-    <view class="width94 box_zing fs_13">
+  <block wx:for="{{list}}" wx:key="{{index}}">
+    <view class="width94 box_zing fs_13" data-id="{{item.id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis" catchtap="toRouter">
       <view class="flex">
-        <image class="flex_nosize goodsImg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567767330059&di=7c19a24cdb7ab2007a497adb2b3a4e40&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F09%2F20180709181137_ftqjg.thumb.700_0.jpg"></image>
+        <image class="flex_nosize goodsImg" src="{{item.goods.goods_thumb}}"></image>
         <view class="goods_delis flex flex_lr column">
           <view class="flex flex_lr goods_name">
-            <text class="clamp_2" style="width:60%">我是商品我是商品我是商品我是商品我是商品我是商品我是商品我是商品</text>
-            <text class="fcF1">退款处理中</text>
+            <text class="clamp_2" style="width:60%">{{item.goods.goods_name}}</text>
+            <text class="fcF1">{{status[item.status_]}}</text>
           </view>
           <view class="flex flex_lr">
-            <text>￥99.00</text>
-            <text>×1</text>
+            <text>￥{{item.goods.goods_price}}</text>
+            <text>×{{item.goods_num}}</text>
           </view>
         </view>
       </view>

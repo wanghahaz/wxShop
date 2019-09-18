@@ -44,7 +44,8 @@
         "pages/invitation/invitation",
         "pages/set/set",
         "pages/intimacy/intimacy",
-        "pages/saleList/saleList"
+        "pages/saleList/saleList",
+        "pages/saleDealis/saleDealis"
       ]
     }
   ],

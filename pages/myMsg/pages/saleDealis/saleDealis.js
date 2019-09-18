@@ -9,17 +9,54 @@ Page({
    * 页面的初始数据
    */
   data: {
-    status: {
+    id: null,
+    dealis: {},
+    statusObj: {
       '1_4': '退款处理中',
       '3_4': '售后处理中',
+      '1_6': '商家审核通过',
+      '3_6': '商家审核通过',
       '1_7': '退款已完成',
       '3_7': '售后已完成',
       '1_5': '退款申请拒绝',
       '3_5': '售后申请拒绝',
     },
-    isLoading: true,
-    list: [],
-    page: 1
+    form: {
+      express_code: '',
+      express_company: ''
+    }
+  },
+  editStatus(e) {
+    let data = {};
+    if (this.dealis.status == 4) {
+      data = {
+        action: 1
+      }
+    } else {
+      data = {
+        action: 2,
+        express_code: this.data.form.express_code,
+        express_company: this.data.form.express_company,
+      }
+    }
+    http.postReq(`/order/refund/deal/${this.data.id}`).then(res => {
+      if (res.code == 200) {
+        until.toast({
+          icon: 'success',
+          title: '撤销成功'
+        })
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 1500)
+      } else {
+
+      }
+    })
+  },
+  call(e) {
+    until.toast({
+      title: "商家没有绑定电话！"
+    })
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -33,38 +70,25 @@ Page({
       })
     }
   },
-  getList() {
-    http.getReq('/order/refund/list', {
-      page: this.data.page
-    }).then(res => {
-      if (res.code == 200) {
-        let list = res.data.data;
-        list.forEach(item => {
-          item.status_ = `${item.type}_${item.status}`
-        })
-        this.setData({
-          list: [...this.data.list, ...list]
-        })
-        if (res.data.last_page == this.data.page) {
-          this.setData({
-            isLoading: false
-          })
-        } else {
-          this.setData({
-            page: this.data.page + 1
-          })
-        }
-      } else {
-        this.setData({
-          isLoading: false
-        })
-      }
+  getDealis() {
+    http.getReq(`/order/refund/info/${this.data.id}`, {}).then(res => {
+      console.log(res)
+      let data = res.data;
+      data.status_ = `${data.type}_${data.status}`
+      this.setData({
+        dealis: data
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    this.setData({
+      id: options.id
+    })
+    this.getDealis()
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -76,12 +100,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    this.setData({
-      list: []
-    })
-    this.getList()
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -108,12 +127,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    if (this.data.isLoading) {
-      this.getList()
-    }
+
   },
 
   /**
    * 用户点击右上角分享
    */
+  onShareAppMessage: function() {
+
+  }
 })

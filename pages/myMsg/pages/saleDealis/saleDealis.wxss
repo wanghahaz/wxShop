@@ -1,6 +1,5 @@
 .status {
   line-height: 194rpx;
-  padding-left: 60rpx;
   color: #fff;
   background: #f18e1e;
   border-radius: 18rpx;
@@ -37,12 +36,12 @@
 
 .remark {
   position: absolute;
-  width: 180rpx;
+  width: 200rpx;
   display: block;
   line-height: 38rpx;
   background: #f8f6f7;
   color: #b2b2b2;
-  left: 0rpx;
+  left: 10rpx;
   bottom: 50rpx;
   border-radius: 16rpx;
 }
@@ -99,12 +98,6 @@
   align-items: flex-end;
 }
 
-.dealis_order .allCheck, .submit .allCheck {
-  width: 38rpx;
-  height: 38rpx;
-  margin-right: 10rpx;
-}
-
 .dealis_order .goodsImg {
   margin-right: 40rpx;
 }
@@ -119,7 +112,7 @@
 }
 
 .dealis_order .btn>text {
-  margin: 30rpx 0 0 20rpx;
+  margin-left: 20rpx;
 }
 
 .submit {

@@ -15,13 +15,34 @@ Page({
     satisfyStatus: 4, //态度
   },
   submit() {
-    until.toast({
-      icon: 'success',
-      title: '评论成功'
+    let list = [];
+
+    this.data.list.forEach(item => {
+      list.push({
+        goods_id: item.goods_id,
+        sku_id: item.sku_id,
+        score: item.score,
+        content: item.content
+      })
     })
-    setTimeout(()=>{
-      wx.navigateBack()
-    },1500)
+    http.postReq(`/order/comment/${this.data.id}`, {
+      data: JSON.stringify(list)
+    }, true).then(res => {
+      if (res.code == 200) {
+        until.toast({
+          icon: 'success',
+          title: '评论成功'
+        })
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 1500)
+      } else {
+        until.toast({
+          title: res.msg || '操作失败'
+        })
+      }
+    })
+
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -37,7 +58,7 @@ Page({
   },
   changeStar(e) {
     let list = this.data.list;
-    list[e.currentTarget.dataset.index].star = e.currentTarget.dataset.ind;
+    list[e.currentTarget.dataset.index].score = e.currentTarget.dataset.ind;
     this.setData({
       list: list
     })
@@ -57,6 +78,13 @@ Page({
     list.splice(e.currentTarget.dataset.index, 1)
     this.setData({
       imgList: list
+    })
+  },
+  bindinput(e) {
+    let list = this.data.list;
+    list[e.currentTarget.dataset.index].content = e.detail.value;
+    this.setData({
+      list: list
     })
   },
   // 添加图片
@@ -107,13 +135,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(app.globalData.commentList)
+    // console.log(options)
     let list = app.globalData.commentList;
     list.forEach(item => {
-      item.star = 4
+      item.score = 4
+      item.content = ""
     })
     this.setData({
-      list: list
+      list: list,
+      id: options.id
     })
   },
 

@@ -12,10 +12,17 @@ Page({
     noSales: 0,
     show_model: false,
     titleName: null,
-    radioIndex:null,
-    checkList: ['商品无货', '发货时间问题', '不想要了', '商品信息填写有误', '其他',
-      '不想要了', '商品信息填写有误', '其他'
-    ]
+    radioIndex: null,
+    saleData: {},
+    goods: {},
+    checkList: []
+  },
+  bindinput(e) {
+    let data = this.data.saleData;
+    data.content = e.detail.value;
+    this.setData({
+      saleData: data
+    })
   },
   select() {
     this.setData({
@@ -24,7 +31,47 @@ Page({
   },
   radioChange(e) {
     this.setData({
-      radioIndex:e.detail.value
+      radioIndex: e.detail.value,
+      show_model: false
+    })
+  },
+  sub() {
+    if (this.data.radioIndex == null) {
+      until.toast({
+        title: `请您选择${this.data.titleName}原因`
+      })
+      return
+    }
+    let data = this.data.saleData;
+    data.reason = this.data.checkList[this.data.radioIndex]
+    http.postReq('/order/refund/apply', data).then(res => {
+      if (res.code == 200) {
+        until.toast({
+          icon: 'success',
+          title: `${this.data.titleName}成功`
+        })
+        setTimeout(() => {
+          wx.navigateTo({
+            url: `/pages/myMsg/pages/saleDealis/saleDealis?id=${res.data}`,
+          })
+        }, 1500)
+      } else {
+        until.toast({
+          title: res.msg || `操作失败`
+        })
+      }
+    })
+  },
+  getCheckList() {
+    http.getReq('/order/refund/get_refund_reason', {
+      type: this.data.name == '退款' ? 3 : 1,
+    }).then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        this.setData({
+          checkList: res.data
+        })
+      }
     })
   },
   toRouter(e) {
@@ -48,11 +95,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let obj = {
+      order_id: options.orderid,
+      order_data_id: options.goodid,
+      type: options.name == '退款' ? 3 : 1,
+      goods_num: app.globalData.saleGoods.goods_num,
+      content: '',
+      reason: '',
+    }
     this.setData({
-      titleName: options.name
+      titleName: options.name,
+      saleData: obj,
+      goods: app.globalData.saleGoods
     })
+    this.getCheckList()
     wx.setNavigationBarTitle({
-      title: options.name,
+      title: `申请${options.name}`,
     })
   },
 

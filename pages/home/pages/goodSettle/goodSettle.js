@@ -76,7 +76,7 @@ Page({
     list.forEach((item, index) => {
       data.goods_info.push({
         store_id: item.store.store_id,
-        msg: item.store.msg,
+        msg: `${item.store.msg}`,
         delivery: 1,
         goods: []
       })
@@ -89,7 +89,7 @@ Page({
         })
       })
     })
-    let str = until.base64_encode(JSON.stringify(data));
+    let str = until.base64_encode(encodeURI(JSON.stringify(data)));
     http.postReq('/order/submit', {
       order: str
     }, true).then(res => {
@@ -100,7 +100,7 @@ Page({
         });
         setTimeout(() => {
           wx.navigateBack();
-        },1000)
+        }, 1000)
       } else if (res.code == 300) {
         wx.requestPayment({
           timeStamp: res.data.timeStamp,
@@ -113,7 +113,9 @@ Page({
             wx.navigateBack()
           },
           fail: function(err) {
-            console.log(err, 2)
+            wx.navigateTo({
+              url: `/pages/home/pages/myOrder/myOrder?index=${0}`
+            })
           }
         })
       } else {
