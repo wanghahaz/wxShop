@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    user: wx.getStorageSync('userInfo'),
     sexIndex: 0,
     sexLits: [{
       id: 0,
@@ -25,10 +26,14 @@ Page({
     http.postReq('/user/gender', {
       gender: e.detail.value == 0 ? '1' : 2
     }).then(res => {
-      if(res.code==200){
-        until.toast({title:'修改成功'})
-      }else{
-        until.toast({ title: '修改失败' })
+      if (res.code == 200) {
+        until.toast({
+          title: '修改成功'
+        })
+      } else {
+        until.toast({
+          title: '修改失败'
+        })
       }
     })
   },
@@ -48,7 +53,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log(this.data.user)
   },
 
   /**

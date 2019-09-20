@@ -47,7 +47,7 @@
       <image src="../../../image/card.png"></image>
       <text class="fs_19">购物车空空如也~</text>
     </view>
-    <view class="fs_16 tc recommended">好物推荐</view>
+      <view class="fs_16 tc recommended" style="color:#B2B2B2">猜你喜欢</view>
     <view class="shop_list flex_wrap" style="width:92%">
       <block wx:for="{{shopList}}" wx:key="{{index}}">
         <one_shop data-path="/pages/home/pages/goodsDealis/goodsDealis" data-id="{{item.id}}" data-skuId="{{item.sku_id}}" catchtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>

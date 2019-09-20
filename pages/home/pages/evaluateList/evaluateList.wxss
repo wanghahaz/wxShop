@@ -9,10 +9,14 @@
   border: 1px solid #b2b2b2;
   color: #b2b2b2;
   border-radius: 30rpx;
-  width: 29%;
-  line-height: 60rpx;
+  width: 25%;
+  line-height: 54rpx;
   text-align: center;
-  margin: 0 3% 24rpx 0;
+  margin: 0 10% 24rpx 0;
+}
+
+.evalTitle  .left {
+  margin-right: 0;
 }
 
 .evalTitle .activeEavl {

@@ -160,6 +160,7 @@ Page({
     this.setData({
       id: options.id || null
     })
+    console.log(options)
     if (options.userName) {
       let form = this.data.form;
       form['name'] = options.userName;
@@ -167,6 +168,7 @@ Page({
       form['address_detail'] = `${options.countyName} ${options.detailInfo}`;
       form['provinceName'] = options.provinceName;
       form['cityName'] = options.cityName;
+      form['areaName'] = options.countyName;
       this.setData({
         form: form
       })

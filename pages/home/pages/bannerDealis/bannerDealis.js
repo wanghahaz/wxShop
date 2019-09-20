@@ -108,13 +108,14 @@ Page({
       wx.showModal({
         title: '观看完成',
         content: `您还未登陆,登录后观看可获得代金券哦~`,
-        confirmText: '下一条',
+        confirmText: '去购物',
         onfirmColor: '#223CC9',
         cancelText: '去登录',
         success(res) {
           if (res.confirm) {
-            that.getNext()
-            console.log('用户点击确定')
+            wx.switchTab({
+              url: '/pages/tabar/index/index',
+            })
           } else if (res.cancel) {
             wx.switchTab({
               url: '/pages/tabar/mine/mine',

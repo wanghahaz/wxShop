@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container" wx:if="{{dealis.id}}" style="padding-bottom:100rpx">
-  <view class="status width94 box_zing">
-    订单状态:{{statusObj[dealis.status]}}
+  <view class="status width94  box_zing">
+    {{statusObj[dealis.status]}}
   </view>
   <!-- <view data-path="/pages/home/pages/logistics/logistics" catchtap="toRouter" class="adress adress_box width94 flex flex_m box_zing">
     <text class="./iconfont/iconwuliu:before icon flex_nosize" style="font-size:64rpx"></text>
@@ -39,12 +39,11 @@
               <text wx:if="{{value.refund_type==0&&value.is_refund==0}}" data-name="退货" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请售后</text>
               <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis" wx:else>{{refund_type[value.type]}}</text>
             </view>
-            <view wx:if="{{dealis.status==1}}" class="btn flex fs_13">
+            <view wx:elif="{{dealis.status==1}}" class="btn flex fs_13">
               <text wx:if="{{value.refund_type==0&&value.is_refund==0}}" data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
               <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis" wx:else>{{refund_type[value.type]}}</text>
             </view>
-            <view wx:if="{{value.is_refund!=0}}" class="btn flex fs_13">
-              <!-- <text wx:if="{{value.refund_type==0&&value.is_refund==0}}" data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text> -->
+            <view wx:elif="{{value.is_refund!=0}}" class="btn flex fs_13">
               <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis">{{refund_type[value.type]}}</text>
             </view>
           </view>

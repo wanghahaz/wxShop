@@ -3,9 +3,18 @@
   <view class="status tc  width94 box_zing">
     {{statusObj[dealis.status_]}}
   </view>
-    <!-- 提交物流信息 -->
+  <!-- 拒绝原因 -->
+  <view wx:if="{{(dealis.status_=='1_5'||dealis.status_=='3_5')&&dealis.msg}}" class="adress_box width94 fs_14 flex column box_zing">
+    <text>商家拒绝原因</text>
+    <view class="input">
+      <text class="./iconfont/icondian:before icon fcb2" style="font-size:24rpx;margin:0 10rpx 0 0rpx"></text>
+      <text class="fs_13 fcb2">{{dealis.msg}}</text>
+    </view>
+    <view></view>
+  </view>
+  <!-- 提交物流信息 -->
   <view wx:if="{{dealis.status_=='1_6'}}" class="adress_box width94 fs_14 flex column box_zing">
-    <text>商家已同意退货，请尽快退还商品</text>
+    <text>商家已同意退货，请在七天内退还商品</text>
     <view class="input">
       <text class="./iconfont/icondian:before icon fcb2" style="font-size:24rpx;margin:0 10rpx 0 0rpx"></text>
       <text class="fs_13 fcb2">如商家逾期未处理，系统将自动退款。</text>

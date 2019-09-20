@@ -124,8 +124,8 @@ open-data[type="userAvatarUrl"] {
 
 .search {
   background: #fff;
-  height: 52rpx;
-  border-radius: 22rpx;
+  height: 60rpx;
+  border-radius: 24rpx;
   position: relative;
   display: flex;
   align-items: center;

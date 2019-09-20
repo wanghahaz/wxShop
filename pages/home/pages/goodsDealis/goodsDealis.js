@@ -54,6 +54,12 @@ Page({
   },
   // 收藏商品
   collectGoods() {
+    if (!wx.getStorageSync('token')) {
+      this.setData({
+        dialogShow: true
+      })
+      return false;
+    }
     http.postReq('/collect', {
       id: this.data.dataObj.id,
       type: 1
@@ -163,8 +169,8 @@ Page({
   // 立即购买
   addBuy() {
     if (!wx.getStorageSync('token')) {
-      until.toast({
-        title: '请您先进行登录，然后继续操作'
+      this.setData({
+        dialogShow: true
       })
       return false;
     }
@@ -204,8 +210,8 @@ Page({
   // 加入购物车
   addCard() {
     if (!wx.getStorageSync('token')) {
-      until.toast({
-        title: '请您先进行登录，然后继续操作'
+      this.setData({
+        dialogShow: true
       })
       return false;
     }

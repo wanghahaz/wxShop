@@ -4,7 +4,7 @@
     <view class="box_size box_zing border  flex flex_lr">
       <text>姓名</text>
       <view style="width:50%" class="flex flex_end">
-        <text class="fs_16 b2 clamp_1">微信昵称微信昵称微信昵称微信昵称微信昵称微信昵称</text>
+        <text class="fs_16 b2 clamp_1">{{user.username}}</text>
         <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx"></text>
       </view>
     </view>

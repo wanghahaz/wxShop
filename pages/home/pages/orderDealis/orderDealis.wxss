@@ -153,8 +153,8 @@
 .callShop {
   margin: 20rpx auto;
   background: #fff;
-  border-radius: 18rpx;
-  line-height: 66rpx;
+  border-radius: 20rpx;
+  line-height: 70rpx;
 }
 
 .callShop>text {
