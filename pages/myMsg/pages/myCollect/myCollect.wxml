@@ -84,6 +84,7 @@
         <text data-type="add" catchtap="addOdd" class="tc">+</text>
       </view>
     </view>
+    <view wx:if="{{!skuObj.spec}}" style="height:304rpx"></view>
     <view class="btn_bottom fs_14 flex">
       <text catchtap="addCard" class="tc">加入购物车</text>
       <text catchtap="addBuy" class="tc">立即购买</text>

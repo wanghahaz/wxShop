@@ -8,13 +8,37 @@
 
 .adress_box {
   margin: 20rpx auto;
-  padding: 30rpx 24rpx;
+  padding-bottom: 30rpx;
   background: #fff;
   border-radius: 18rpx;
 }
 
-.adress_box>view {
-  height: 100rpx;
+.adress_box>text {
+  border-bottom: 1px solid #e4e4e4;
+  padding: 30rpx;
+}
+
+.adress_box .input {
+  width: auto;
+  box-sizing: border-box;
+  margin: 30rpx 30rpx 0 30rpx;
+}
+
+.adress_box .input .sub {
+  width: 100rpx;
+  line-height: 40rpx;
+  margin-left: 10%;
+  border: 1px solid rgba(241, 142, 30, 1);
+  border-radius: 19rpx;
+}
+
+.adress_box .input input {
+  font-size: 26rpx;
+  width: 40%;
+  padding: 0 10rpx;
+  margin-left: 10rpx;
+  background: rgba(245, 245, 245, 1);
+  border-radius: 10rpx;
 }
 
 .gps {

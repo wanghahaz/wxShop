@@ -26,6 +26,13 @@ Page({
       express_company: ''
     }
   },
+  bindinput(e) {
+    let data = this.data.form;
+    data[e.currentTarget.dataset.type] = e.detail.value;
+    this.setData({
+      form: data
+    })
+  },
   // 撤回或者提交物流信息
   editStatus(e) {
     let data = {};
@@ -44,13 +51,19 @@ Page({
       if (res.code == 200) {
         until.toast({
           icon: 'success',
-          title: '撤销成功'
+          title: this.data.dealis.status == 4 ? '撤销成功' : '操作成功'
         })
-        setTimeout(() => {
-          wx.navigateBack()
-        }, 1500)
+        if (this.data.dealis.status == 4) {
+          setTimeout(() => {
+            wx.navigateBack()
+          }, 1500)
+        } else {
+          this.getDealis()
+        }
       } else {
-
+        until.toast({
+          title: '操作失败'
+        })
       }
     })
   },
@@ -72,13 +85,19 @@ Page({
     }
   },
   getDealis() {
-    http.getReq(`/order/refund/info/${this.data.id}`, {}).then(res => {
+    http.getReq(`/order/refund/info/${this.data.id}`, {}, true).then(res => {
       console.log(res)
-      let data = res.data;
-      data.status_ = `${data.type}_${data.status}`
-      this.setData({
-        dealis: data
-      })
+      if (res.code == 200) {
+        let data = res.data;
+        data.status_ = `${data.type}_${data.status}`
+        this.setData({
+          dealis: data
+        })
+      } else {
+        until.toast({
+          title: '加载失败'
+        })
+      }
     })
   },
   /**

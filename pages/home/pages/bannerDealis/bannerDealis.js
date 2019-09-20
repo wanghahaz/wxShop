@@ -147,15 +147,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
     this.setData({
       id: options.id
     })
-    timers = setInterval(() => {
-      console.log(new Date().getTime())
-      let times = until.diffTime(new Date().getTime(), options.time)
-      console.log(times)
-    }, 1000)
+    if (options.time > 0) {
+      timers = setInterval(() => {
+        let times = until.diffTime(new Date().getTime(), `${options.time}000`)
+        this.setData({
+          h: times.hours,
+          m: times.minutes,
+          s: times.seconds
+        })
+        if (times.hours == '00' && times.minutes == '00' && times.seconds == '00') {
+          clearInterval(timers)
+        }
+      }, 1000)
+    } else {
+      this.setData({
+        h: '00',
+        m: '00',
+        s: '00'
+      })
+    }
     this.getAdvert()
   },
 
@@ -184,7 +197,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    return;
+    clearInterval(timers)
   },
 
   /**

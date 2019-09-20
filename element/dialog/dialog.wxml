@@ -1,12 +1,23 @@
-<view >
-  <view class="mask model" wx:if="{{isInfo}}">
-    <view class="size_model flex cm column">
-      <text class="box_zing tc">请您先登录！</text>
-      <view class="bth flex fs_15">
-        <view bindtap="cancel" class="tc box_zing" style="border-right: 1px solid #E4E4E4;">取消</view>
-        <button  openType="getUserInfo" bindgetuserinfo="getInfo"  hover-class="none" style="line-height: 80rpx" class="tc getInfo">确认</button>
+<view bindtap="close" class="weui-mask {{!show ? 'weui-mask_hidden' : '' }}" wx:if="{{mask}}"></view>
+<view wx:if="{{show}}" bindtap="close" class="weui-dialog__wrp {{extClass}}">
+  <view class="weui-dialog" catchtap="stopEvent">
+    <view class="weui-dialog__hd">
+      <view class="weui-dialog__title">{{title}}
+        <slot name="title"></slot>
       </view>
     </view>
+    <view class="weui-dialog__bd">
+      <slot></slot>
+    </view>
+    <view class="weui-dialog__ft">
+      <block wx:if="{{buttons && buttons.length}}">
+        <block wx:for="{{buttons}}" wx:key="{{index}}">
+          <button wx:if="{{index==0}}" hover-class="none" class="weui-dialog__btn {{item.className}} {{item.extClass}}" data-index="{{index}}" bindtap="buttonTap">{{item.text}}</button>
+          <button wx:else openType="getUserInfo" bindgetuserinfo="buttonTap" hover-class="none" class="weui-dialog__btn {{item.className}} {{item.extClass}}" data-index="{{index}}" >{{item.text}}</button>
+        </block>
+        <!-- <view class="weui-dialog__btn" bindtap="confirm">确认</view> -->
+      </block>
+      <slot name="footer" wx:else></slot>
+    </view>
   </view>
-
 </view>

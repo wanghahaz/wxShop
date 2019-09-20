@@ -2,8 +2,11 @@
   <scroll-view scroll-top="{{scrollTop}}" scroll-y id="scrollMsg" scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
     <view class="chat-notice fs_14 tc">系统消息: 欢迎来到{{shopName}}</view>
     <view catchtap="toRouter" data-id="{{goods.goods_id}}" data-skuId="{{goods.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" class="goods box_zing flex" wx:if="{{goods.goods_id}}">
-      <image src="{{goods.goods_thumb}}"></image>
-      <text class="fs_13 clamp_2">{{goods.goods_name}}</text>
+      <image class="flex_nosize" src="{{goods.goods_thumb}}"></image>
+      <view class="fs_13 gdealis flex_tb">
+        <text class="clamp_2">{{goods.goods_name}}</text>
+        <text class="fcF1">￥{{goods.goods_price}}</text>
+      </view>
     </view>
     <block wx:key wx:for='{{msgList}}' wx:for-index="index">
 

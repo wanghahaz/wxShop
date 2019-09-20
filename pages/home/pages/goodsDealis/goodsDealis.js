@@ -9,6 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttons: [{
+      text: '取消'
+    }, {
+      text: '确定'
+    }],
+    dialogShow: false,
     clientHeight: app.globalData.clientHeight / 2,
     scrollTop: 0,
     is_collect: 1,
@@ -26,6 +32,13 @@ Page({
     goods_price: 0,
     goods_body: '',
     goods_thumb: ''
+  },
+  // 组件返回值
+  tapDialogButton(e) {
+    console.log('dialog', e.detail)
+    this.setData({
+      dialogShow: false,
+    })
   },
   // 吸顶
   onPageScroll(e) {
@@ -100,13 +113,14 @@ Page({
       let goods = {
         goods_name: this.data.goodsData.row.goods_name,
         goods_thumb: this.data.goodsData.row.goods_thumb,
+        goods_price: this.data.goodsData.row.goods_price,
         goods_id: this.data.dataObj.id,
         sku_id: this.data.dataObj.sku_id,
       }
       app.globalData.webGoods = goods;
       if (!wx.getStorageSync('token')) {
-        until.toast({
-          title: '请您先进行登录，然后继续操作'
+        this.setData({
+          dialogShow: true
         })
         return false;
       }

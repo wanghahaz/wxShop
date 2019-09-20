@@ -10,7 +10,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isGetInfo: false,
     scrollTop: 0,
     bannerList: [],
     navList: [],
@@ -19,12 +18,6 @@ Page({
     clientHeight: app.globalData.clientHeight / 2,
     shopList: [],
     isPullDownRefresh: true,
-  },
-  // 组件返回值
-  myevent(e) {
-    this.setData({
-      isGetInfo: false
-    })
   },
   onPageScroll(e) {
     this.setData({

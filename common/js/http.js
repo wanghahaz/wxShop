@@ -64,6 +64,8 @@ let postReq = function(url, data, show) {
             content: res.data.msg || '网络出错，请刷新重试',
             showCancel: false
           })
+          wx.removeStorageSync('token')
+          wx.removeStorageSync('userInfo')
           reject(res.data)
         } else {
           resolve(res.data)

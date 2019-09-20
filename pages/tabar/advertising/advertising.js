@@ -9,6 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttons: [{
+      text: '取消'
+    }, {
+      text: '确定'
+    }],
+    dialogShow: false,
     marqueePace: 1, //滚动速度
     marqueeDistance: 0, //初始滚动距离
     marqueeDistance2: 0,
@@ -22,6 +28,12 @@ Page({
     height: 0,
     cardNum: 0,
     time: ''
+  },
+  tapDialogButton(e) {
+    console.log('dialog', e.detail)
+    this.setData({
+      dialogShow: false,
+    })
   },
   //点击使用体验卡 
   startCard(e) {
@@ -75,8 +87,8 @@ Page({
   toRouter(e) {
     if (e.currentTarget.dataset.path == "/pages/home/pages/invitation/invitation" || e.currentTarget.dataset.login) {
       if (!wx.getStorageSync('token')) {
-        until.toast({
-          title: "请您先登陆！"
+        this.setData({
+          dialogShow: true
         })
         return false;
       }

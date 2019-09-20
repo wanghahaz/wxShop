@@ -9,6 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttons: [{
+      text: '取消'
+    }, {
+      text: '确定'
+    }],
+    dialogShow: false,
     is_collect: 0,
     shopId: null,
     shopObj: {},
@@ -22,6 +28,13 @@ Page({
   showModel() {
     this.setData({
       showMask: !this.data.showMask
+    })
+  },
+  // 组件返回值
+  tapDialogButton(e) {
+    console.log('dialog', e.detail)
+    this.setData({
+      dialogShow: false,
     })
   },
   getShopDealis() {
@@ -95,6 +108,14 @@ Page({
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
+    if (e.currentTarget.dataset.path == '/pages/home/pages/websocket/websocket') {
+      if (!wx.getStorageSync('token')) {
+        this.setData({
+          dialogShow: true
+        })
+        return false;
+      }
+    }
     if (data) {
       wx.navigateTo({
         url: `${e.currentTarget.dataset.path}?${data}`,

@@ -1,11 +1,15 @@
 <!--index.wxml-->
 <view class="container" wx:if="{{shopObj.store_name}}">
+  <mp-dialog title="提示" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+    <view>当前操作需要登陆后进行,请您立即登陆~</view>
+  </mp-dialog>
   <view class="titleBox">
     <image class="bgImg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567767330059&di=7c19a24cdb7ab2007a497adb2b3a4e40&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F09%2F20180709181137_ftqjg.thumb.700_0.jpg"></image>
     <view class="shopTitle width94 flex flex_lr flex_m ">
-      <view class="flex">
+      <view class="flex" style="position: relative">
         <image src="{{shopObj.store_thumb}}" class="slide-image"></image>
         <text class="fs_20 flex flex_m">{{shopObj.store_name}}</text>
+        <text data-path="/pages/home/pages/websocket/websocket" data-id="{{shopId}}" data-name="{{shopObj.store_name}}" catchtap="toRouter" class="./iconfont/iconxiaoxi:before icon webscoket" style="font-size:44rpx"></text>
       </view>
       <text class="collect flex_nosize fs_14 tc" catchtap="collectGoods">{{is_collect?'取消收藏':'收藏'}}</text>
     </view>

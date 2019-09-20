@@ -85,8 +85,6 @@ Page({
           openid: app.globalData.openid,
           avatar: res.userInfo.avatarUrl
         }).then(re => {
-          console.log(res)
-          console.log(wx.getStorageSync('share_id'))
           app.globalData.userInfo = re.data.user;
           app.globalData.token = re.data.token;
           wx.setStorage({

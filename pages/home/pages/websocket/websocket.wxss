@@ -90,9 +90,14 @@ input {
   height: 134rpx;
 }
 
-.goods text {
+.goods .gdealis {
   margin-left: 20rpx;
+  height: 134rpx;
+  /* align-items:  */
+
+}
+
+.goods .gdealis text {
   width: 60%;
-  height: 100%;
   line-height: 1.6;
 }

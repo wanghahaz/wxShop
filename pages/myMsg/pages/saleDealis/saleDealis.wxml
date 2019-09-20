@@ -3,8 +3,51 @@
   <view class="status tc  width94 box_zing">
     {{statusObj[dealis.status_]}}
   </view>
-  <view class="user adress_box width94 flex flex_m box_zing">
+    <!-- 提交物流信息 -->
+  <view wx:if="{{dealis.status_=='1_6'}}" class="adress_box width94 fs_14 flex column box_zing">
+    <text>商家已同意退货，请尽快退还商品</text>
+    <view class="input">
+      <text class="./iconfont/icondian:before icon fcb2" style="font-size:24rpx;margin:0 10rpx 0 0rpx"></text>
+      <text class="fs_13 fcb2">如商家逾期未处理，系统将自动退款。</text>
+    </view>
+    <view></view>
   </view>
+  <view wx:if="{{dealis.status_=='1_6'}}" class="adress_box width94 fs_14 flex column  box_zing">
+    <text>物流信息</text>
+    <view class="flex input">
+      <text>物流公司：</text>
+      <text>圆通快递</text>
+    </view>
+    <view class="flex input">
+      <text>运单编号：</text>
+      <text>123456789123</text>
+    </view>
+  </view>
+  <!-- 未提交物流信息 -->
+  <view wx:if="{{dealis.status_=='1_6'}}" class="adress_box width94 fs_14 flex column box_zing">
+    <text>商家已同意退货，请尽快退还商品</text>
+    <view class="input">
+      <text class="./iconfont/icondian:before icon fcb2" style="font-size:24rpx;margin:0 10rpx 0 0rpx"></text>
+      <text class="fs_13 fcb2">如您逾期未填写物流信息，系统将自动关闭此次退货申请。</text>
+    </view>
+    <view class="input">
+      <text class="./iconfont/icondian:before icon fcb2" style="font-size:24rpx;margin:0 10rpx 0 0rpx"></text>
+      <text class="fs_13 fcb2">未经商家同意，请不要用货到付款或者平邮的方式。</text>
+    </view>
+  </view>
+  <view wx:if="{{dealis.status_=='1_6'}}" class="adress_box width94 fs_14 flex column  box_zing">
+    <text>请填写物流信息</text>
+    <view class="flex input">
+      <text>物流公司：</text>
+      <input data-type="express_code" bindinput="bindinput" placeholder="请填写运单编号"></input>
+    </view>
+    <view class="flex input">
+      <text>运单编号：</text>
+      <input data-type="express_company" bindinput="bindinput" placeholder="请填写运单编号"></input>
+      <text catchtap="editStatus" class="sub fcF1 tc fs_13">提交</text>
+    </view>
+  </view>
+
   <view class="goodspDealis width94 box_zing">
     <block>
       <view class="dealis_order  box_zing">

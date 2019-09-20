@@ -15,6 +15,12 @@
   margin-bottom: 20rpx;
 }
 
+.webscoket {
+  position: relative;
+  top: 30rpx;
+  left: 14rpx;
+}
+
 .titleBox>view {
   position: relative;
   z-index: 9;
@@ -62,7 +68,7 @@
   left: 0;
   bottom: 0;
   overflow-y: auto;
-  max-height:510rpx;
+  max-height: 510rpx;
   width: 100%;
   padding-bottom: 100rpx;
 }

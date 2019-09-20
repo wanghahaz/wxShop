@@ -50,16 +50,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   toRouter(e) {
-    let data = until.cutShift(e.currentTarget.dataset);
-    if (data) {
-      wx.navigateTo({
-        url: `${e.currentTarget.dataset.path}?${data}`,
-      })
-    } else {
-      wx.navigateTo({
-        url: e.currentTarget.dataset.path,
-      })
-    }
+    wx.navigateBack()
+    // let data = until.cutShift(e.currentTarget.dataset);
+    // if (data) {
+    //   wx.navigateTo({
+    //     url: `${e.currentTarget.dataset.path}?${data}`,
+    //   })
+    // } else {
+    //   wx.navigateTo({
+    //     url: e.currentTarget.dataset.path,
+    //   })
+    // }
   },
   onLoad: function(options) {
     if (options.type) {
@@ -77,6 +78,7 @@ Page({
     });
     websocket.connect(function(res) {
       let obj = JSON.parse(res.data);
+      console.log(obj)
       if (obj.type == 3) {
         obj.message = `http://www.lyjp.shop/${obj.message}`
       }
@@ -137,7 +139,7 @@ Page({
             if (re.code == 200) {
               let data = {
                 uid: that.data.userObj.id,
-                ruid: 17,
+                ruid: this.data.shopId,
                 type: 3,
                 content: re.data,
                 cmd: 'msg'
@@ -209,7 +211,7 @@ Page({
   sendClick: function(e) {
     let data = {
       uid: this.data.userObj.id,
-      ruid: 17,
+      ruid: this.data.shopId,
       type: 1,
       content: this.data.inputVal || e.detail.value,
       cmd: 'msg'

@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "mp-dialog": "../../element/dialog/dialog"
+  },
   "navigationBarTitleText": "广告平台"
 }
