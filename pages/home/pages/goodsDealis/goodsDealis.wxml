@@ -29,10 +29,17 @@
 
   <view class="box_Big box_zing" style="background: #fff;">
     <text style="margin:20rpx 0 10rpx 0;display: inline-block" class="fcF1 fs_20">￥{{goodsData.row.goods_price}}</text>
-    <view class="flex flex_lr flex_m" style="padding-bottom:20rpx;">
+    <view class="flex flex_lr flex_m">
       <text style="width:75%" class="clamp_2">{{goodsData.row.goods_name}}</text>
       <text wx:if="{{is_collect==1}}" catchtap="collectGoods" class="./iconfont/iconxin:before icon" style="font-size:52rpx; color:#F44444"></text>
       <text wx:else catchtap="collectGoods" class="./iconfont/iconxin1:before icon" style="font-size:52rpx; color:#F44444"></text>
+    </view>
+    <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" style="margin-top:14rpx;padding:0rpx 3% 20rpx 3%;" class="flex flex_lr shop_box fs_14">
+      <text style="width:50%">{{goodsData.store.store_name}}</text>
+      <view class="flex flex_m flex_end ">
+        <text>进店逛逛</text>
+        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+      </view>
     </view>
     <view data-type="3" bindtap="showModel" style="padding:20rpx 3% 16rpx 3%;border-top:18rpx solid #f8f6f7" class="flex flex_lr fs_12">
       <text class="fcb2">服务 <text class="text_right">7天退货·48小时发货</text></text>
@@ -47,15 +54,6 @@
       <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
     </view>
   </view>
-
-  <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" style="margin-top:20rpx;padding:30rpx 3% 0 3%;" class="flex flex_lr shop_box fs_14">
-    <text style="width:50%">{{goodsData.store.store_name}}</text>
-    <view class="fcb2 flex flex_m flex_end ">
-      <text>进店逛逛</text>
-      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
-    </view>
-  </view>
-
   <view class="goodsDealis flex column box_zing">
     <view catchtap="toRouter" data-id="{{dataObj.id}}" data-path="/pages/home/pages/evaluateList/evaluateList" class="fs_14 flex flex_lr">
       <text style="width:50%">评价（{{commentList.length>99?'99+':commentList.length}}）</text>

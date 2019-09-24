@@ -5,7 +5,7 @@
       <text class="addImg tc ">+</text>
       <text class="fs_17 " style="margin-left:20rpx; ">新增收货地址</text>
     </view>
-    <text class="./iconfont/iconarrow-right-copy:before icon " style="font-size:36rpx;float: right; "></text>
+    <text class="./iconfont/iconarrow-right-copy:before icon " style="font-size:48rpx;float: right; "></text>
   </view>
   <view wx:else class="box_adress flex box_zing flex_m" data-path="/pages/myMsg/pages/adressList/adressList" bind:tap="toRouter">
     <image class="gps flex_nosize" src="../../../../image/gps.png"></image>

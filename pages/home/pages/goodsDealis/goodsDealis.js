@@ -296,7 +296,7 @@ Page({
     http.getReq(`/goods/get_eval_top/${this.data.dataObj.id}`, {}).then(res => {
       if (res.code == 200) {
         let data = res.data;
-        data.percent = res.data.high_rate > 0 ? res.data.high_rate.substr(-2) : '0';
+        data.percent = res.data.high_rate/1 == 1 ? `${res.data.high_rate/1}00` : res.data.high_rate == 0 ? 0 : res.data.high_rate / 1 * 100;
         this.setData({
           eval_top: data
         })
@@ -416,7 +416,7 @@ Page({
       share_id = 0;
     }
     return {
-      title: '您好，欢迎零元晋品',
+      title: '您好，欢迎使用零元晋品',
       path: '/pages/home/pages/goodsDealis/goodsDealis?share_id=' + share_id,
     }
   }

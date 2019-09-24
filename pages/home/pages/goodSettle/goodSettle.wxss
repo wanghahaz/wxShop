@@ -42,8 +42,8 @@
 }
 
 .goodsImg {
-  width: 229rpx;
-  height: 229rpx;
+  width: 230rpx;
+  height: 230rpx;
 }
 
 .goods {
@@ -70,7 +70,7 @@
 }
 
 .box_size {
-  margin: 16rpx auto;
+  margin: 30rpx auto;
 }
 
 .box_size >input {
@@ -80,6 +80,11 @@
   padding-left: 10rpx;
   border-radius: 10rpx;
   background: #f8f6f7;
+}
+
+.box_size>text:nth-of-type(1) {
+  width: 230rpx;
+  text-align: right;
 }
 
 .check {

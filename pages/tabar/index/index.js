@@ -19,6 +19,12 @@ Page({
     shopList: [],
     isPullDownRefresh: true,
   },
+  tolink(e) {
+    wx.navigateTo({
+      url: `${e.currentTarget.dataset.link}`,
+    })
+    console.log(e)
+  },
   onPageScroll(e) {
     this.setData({
       scrollTop: e.scrollTop
@@ -197,7 +203,7 @@ Page({
       share_id = 0;
     }
     return {
-      title: '您好，欢迎零元晋品',
+      title: '您好，欢迎使用零元晋品',
       path: '/pages/tabar/index/index?share_id=' + share_id,
     }
   }

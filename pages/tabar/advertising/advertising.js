@@ -21,7 +21,7 @@ Page({
     marquee2copy_status: false,
     marquee2_margin: 10,
     size: 14,
-    interval: 45,
+    interval: 80,
     ads: [],
     row: {},
     logsList: [],
@@ -34,6 +34,11 @@ Page({
     this.setData({
       dialogShow: false,
     })
+    if (e.detail.item.token) {
+      this.setData({
+        isLogin: true
+      })
+    }
   },
   //点击使用体验卡 
   startCard(e) {
@@ -216,9 +221,10 @@ Page({
     } else {
       share_id = 0;
     }
+    console.log(share_id)
     return {
-      title: '您好，欢迎零元晋品',
-      path: '/pages/tabar/advertising/advertising?share_id=' + share_id,
+      title: '您好，欢迎使用零元晋品',
+      path: '/pages/tabar/share/share?share_id=' + share_id,
     }
   }
 })

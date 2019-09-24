@@ -22,7 +22,6 @@ Page({
   onReady: function() {
     var that = this;
     if (!socketOpen) {
-      console.log(1)
       this.webSocket()
     }
     SocketTask.onOpen(res => {

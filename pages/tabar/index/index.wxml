@@ -11,14 +11,14 @@
   </view>
   <swiper indicator-dots="true" autoplay="true" interval="2000" duration="200" circular='true' class="width94 swiper_ab">
     <block wx:for="{{bannerList}}" wx:key="{{index}}">
-      <swiper-item>
+      <swiper-item data-link="{{item.link_url}}" catchtap="tolink">
         <image src="{{item.thumb}}" onerror="" class="slide-image"></image>
       </swiper-item>
     </block>
   </swiper>
   <view class="flex flex_sa seckill width94 flex_wrap">
     <block wx:for="{{navList}}" wx:key="{{index}}">
-      <view class="seckillList flex flex_nosize">
+      <view data-link="{{item.link_url}}" catchtap="tolink" class="seckillList flex flex_nosize">
         <image class="image" src="{{item.icon}}"></image>
         <text class="fs_13 clamp_1 tc" style="color:#F18E1E;margin:4rpx 0 0 0;width:95%">{{item.name}}</text>
       </view>

@@ -44,7 +44,7 @@
           <text wx:if='{{item.status==1}}' data-id="{{item.id}}" data-type="5" data-toast="已提醒卖家发货！" data-model="提醒发货?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">提醒发货</text>
           <text wx:if='{{item.status==2}}' data-id="{{item.id}}" data-type="1" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">确认收货</text>
           <text wx:if='{{item.status==0}}' data-jifen="{{item.is_jifen}}" data-id="{{item.id}}" data-type="4" data-toast="付款成功" data-model="{{item.is_jifen?'您有冻结的代金券，是否使用':'您是否确认付款'}}?" catchtap="editStatus" class="evaluation fcF1">立即付款</text>
-          <text wx:if='{{item.status==9||item.status==10||item.status==8||item.status==3}}' data-id="{{item.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">删除订单</text>
+          <text wx:if='{{item.status==9||item.status==10}}' data-id="{{item.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">删除订单</text>
           <text wx:if='{{item.status==8}}' data-id="{{item.id}}" catchtap="toRouter" data-path="/pages/home/pages/goodSevaluation/goodSevaluation" class="evaluation fcF1">评价</text>
           <text wx:if='{{item.status==9||item.status==10||item.status==1||item.status==2||item.status==3}}' class="evaluation fcF1">查看订单</text>
         </view>
@@ -196,7 +196,7 @@
           <text class="fs_16">合计：￥{{item.goods_amount}}</text>
         </view>
         <view class="btn count flex fs_13">
-          <text wx:if='{{item.status==9||item.status==10||item.status==8}}' data-id="{{item.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">删除订单</text>
+          <text wx:if='{{item.status==9||item.status==10}}' data-id="{{item.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">删除订单</text>
           <text wx:if='{{item.status==8}}' data-id="{{item.id}}" catchtap="toRouter" data-path="/pages/home/pages/goodSevaluation/goodSevaluation" class="evaluation fcF1">评价</text>
         </view>
       </view>

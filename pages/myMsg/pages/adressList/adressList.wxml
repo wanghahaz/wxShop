@@ -3,7 +3,7 @@
   <button hover-class="none" class="getWx flex flex_m box_zing" bind:tap="getAddress">
     <view class="flex flex_m">
       <text class="./iconfont/iconweixin:before icon wx"></text>
-      <text>获取微信收货地址</text>
+      <text class="fs_15">获取微信收货地址</text>
     </view>
     <text class=" ./iconfont/iconarrow-right-copy:before icon " style="font-size:30rpx "></text>
   </button>

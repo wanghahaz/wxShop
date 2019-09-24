@@ -200,7 +200,7 @@ Page({
       share_id = 0;
     }
     return {
-      title: '您好，欢迎零元晋品',
+      title: '您好，欢迎使用零元晋品',
       path: '/pages/home/pages/shopDetails/shopDetails?share_id=' + share_id,
     }
   }

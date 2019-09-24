@@ -1,4 +1,5 @@
-var url = 'ws://192.168.0.108:9501'; //服务器地址
+// var url = 'ws://192.168.0.108:9501'; //服务器地址
+let url ='wss://www.lyjp.shop/wss';
 let socketOpen = false;
 function connect(func) {
   wx.connectSocket({

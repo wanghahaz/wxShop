@@ -241,22 +241,29 @@ module.exports =
                       key: "userInfo",
                       data: re.data.user
                     })
-                    that.setData({
-                      token: re.data.token ? false : true,
-                      userInfo: app.globalData.userInfo
-                    })
-
+                    let userInfo = {
+                      userInfo: re.data.user,
+                      token: re.data.token
+                    }
+                    that.triggerEvent('buttontap', {
+                      index: index,
+                      item: userInfo
+                    }, {});
                   })
                 },
                 fail: function(err) {
-                  console.log(err)
+                  that.triggerEvent('buttontap', {
+                    index: index,
+                    item: that.data.buttons[index]
+                  }, {});
                 }
               })
+            } else {
+              this.triggerEvent('buttontap', {
+                index: index,
+                item: this.data.buttons[index]
+              }, {});
             }
-            this.triggerEvent('buttontap', {
-              index: index,
-              item: this.data.buttons[index]
-            }, {});
 
           },
           close: function close() {

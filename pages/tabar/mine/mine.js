@@ -9,6 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttons: [{
+      text: '取消'
+    }, {
+      text: '确定'
+    }],
+    dialogShow: false,
     orderList: [{
       name: '待付款',
       path: "/pages/home/pages/myOrder/myOrder",
@@ -75,6 +81,17 @@ Page({
     token: true,
     userInfo: {}
   },
+  tapDialogButton(e) {
+    this.setData({
+      dialogShow: false,
+    })
+    if (e.detail.item.token) {
+      this.setData({
+        token: false,
+        userInfo: e.detail.item.userInfo
+      })
+    }
+  },
   getInfo() {
     let that = this;
     wx.getUserInfo({
@@ -134,8 +151,8 @@ Page({
   toRouter(e) {
     if (e.currentTarget.dataset.path != "/pages/home/pages/goodsDealis/goodsDealis") {
       if (!wx.getStorageSync('token')) {
-        until.toast({
-          title: '请您先进行登录，然后继续操作'
+        this.setData({
+          dialogShow: true
         })
         return false;
       }

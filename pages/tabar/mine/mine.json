@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "one_shop": "../../element/oneShop/oneShop"
+    "one_shop": "../../element/oneShop/oneShop",
+    "mp-dialog": "../../element/dialog/dialog"
   },
   "navigationBarTitleText": "我的"
 }

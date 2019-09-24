@@ -1,5 +1,5 @@
 // 域名
-let req_url = 'http://www.lyjp.shop/api';
+let req_url = 'https://www.lyjp.shop/api';
 // http://mall.com/api
 // get请求
 let getReq = function(url, data, show) {
@@ -24,6 +24,8 @@ let getReq = function(url, data, show) {
             content: res.data.msg,
             showCancel: false
           })
+          wx.removeStorageSync('token')
+          wx.removeStorageSync('userInfo')
           reject(res.data)
         } else {
           resolve(res.data)
