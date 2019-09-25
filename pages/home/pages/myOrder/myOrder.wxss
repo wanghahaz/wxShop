@@ -1,28 +1,15 @@
-scroll-view .active {
+.title .active {
   color: #f18e1e;
   border-bottom: 1px solid #f18e1e;
 }
 
 .title {
-  height: 98rpx;
-}
-
-swiper {
-  display: flex;
-  height: 100%;
-}
-
-swiper-item {
-  height: 100%;
-  overflow: scroll;
-  overflow-x: hidden;
+  margin-bottom: 14rpx;
 }
 
 .title text {
   display: inline-block;
-  flex-shrink: 0;
-  margin: auto 30rpx auto 0;
-  padding: 30rpx 10rpx 4rpx 10rpx;
+  padding: 40rpx 10rpx 10rpx 10rpx;
 }
 
 .dealis_order {

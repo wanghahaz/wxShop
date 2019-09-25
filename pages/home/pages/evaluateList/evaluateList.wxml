@@ -26,9 +26,9 @@
             <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg" class="comentImg"></image>
           </block>
         </view> -->
-        <view class="shopReply box_zing" style="margin:20rpx 0">
+        <view wx:if="{{item.comment}}" class="shopReply box_zing" style="margin:20rpx 0">
           <view style="margin-bottom:6rpx">店家回复</view>
-          <view style="line-height:1.5">哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或或或或哈哈哈哈哈哈哈哈哈哈呵呵呵呵呵呵呵呵</view>
+          <view style="line-height:1.5">{{item.comment.content}}</view>
         </view>
         <!-- 赞 -->
         <!-- <view class="flex flex_m flex_end">

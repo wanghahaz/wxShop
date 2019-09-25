@@ -113,7 +113,7 @@ Page({
             wx.navigateBack()
           },
           fail: function(err) {
-            wx.navigateTo({
+            wx.redirectTo({
               url: `/pages/home/pages/myOrder/myOrder?index=${0}`
             })
           }

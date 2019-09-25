@@ -157,7 +157,8 @@ Page({
           is_collect: res.data.is_collect,
           goods_storage: res.data.row.goods_storage,
           goods_price: res.data.row.goods_price,
-          goods_thumb: res.data.row.goods_images[0]
+          goods_thumb: res.data.row.goods_images[0],
+          goods_service: res.data.row.goods_service == null ? res.data.row.goods_service : res.data.row.goods_service.join(',')
         })
       } else {
         until.toast({
@@ -296,7 +297,7 @@ Page({
     http.getReq(`/goods/get_eval_top/${this.data.dataObj.id}`, {}).then(res => {
       if (res.code == 200) {
         let data = res.data;
-        data.percent = res.data.high_rate/1 == 1 ? `${res.data.high_rate/1}00` : res.data.high_rate == 0 ? 0 : res.data.high_rate / 1 * 100;
+        data.percent = res.data.high_rate / 1 == 1 ? `${res.data.high_rate/1}00` : res.data.high_rate == 0 ? 0 : res.data.high_rate / 1 * 100;
         this.setData({
           eval_top: data
         })

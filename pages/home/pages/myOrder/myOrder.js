@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    hasOnShow: false,
     statusObj: {
       '-1': '全部',
       '0': '未付款',
@@ -24,12 +25,15 @@ Page({
       '10': '已关闭'
     },
     refund_type: {
-      '1_1': '退货中',
-      '1_2': '退货已拒绝',
-      '1_3': '已退货',
-      '3_1': '退款中',
-      '3_2': '退款已拒绝',
-      '1_3': '已退款',
+      '1': '售后处理中',
+      '2': '售后已完成',
+      '3': '拒绝售后'
+      // '1_1': '退货中',
+      // '1_2': '退货已拒绝',
+      // '1_3': '已退货',
+      // '3_1': '退款中',
+      // '3_2': '退款已拒绝',
+      // '3_3': '已退款',
     },
     isLoading: true,
     titleIndex: -1,
@@ -143,6 +147,7 @@ Page({
         this.setData({
           goodsList: [...this.data.goodsList, ...list]
         })
+
         if (res.data.last_page == this.data.page) {
           this.setData({
             isLoading: false
@@ -224,18 +229,20 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (this.data.hasOnShow) {
+      return
+    }
     this.setData({
       isLoading: true,
       page: 1,
-      goodsList: []
+      goodsList: [],
+      hasOnShow: true
     })
     this.getMyOrder()
   },
@@ -244,7 +251,12 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    this.setData({
+      isLoading: true,
+      page: 1,
+      goodsList: [],
+      hasOnShow: false
+    })
   },
 
   /**

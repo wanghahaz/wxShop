@@ -23,12 +23,15 @@ Page({
       '10': '已关闭'
     },
     refund_type: {
-      '1_1': '退货中',
-      '1_2': '退货已拒绝',
-      '1_3': '已退货',
-      '3_1': '退款中',
-      '3_2': '退款已拒绝',
-      '1_3': '已退款',
+      '1': '售后处理中',
+      '2': '售后已完成',
+      '3': '拒绝售后'
+      // '1_1': '退货中',
+      // '1_2': '退货已拒绝',
+      // '1_3': '已退货',
+      // '1_3': '退款中',
+      // '2_3': '退款已拒绝',
+      // '3_3': '已退款',
     },
     dealis: {},
     id: null,
@@ -82,7 +85,7 @@ Page({
       if (res.code == 200) {
         let data = res.data;
         data.order_data.forEach(item => {
-          item.type = `${item.refund_type}_${item.is_refund}`
+          item.type = `${item.is_refund}_${item.refund_type}`
         })
         this.setData({
           dealis: data

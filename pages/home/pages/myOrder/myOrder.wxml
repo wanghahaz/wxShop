@@ -1,13 +1,15 @@
 <!--index.wxml-->
 <view class="container">
-  <scroll-view scroll-x scroll-left="{{scrollLeft}}" style="width: 100%;white-space: nowrap" class="title">
-    <text data-index="-1" style="margin-left:36rpx" bindtap="bindchange" class="{{titleIndex=='-1'?'active':''}} tc">全部</text>
+  <!-- <scroll-view scroll-x scroll-left="{{scrollLeft}}" style="width: 100%;white-space: nowrap" class="title"> -->
+  <view class="flex title flex_sa">
+    <text data-index="-1" bindtap="bindchange" class="{{titleIndex=='-1'?'active':''}} tc">全部</text>
     <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">待付款</text>
     <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">待发货</text>
     <text data-index="2" bindtap="bindchange" class="{{titleIndex==2?'active':''}} tc">待收货</text>
     <text data-index="8" bindtap="bindchange" class="{{titleIndex==8?'active':''}} tc">待评价</text>
-    <!-- <text data-index="4" bindtap="bindchange" class="{{titleIndex==4?'active':''}} tc">退款/售后</text> -->
-  </scroll-view>
+  </view>
+  <!-- <text data-index="4" bindtap="bindchange" class="{{titleIndex==4?'active':''}} tc">退款/售后</text> -->
+  <!-- </scroll-view> -->
   <view class="noMore" wx:if="{{goodsList.length==0&&!isLoading}}">您还没有订单哦！</view>
   <block wx:if="{{titleIndex=='-1'}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
@@ -27,11 +29,11 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-             <view class="fs_12 flex flex_lr refund_type">
+            <view class="fs_12 flex flex_lr refund_type">
               <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.type]}}</text>
+              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
             </view>
-            
+
           </view>
         </view>
 
@@ -69,11 +71,11 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-             <view class="fs_12 flex flex_lr refund_type">
+            <view class="fs_12 flex flex_lr refund_type">
               <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.type]}}</text>
+              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
             </view>
-            
+
           </view>
         </view>
 
@@ -108,11 +110,11 @@
             </view>
             <view class="fs_12 flex flex_lr refund_type">
               <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.type]}}</text>
+              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
             </view>
-             <view class="fs_12 flex flex_lr refund_type">
+            <view class="fs_12 flex flex_lr refund_type">
               <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.type]}}</text>
+              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
             </view>
           </view>
         </view>
@@ -146,11 +148,11 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-             <view class="fs_12 flex flex_lr refund_type">
+            <view class="fs_12 flex flex_lr refund_type">
               <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.type]}}</text>
+              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
             </view>
-            
+
           </view>
         </view>
 
@@ -183,11 +185,11 @@
                 <text class="fs_11 ter">×{{value.goods_num}}</text>
               </view>
             </view>
-             <view class="fs_12 flex flex_lr refund_type">
+            <view class="fs_12 flex flex_lr refund_type">
               <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.type]}}</text>
+              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
             </view>
-            
+
           </view>
         </view>
 

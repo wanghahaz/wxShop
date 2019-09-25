@@ -58,7 +58,7 @@
 }
 
 .one_shop>view>text {
-  padding: 6rpx 0 0 6rpx;
+  padding: 6rpx 6rpx 0 8rpx;
 }
 
 .ticket {

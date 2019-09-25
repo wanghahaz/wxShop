@@ -4,17 +4,17 @@ import http from "./common/js/http.js";
 App({
   setBadge() {
     let that = this;
-    if (that.globalData.totalCount > 0) {
-      wx.setTabBarBadge({
-        index: 3,
-        text: String(that.globalData.totalCount > 9 ? '9+' : that.globalData.totalCount),
-        success: function(res) {},
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
+    // if (that.globalData.totalCount > 0) {
+    //   wx.setTabBarBadge({
+    //     index: 3,
+    //     text: String(that.globalData.totalCount > 9 ? '9+' : that.globalData.totalCount),
+    //     success: function(res) {},
+    //   })
+    // } else {
+    //   wx.hideTabBarRedDot({
+    //     index: 3,
+    //   })
+    // }
 
   },
   getCard() {
@@ -129,8 +129,10 @@ App({
     if (list.legnth == 0) {
       this.globalData.totalPrice = 0;
       this.globalData.totalCount = 0;
+      this.globalData.indexTotal = 0
       return;
     }
+    let sums = 0;
     let sum = 0;
     let count = 0;
     goodsList.forEach(item => {
@@ -146,7 +148,8 @@ App({
     this.setBadge();
   },
   globalData: {
-    webGoods:{},
+    indexTotal: 0,
+    webGoods: {},
     commentList: [], //评价商品列表
     saleGoods: {}, //售后商品
     goodsList: [], //再次购买的商品列表

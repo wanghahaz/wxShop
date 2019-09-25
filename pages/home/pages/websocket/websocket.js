@@ -63,6 +63,7 @@ Page({
     // }
   },
   onLoad: function(options) {
+    console.log(options)
     if (options.type) {
       this.setData({
         goods: app.globalData.webGoods
@@ -73,6 +74,7 @@ Page({
     _this.setData({
       userObj: userObj,
       shopId: options.id,
+      bindUser: options.binduser,
       shopName: options.name,
       cusHeadIcon: app.globalData.userInfo.avatar,
     });
@@ -139,7 +141,7 @@ Page({
             if (re.code == 200) {
               let data = {
                 uid: that.data.userObj.id,
-                ruid: this.data.shopId,
+                ruid: this.data.bindUser,
                 type: 3,
                 content: re.data,
                 cmd: 'msg'
@@ -211,7 +213,7 @@ Page({
   sendClick: function(e) {
     let data = {
       uid: this.data.userObj.id,
-      ruid: this.data.shopId,
+      ruid: this.data.bindUser,
       type: 1,
       content: this.data.inputVal || e.detail.value,
       cmd: 'msg'

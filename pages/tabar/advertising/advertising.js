@@ -3,7 +3,7 @@
 const app = getApp();
 import http from "../../../common/js/http.js";
 import until from "../../../utils/util.js";
-let timers = null;
+let interval = null;
 Page({
   /**
    * 页面的初始数据
@@ -21,7 +21,7 @@ Page({
     marquee2copy_status: false,
     marquee2_margin: 10,
     size: 14,
-    interval: 80,
+    interval: 70,
     ads: [],
     row: {},
     logsList: [],
@@ -114,7 +114,7 @@ Page({
    */
   run2: function() {
     var vm = this;
-    var interval = setInterval(function() {
+     interval = setInterval(function() {
       if (-vm.data.marqueeDistance2 < vm.data.length) {
         // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
         vm.setData({
@@ -183,13 +183,14 @@ Page({
     })
     this.getIndex()
     this.getLogs()
+    console.log(2)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-    clearInterval(timers)
+    clearInterval(interval)
   },
 
   /**

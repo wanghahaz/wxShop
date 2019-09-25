@@ -13,7 +13,7 @@ Page({
     goodsList: [],
     totalPrice: 0,
     count: 0,
-    allCheck: true,
+    allCheck: false,
     page: 1,
     isPullDownRefresh: true,
   },
@@ -47,10 +47,10 @@ Page({
       let list = res.data;
       if (res.code == 200) {
         list.forEach(item => {
-          item.store.check = true;
+          item.store.check = false;
           item.goods.forEach(value => {
             if (value.status == 1) {
-              value.check = true
+              value.check = false
             } else {
               value.check = false;
             }
@@ -133,6 +133,11 @@ Page({
     })
   },
   toRouter(e) {
+    if (e.currentTarget.dataset.path == '/pages/home/pages/goodSettle/goodSettle') {
+      if (this.data.totalPrice / 1 <= 0) {
+        return;
+      }
+    }
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
       wx.navigateTo({

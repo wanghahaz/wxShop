@@ -65,7 +65,7 @@
 .sale_out {
   display: inline-block;
   width: 100%;
-  padding:80% 10rpx 0 0;
+  padding: 80% 10rpx 0 0;
 }
 
 .title {
@@ -124,13 +124,13 @@
 
 .count .text {
   display: inline-block;
-  width: 36rpx;
-  color: #b2b2b2;
-  line-height: 36rpx;
+  width: 40rpx;
+  line-height: 40rpx;
 }
 
 .add, .odd {
   border-radius: 50%;
+  color: #000;
   background: #f2f2f0;
 }
 

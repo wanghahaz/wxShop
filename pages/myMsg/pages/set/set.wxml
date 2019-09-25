@@ -30,4 +30,7 @@
     <text>隐私&政策</text>
     <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:40rpx"></text>
   </view>
+  <view data-path="/pages/myMsg/pages/intimacy/intimacy" bindtap="toRouter" class="box width94 box_size tc box_zing flex flex_c">
+    <text>退出登录</text>
+  </view>
 </view>

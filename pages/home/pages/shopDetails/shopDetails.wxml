@@ -9,7 +9,7 @@
       <view class="flex" style="position: relative">
         <image src="{{shopObj.store_thumb}}" class="slide-image"></image>
         <text class="fs_20 flex flex_m">{{shopObj.store_name}}</text>
-        <text data-path="/pages/home/pages/websocket/websocket" data-id="{{shopId}}" data-name="{{shopObj.store_name}}" catchtap="toRouter" class="./iconfont/iconxiaoxi:before icon webscoket" style="font-size:44rpx"></text>
+        <text data-bindUser="{{shopObj.bind_user}}" data-path="/pages/home/pages/websocket/websocket" data-id="{{shopId}}" data-name="{{shopObj.store_name}}" catchtap="toRouter" class="./iconfont/iconxiaoxi:before icon webscoket" style="font-size:44rpx"></text>
       </view>
       <text class="collect flex_nosize fs_14 tc" catchtap="collectGoods">{{is_collect?'取消收藏':'收藏'}}</text>
     </view>

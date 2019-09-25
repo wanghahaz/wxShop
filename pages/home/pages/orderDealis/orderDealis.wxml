@@ -35,16 +35,14 @@
               </view>
             </view>
             <text wx:if="{{value.spec_name}}" class="remark clamp_1 fs_12 tc fcb2">{{value.spec_name}}</text>
-            <view wx:if="{{dealis.status==2}}" class="btn flex fs_13">
-              <text wx:if="{{value.refund_type==0&&value.is_refund==0}}" data-name="退货" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请售后</text>
-              <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis" wx:else>{{refund_type[value.type]}}</text>
+            <view wx:if="{{dealis.status==2&&value.refund_status==0}}" class="btn flex fs_13">
+              <text data-name="退货" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请售后</text>
             </view>
-            <view wx:elif="{{dealis.status==1}}" class="btn flex fs_13">
-              <text wx:if="{{value.refund_type==0&&value.is_refund==0}}" data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
-              <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis" wx:else>{{refund_type[value.type]}}</text>
+            <view wx:elif="{{dealis.status==1&&value.refund_status==0}}" class="btn flex fs_13">
+              <text data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
             </view>
-            <view wx:elif="{{value.is_refund!=0}}" class="btn flex fs_13">
-              <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis">{{refund_type[value.type]}}</text>
+            <view wx:elif="{{(dealis.status==4||dealis.status==6||dealis.status==1||dealis.status==2||dealis.status==7)&&value.refund_status!=0}}" class="btn flex fs_13">
+              <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis">{{refund_type[value.refund_status]}}</text>
             </view>
           </view>
         </view>
