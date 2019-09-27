@@ -37,6 +37,18 @@ Page({
       }
     })
   },
+  logout() {
+    http.postReq('/logout').then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        wx.removeStorageSync('token')
+        wx.removeStorageSync('userInfo')
+        wx.switchTab({
+          url: '/pages/tabar/mine/mine',
+        })
+      }
+    })
+  },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {

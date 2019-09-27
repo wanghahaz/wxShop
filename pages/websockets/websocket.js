@@ -98,7 +98,6 @@ Page({
       content: that.data.inputValue
     }
     if (socketOpen) {
-      console.log(1)
       // 如果打开了socket就发送数据给服务器
       sendSocketMessage(data_1)
       this.data.allContentList.push({
@@ -138,7 +137,6 @@ Page({
           filePath: res.tempFilePaths,
           name: 'img',
           success: function(res) {
-            console.log(res)
             wx.showToast({
               title: '图片发送成功！',
               duration: 3000
@@ -174,12 +172,9 @@ Page({
 
 //通过 WebSocket 连接发送数据，需要先 wx.connectSocket，并在 wx.onSocketOpen 回调之后才能发送。
 function sendSocketMessage(msg) {
-  console.log(msg)
   var that = this;
-  console.log('通过 WebSocket 连接发送数据', JSON.stringify(msg))
   SocketTask.send({
     data: JSON.stringify(msg)
   }, function(res) {
-    console.log('已发送', res)
   })
 }

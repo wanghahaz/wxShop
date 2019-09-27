@@ -184,6 +184,9 @@ Page({
    */
   onHide: function() {
     app.globalData.goodsList = this.data.goodsList;
+    this.setData({
+      allCheck: false
+    })
   },
 
   /**

@@ -54,7 +54,8 @@
   </view>
   <view class="flexd_bt flex flex_m fs_15">
     <text>总额(含运费):</text>
-    <text class="fcF1 ">￥{{totalPrice}}</text>
+    <text wx:if="{{!is_jifen}}" class="fcF1 ">￥{{totalPrice}}</text>
+    <text wx:else class="fcF1 ">￥{{totalPrice>money?totalPrice/1-money/1:0}}</text>
     <text bindtap="submint" class="total tc">提交订单</text>
   </view>
   <view class="mask" data-type="0" catchtap="showMake" wx:if="{{maskType}}">

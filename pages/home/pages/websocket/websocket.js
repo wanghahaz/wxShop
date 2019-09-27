@@ -3,23 +3,10 @@ import http from "../../../../common/js/http.js";
 var websocket = require("../../../../common/js/websocket.js");
 let inputVal = "";
 const app = getApp();
-var msgList = [{
-    created_at: '12:12:23',
-    ziji: '0',
-    type: '1',
-    message: '您好，欢迎光临，非常高兴为您服务，有什么可以为您效劳呢?'
-  },
-  {
-    created_at: '12:15:58',
-    ziji: '1',
-    type: '1',
-    message: '我怕是走错片场了...'
-  }
-];
+var msgList = [];
 var windowWidth = wx.getSystemInfoSync().windowWidth;
 var windowHeight = wx.getSystemInfoSync().windowHeight;
 var keyHeight = 0;
-
 /**
  * 初始化数据
  */
@@ -63,7 +50,9 @@ Page({
     // }
   },
   onLoad: function(options) {
-    console.log(options)
+    wx.showLoading({
+      title: '加载中',
+    })
     if (options.type) {
       this.setData({
         goods: app.globalData.webGoods
@@ -72,6 +61,7 @@ Page({
     let _this = this;
     let userObj = wx.getStorageSync('userInfo');
     _this.setData({
+      thumb: options.thumb,
       userObj: userObj,
       shopId: options.id,
       bindUser: options.binduser,
@@ -81,8 +71,9 @@ Page({
     websocket.connect(function(res) {
       let obj = JSON.parse(res.data);
       console.log(obj)
+      // console.log(obj)
       if (obj.type == 3) {
-        obj.message = `http://www.lyjp.shop/${obj.message}`
+        obj.message = `https://www.lyjp.shop/${obj.message}`
       }
       let list = _this.data.msgList;
       list.push(obj)
@@ -94,11 +85,17 @@ Page({
         toView: 'msg-' + (list.length - 1)
       })
     })
+    setTimeout(() => {
+      wx.hideLoading();
+      let data = {
+        uid: this.data.userObj.id,
+        ruid: this.data.bindUser,
+        cmd: 'login'
+      }
+      websocket.send(data)
+    }, 1000)
     _this.pageScrollToBottom()
     //
-  },
-  open() {
-
   },
   /**
    * 生命周期函数--监听页面显示
@@ -124,10 +121,11 @@ Page({
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function(res) {
+        console.log(res)
         wx.uploadFile({
-          url: 'http://www.lyjp.shop/file/upload', //仅为示例，非真实的接口地址
+          url: 'https://www.lyjp.shop/file/upload', //仅为示例，非真实的接口地址
           filePath: res.tempFilePaths[0],
           name: 'file',
           header: {
@@ -138,10 +136,11 @@ Page({
           },
           success: function(r) {
             let re = JSON.parse(r.data);
+            console.log(re)
             if (re.code == 200) {
               let data = {
                 uid: that.data.userObj.id,
-                ruid: this.data.bindUser,
+                ruid: that.data.bindUser,
                 type: 3,
                 content: re.data,
                 cmd: 'msg'

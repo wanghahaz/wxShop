@@ -72,7 +72,7 @@
         "pagePath": "pages/tabar/advertising/advertising",
         "iconPath": "/image/banner.png",
         "selectedIconPath": "/image/bannerAc.png",
-        "text": "广告"
+        "text": "视屏"
       },
       {
         "pagePath": "pages/tabar/shopCard/shopCard",

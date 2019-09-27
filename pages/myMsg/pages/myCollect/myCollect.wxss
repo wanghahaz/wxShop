@@ -1,3 +1,13 @@
+.noGoods {
+  width: 192rpx;
+  height: 158rpx;
+}
+
+.noShop {
+  width: 124rpx;
+  height: 130rpx;
+}
+
 .title>.active {
   color: #f18e1e;
   border-bottom: 1px solid #f18e1e;
@@ -56,45 +66,48 @@
   height: 50rpx;
 }
 
-.container{
-  width:100%;
+.container {
+  width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  padding-bottom:10rpx;
+  padding-bottom: 10rpx;
 }
+
 .touch-item {
- font-size: 14px;
- display: flex;
- /* //均匀排布每个元素 */
- justify-content: space-between;
- border-bottom:1px solid #ccc;
- width: 100%;
- overflow: hidden;
+  font-size: 14px;
+  display: flex;
+  /* //均匀排布每个元素 */
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  overflow: hidden;
 }
+
 .content {
- width: 100%;
- margin-right:0;
- -webkit-transition: all 0.4s;
- transition: all 0.4s;
- -webkit-transform: translateX(90px);
- transform: translateX(90px);
- margin-left: -90px;
+  width: 100%;
+  margin-right: 0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  margin-left: -90px;
 }
+
 .del {
- background-color: #f18e1e;
- width: 90px;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- color: #fff;
- -webkit-transform: translateX(90px);
- transform: translateX(90px);
- -webkit-transition: all 0.4s;
- transition: all 0.4s;
+  background-color: #f18e1e;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
 }
-.touch-move-active .content,
-.touch-move-active .del {
- -webkit-transform: translateX(0);
- transform: translateX(0);
+
+.touch-move-active .content, .touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
 }

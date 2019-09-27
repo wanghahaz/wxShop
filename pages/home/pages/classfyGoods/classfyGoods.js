@@ -31,13 +31,13 @@ Page({
         this.setData({
           shopList: [...this.data.shopList, ...res.data.data]
         })
-        if (res.data.last_page == this.data.page || this.data == null) {
+        if (res.data.last_page == this.data.page) {
           this.setData({
             isPullDownRefresh: false
           })
         } else {
           this.setData({
-            page: this.data.page++
+            page: this.data.page + 1
           })
         }
       } else {
@@ -48,6 +48,7 @@ Page({
       }
 
     })
+  
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);

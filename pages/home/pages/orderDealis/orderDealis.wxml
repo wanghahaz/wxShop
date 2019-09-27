@@ -41,7 +41,7 @@
             <view wx:elif="{{dealis.status==1&&value.refund_status==0}}" class="btn flex fs_13">
               <text data-name="退款" data-path="/pages/home/pages/salesSub/salesSub" data-goodId="{{value.id}}" data-orderId="{{id}}" catchtap="toRouter" class="evaluation fcF1">申请退款</text>
             </view>
-            <view wx:elif="{{(dealis.status==4||dealis.status==6||dealis.status==1||dealis.status==2||dealis.status==7)&&value.refund_status!=0}}" class="btn flex fs_13">
+            <view wx:elif="{{(dealis.status==4||dealis.status==6||dealis.status==1||dealis.status==2||dealis.status==7||dealis.status==8)&&value.refund_status!=0}}" class="btn flex fs_13">
               <text class="evaluation fcF1" catchtap="toRouter" data-id="{{value.refund_id}}" data-path="/pages/myMsg/pages/saleDealis/saleDealis">{{refund_type[value.refund_status]}}</text>
             </view>
           </view>
@@ -75,7 +75,7 @@
     <text class="fs_16">订单信息</text>
     <view class="flex flex_lr">
       <text class="fcb2">订单编号：{{dealis.order_id}}</text>
-      <text class="fcF1" data-content="E12345687900000" bindtap="setClip">复制</text>
+      <text class="fcF1" data-content="{{dealis.order_id}}" bindtap="setClip">复制</text>
     </view>
     <text class="fcb2">创建时间：{{dealis.created_at}}</text>
     <text wx:if="{{dealis.pay_time}}" class="fcb2">付款时间：{{dealis.pay_time}}</text>
@@ -83,10 +83,10 @@
     <text wx:if="{{dealis.check_time}}" class="fcb2">成交时间：{{dealis.check_time}}</text>
   </view>
   <view class="width94 flex callShop fs_14">
-    <text data-path="/pages/home/pages/websocket/websocket" data-id="{{dealis.store.id}}" data-name="{{dealis.store.store_name}}" bindtap="toRouter" class="tc">联系卖家</text>
+    <text data-path="/pages/home/pages/websocket/websocket" data-id="{{dealis.store.id}}" data-name="{{dealis.store.store_name}}" data-thumb="{{dealis.store.store_thumb}}" bindtap="toRouter" class="tc">联系卖家</text>
     <text catchtap="call" class="tc fcb2">拨打电话</text>
   </view>
-  <view class="submit flex  box_zing  fs_14">
+  <view wx:if="{{dealis.status==1||dealis.status==2||dealis.status==8||dealis.status==9||dealis.status==10||dealis.status==3||dealis.status==5||dealis.status==7}}" class="submit flex  box_zing  fs_14">
     <view style="flex:1" class="flex flex_m">
       <text>总价:<text class="fcF1">￥{{dealis.total_fee}}</text> </text>
     </view>
@@ -96,7 +96,7 @@
       <text wx:if='{{dealis.status==2}}' data-id="{{dealis.id}}" data-type="1" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation">确认收货</text>
       <text wx:if='{{dealis.status==0}}' data-jifen="{{dealis.order_jifen}}" data-id="{{dealis.id}}" data-type="4" data-toast="付款成功" data-model="{{dealis.order_jifen!='0.00'?'您有冻结的代金券，是否使用':'您是否确认付款'}}?" catchtap="editStatus" class="evaluation fcF1">立即支付</text>
       <text wx:if='{{dealis.status==9||dealis.status==10}}' data-id="{{dealis.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation">删除订单</text>
-      <text wx:if='{{dealis.status==9||dealis.status==10}}' catchtap="toRouter" data-path="/pages/home/pages/goodSettle/goodSettle" class="evaluation fcF1">再次购买</text>
+      <text wx:if='{{dealis.status==3||dealis.status==5||dealis.status==7||dealis.status==9||dealis.status==10}}' catchtap="toRouter" data-path="/pages/home/pages/goodSettle/goodSettle" class="evaluation fcF1">再次购买</text>
       <text wx:if='{{dealis.status==8}}' data-id="{{dealis.id}}" catchtap="toRouter" data-path="/pages/home/pages/goodSevaluation/goodSevaluation" class="evaluation fcF1">评价</text>
     </view>
   </view>

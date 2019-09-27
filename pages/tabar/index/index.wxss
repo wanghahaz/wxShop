@@ -1,3 +1,6 @@
+.container_box{
+  position: relative;
+}
 .title {
   height: 314rpx;
   position: relative;

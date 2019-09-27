@@ -1,0 +1,5 @@
+.no_Goods {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 90rpx auto 10rpx auto;
+}

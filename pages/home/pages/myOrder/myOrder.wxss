@@ -1,3 +1,9 @@
+.noGoods {
+  width: 124rpx;
+  height: 130rpx;
+  margin: 90rpx auto 30rpx auto
+}
+
 .title .active {
   color: #f18e1e;
   border-bottom: 1px solid #f18e1e;

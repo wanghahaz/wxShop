@@ -30,7 +30,7 @@ Page({
     time: ''
   },
   tapDialogButton(e) {
-    console.log('dialog', e.detail)
+    // console.log('dialog', e.detail)
     this.setData({
       dialogShow: false,
     })
@@ -43,7 +43,7 @@ Page({
   //点击使用体验卡 
   startCard(e) {
     http.postReq('/advert/use_gift_card', {}, true).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
         until.toast({
           title: '您已开启双倍收益'
@@ -183,7 +183,7 @@ Page({
     })
     this.getIndex()
     this.getLogs()
-    console.log(2)
+    // console.log(2)
   },
 
   /**
@@ -222,7 +222,6 @@ Page({
     } else {
       share_id = 0;
     }
-    console.log(share_id)
     return {
       title: '您好，欢迎使用零元晋品',
       path: '/pages/tabar/share/share?share_id=' + share_id,

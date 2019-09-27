@@ -1,6 +1,7 @@
 // var url = 'ws://192.168.0.108:9501'; //服务器地址
-let url ='wss://www.lyjp.shop/wss';
+let url = 'wss://www.lyjp.shop/wss';
 let socketOpen = false;
+
 function connect(func) {
   wx.connectSocket({
     url: url,
@@ -12,6 +13,7 @@ function connect(func) {
     },
 
     fail: function() {
+      wx.hideLoading();
       wx.showToast({
         title: '网络连接失败，请检查！',
         icon: "none",
@@ -27,6 +29,7 @@ function connect(func) {
   });
 
   wx.onSocketError(function(res) {
+    wx.hideLoading();
     socketOpen = false;
     wx.showToast({
       title: 'websocket连接失败，请检查！',
@@ -38,6 +41,7 @@ function connect(func) {
 
 //发送消息
 function send(msg) {
+  console.log(msg)
   if (socketOpen) {
     wx.sendSocketMessage({
       data: JSON.stringify(msg)

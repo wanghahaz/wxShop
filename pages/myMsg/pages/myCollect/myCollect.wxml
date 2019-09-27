@@ -4,7 +4,11 @@
     <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">商品</text>
     <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">店铺</text>
   </view>
-  <view wx:if="{{list.length==0&&isLoading==false}}" style="margin-top:20rpx" class="noMore">您还没有收藏任何{{titleIndex==0?'商品':'店铺'}}哦</view>
+  <view style="margin:90rpx 0 10px 0" class="flex flex_c_m" wx:if="{{list.length==0&&isLoading==false}}">
+    <image wx:if="{{titleIndex==0}}" class="noGoods" src="../../image/no_good.png"></image>
+    <image wx:else class="noShop" src="../../image/no_shop.png"></image>
+  </view>
+  <view wx:if="{{list.length==0&&isLoading==false}}" class="noMore">您还没有收藏任何{{titleIndex==0?'商品':'店铺'}}哦~</view>
   <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" data-id="{{item.store_id||item.goods_id}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{list}}" wx:key="{{index}}">
     <!-- 商品 -->
     <view class="content" wx:if="{{titleIndex==0}}">

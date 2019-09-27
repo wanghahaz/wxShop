@@ -67,7 +67,7 @@
     <view style="margin:14rpx 0 0 0" class="fs_14" wx:if="{{commentList.length==0}}">暂无评价</view>
     <block wx:else>
       <view style="margin:20rpx 0 0 0" class="coment flex">
-        <image src="{{commentList[0].user.avatar}}" class="comentTx"></image>
+        <image src="{{commentList[0].user.avatar}}" class="comentTx flex_nosize"></image>
         <view class="flex column fs_13">
           <view class="flex flex_lr_m">
             <text>{{commentList[0].user.username}}</text>
@@ -103,15 +103,16 @@
   <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
   <view class="flex flex_bottom flex_m ">
     <view data-path="/pages/tabar/index/index" bindtap="switchTab" class="imgGoods flex_nosize flex  column fs_12 ">
-      <image style="width:49rpx;height:50rpx" src="../../../../image/goodH.png"></image>
+      <image style="width:44rpx;height:44rpx" src="../../../../image/goodH.png"></image>
       <text class="fcF1">首页</text>
     </view>
-    <view data-type="1" data-path="/pages/home/pages/websocket/websocket" data-id="{{goodsData.store.id}}" data-bindUser="{{goodsData.store.bind_user}}" data-name="{{goodsData.store.store_name}}" bindtap="toRouter" class="imgGoods flex column fs_12  flex_nosize">
-      <image style="width:49rpx;height:49rpx" src="../../../../image/goodW.png"></image>
+    <view data-type="1" data-path="/pages/home/pages/websocket/websocket" data-id="{{goodsData.store.id}}" data-thumb="{{goodsData.store.store_thumb}}" data-bindUser="{{goodsData.store.bind_user}}" data-name="{{goodsData.store.store_name}}" bindtap="toRouter"
+      class="imgGoods flex column fs_12  flex_nosize">
+      <image style="width:44rpx;height:44rpx" src="../../../../image/goodW.png"></image>
       <text>客服</text>
     </view>
     <view data-path="/pages/tabar/shopCard/shopCard" bindtap="switchTab" class="imgGoods flex column fs_12 flex_nosize">
-      <image style="width:56rpx;height:54rpx" src="../../../../image/goodC.png"></image>
+      <image style="width:50rpx;height:48rpx" src="../../../../image/goodC.png"></image>
       <text>购物车</text>
     </view>
     <view class="btn_bottom fs_14 flex">

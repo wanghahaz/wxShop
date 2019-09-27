@@ -72,6 +72,12 @@ Page({
   },
   // 商品加减
   addOdd(e) {
+    if (this.data.goods_storage == 0) {
+      until.toast({
+        title: '此商品暂无库存,请您重新选择'
+      })
+      return false;
+    }
     if (e.currentTarget.dataset.type == 'add') {
       this.setData({
         goods_num: this.data.goods_num + 1 > this.data.goods_storage ? this.data.goods_storage : this.data.goods_num + 1
@@ -175,6 +181,12 @@ Page({
       })
       return false;
     }
+    if (this.data.goods_storage == 0) {
+      until.toast({
+        title: '此商品暂无库存,请您重新选择'
+      })
+      return false;
+    }
     if (this.data.skuObj.spec) {
       if (!this.data.selectSku.goods_price) {
         until.toast({
@@ -205,7 +217,7 @@ Page({
     }];
     app.globalData.goodsList = list;
     wx.navigateTo({
-      url: '/pages/home/pages/goodSettle/goodSettle'
+      url: '/pages/home/pages/goodSettle/goodSettle?type=1'
     })
   },
   // 加入购物车
@@ -217,6 +229,12 @@ Page({
       return false;
     }
     if (this.data.skuObj.spec) {
+      if (this.data.goods_storage == 0) {
+        until.toast({
+          title: '此商品暂无库存,请您重新选择'
+        })
+        return false;
+      }
       if (!this.data.selectSku.goods_price) {
         until.toast({
           title: '请您选择商品'
@@ -247,6 +265,9 @@ Page({
   selectSku(e) {
     let list = JSON.parse(JSON.stringify(this.data.skuObj.spec));
     let obj = JSON.parse(JSON.stringify(this.data.skuObj));
+    console.log(e)
+    console.log(list)
+    console.log(obj)
     list[e.currentTarget.dataset.index].sub.forEach((item, index) => {
       if (index == e.currentTarget.dataset.ind) {
         item.check = !item.check
@@ -273,8 +294,12 @@ Page({
       if (selectSpec.length == specList.length) {
         let str = selectSpec.join('_');
         if (!skuList.find(item => item.spec == str)) {
-          until.toast({
-            title: '此商品暂无库存,请您重新选择'
+          this.setData({
+            selectSku: {},
+            goods_storage: 0,
+            goods_price: this.data.goods_price,
+            goods_thumb: this.data.goods_thumb,
+            goods_num: 1
           })
           return false;
         }
@@ -418,6 +443,7 @@ Page({
     }
     return {
       title: '您好，欢迎使用零元晋品',
+      imageUrl: this.data.goodsData.row.goods_images[0],
       path: '/pages/home/pages/goodsDealis/goodsDealis?share_id=' + share_id,
     }
   }

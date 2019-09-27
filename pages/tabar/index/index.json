@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "one_shop":"../../element/oneShop/oneShop"
+    "one_shop": "../../element/oneShop/oneShop"
   },
-  "navigationBarTitleText": "首页"
+  "navigationBarTitleText": "首页",
+  "enablePullDownRefresh": true
 }

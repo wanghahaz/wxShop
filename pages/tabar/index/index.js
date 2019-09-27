@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isTop: false, //下拉刷新
     scrollTop: 0,
     bannerList: [],
     navList: [],
@@ -111,18 +112,31 @@ Page({
     http.getReq('/index/goods', {
       page: this.data.page
     }, true).then(res => {
-      this.setData({
-        shopList: [...this.data.shopList, ...res.data.data]
-      })
-      if (res.data.last_page == this.data.page) {
+      if (res.code == 200) {
         this.setData({
-          isPullDownRefresh: false
+          shopList: [...this.data.shopList, ...res.data.data]
         })
+        if (res.data.last_page == this.data.page) {
+          this.setData({
+            isPullDownRefresh: false
+          })
+        } else {
+          this.setData({
+            page: this.data.page + 1
+          })
+        }
       } else {
-        this.setData({
-          page: this.data.page + 1
+        until.toast({
+          title: '加载失败'
         })
       }
+      if (this.data.isTop) {
+        wx.stopPullDownRefresh();
+        this.setData({
+          isTop: false
+        })
+      }
+
     })
   },
   // 首页导航
@@ -180,7 +194,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.setData({
+      page: 1,
+      isTop: true,
+      isPullDownRefresh: true,
+      shopList: [],
+    })
+    this.getGoods()
   },
 
   /**

@@ -89,6 +89,7 @@ Page({
         })
       })
     })
+    // console.log(data)
     let str = until.base64_encode(encodeURI(JSON.stringify(data)));
     http.postReq('/order/submit', {
       order: str
@@ -138,6 +139,7 @@ Page({
     })
   },
   onLoad: function(options) {
+    console.log(options)
     let that = this;
     let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
     let totalPrice = 0;
@@ -150,13 +152,12 @@ Page({
         sum += value.goods_num * value.goods_price;
       })
       item.sum = sum;
-      totalPrice += item.sum;
+      totalPrice += item.sum / 1;
     })
     that.setData({
       goodsList: list,
-      totalPrice: totalPrice
+      totalPrice: options.type ? totalPrice : app.globalData.totalPrice
     })
-    console.log(this.data.totalPrice)
     that.getAdress()
     that.getChit()
   },
@@ -171,7 +172,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function() {
+
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

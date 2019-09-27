@@ -25,6 +25,9 @@ Page({
 
     })
   },
+  bindprogress(){
+
+  },
   // 右上角关闭
   back() {
     if (this.data.time > 0) {

@@ -6,7 +6,7 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const diffTime = function(startDate, endDate) {
@@ -33,17 +33,6 @@ const diffTime = function(startDate, endDate) {
     minutes,
     seconds
   }
-  // var returnStr = seconds + "秒";
-  // if (minutes > 0) {
-  //   returnStr = minutes + "分" + returnStr;
-  // }
-  // if (hours > 0) {
-  //   returnStr = hours + "小时" + returnStr;
-  // }
-  // if (days > 0) {
-  //   returnStr = days + "天" + returnStr;
-  // }
-  // return returnStr;
 }
 const formatNumber = n => {
   n = n.toString()

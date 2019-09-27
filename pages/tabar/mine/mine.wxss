@@ -116,21 +116,21 @@ open-data[type="userAvatarUrl"] {
 
 
 .money {
-  width: 48rpx;
-  height: 36rpx;
+  width: 42rpx;
+  height: 42rpx;
 }
 
 .collection {
-  width: 45rpx;
-  height: 43rpx;
+  width: 42rpx;
+  height:40rpx;
 }
 
 .adress {
-  width: 38rpx;
-  height: 37rpx;
+  width: 36rpx;
+  height: 46rpx;
 }
 
 .people {
-  width: 37rpx;
-  height: 38rpx;
+  width: 40rpx;
+  height:38rpx;
 }

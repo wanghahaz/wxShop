@@ -137,12 +137,16 @@ Page({
   onLoad: function(options) {
     // console.log(options)
     let list = app.globalData.commentList;
+    let dataList = []
     list.forEach(item => {
       item.score = 4
       item.content = ""
+      if (item.refund_status == 0) {
+        dataList.push(item)
+      }
     })
     this.setData({
-      list: list,
+      list: dataList,
       id: options.id
     })
   },

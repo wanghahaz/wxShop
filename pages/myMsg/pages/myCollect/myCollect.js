@@ -33,6 +33,12 @@ Page({
   // 商品加减
   addOdd(e) {
     if (this.data.skuObj.spec) {
+      if (this.data.goods_storage == 0) {
+        until.toast({
+          title: '此商品暂无库存,请您重新选择'
+        })
+        return false;
+      }
       if (!this.data.selectSku.goods_price) {
         until.toast({
           title: '请您选择商品'
@@ -54,6 +60,12 @@ Page({
   },
   // 加入购物车
   addCard() {
+    if (this.data.goods_storage == 0) {
+      until.toast({
+        title: '此商品暂无库存,请您重新选择'
+      })
+      return false;
+    }
     if (this.data.skuObj.spec) {
       if (!this.data.selectSku.goods_price) {
         until.toast({
@@ -82,6 +94,12 @@ Page({
   // 立即购买
   addBuy() {
     if (this.data.skuObj.spec) {
+      if (this.data.goods_storage == 0) {
+        until.toast({
+          title: '此商品暂无库存,请您重新选择'
+        })
+        return false;
+      }
       if (!this.data.selectSku.goods_price) {
         until.toast({
           title: '请选择选择商品'
@@ -110,7 +128,7 @@ Page({
     }];
     app.globalData.goodsList = list;
     wx.navigateTo({
-      url: '/pages/home/pages/goodSettle/goodSettle'
+      url: '/pages/home/pages/goodSettle/goodSettle?type=1'
     })
   },
   // 选择规格
@@ -143,8 +161,12 @@ Page({
       if (selectSpec.length == specList.length) {
         let str = selectSpec.join('_');
         if (!skuList.find(item => item.spec == str)) {
-          until.toast({
-            title: '此商品暂无库存,请您重新选择'
+          this.setData({
+            selectSku: {},
+            goods_storage: 0,
+            goods_price: this.data.goods_price,
+            goods_thumb: this.data.goods_thumb,
+            goods_num: 1
           })
           return false;
         }

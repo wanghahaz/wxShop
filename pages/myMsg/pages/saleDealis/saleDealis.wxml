@@ -48,7 +48,7 @@
     <text>请填写物流信息</text>
     <view class="flex input">
       <text>物流公司：</text>
-      <input data-type="express_company" bindinput="bindinput" placeholder="请填写运单编号"></input>
+      <input data-type="express_company" bindinput="bindinput" placeholder="请填写物流公司"></input>
     </view>
     <view class="flex input">
       <text>运单编号：</text>
@@ -110,12 +110,12 @@
     <text class="fs_16">订单信息</text>
     <view class="flex flex_lr">
       <text class="fcb2">订单编号：{{dealis.order.order_id}}</text>
-      <text class="fcF1" data-content="E12345687900000" bindtap="setClip">复制</text>
+      <text class="fcF1" data-content="{{dealis.order.order_id}}" bindtap="setClip">复制</text>
     </view>
     <text class="fcb2">创建时间：{{dealis.order.created_at}}</text>
   </view>
   <view class="width94 flex callShop fs_14">
-    <text data-bindUser="{{dealis.store.bind_user}}" data-path="/pages/home/pages/websocket/websocket" data-id="{{dealis.store.id}}" data-name="{{dealis.store.store_name}}" bindtap="toRouter" class="tc">联系卖家</text>
+    <text data-bindUser="{{dealis.store.bind_user}}" data-path="/pages/home/pages/websocket/websocket" data-thumb="{{dealis.store.store_thumb}}" data-id="{{dealis.store.id}}" data-name="{{dealis.store.store_name}}" bindtap="toRouter" class="tc">联系卖家</text>
     <text catchtap="call" class="tc fcb2">拨打电话</text>
   </view>
   <!-- <view wx:if="{{dealis.status==4}}" class="submit flex  box_zing  fs_14">

@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container container_box">
   <view class="title">
     <image class="bg" src="../../../image/bg.png"></image>
     <view style="height:38rpx"></view>

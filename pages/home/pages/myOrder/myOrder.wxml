@@ -10,7 +10,10 @@
   </view>
   <!-- <text data-index="4" bindtap="bindchange" class="{{titleIndex==4?'active':''}} tc">退款/售后</text> -->
   <!-- </scroll-view> -->
-  <view class="noMore" wx:if="{{goodsList.length==0&&!isLoading}}">您还没有订单哦！</view>
+  <view style="margin:30rpx 0 10px 0" class="flex flex_c_m column" wx:if="{{goodsList.length==0&&!isLoading}}">
+    <image class="noGoods" src="../../image/no_order.png"></image>
+    <view class="noMore">您还没有订单哦~</view>
+  </view>
   <block wx:if="{{titleIndex=='-1'}}">
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
