@@ -25,7 +25,7 @@ Page({
 
     })
   },
-  bindprogress(){
+  bindprogress() {
 
   },
   // 右上角关闭
@@ -79,6 +79,9 @@ Page({
   },
   // 获取观看奖励 (登录)  播放结束触发
   bindended() {
+    this.setData({
+      time: 0
+    })
     let that = this;
     if (wx.getStorageSync('token')) {
       http.getReq(`/advert/get_reward/${this.data.id}`, {}).then(res => {

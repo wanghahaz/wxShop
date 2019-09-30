@@ -254,7 +254,6 @@ Page({
     this.setData({
       isLoading: true,
       page: 1,
-      goodsList: [],
       hasOnShow: false
     })
   },
