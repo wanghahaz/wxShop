@@ -82,19 +82,18 @@ Page({
       })
       item.goods.forEach(value => {
         data.goods_info[index].goods.push({
-          goods_id: value.id,
+          goods_id: value.goods_id || value.id,
           sku_id: value.sku_id || 0,
           goods_num: value.goods_num,
           cart_id: value.cart_id
         })
       })
     })
-    // console.log(data)
+    // return;
     let str = until.base64_encode(encodeURI(JSON.stringify(data)));
     http.postReq('/order/submit', {
       order: str
     }, true).then(res => {
-      console.log(res)
       if (res.code == 200) {
         until.toast({
           title: '支付成功'
@@ -110,7 +109,6 @@ Page({
           signType: res.data.signType,
           paySign: res.data.paySign,
           success: (res) => {
-            console.log(res, 1)
             wx.navigateBack()
           },
           fail: function(err) {
@@ -139,7 +137,6 @@ Page({
     })
   },
   onLoad: function(options) {
-    console.log(options)
     let that = this;
     let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
     let totalPrice = 0;

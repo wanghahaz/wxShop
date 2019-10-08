@@ -96,7 +96,7 @@
       <text wx:if='{{dealis.status==2}}' data-id="{{dealis.id}}" data-type="1" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation">确认收货</text>
       <text wx:if='{{dealis.status==0}}' data-jifen="{{dealis.order_jifen}}" data-id="{{dealis.id}}" data-type="4" data-toast="付款成功" data-model="{{dealis.order_jifen!='0.00'?'您有冻结的代金券，是否使用':'您是否确认付款'}}?" catchtap="editStatus" class="evaluation fcF1">立即支付</text>
       <text wx:if='{{dealis.status==9||dealis.status==10}}' data-id="{{dealis.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation">删除订单</text>
-      <text wx:if='{{dealis.status==3||dealis.status==5||dealis.status==7||dealis.status==9||dealis.status==10}}' catchtap="toRouter" data-path="/pages/home/pages/goodSettle/goodSettle" class="evaluation fcF1">再次购买</text>
+      <text wx:if='{{dealis.status==3||dealis.status==5||dealis.status==7||dealis.status==9||dealis.status==10}}' catchtap="toRouter" data-type="1" data-path="/pages/home/pages/goodSettle/goodSettle" class="evaluation fcF1">再次购买</text>
       <text wx:if='{{dealis.status==8}}' data-id="{{dealis.id}}" catchtap="toRouter" data-path="/pages/home/pages/goodSevaluation/goodSevaluation" class="evaluation fcF1">评价</text>
     </view>
   </view>
