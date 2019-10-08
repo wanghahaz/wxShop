@@ -28,6 +28,9 @@ Page({
     } else {
       num = num-- > 1 ? num : 1;
     }
+    if (e.currentTarget.dataset.type == 'odd' && e.currentTarget.dataset.num == 1) {
+      return false;
+    }
     http.postReq(`/cart/edit/${e.currentTarget.dataset.id}`, {
       goods_num: num,
       goods_spec: e.currentTarget.dataset.skuid
@@ -61,6 +64,7 @@ Page({
       }
       app.getPrice(list)
       this.setData({
+        allCheck: false,
         goodsList: list,
         totalPrice: app.globalData.totalPrice,
         count: app.globalData.totalCount,
@@ -170,6 +174,10 @@ Page({
   onShow: function() {
     if (wx.getStorageSync('token')) {
       this.getCard()
+    } else {
+      this.setData({
+        goodsList: []
+      })
     }
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
@@ -184,9 +192,6 @@ Page({
    */
   onHide: function() {
     app.globalData.goodsList = this.data.goodsList;
-    this.setData({
-      allCheck: false
-    })
   },
 
   /**

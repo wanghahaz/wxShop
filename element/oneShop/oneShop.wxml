@@ -4,7 +4,7 @@
     <text class="title box_zing clamp_2 fs_13">{{obj.goods_name}}</text>
   </view>
   <view class="flex">
-    <text class="old  fs_13">￥{{obj.goods_market_price}}</text>
-    <text class="new fs_13">￥{{obj.goods_price}}</text>
+    <text class="old  fs_13 clamp_1">￥{{obj.goods_market_price}}</text>
+    <text class="new fs_13 clamp_1">￥{{obj.goods_price}}</text>
   </view>
 </view>

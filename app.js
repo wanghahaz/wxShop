@@ -143,7 +143,7 @@ App({
         }
       })
     })
-    this.globalData.totalPrice = sum;
+    this.globalData.totalPrice = sum.toFixed(2);
     this.globalData.totalCount = count;
     this.setBadge();
   },

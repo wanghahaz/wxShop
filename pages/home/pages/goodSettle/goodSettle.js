@@ -89,11 +89,12 @@ Page({
         })
       })
     })
-    // return;
+    // console.log(data)
     let str = until.base64_encode(encodeURI(JSON.stringify(data)));
     http.postReq('/order/submit', {
       order: str
     }, true).then(res => {
+      console.log(res)
       if (res.code == 200) {
         until.toast({
           title: '支付成功'
@@ -109,6 +110,7 @@ Page({
           signType: res.data.signType,
           paySign: res.data.paySign,
           success: (res) => {
+            console.log(res, 1)
             wx.navigateBack()
           },
           fail: function(err) {
@@ -137,6 +139,7 @@ Page({
     })
   },
   onLoad: function(options) {
+    console.log(options)
     let that = this;
     let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
     let totalPrice = 0;
@@ -148,12 +151,12 @@ Page({
       item.goods.forEach(value => {
         sum += value.goods_num * value.goods_price;
       })
-      item.sum = sum;
+      item.sum = sum.toFixed(2);
       totalPrice += item.sum / 1;
     })
     that.setData({
       goodsList: list,
-      totalPrice: options.type ? totalPrice : app.globalData.totalPrice
+      totalPrice: options.type ? totalPrice.toFixed(2) : app.globalData.totalPrice
     })
     that.getAdress()
     that.getChit()

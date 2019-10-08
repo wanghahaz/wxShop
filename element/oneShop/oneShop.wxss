@@ -41,12 +41,6 @@
   height: 280rpx;
 }
 
-.title {
-  padding: 4rpx;
-  color: #010000;
-  width: 100%;
-}
-
 .old {
   color: #b2b2b2;
   text-decoration: line-through;
@@ -55,11 +49,29 @@
 .one_shop .new {
   font-weight: 700;
   color: #f18e1e;
-  padding: 6rpx 0rpx 6rpx 60rpx;
+}
+
+.one_shop>.flex {
+  box-sizing: border-box;
+  padding: 0 10rpx;
+  justify-content: space-between;
+}
+
+.one_shop>.flex text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 48%;
 }
 
 .one_shop>view>text {
-  padding: 6rpx 6rpx 0 8rpx;
+  padding: 6rpx 0rpx 6rpx 0rpx;
+}
+
+.one_shop>view .title {
+  padding: 4rpx 8rpx;
+  color: #010000;
+  width: 100%;
 }
 
 .ticket {

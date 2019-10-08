@@ -24,7 +24,7 @@
             <text wx:if="{{value.spec_name}}" class="remark fs_12 clamp_1 tc">{{value.spec_name}}</text>
             <!-- 商品正常 -->
             <view wx:if="{{value.status==1}}">
-              <text class="price">￥{{value.goods_price}}</text>
+              <text class="price clamp_1" style="max-width:240rpx">￥{{value.goods_price}}</text>
               <view class="count flex">
                 <text data-skuId="{{value.sku_id}}" data-id="{{value.cart_id}}" data-type="odd" catchtap="addOdd" data-num="{{value.goods_num}}" class="text odd tc fs_13">-</text>
                 <text class="text fs_12 tc">{{value.goods_num}}</text>
@@ -47,7 +47,7 @@
       <image src="../../../image/card.png"></image>
       <text class="fs_19">购物车空空如也~</text>
     </view>
-      <view class="fs_16 tc recommended" style="color:#B2B2B2">猜你喜欢</view>
+    <view class="fs_16 tc recommended" style="color:#B2B2B2">猜你喜欢</view>
     <view class="shop_list flex_wrap" style="width:92%">
       <block wx:for="{{shopList}}" wx:key="{{index}}">
         <one_shop data-path="/pages/home/pages/goodsDealis/goodsDealis" data-id="{{item.id}}" data-skuId="{{item.sku_id}}" catchtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
@@ -63,8 +63,8 @@
       <text class="fcb2">全选</text>
     </view>
     <view class="flex flex_m right">
-      <text class="flex_wrap">总计:</text>
-      <text style="color:#F18E1E;margin:0 0 0 8rpx;">￥{{totalPrice}}</text>
+      <text class="flex_wrap flex_nosize">总计:</text>
+      <text class="clamp_1" style="color:#F18E1E;margin:0 0 0 8rpx;max-width:240rpx">￥{{totalPrice}}</text>
       <view data-path="/pages/home/pages/goodSettle/goodSettle" bindtap="toRouter" class="settle tc">结算({{count}})</view>
     </view>
   </view>
