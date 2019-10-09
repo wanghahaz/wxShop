@@ -94,7 +94,17 @@
     <text style="padding:10rpx 0 6rpx 0">商品详情</text>
     <rich-text nodes="{{goods_body}}"></rich-text>
   </view>
-  <view class="fs_19 tc  recommended" style="color:#B2B2B2">猜你喜欢</view>
+  <view class="fs_13 tc recommended">
+    <view class="flex flex_m">
+      <image class="left_1" src="../../../../image/left_1.png"></image>
+      <image class="left_2" src="../../../../image/left_2.png"></image>
+    </view>
+    <text style="color:#B2B2B2">猜你喜欢</text>
+    <view class="flex flex_m">
+      <image class="left_2" src="../../../../image/left_2.png"></image>
+      <image class="left_1" src="../../../../image/left_1.png"></image>
+    </view>
+  </view>
   <view class="shop_list flex_wrap" style="width:92%">
     <block wx:for="{{shopList}}" wx:key="{{index}}">
       <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>

@@ -16,33 +16,6 @@
   color: #b2b2b2;
 }
 
-.recommended {
-  position: relative;
-  color: #b2b2b2;
-  margin: 60rpx 0 20rpx 0;
-}
-
-.recommended::after {
-  position: absolute;
-  content: "";
-  width: 38%;
-  height: 2rpx;
-  background: #e4e4e4;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.recommended::before {
-  position: absolute;
-  content: "";
-  width: 38%;
-  height: 2rpx;
-  background: #e4e4e4;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
 
 /* ----goods */
 

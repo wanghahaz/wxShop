@@ -90,10 +90,33 @@ open-data[type="userAvatarUrl"] {
   margin: 30rpx 0 20rpx 0;
 }
 
+.recommended .left_1 {
+  width: 12rpx;
+  height: 18rpx;
+  margin: 0 4rpx;
+}
+
+.recommended>view {
+  position: absolute;
+  height: 100%;
+  top: 0;
+}
+
+.recommended>view:nth-of-type(1) {
+  left: 36%;
+}
+.recommended>view:nth-of-type(2) {
+  right: -60%;
+}
+.recommended .left_2 {
+  width: 14rpx;
+  height: 30rpx;
+}
+
 .recommended::after {
   position: absolute;
   content: "";
-  width: 38%;
+  width: 34%;
   height: 2rpx;
   background: #e4e4e4;
   left: 0;
@@ -104,7 +127,7 @@ open-data[type="userAvatarUrl"] {
 .recommended::before {
   position: absolute;
   content: "";
-  width: 38%;
+  width: 34%;
   height: 2rpx;
   background: #e4e4e4;
   right: 0;
