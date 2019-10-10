@@ -6,7 +6,7 @@
   <view wx:if="{{commentList.length==0&&!isLoding}}" class="noMore">商品暂无评价...</view>
   <block wx:for="{{commentList}}" wx:key="{{index}}">
     <view class="width94 coment box_zing flex">
-      <image src="{{item.user.avatar}}" class="comentTx"></image>
+      <image src="{{item.user.avatar}}" class="comentTx flex_nosize"></image>
       <view class="flex column fs_14">
         <view class="flex flex_lr_m">
           <text>{{item.user.username}}</text>

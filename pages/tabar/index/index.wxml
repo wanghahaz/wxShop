@@ -1,21 +1,22 @@
 <!--index.wxml-->
 <view class="container container_box">
   <view class="title">
-    <image class="bg" src="../../../image/bg.png"></image>
+    <image class="bg" src="../../../image/bg_bg.png"></image>
     <view style="height:38rpx"></view>
     <view bindtap="toRouter" data-path="/pages/home/pages/search/search" class="search width90">
       <text class="./iconfont/iconsousuo:before icon" style="font-size:28rpx"></text>
       <text class="border"></text>
       <text class="seaText fs_15">请输入关键词</text>
     </view>
+    <swiper indicator-dots="true" autoplay="true" interval="2000" duration="200" circular='true' class="swiper_ab">
+      <block wx:for="{{bannerList}}" wx:key="{{index}}">
+        <swiper-item data-link="{{item.link_url}}" catchtap="tolink">
+          <image src="{{item.thumb}}" onerror="" class="slide-image"></image>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
-  <swiper indicator-dots="true" autoplay="true" interval="2000" duration="200" circular='true' class="width94 swiper_ab">
-    <block wx:for="{{bannerList}}" wx:key="{{index}}">
-      <swiper-item data-link="{{item.link_url}}" catchtap="tolink">
-        <image src="{{item.thumb}}" onerror="" class="slide-image"></image>
-      </swiper-item>
-    </block>
-  </swiper>
+
   <view class="flex flex_sa seckill width94 flex_wrap">
     <block wx:for="{{navList}}" wx:key="{{index}}">
       <view data-link="{{item.link_url}}" catchtap="tolink" class="seckillList flex flex_nosize">
@@ -52,6 +53,17 @@
   </view> -->
   <!-- 商品列表 -->
   <!-- pages/websockets/websocket /pages/home/pages/websocket/websocket -->
+  <!-- 分类推荐 -->
+  <view class="clasfiy flex">
+    <view wx:for="{{2}}" wx:key="{{index}}" class="box_zing flex column">
+      <text class="fs_13">品质好物</text>
+      <text class="fs_10 fcF1">精选每日好物</text>
+      <view class="flex flex_sa flex_m">
+        <image src="https://www.lyjp.shop/uploads/2019-10-09/UiOztJS8uaSLzmBeroav5oCxKELhvakkTZkLpekS.jpeg"></image>
+        <image src="https://www.lyjp.shop/uploads/2019-10-09/UiOztJS8uaSLzmBeroav5oCxKELhvakkTZkLpekS.jpeg"></image>
+      </view>
+    </view>
+  </view>
   <view class="fs_13 tc recommended">
     <view class="flex flex_m">
       <image class="left_1" src="../../../image/left_1.png"></image>

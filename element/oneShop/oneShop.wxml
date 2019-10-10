@@ -1,7 +1,7 @@
 <view class="one_shop flex flex_lr_m">
   <view>
-    <image src="{{obj.goods_thumb}}"></image>
-    <text class="title box_zing clamp_2 fs_13">{{obj.goods_name}}</text>
+    <image mode="aspectFit" src="{{obj.goods_thumb}}"></image>
+    <text class="title box_zing clamp_2 fs_11">{{obj.goods_name}}</text>
   </view>
   <view class="flex">
     <text class="old  fs_13 clamp_1">￥{{obj.goods_market_price}}</text>

@@ -101,9 +101,7 @@ open-data[type="userAvatarUrl"] {
 }
 
 .orderList {
-  /* width: 92%; */
-  margin-top: 14rpx;
-  /* margin: 10rpx auto 28rpx auto; */
+  margin-top: 22rpx;
 }
 
 .orderList image {

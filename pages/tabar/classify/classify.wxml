@@ -10,17 +10,17 @@
   <view class="content" style="height:{{height-104}}rpx">
     <view class="left flex ">
       <block wx:for="{{fyList}}" wx:key="{{index}}">
-        <text bindtap="changelf" data-index="{{index}}" class="{{leftIndex==index?'lfActive':''}} fs_18 tc">{{item.name}}</text>
+        <text bindtap="changelf" data-index="{{index}}" class="{{leftIndex==index?'lfActive':''}}  tc">{{item.name}}</text>
       </block>
     </view>
     <scroll-view scroll-y class="right" style="height:{{height-104}}rpx" bindscrolltolower="lower">
       <view wx:for="{{leftList}}" wx:key="{{index}}" class="goods box_zing">
-        <view class="goodsTitle">{{item.name}}</view>
+        <view class="goodsTitle fs_15">{{item.name}}</view>
         <block wx:if="{{item.sub.length>0}}">
           <view class="flex flex_wrap goodsList">
             <view style="width:33%" class="flex column flex_c_m" wx:for="{{item.sub}}" wx:key="{{ind}}" wx:for-item="value" wx:for-index="ind" data-id="{{value.id}}" data-name="{{value.name}}" data-path="/pages/home/pages/classfyGoods/classfyGoods" bindtap="toRouter">
               <image style="width:75rpx;height:86rpx" class="flex_nosize" src="{{value.icon}}"></image>
-              <text style="margin:8rpx 0 30rpx 0;" class="fs_14">{{value.name}}</text>
+              <text style="margin:10rpx 4rpx 24rpx 0;" class="fs_12">{{value.name}}</text>
             </view>
           </view>
         </block>

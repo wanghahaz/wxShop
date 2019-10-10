@@ -20,7 +20,7 @@ Page({
       '1_7': '售后已完成',
       '3_5': '退款申请拒绝',
       '1_5': '售后申请拒绝',
-      '1_11':'已寄出,待商家收货'
+      '1_11': '已寄出,待商家收货'
     },
     form: {
       express_code: '',
@@ -30,7 +30,7 @@ Page({
   // 复制
   setClip(e) {
     wx.setClipboardData({
-      data: e.currentTarget.dataset.content,
+      data: String(e.currentTarget.dataset.content),
       success(res) {},
       fail(err) {}
     })

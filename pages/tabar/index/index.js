@@ -59,16 +59,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.getGoods()
     if (!wx.getStorageSync('share_id')) {
       wx.setStorage({
         key: "share_id",
         data: options.share_id ? options.share_id : 0
       })
     }
-    this.getGoods()
-    this.getseckill()
-    this.getBanner();
-    this.getNav()
   },
   countDown() {
     timers = setInterval(() => {
@@ -166,14 +163,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    // wx.hideTabBar()
-    console.log(wx.getStorageSync('userInfo'))
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
         selected: 0
       })
     }
+    this.getseckill()
+    this.getBanner();
+    this.getNav()
   },
 
   /**

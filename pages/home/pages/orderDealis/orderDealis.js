@@ -187,7 +187,7 @@ Page({
   },
   setClip(e) {
     wx.setClipboardData({
-      data: e.currentTarget.dataset.content,
+      data: String(e.currentTarget.dataset.content),
       success(res) {},
       fail(err) {}
     })
