@@ -121,7 +121,7 @@
 }
 
 .settle {
-  width: 221rpx;
+  width: 180rpx;
   line-height: 65rpx;
   background: #f18e1e;
   color: #fff;

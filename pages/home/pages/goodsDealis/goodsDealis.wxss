@@ -21,6 +21,7 @@
 }
 
 .swiper_box {
+  background: #fff;
   position: relative;
 }
 

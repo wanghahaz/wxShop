@@ -1,5 +1,5 @@
 .one_shop {
-  height: 450rpx;
+  height: 470rpx;
   padding-bottom: 10rpx;
   width: 100%;
   background: #fff;
@@ -7,6 +7,7 @@
   position: relative;
   border-radius: 18rpx;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .clamp_2 {
@@ -39,8 +40,9 @@
 }
 
 .one_shop image {
+  width: 100%;
   border-radius: 18rpx 18rpx 0 0;
-  height: 320rpx;
+  height: 340rpx;
 }
 
 .old {

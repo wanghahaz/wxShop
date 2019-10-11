@@ -66,14 +66,14 @@
     <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
   </view>
 
-  <view wx:if="{{goodsList.length>0}}" class="bottom flex">
+  <view wx:if="{{goodsList.length>0}}" class="bottom flex fs_14">
     <view catchtap="selectAll" class="flex flex_m" style="width:30%">
       <image wx:if="{{allCheck}}" class="check" src="../../../image/check.png"></image>
       <text wx:else class="nocheck box_zing check"></text>
       <text class="fcb2">全选</text>
     </view>
     <view class="flex flex_m right">
-      <text class="flex_wrap flex_nosize">总计:</text>
+      <text class="flex_wrap flex_nosize"><text class="fs_11 fcb2">(不含运费)</text> 总计:</text>
       <text class="clamp_1" style="color:#F18E1E;margin:0 0 0 8rpx;max-width:240rpx">￥{{totalPrice}}</text>
       <view data-path="/pages/home/pages/goodSettle/goodSettle" bindtap="toRouter" class="settle tc">结算({{count}})</view>
     </view>
