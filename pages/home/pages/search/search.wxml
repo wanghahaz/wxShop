@@ -2,7 +2,7 @@
 <view class="container">
   <view class="search_box width90 flex">
     <view class="search width90">
-      <text class="./iconfont/iconsousuo:before icon" style="font-size:28rpx"></text>
+      <text class="./iconfont/iconsousuo:before icon" style="font-size:32rpx"></text>
       <text class="border"></text>
       <input type="text" bindinput="bindinput" value="{{searchText}}" class="fs_15" placeholder="请输入关键词"></input>
     </view>

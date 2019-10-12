@@ -13,12 +13,18 @@ Page({
     isTop: false, //下拉刷新
     scrollTop: 0,
     bannerList: [],
+    dots_index: 0,
     navList: [],
     page: 1,
     is_on: 2,
     clientHeight: app.globalData.clientHeight / 2,
     shopList: [],
     isPullDownRefresh: true,
+  },
+  changedots(e) {
+    this.setData({
+      dots_index: e.detail.current
+    })
   },
   tolink(e) {
     wx.navigateTo({

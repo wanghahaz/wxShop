@@ -39,6 +39,27 @@ swiper image {
   height: 100%;
 }
 
+.indicator_dots {
+  z-index: 1000;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 360rpx;
+}
+
+.indicator_dots>text {
+  display: inline-block;
+  width: 10rpx;
+  margin-right: 6rpx;
+  height: 10rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+.indicator_dots> .dotsAc{
+  width: 20rpx;
+  border-radius: 6rpx;
+}
+
 /*分类推荐  */
 
 .clasfiy {

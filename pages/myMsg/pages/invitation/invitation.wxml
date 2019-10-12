@@ -16,7 +16,7 @@
     </view>
     <!--open-type="share"  -->
     <!--  data-path="/pages/tabar/share/share"  catchtap="toRouter" -->
-    <button open-type="share" hover-class='none' class="invita fs_16 tc">发邀请领双倍收益卡</button>
+    <button style="margin:0 0 12rpx 0" open-type="share" hover-class='none' class="invita fs_16 tc">发邀请领双倍收益卡</button>
   </view>
   <view class="tc recommended" style="color:#B2B2B2">{{sIndex==0?'邀请的朋友':'双倍收益卡'}}</view>
   <view wx:if="{{userList.length==0}}" class="noInva flex column flex_m">

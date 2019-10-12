@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="search width90" bindtap="toRouter" data-path="/pages/home/pages/search/search">
-    <text class="./iconfont/iconsousuo:before icon" style="font-size:28rpx"></text>
+    <text class="./iconfont/iconsousuo:before icon" style="font-size:32rpx"></text>
     <text class="border"></text>
     <text class="seaText fs_15">请输入关键词</text>
     <!-- <input class="fs_15" placeholder="请输入关键词"></input> -->

@@ -54,12 +54,12 @@ open-data[type="userAvatarUrl"] {
 }
 
 .oneList {
-  width: 48.5%;
-  margin-bottom: 10rpx;
+  width: 49%;
+  margin-bottom: 4rpx;
 }
 
 .ml {
-  margin-right: 3%;
+  margin-right: 2%;
 }
 
 /* 售后退货 图片等提交样式 */

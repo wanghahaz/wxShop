@@ -8,6 +8,9 @@
     "pages/tabar/share/share",
     "pages/websockets/websocket"
   ],
+  "navigateToMiniProgramAppIdList": [
+    "wx2c2234cfaa932dd0"
+  ],
   "subpackages": [
     {
       "root": "pages/home/",

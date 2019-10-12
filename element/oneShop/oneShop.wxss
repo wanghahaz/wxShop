@@ -57,7 +57,7 @@
 
 .one_shop>.flex {
   box-sizing: border-box;
-  padding: 0 10rpx;
+  padding: 0 14rpx;
   justify-content: space-between;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .one_shop>view .title {
-  padding: 4rpx 8rpx;
+  padding: 4rpx 14rpx;
   color: #010000;
   width: 100%;
 }

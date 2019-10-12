@@ -18,7 +18,7 @@
   <view class="order_box box_zing">
     <view class="orderTitle fs_16 flex_lr flex">
       <text>我的订单</text>
-      <text data-index="-1" data-path="/pages/home/pages/myOrder/myOrder" bindtap="toRouter">全部订单<text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:32rpx"></text></text>
+      <text data-index="-1" class="fs_14" data-path="/pages/home/pages/myOrder/myOrder" bindtap="toRouter">全部订单<text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:32rpx"></text></text>
     </view>
     <view class="orderList fs_12 flex  flex_lr">
       <view class="flex flex_line_c flex_lr " wx:for="{{orderList}}" wx:key="{{index}}" data-index="{{item.status}}" data-path="{{item.path}}" bindtap="toRouter">

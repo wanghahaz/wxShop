@@ -43,7 +43,7 @@
     </view>
     <view style="height:18rpx;background:#f8f6f7"></view>
     <view data-type="2" style="margin:30rpx 0 20rpx 0 ;" class="flex flex_lr fs_12">
-      <text class="fcb2">快递  <text class="text_right">包邮</text></text>
+      <text class="fcb2">快递  <text class="text_right">{{goodsData.row.tmpl_rule?goodsData.row.tmpl_rule.tmpl_rule.default_money+'元':'包邮'}}</text></text>
       <text class="fcb2" style="padding:0 20rpx 0 0 ">已售：{{goodsData.row.goods_virtual_sales_num}}</text>
     </view>
     <view wx:if="{{goods_service}}" data-type="3" bindtap="showModel" style="margin:10rpx 0;" class="flex flex_lr fs_12">
