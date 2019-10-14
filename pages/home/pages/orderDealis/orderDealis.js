@@ -58,6 +58,8 @@ Page({
           store_name: this.data.dealis.store.store_name,
           store_id: this.data.dealis.store.id,
           store_thumb: this.data.dealis.store.store_thumb,
+          store_tmpl_strategy_type: this.data.store_tmpl_strategy.type,
+          store_tmpl_strategy_money: this.data.store_tmpl_strategy.money,
           check: true
         },
         goods: goods

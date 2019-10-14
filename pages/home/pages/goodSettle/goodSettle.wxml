@@ -24,7 +24,7 @@
             <image class="goodsImg flex_nosize " src="{{value.goods_thumb}}"></image>
             <view class="flex_tb goods_dea ">
               <text class="good_name fs_14 clamp_2 ">{{value.goods_name}}</text>
-              <text wx:if="{{value.spec_name}}" class="remarks fs_12 tc ">{{value.spec_name}}</text>
+              <text wx:if="{{value.spec_name}}" class="remarks fs_12 clamp_1  tc">{{value.spec_name}}</text>
               <view class="flex flex_lr ">
                 <text class="fcF1">￥{{value.goods_price}}</text>
                 <text>×{{value.goods_num}}</text>
@@ -34,7 +34,7 @@
         </view>
         <view data-type="1" bindtap="showMake" class="width94 fs_14 box_size flex flex_m flex_lr">
           <text>配送方式</text>
-          <text>快递 免运费></text>
+          <text>快递 {{item.fee}}></text>
         </view>
         <view class="width94 fs_14 box_size flex flex_m ">
           <text class="flex_nosize ">买家留言</text>

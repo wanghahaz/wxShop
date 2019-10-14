@@ -89,7 +89,7 @@ Page({
         })
       })
     })
-    // console.log(data)
+    console.log(until.base64_encode(JSON.stringify(data)))
     let str = until.base64_encode(encodeURI(JSON.stringify(data)));
     http.postReq('/order/submit', {
       order: str
@@ -139,21 +139,36 @@ Page({
     })
   },
   onLoad: function(options) {
-    console.log(options)
     let that = this;
     let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
     let totalPrice = 0;
+    let fee = '包邮';
     list.forEach(item => {
       item.store.msg = '';
       let check = item.goods.some(val => val.check);
       item.store.check = check;
       let sum = 0;
-      item.goods.forEach(value => {
+      let max = item.goods[0].tmpl_rule ? item.goods[0].tmpl_rule.tmpl_rule.default_money.split(".")[0] : item.goods[0].freight_fee.split(".")[0]
+      item.goods.forEach((value, ind) => {
+        if ((ind + 1) < item.goods.length) {
+          console.log(ind)
+          console.log(item.goods[ind + 1].tmpl_rule)
+          max = max < item.goods[ind + 1].tmpl_rule ? item.goods[ind + 1].tmpl_rule.tmpl_rule.default_money.split(".")[0] : item.goods[ind + 1].freight_fee.split(".")[0] ? item.goods[ind + 1].tmpl_rule ? item.goods[ind + 1].tmpl_rule.tmpl_rule.default_money.split(".")[0] : item.goods[ind + 1].freight_fee.split(".")[0] : max
+        }
         sum += value.goods_num * value.goods_price;
       })
       item.sum = sum.toFixed(2);
       totalPrice += item.sum / 1;
+      let fee_money = item.store.store_tmpl_strategy_money || item.store_tmpl_strategy.money;
+      if ((item.store.store_tmpl_strategy_type || item.store_tmpl_strategy.type) == 1) {
+        item.fee = `${max}元`
+      } else if ((item.store.store_tmpl_strategy_type || item.store_tmpl_strategy.type) == 2) {
+        item.fee = "包邮"
+      } else {
+        item.fee = item.sum > fee_money.split(".")[0] ? `${max}元` : '包邮'
+      }
     })
+    console.log(list)
     that.setData({
       goodsList: list,
       totalPrice: options.type ? totalPrice.toFixed(2) : app.globalData.totalPrice

@@ -29,28 +29,28 @@
 
   <view class="box_Big box_zing" style="background: #fff;">
     <text style="margin:20rpx 0 10rpx 0;display: inline-block" class="fcF1 fs_20">￥{{goodsData.row.goods_price}}</text>
-    <view class="flex flex_lr flex_m">
+    <view class="flex flex_lr flex_m" style="padding:0rpx 3% 20rpx 3%;">
       <text style="width:75%" class="clamp_2">{{goodsData.row.goods_name}}</text>
       <text wx:if="{{is_collect==1}}" catchtap="collectGoods" class="./iconfont/iconxin:before icon" style="font-size:52rpx; color:#F44444"></text>
       <text wx:else catchtap="collectGoods" class="./iconfont/iconxin1:before icon" style="font-size:52rpx; color:#F44444"></text>
     </view>
-    <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" style="margin-top:14rpx;padding:0rpx 3% 20rpx 3%;" class="flex flex_lr shop_box fs_14">
+    <!-- <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" style="margin-top:14rpx;padding:0rpx 3% 20rpx 3%;" class="flex flex_lr shop_box fs_14">
       <text style="width:50%">{{goodsData.store.store_name}}</text>
       <view class="flex flex_m flex_end ">
         <text>进店逛逛</text>
         <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
       </view>
-    </view>
+    </view> -->
     <view style="height:18rpx;background:#f8f6f7"></view>
     <view data-type="2" style="margin:30rpx 0 20rpx 0 ;" class="flex flex_lr fs_12">
-      <text class="fcb2">快递  <text class="text_right">{{goodsData.row.tmpl_rule?goodsData.row.tmpl_rule.tmpl_rule.default_money+'元':'包邮'}}</text></text>
+      <text class="fcb2">运费  <text class="text_right">{{expressFee}}</text></text>
       <text class="fcb2" style="padding:0 20rpx 0 0 ">已售：{{goodsData.row.goods_virtual_sales_num}}</text>
     </view>
     <view wx:if="{{goods_service}}" data-type="3" bindtap="showModel" style="margin:10rpx 0;" class="flex flex_lr fs_12">
       <text class="fcb2">服务 <text class="text_right">{{goodsData.row.goods_service[0]}}</text></text>
       <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
     </view>
-    <view data-type="1" bindtap="showModel" style="margin:10rpx 0;padding:0rpx 3% 20rpx 3%" class="flex flex_lr fs_12">
+    <view data-type="1" bindtap="showModel" style="margin:10rpx 0 18rpx 0;padding:0rpx 3% 16rpx 3%" class="flex flex_lr fs_12">
       <text class="fcb2">选择 <text class="text_right">选择商品规格</text> </text>
       <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
     </view>
@@ -89,6 +89,19 @@
         </view>
       </view>
     </block>
+  </view>
+  <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" class="goodsDealis shopDealis flex box_zing">
+    <image class="flex_nosize" src="{{goodsData.store.store_thumb}}"></image>
+    <view style="margin-left:10px" class="flex column flex_sa box_zing">
+      <view class="flex">
+        <text style="width:50%">{{goodsData.store.store_name}}</text>
+        <view class="flex flex_m flex_end fcb2 fs_13">
+          <text>进店逛逛</text>
+          <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+        </view>
+      </view>
+      <view class="fs_11 fcb2">山西省太原市小店区通达西街6单元6楼602</view>
+    </view>
   </view>
   <view class="goodsDealis  flex column  box_zing">
     <text style="padding:10rpx 0 6rpx 0">商品详情</text>

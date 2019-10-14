@@ -31,11 +31,12 @@ Page({
     goods_storage: 0,
     goods_price: 0,
     goods_body: '',
-    goods_thumb: ''
+    goods_thumb: '',
+    expressFee: ''
   },
   // 组件返回值
   tapDialogButton(e) {
-    console.log('dialog', e.detail)
+    // console.log('dialog', e.detail)
     this.setData({
       dialogShow: false,
     })
@@ -166,6 +167,23 @@ Page({
           goods_thumb: res.data.row.goods_images[0],
           goods_service: res.data.row.goods_service == null ? res.data.row.goods_service : res.data.row.goods_service.join(',')
         })
+        // goodsData.row.store_tmpl_strategy.type == 2 ? '包邮'：
+        // goodsData.row.store_tmpl_strategy.type == 3 ? '满' + goodsData.row.store_tmpl_strategy.money + '元包邮' : goodsData.row.tmpl_rule ? goodsData.row.tmpl_rule.tmpl_rule.default_money + '元' : '包邮'
+
+        // expressFee: ''
+        let expressFee = '';
+        if (res.data.row.store_tmpl_strategy.type == 2) {
+          expressFee = '包邮'
+        } else if (res.data.row.store_tmpl_strategy.type == 3) {
+          expressFee = '满' + res.data.row.store_tmpl_strategy.money + '元包邮'
+        } else if (res.data.row.tmpl_rule) {
+          expressFee = res.data.row.tmpl_rule.tmpl_rule.default_money + '元'
+        } else {
+          expressFee = res.data.row.freight_fee > '0.00' ? res.data.row.freight_fee + '元' : '包邮'
+        }
+        this.setData({
+          expressFee: expressFee
+        })
       } else {
         until.toast({
           title: '加载失败'
@@ -199,6 +217,8 @@ Page({
       store: {
         store_name: this.data.goodsData.store.store_name || '',
         store_id: this.data.goodsData.store.id,
+        store_tmpl_strategy_type: this.data.goodsData.row.store_tmpl_strategy.type,
+        store_tmpl_strategy_money: this.data.goodsData.row.store_tmpl_strategy.money,
         check: true
       },
       goods: [{
@@ -212,7 +232,9 @@ Page({
         goods_storage: this.data.selectSku.goods_storage || this.data.goodsData.row.goods_storage,
         is_mult: this.data.goodsData.row.is_mult,
         sku_id: this.data.selectSku.id || this.data.dataObj.sku_id,
-        spec_name: this.data.selectSku.spec_name || ''
+        spec_name: this.data.selectSku.spec_name || '',
+        freight_fee: this.data.goodsData.row.freight_fee,
+        tmpl_rule: this.data.goodsData.row.tmpl_rule
       }]
     }];
     app.globalData.goodsList = list;
@@ -265,9 +287,9 @@ Page({
   selectSku(e) {
     let list = JSON.parse(JSON.stringify(this.data.skuObj.spec));
     let obj = JSON.parse(JSON.stringify(this.data.skuObj));
-    console.log(e)
-    console.log(list)
-    console.log(obj)
+    // console.log(e)
+    // console.log(list)
+    // console.log(obj)
     list[e.currentTarget.dataset.index].sub.forEach((item, index) => {
       if (index == e.currentTarget.dataset.ind) {
         item.check = !item.check
