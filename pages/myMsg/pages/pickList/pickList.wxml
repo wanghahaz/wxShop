@@ -1,15 +1,12 @@
 <!--index.wxml-->
 <view class="container">
-  <!-- <scroll-view scroll-x scroll-left="{{scrollLeft}}" style="width: 100%;white-space: nowrap" class="title"> -->
+ 
   <view class="flex title flex_sa">
     <text data-index="-1" bindtap="bindchange" class="{{titleIndex=='-1'?'active':''}} tc">全部</text>
     <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">待付款</text>
-    <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">待发货</text>
-    <text data-index="2" bindtap="bindchange" class="{{titleIndex==2?'active':''}} tc">待收货</text>
+    <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">待提货</text>
     <text data-index="8" bindtap="bindchange" class="{{titleIndex==8?'active':''}} tc">待评价</text>
   </view>
-  <!-- <text data-index="4" bindtap="bindchange" class="{{titleIndex==4?'active':''}} tc">退款/售后</text> -->
-  <!-- </scroll-view> -->
   <view style="margin:30rpx 0 10px 0" class="flex flex_c_m column" wx:if="{{goodsList.length==0&&!isLoading}}">
     <image class="noGoods" src="../../image/no_order.png"></image>
     <view class="noMore">您还没有订单哦~</view>

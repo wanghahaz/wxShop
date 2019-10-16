@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container" wx:if="{{goodsData.row}}">
+<view class="container {{showMask?'':'hideContainer'}}" wx:if="{{goodsData.row}}">
   <mp-dialog title="提示" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
     <view>当前操作需要登陆后进行,请您立即登陆~</view>
   </mp-dialog>
@@ -100,7 +100,7 @@
           <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
         </view>
       </view>
-      <view class="fs_11 fcb2">山西省太原市小店区通达西街6单元6楼602</view>
+      <view class="fs_11 fcb2">{{goodsData.store.store_address}}</view>
     </view>
   </view>
   <view class="goodsDealis  flex column  box_zing">
@@ -143,7 +143,7 @@
       <text catchtap="showModel" data-type="1" class="tc">立即购买</text>
     </view>
   </view>
-  <view bindtap="showModel" catch:touchmove hidden="{{showMask}}" class="mask add_goods">
+  <view bindtap="showModel" catch:touchmove="true" hidden="{{showMask}}" class="mask add_goods">
   </view>
   <view class="{{!showMask&&showType==1?'maskContentAc':''}} maskContent  box_zing">
     <view class="flex goodsDe box_zing">
@@ -155,7 +155,7 @@
       </view>
       <text class="addCard tc fs_22" catchtap="showModel" class="./iconfont/iconguanbi:before icon close fs_18"></text>
     </view>
-    <view wx:if="{{skuObj.spec.length>0}}" class="skuObj box_zing">
+    <view wx:if="{{skuObj.spec.length>0}}" class="skuObj box_zing" style=" overflow-y: auto">
       <view>
         <block wx:for="{{skuObj.spec}}" wx:key="{{index}}">
           <view style="color:#8A8A8A;">{{item.name}}</view>

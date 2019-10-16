@@ -9,11 +9,24 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttons: [{
+      text: '确定'
+    }],
     fyList: [],
     leftList: [],
     leftIndex: 0,
     pid: null,
     height: 0,
+  },
+  tapDialogButton(e) {
+    this.setData({
+      dialogShow: false,
+    })
+    if (e.detail.item.token) {
+      this.setData({
+        isLogin: true
+      })
+    }
   },
   // 顶级分类
   getIndex() {
@@ -96,6 +109,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (!wx.getStorageSync('token')) {
+      this.setData({
+        dialogShow: true
+      })
+    }
     this.getIndex()
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {

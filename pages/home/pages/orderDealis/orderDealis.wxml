@@ -18,6 +18,13 @@
       <text class="clamp_1">收货地址：{{dealis.address.address_info}} </text>
     </view>
   </view>
+
+  <view class="qr width94 goodspDealis box_zing flex column">
+    <view class="tc fs_14">未核销</view>
+    <image class="qr_qr" src="http://7.pic.pc6.com/up/2016-12/20161213153647219.png"></image>
+    <view class="fs_10 tc" style="color:red;margin:10px 0">未提货前，请勿将提货码告知他人，以保证资金安全</view>
+    <view class="fs_13 tc fcb2">有效期：2019.10.10-2019.10.16</view>
+  </view>
   <view class="goodspDealis width94 box_zing">
     <block>
       <view class="dealis_order  box_zing">
@@ -25,8 +32,8 @@
           <text>{{dealis.store.store_name}} <text class="./iconfont/iconarrow-right-copy:before icon flex_nosize" style="font-size:30rpx"></text></text>
         </view>
         <view class="goods_Dealis flex flex_nosize" wx:for="{{dealis.order_data}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image data-id="{{value.goods_id}}" data-skuId="{{value.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
-          <view data-id="{{value.goods_id}}" data-skuId="{{value.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="goodsDealis">
+          <image data-id="{{value.goods_id}}" data-skuId="{{value.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" data-status="{{value.status}}" data-deleted_at="{{value.deleted_at}}" bindtap="toRouter" class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
+          <view data-id="{{value.goods_id}}" data-skuId="{{value.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" data-status="{{value.status}}" data-deleted_at="{{value.deleted_at}}" bindtap="toRouter" class="goodsDealis">
             <view class="flex flex_lr">
               <text class="fs_14 clamp_2">{{value.goods_name}}</text>
               <view style="width:130rpx" class="flex column flex_nosize flex_lr fs_12 ter">
@@ -84,9 +91,9 @@
   </view>
   <view class="width94 flex callShop fs_14">
     <text data-path="/pages/home/pages/websocket/websocket" data-id="{{dealis.store.id}}" data-name="{{dealis.store.store_name}}" data-thumb="{{dealis.store.store_thumb}}" bindtap="toRouter" class="tc">联系卖家</text>
-    <text catchtap="call" class="tc fcb2">拨打电话</text>
+    <text catchtap="call" class="tc">拨打电话</text>
   </view>
-  <view wx:if="{{dealis.status==1||dealis.status==2||dealis.status==8||dealis.status==9||dealis.status==10||dealis.status==3||dealis.status==5||dealis.status==7}}" class="submit flex  box_zing  fs_14">
+  <view wx:if="{{dealis.status==1||dealis.status==0||dealis.status==2||dealis.status==8||dealis.status==9||dealis.status==10||dealis.status==3||dealis.status==5||dealis.status==7}}" class="submit flex  box_zing  fs_14">
     <view style="flex:1" class="flex flex_m">
       <text>总价:<text class="fcF1">￥{{dealis.total_fee}}</text> </text>
     </view>

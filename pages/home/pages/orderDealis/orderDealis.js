@@ -38,9 +38,15 @@ Page({
     orderType: {}
   },
   call(e) {
-    until.toast({
-      title: "商家没有绑定电话！"
-    })
+    if (this.data.dealis.store.phone) {
+      wx.makePhoneCall({
+        phoneNumber: this.data.dealis.store.phone //仅为示例，并非真实的电话号码
+      })
+    } else {
+      until.toast({
+        title: "商家没有绑定电话！"
+      })
+    }
   },
   toRouter(e) {
     let goods = JSON.parse(JSON.stringify(this.data.dealis.order_data))
@@ -49,17 +55,26 @@ Page({
       item.cart_id = 0;
     })
     // 
+    if (e.currentTarget.dataset.path == '/pages/home/pages/goodsDealis/goodsDealis') {
+      if (e.currentTarget.dataset.status == 0) {
+        until.toast({
+          title: '商品已下架'
+        })
+        return;
+      }
+    }
     if (e.currentTarget.dataset.path == '/pages/home/pages/goodSevaluation/goodSevaluation') {
       app.globalData.commentList = this.data.dealis.order_data
     }
     if (e.currentTarget.dataset.path == '/pages/home/pages/goodSettle/goodSettle') {
+      // return;
       let list = [{
         store: {
           store_name: this.data.dealis.store.store_name,
           store_id: this.data.dealis.store.id,
           store_thumb: this.data.dealis.store.store_thumb,
-          store_tmpl_strategy_type: this.data.store_tmpl_strategy.type,
-          store_tmpl_strategy_money: this.data.store_tmpl_strategy.money,
+          store_tmpl_strategy_type: this.data.dealis.store_tmpl_strategy.type,
+          store_tmpl_strategy_money: this.data.dealis.store_tmpl_strategy.money,
           check: true
         },
         goods: goods

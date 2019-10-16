@@ -77,9 +77,15 @@ Page({
     })
   },
   call(e) {
-    until.toast({
-      title: "商家没有绑定电话！"
-    })
+    if (this.data.dealis.store.phone) {
+      wx.makePhoneCall({
+        phoneNumber: this.data.dealis.store.phone //仅为示例，并非真实的电话号码
+      })
+    } else {
+      until.toast({
+        title: "商家没有绑定电话！"
+      })
+    }
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);

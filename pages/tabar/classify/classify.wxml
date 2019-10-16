@@ -1,5 +1,8 @@
 <!--index.wxml-->
 <view class="container">
+  <mp-dialog title="提示" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+    <view>当前操作需要登陆后进行,请您立即登陆~</view>
+  </mp-dialog>
   <view class="search width90" bindtap="toRouter" data-path="/pages/home/pages/search/search">
     <text class="./iconfont/iconsousuo:before icon" style="font-size:32rpx"></text>
     <text class="border"></text>

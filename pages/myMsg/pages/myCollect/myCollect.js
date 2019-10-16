@@ -84,6 +84,9 @@ Page({
         until.toast({
           title: '已加入购物车！'
         })
+        this.setData({
+          showMask: true
+        })
       } else {
         until.toast({
           title: '加入购物车失败！'

@@ -9,9 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    buttons: [{
-      text: '取消'
-    }, {
+    buttons: [ {
       text: '确定'
     }],
     dialogShow: false,
@@ -114,7 +112,7 @@ Page({
    */
   run2: function() {
     var vm = this;
-     interval = setInterval(function() {
+    interval = setInterval(function() {
       if (-vm.data.marqueeDistance2 < vm.data.length) {
         // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
         vm.setData({
@@ -172,6 +170,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (!wx.getStorageSync('token')) {
+      this.setData({
+        dialogShow: true
+      })
+    }
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({

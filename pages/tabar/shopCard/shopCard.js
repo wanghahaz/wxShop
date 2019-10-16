@@ -9,6 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttons: [{
+      text: '确定'
+    }],
     shopList: [],
     goodsList: [],
     totalPrice: 0,
@@ -16,6 +19,16 @@ Page({
     allCheck: false,
     page: 1,
     isPullDownRefresh: true,
+  },
+  tapDialogButton(e) {
+    this.setData({
+      dialogShow: false,
+    })
+    if (e.detail.item.token) {
+      this.setData({
+        token: false,
+      })
+    }
   },
   // 编辑购物车商品加减
   addOdd(e) {
@@ -172,6 +185,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (!wx.getStorageSync('token')) {
+      this.setData({
+        dialogShow: true
+      })
+    }
     if (wx.getStorageSync('token')) {
       this.getCard()
     } else {

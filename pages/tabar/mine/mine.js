@@ -10,8 +10,6 @@ Page({
    */
   data: {
     buttons: [{
-      text: '取消'
-    }, {
       text: '确定'
     }],
     dialogShow: false,
@@ -68,7 +66,28 @@ Page({
         src: '../../../image/invita.png'
       },
       {
-        name: '客服',
+        name: '我的客服',
+        path: '',
+        clas: "people",
+        style: 'margin:0 20rpx 0 0rpx',
+        src: '../../../image/peopel.png'
+      },
+      {
+        name: '我的自提',
+        path: '/pages/myMsg/pages/pickList/pickList?index=1',
+        clas: "people",
+        style: 'margin:0 20rpx 0 0rpx',
+        src: '../../../image/peopel.png'
+      },
+      {
+        name: '收货地址',
+        path: '/pages/myMsg/pages/adressList/adressList',
+        clas: "people",
+        style: 'margin:0 20rpx 0 0rpx',
+        src: '../../../image/peopel.png'
+      },
+      {
+        name: '帮助中心',
         path: '',
         clas: "people",
         style: 'margin:0 20rpx 0 0rpx',
@@ -180,6 +199,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (!wx.getStorageSync('token')) {
+      this.setData({
+        dialogShow: true
+      })
+    }
     this.setData({
       token: wx.getStorageSync('token') ? false : true,
       userInfo: app.globalData.userInfo

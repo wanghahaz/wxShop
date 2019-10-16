@@ -32,13 +32,34 @@
             </view>
           </view>
         </view>
-        <view data-type="1" bindtap="showMake" class="width94 fs_14 box_size flex flex_m flex_lr">
+        <!-- data-type="1" bindtap="showMake" -->
+        <view class="width94 fs_14 box_size flex flex_m flex_lr">
           <text>配送方式</text>
-          <text>快递 {{item.fee}}></text>
+          <text>快递 {{item.shiping_fee=='0.00'?'包邮':'￥'+item.shiping_fee}}</text>
         </view>
         <view class="width94 fs_14 box_size flex flex_m ">
           <text class="flex_nosize ">买家留言</text>
           <input data-index="{{index}}" bindinput="bindinput" class="fs_14 width90" placeholder="点击给商家留言 "></input>
+        </view>
+        <view class="width94 fs_14 box_size flex flex_m flex_lr">
+          <text>是否自提</text>
+          <image catchtap="setPick" data-check="{{item.isPick}}" data-index="{{index}}" style="margin-right:20rpx" wx:if="{{item.isPick}}" class="check" src="../../../../image/check.png"></image>
+          <text catchtap="setPick" data-check="{{item.isPick}}" data-index="{{index}}" wx:else style="margin-right:20rpx" class="nocheck box_zing check"></text>
+        </view>
+        <!-- 店铺地址 -->
+        <view wx:if="{{item.isPick}}" class="width94 fs_14 box_size flex flex_m column flex_lr">
+          <view>
+            <text>提货地址:</text>
+            <text>山西省太原市小店区XXX小区</text>
+          </view>
+          <view>
+            <text>营业时间:</text>
+            <text>9.00-10.00</text>
+          </view>
+          <view>
+            <text>到店自提须知</text>
+            <text data-type="1" bindtap="showMake">查看</text>
+          </view>
         </view>
         <view style="padding: 10rpx 0 30rpx 0 " class="width94 flex flex_m flex_lr fs_15">
           <text></text>
@@ -48,12 +69,13 @@
     </block>
   </view>
   <view class="fs_14  flex flex_m flex_lr money box_zing">
-    <text>可使用{{totalPrice>money?money:totalPrice}}元代金券</text>
+    <text>可使用{{totalPrice>money+'.00'?money:totalPrice+'.00'}}元代金券</text>
     <image bindtap="setShopCheck" wx:if="{{is_jifen}}" class="check" src="../../../../image/check.png"></image>
     <text bindtap="setShopCheck" wx:else class="nocheck box_zing check"></text>
   </view>
   <view class="flexd_bt flex flex_m fs_15">
-    <text>总额(含运费):</text>
+    <text><text style="margin:0 5px 0 0" class="fs_12 fcb2">共{{unitsNum}}件</text>
+    <text style="margin:0 3px 0 0" class="fs_10 fcb2">含运费</text>合计:</text>
     <text wx:if="{{!is_jifen}}" class="fcF1 ">￥{{totalPrice}}</text>
     <text wx:else class="fcF1 ">￥{{totalPrice>money?totalPrice/1-money/1:0}}</text>
     <text bindtap="submint" class="total tc">提交订单</text>
@@ -62,11 +84,19 @@
   </view>
   <view class="way {{maskType!=0?'transMask':''}}" catchtap>
     <view>
-      <view class="tc fs_16" style="margin:15rpx auto">配送方式</view>
-      <view class="flex flex_m flex_lr width94" style="margin:20rpx auto">
+      <view class="tc fs_16" style="margin:15rpx auto">到店自提须知</view>
+      <view class="fs_14 width94" style="margin:20rpx auto">
+        <text style="display:block;margin:20rpx 0">Q.如何提货?</text>
+        <text style="line-height: 1.5">  A.选择"到店自提"的买家，成功付款后，凭订单管理内的提货二维码到自提点进行提货，到店后出示提货二维码，由卖家验证后，完成提货。未提货前，请勿将提货码告知他人，以保证资金安全。</text>
+        <text style="display:block;margin:16rpx 0"> Q、提货有效期? </text>
+        <text style="line-height: 1.5"> A.买家成功支付后，须在7天内至自提点提货。如逾期未提货，订单将自动关闭，届时退款将直接退回到买家帐户。</text>
+        <text style="display:block;margin:20rpx 0">Q.到店自提订单是否需要支付运费?</text>
+        <text style="line-height: 1.5"> A.到店自提订单无需运费，但需要买家自行前往所选自提点取货。</text>
+      </view>
+      <!-- <view class="flex flex_m flex_lr width94" style="margin:20rpx auto">
         <image src="../../../../image/check.png"></image>
         <text class="fs_14">快递 免运费</text>
-      </view>
+      </view> -->
       <view data-type="0" class="close fs_20 tc" catchtap="showMake">关闭</view>
     </view>
   </view>

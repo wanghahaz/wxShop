@@ -10,6 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buttons: [{
+      text: '确定'
+    }],
     isTop: false, //下拉刷新
     scrollTop: 0,
     bannerList: [],
@@ -20,6 +23,16 @@ Page({
     clientHeight: app.globalData.clientHeight / 2,
     shopList: [],
     isPullDownRefresh: true,
+  },
+  tapDialogButton(e) {
+    this.setData({
+      dialogShow: false,
+    })
+    if (e.detail.item.token) {
+      this.setData({
+        isLogin: true
+      })
+    }
   },
   changedots(e) {
     this.setData({
@@ -169,6 +182,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (!wx.getStorageSync('token')) {
+      this.setData({
+        dialogShow: true
+      })
+    }
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({

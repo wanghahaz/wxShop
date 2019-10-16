@@ -167,10 +167,6 @@ Page({
           goods_thumb: res.data.row.goods_images[0],
           goods_service: res.data.row.goods_service == null ? res.data.row.goods_service : res.data.row.goods_service.join(',')
         })
-        // goodsData.row.store_tmpl_strategy.type == 2 ? '包邮'：
-        // goodsData.row.store_tmpl_strategy.type == 3 ? '满' + goodsData.row.store_tmpl_strategy.money + '元包邮' : goodsData.row.tmpl_rule ? goodsData.row.tmpl_rule.tmpl_rule.default_money + '元' : '包邮'
-
-        // expressFee: ''
         let expressFee = '';
         if (res.data.row.store_tmpl_strategy.type == 2) {
           expressFee = '包邮'
@@ -275,6 +271,9 @@ Page({
       if (res.code == 200) {
         until.toast({
           title: '已加入购物车！'
+        })
+        this.setData({
+          showMask: true
         })
       } else {
         until.toast({

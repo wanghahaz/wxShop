@@ -30,6 +30,13 @@ Page({
       is_jifen: !this.data.is_jifen
     })
   },
+  setPick(e) {
+    let list = JSON.parse(JSON.stringify(this.data.goodsList))
+    list[e.currentTarget.dataset.index].isPick = !e.currentTarget.dataset.check;
+    this.setData({
+      goodsList: list
+    })
+  },
   bindinput(e) {
     let list = JSON.parse(JSON.stringify(this.data.goodsList))
     list[e.currentTarget.dataset.index].store.msg = e.detail.value;
@@ -89,12 +96,12 @@ Page({
         })
       })
     })
-    console.log(until.base64_encode(JSON.stringify(data)))
+    // console.log(until.base64_encode(JSON.stringify(data)))
     let str = until.base64_encode(encodeURI(JSON.stringify(data)));
     http.postReq('/order/submit', {
       order: str
     }, true).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
         until.toast({
           title: '支付成功'
@@ -110,7 +117,6 @@ Page({
           signType: res.data.signType,
           paySign: res.data.paySign,
           success: (res) => {
-            console.log(res, 1)
             wx.navigateBack()
           },
           fail: function(err) {
@@ -133,7 +139,7 @@ Page({
     http.getReq('/jifen/logs', {}, true).then(res => {
       if (res.code == 200) {
         this.setData({
-          money: res.data.jifen
+          money: res.data.jifen.split(".")[0]
         })
       }
     })
@@ -141,6 +147,57 @@ Page({
   onLoad: function(options) {
     let that = this;
     let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
+    let strList = JSON.parse(JSON.stringify(app.globalData.goodsList));
+    let goods_info = []
+    strList.forEach((item, index) => {
+      goods_info.push({
+        address_id: this.data.address.id || 0,
+        store_id: item.store.store_id,
+        delivery: 1,
+        goods: []
+      })
+      item.goods.forEach(value => {
+        goods_info[index].goods.push({
+          goods_id: value.goods_id || value.id,
+          sku_id: value.sku_id || 0,
+          goods_num: value.goods_num,
+          cart_id: value.cart_id
+        })
+      })
+    })
+    let str = until.base64_encode(encodeURI(JSON.stringify(goods_info)));
+    let unitsNum = 0;
+    // http.postReq('/order/order_fee', {
+    //   goods_info: str
+    // }, true).then(res => {
+    //   let data = res.data;
+    //   list.forEach(item => {
+    //     item.store.msg = '';
+    //     let check = item.goods.some(val => val.check);
+    //     item.store.check = check;
+    //     item.isPick = false;
+    //     item.goods.forEach(value => {
+    //       unitsNum += value.goods_num / 1;
+    //     })
+
+    //   })
+    //   list.forEach(item => {
+    //     data.order_fee.forEach(value => {
+    //       if (item.store.store_id == value.store_id) {
+    //         item.goods_amount = value.goods_amount.toFixed(2)
+    //         item.shiping_fee = value.shipping_fee.toFixed(2)
+    //         item.sum = value.total_fee.toFixed(2)
+    //       }
+    //     })
+    //   })
+    //   that.setData({
+    //     goodsList: list,
+    //     totalPrice: (data.goods_amount / 1 + data.shipping_fee / 1),
+    //     shipping_fee: data.shipping_fee.toFixed(2),
+    //     unitsNum: unitsNum
+    //   })
+    // })
+
     let totalPrice = 0;
     let fee = '包邮';
     list.forEach(item => {
@@ -150,11 +207,6 @@ Page({
       let sum = 0;
       let max = item.goods[0].tmpl_rule ? item.goods[0].tmpl_rule.tmpl_rule.default_money.split(".")[0] : item.goods[0].freight_fee.split(".")[0]
       item.goods.forEach((value, ind) => {
-        if ((ind + 1) < item.goods.length) {
-          console.log(ind)
-          console.log(item.goods[ind + 1].tmpl_rule)
-          max = max < item.goods[ind + 1].tmpl_rule ? item.goods[ind + 1].tmpl_rule.tmpl_rule.default_money.split(".")[0] : item.goods[ind + 1].freight_fee.split(".")[0] ? item.goods[ind + 1].tmpl_rule ? item.goods[ind + 1].tmpl_rule.tmpl_rule.default_money.split(".")[0] : item.goods[ind + 1].freight_fee.split(".")[0] : max
-        }
         sum += value.goods_num * value.goods_price;
       })
       item.sum = sum.toFixed(2);
@@ -168,7 +220,6 @@ Page({
         item.fee = item.sum > fee_money.split(".")[0] ? `${max}元` : '包邮'
       }
     })
-    console.log(list)
     that.setData({
       goodsList: list,
       totalPrice: options.type ? totalPrice.toFixed(2) : app.globalData.totalPrice

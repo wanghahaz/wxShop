@@ -26,10 +26,21 @@
         <text style="color:#B2B2B2">{{item.name}}</text>
       </view>
     </view>
-
   </view>
 
-  <view style="margin_top:-20rpx" class="width90 flex_wrap flex_sa">
+  <view style="margin_top:-20rpx" class="width90 flex flex_wrap btList">
+    <block wx:for="{{btList}}" wx:key="{{index}}">
+      <view data-path="{{item.path}}" bindtap="toRouter" class="flex flex_line_c flex_lr {{index>3?'mt':''}}" wx:if="{{item.name!='我的客服'}}">
+        <image class="{{item.clas}}" src="{{item.src}}"></image>
+        <text>{{item.name}}</text>
+      </view>
+      <button class="flex flex_line_c flex_lr" open-type="contact" wx:else>
+        <image class="{{item.clas}}" src="{{item.src}}"></image>
+        <text style="width:140rpx" class="fs_12 tc">{{item.name}}</text>
+      </button>
+    </block>
+  </view>
+  <!-- <view style="margin_top:-20rpx" class="width90 flex_wrap flex_sa">
     <block wx:for="{{btList}}" wx:key="{{index}}">
       <view wx:if="{{index<3}}" data-path="{{item.path}}" bindtap="toRouter" class="{{index>1?'mt':''}} box_big flex_nosize flex flex_c flex_m">
         <image class="{{item.clas}}" style="{{item.style}}" src="{{item.src}}"></image>
@@ -40,7 +51,7 @@
         <text style="width:140rpx" class="fs_12 tc">{{item.name}}</text>
       </button>
     </block>
-  </view>
+  </view> -->
   <view class="fs_13 tc recommended">
     <view class="flex flex_m">
       <image class="left_1" src="../../../image/left_1.png"></image>

@@ -40,6 +40,7 @@
       "name": "myMsg",
       "pages": [
         "pages/myChit/myChit",
+        "pages/pickList/pickList",
         "pages/myCollect/myCollect",
         "pages/chitHistory/chitHistory",
         "pages/adressList/adressList",

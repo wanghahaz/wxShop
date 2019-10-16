@@ -90,7 +90,7 @@
       <text>申请原因</text>
       <text>{{dealis.reason}}</text>
     </view>
-    <view class="com  column flex flex_lr fs_13 box_zing">
+    <view wx:if="{{dealis.content}}" class="com  column flex flex_lr fs_13 box_zing">
       <text>具体描述</text>
       <text style="margin:12rpx 20rpx 0 20rpx;line-height:1.8">{{dealis.content}}</text>
     </view>
@@ -116,7 +116,7 @@
   </view>
   <view class="width94 flex callShop fs_14">
     <text data-bindUser="{{dealis.store.bind_user}}" data-path="/pages/home/pages/websocket/websocket" data-thumb="{{dealis.store.store_thumb}}" data-id="{{dealis.store.id}}" data-name="{{dealis.store.store_name}}" bindtap="toRouter" class="tc">联系卖家</text>
-    <text catchtap="call" class="tc fcb2">拨打电话</text>
+    <text catchtap="call" class="tc">拨打电话</text>
   </view>
   <!-- <view wx:if="{{dealis.status==4}}" class="submit flex  box_zing  fs_14">
     <view style="flex:1" class="flex flex_m">

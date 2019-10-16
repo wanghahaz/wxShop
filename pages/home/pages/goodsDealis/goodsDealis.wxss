@@ -2,6 +2,9 @@
   padding-bottom: 120rpx;
 }
 
+.hideContainer {
+}
+
 .box_Big>view, .box_Big>text, .shop_box {
   padding: 0 3%;
   box-sizing: border-box;

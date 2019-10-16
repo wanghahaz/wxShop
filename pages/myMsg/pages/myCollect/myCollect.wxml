@@ -13,7 +13,7 @@
     <!-- 商品 -->
     <view class="content" wx:if="{{titleIndex==0}}">
 
-      <view data-id="{{item.goods_id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" catchtap="toRouter" wx:if="{{item.goods.goods_storage>0}}" class="flex box_zing shop goods">
+      <view data-id="{{item.goods_id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" catchtap="toRouter" wx:if="{{item.goods.goods_storage>0&&item.goods.status==1}}" class="flex box_zing shop goods">
         <image class="shopTx goodsTx flex_nosize" src="{{item.goods.goods_thumb}}"></image>
         <view class="shopDealis goodsDealis flex column flex_lr">
           <text class="fs_14 clamp_2">{{item.goods.goods_name}}</text>
@@ -26,13 +26,15 @@
       </view>
       <view wx:else class="flex box_zing shop goods">
         <image class="shopTx goodsTx flex_nosize" src="../../image/n_goods.png"></image>
-        <text class="end">售罄</text>
+        <text wx:if="{{item.goods.status==0}}" class="end">下架</text>
+        <text wx:else class="end">售罄</text>
         <view class="shopDealis goodsDealis flex column flex_lr">
           <text class="clamp_2">{{item.goods.goods_name}}</text>
-          <text class="fs_12 fcb2">已售空</text>
+          <text wx:if="{{item.goods.status==0}}" class="fs_12 fcb2">已下架</text>
+          <text wx:else class="fs_12 fcb2">已售空</text>
           <view class="flex flex_lr">
             <text class="fs_19 fcF1">￥{{item.goods.goods_price}}</text>
-            <image class="add" src="../../../image/no_goods.png"></image>
+            <image class="add" src="../../../../image/no_goods.png"></image>
           </view>
         </view>
       </view>
@@ -40,7 +42,7 @@
     <!-- 店铺 -->
     <view class="content" bindtap="toRouter" data-id="{{item.store_id}}" data-path="/pages/home/pages/shopDetails/shopDetails" wx:else>
       <view class="flex box_zing shop">
-        <image class="shopTx flex_nosize" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2870455309,2484184181&fm=26&gp=0.jpg"></image>
+        <image class="shopTx flex_nosize" src="{{item.store.store_thumb}}"></image>
         <view class="shopDealis flex column flex_sa">
           <text class="clamp_2 fs_16">{{item.store.store_name}}</text>
           <view class="flex flex_lr">

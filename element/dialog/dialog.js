@@ -222,7 +222,7 @@ module.exports =
           buttonTap: function buttonTap(e) {
             var index = e.currentTarget.dataset.index;
             let that = this;
-            if (index == 1) {
+            if (index == 0) {
               wx.getUserInfo({
                 success: function(res) {
                   http.postReq('/login', {
@@ -267,12 +267,12 @@ module.exports =
 
           },
           close: function close() {
-            var data = this.data;
-            if (!data.maskClosable) return;
-            this.setData({
-              show: false
-            });
-            this.triggerEvent('close', {}, {});
+            // var data = this.data;
+            // if (!data.maskClosable) return;
+            // this.setData({
+            //   show: false
+            // });
+            // this.triggerEvent('close', {}, {});
           },
           stopEvent: function stopEvent() {}
         }
