@@ -22,36 +22,27 @@
     </view>
     <view class="orderList fs_12 flex  flex_lr">
       <view class="flex flex_line_c flex_lr " wx:for="{{orderList}}" wx:key="{{index}}" data-index="{{item.status}}" data-path="{{item.path}}" bindtap="toRouter">
-        <image style="{{item.style}}" src="{{item.src}}" class="{{item.clas}}"></image>
+        <view style="flex:1;" class="flex_line_c">
+          <image style="{{item.style}};margin:auto" src="{{item.src}}" class="{{item.clas}}"></image>
+        </view>
         <text style="color:#B2B2B2">{{item.name}}</text>
       </view>
     </view>
   </view>
 
-  <view style="margin_top:-20rpx" class="width90 flex flex_wrap btList">
+  <view style="margin:-30rpx auto 40rpx auto" class="width90 flex flex_wrap btList">
     <block wx:for="{{btList}}" wx:key="{{index}}">
-      <view data-path="{{item.path}}" bindtap="toRouter" class="flex flex_line_c flex_lr {{index>3?'mt':''}}" wx:if="{{item.name!='我的客服'}}">
-        <image class="{{item.clas}}" src="{{item.src}}"></image>
-        <text>{{item.name}}</text>
-      </view>
-      <button class="flex flex_line_c flex_lr" open-type="contact" wx:else>
-        <image class="{{item.clas}}" src="{{item.src}}"></image>
-        <text style="width:140rpx" class="fs_12 tc">{{item.name}}</text>
+      <button hover-class="none" class="{{index>3?'mt':''}} flex_line_c flex_lr" open-type="contact" wx:if="{{item.name=='我的客服'}}">
+        <image style="{{item.style}};margin:0 auto" src="{{item.src}}"></image>
+        <text style="width:140rpx" class="fs_11 tc">{{item.name}}</text>
       </button>
+      <button wx:else hover-class="none" data-path="{{item.path}}" bindtap="toRouter" class="flex_line_c flex_lr {{index>3?'mt':''}}">
+        <image style="{{item.style}}" src="{{item.src}}"></image>
+        <text class="fs_11 tc">{{item.name}}</text>
+      </button>
+
     </block>
   </view>
-  <!-- <view style="margin_top:-20rpx" class="width90 flex_wrap flex_sa">
-    <block wx:for="{{btList}}" wx:key="{{index}}">
-      <view wx:if="{{index<3}}" data-path="{{item.path}}" bindtap="toRouter" class="{{index>1?'mt':''}} box_big flex_nosize flex flex_c flex_m">
-        <image class="{{item.clas}}" style="{{item.style}}" src="{{item.src}}"></image>
-        <text style="width:140rpx" class="fs_12 tc">{{item.name}}</text>
-      </view>
-      <button open-type="contact" style="margin:28rpx 0 0 0" wx:else hover-class="none" class="{{index>1?'mt':''}} box_big flex_nosize flex flex_c flex_m">
-        <image class="{{item.clas}}" style="{{item.style}}" src="{{item.src}}"></image>
-        <text style="width:140rpx" class="fs_12 tc">{{item.name}}</text>
-      </button>
-    </block>
-  </view> -->
   <view class="fs_13 tc recommended">
     <view class="flex flex_m">
       <image class="left_1" src="../../../image/left_1.png"></image>

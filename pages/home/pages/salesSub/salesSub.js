@@ -48,7 +48,7 @@ Page({
       if (res.code == 200) {
         until.toast({
           icon: 'success',
-          title: `${this.data.titleName}成功`
+          title: `提交成功`
         })
         setTimeout(() => {
           wx.navigateTo({

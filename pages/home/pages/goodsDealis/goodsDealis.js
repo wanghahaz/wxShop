@@ -212,6 +212,8 @@ Page({
     let list = [{
       store: {
         store_name: this.data.goodsData.store.store_name || '',
+        store_address: this.data.goodsData.store.store_address,
+        store_open_at: this.data.goodsData.store.store_open_at,
         store_id: this.data.goodsData.store.id,
         store_tmpl_strategy_type: this.data.goodsData.row.store_tmpl_strategy.type,
         store_tmpl_strategy_money: this.data.goodsData.row.store_tmpl_strategy.money,

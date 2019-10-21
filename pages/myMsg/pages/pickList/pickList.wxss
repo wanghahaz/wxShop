@@ -22,7 +22,7 @@
   border-radius: 18rpx;
   background: #fff;
   padding: 30rpx 40rpx;
-  margin-bottom: 30rpx;
+  margin-top: 30rpx;
 }
 
 .dealis_order .goodsImg {

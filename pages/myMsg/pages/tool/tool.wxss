@@ -1,0 +1,9 @@
+.big_box {
+  background: #fff;
+  padding: 30rpx 0;
+}
+
+.size_box {
+  width: 24%;
+  height: 86rpx;
+}

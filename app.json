@@ -49,7 +49,12 @@
         "pages/set/set",
         "pages/intimacy/intimacy",
         "pages/saleList/saleList",
-        "pages/saleDealis/saleDealis"
+        "pages/saleDealis/saleDealis",
+        "pages/tool/tool",
+        "pages/verification/verification",
+        "pages/help/help",
+        "pages/helpList/helpList",
+        "pages/helpDealis/helpDealis"
       ]
     }
   ],
@@ -58,7 +63,7 @@
     "color": "#000",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "selectedColor": "#19d646",
+    "selectedColor": "#F18E1E",
     "list": [
       {
         "pagePath": "pages/tabar/index/index",
@@ -71,12 +76,6 @@
         "iconPath": "/image/classfiy.png",
         "selectedIconPath": "/image/classfiyAc.png",
         "text": "分类"
-      },
-      {
-        "pagePath": "pages/tabar/advertising/advertising",
-        "iconPath": "/image/banner.png",
-        "selectedIconPath": "/image/bannerAc.png",
-        "text": "视屏"
       },
       {
         "pagePath": "pages/tabar/shopCard/shopCard",

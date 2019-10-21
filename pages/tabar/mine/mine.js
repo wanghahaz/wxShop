@@ -3,6 +3,12 @@
 const app = getApp();
 import until from "../../../utils/util.js";
 import http from "../../../common/js/http.js";
+let shop = {
+  name: '商家工具',
+  path: '/pages/myMsg/pages/tool/tool',
+  style: 'width:40rpx;height:40rpx',
+  src: '../../../image/tool.png'
+}
 Page({
 
   /**
@@ -10,88 +16,96 @@ Page({
    */
   data: {
     buttons: [{
+      text: '取消'
+    }, {
       text: '确定'
     }],
     dialogShow: false,
+    isMerchant: false,
     orderList: [{
       name: '待付款',
       path: "/pages/home/pages/myOrder/myOrder",
       status: '0',
       src: '../../../image/fukuan.png',
-      style: 'width:58rpx;height:48rpx;margin-top:4rpx'
+      style: 'width:42rpx;height:34rpx;'
     }, {
       name: '待发货',
       status: '1',
       path: "/pages/home/pages/myOrder/myOrder",
       src: '../../../image/fahuo.png',
-      style: 'width:52rpx;height:48rpx;margin-top:4rpx'
+      style: 'width:42rpx;height:36rpx;'
     }, {
       name: '待收货',
       status: '2',
       path: "/pages/home/pages/myOrder/myOrder",
       src: '../../../image/shouhuo.png',
-      style: 'width:54rpx;height:52rpx'
+      style: 'width:46rpx;height:44rpx'
     }, {
       name: '待评价',
       status: '8',
       path: "/pages/home/pages/myOrder/myOrder",
       src: '../../../image/pingjia.png',
-      style: 'width:54rpx;height:52rpx'
+      style: 'width:44rpx;height:46rpx'
     }, {
       name: '退款/售后',
       status: '4',
       path: "/pages/myMsg/pages/saleList/saleList",
       src: '../../../image/shouhou.png',
-      style: 'width:58rpx;height:52rpx'
+      style: 'width:54rpx;height:50rpx'
     }],
     btList: [{
-        // path: '/pages/home/pages/sureGoods/sureGoods',
         name: '我的代金券',
         path: '/pages/myMsg/pages/myChit/myChit',
-        clas: "money",
-        style: 'margin:0 20rpx 0 0rpx',
+        style: 'width:42rpx;height:34rpx',
         src: '../../../image/money.png'
-      },
-      {
-        name: '我的收藏',
-        path: "/pages/myMsg/pages/myCollect/myCollect",
-        clas: "collection",
-        style: 'margin:0 22rpx 0 0rpx',
-        src: '../../../image/sc.png'
       }, {
         name: '邀请有礼',
         path: '/pages/myMsg/pages/invitation/invitation',
         clas: "adress",
-        style: 'margin:0 16rpx 0 0rpx',
+        style: 'width:42rpx;height:40rpx',
         src: '../../../image/invita.png'
-      },
-      {
-        name: '我的客服',
-        path: '',
-        clas: "people",
-        style: 'margin:0 20rpx 0 0rpx',
-        src: '../../../image/peopel.png'
-      },
-      {
-        name: '我的自提',
-        path: '/pages/myMsg/pages/pickList/pickList?index=1',
-        clas: "people",
-        style: 'margin:0 20rpx 0 0rpx',
-        src: '../../../image/peopel.png'
       },
       {
         name: '收货地址',
         path: '/pages/myMsg/pages/adressList/adressList',
         clas: "people",
-        style: 'margin:0 20rpx 0 0rpx',
-        src: '../../../image/peopel.png'
+        style: 'width:36rpx;height:40rpx',
+        src: '../../../image/adressL.png'
+      },
+      {
+        name: '自提订单',
+        path: '/pages/myMsg/pages/pickList/pickList',
+        style: 'width:40rpx;height:38rpx',
+        src: '../../../image/pick.png'
+      },
+      {
+        name: '商品收藏',
+        path: "/pages/myMsg/pages/myCollect/myCollect?type=0",
+        clas: "collection",
+        style: 'width:46rpx;height:40rpx',
+        src: '../../../image/goodsC.png'
+      },
+      {
+        name: '店铺收藏',
+        path: "/pages/myMsg/pages/myCollect/myCollect?type=1",
+        clas: "collection",
+        style: 'width:44rpx;height:42rpx',
+        src: '../../../image/shopC.png'
       },
       {
         name: '帮助中心',
+        path: '/pages/myMsg/pages/help/help',
+        clas: "people",
+        style: 'width:40rpx;height:42rpx',
+        src: '../../../image/help.png'
+      },
+
+      {
+        name: '我的客服',
         path: '',
         clas: "people",
-        style: 'margin:0 20rpx 0 0rpx',
-        src: '../../../image/peopel.png'
+        style: 'width:42rpx;height:40rpx',
+        src: '../../../image/helpP.png'
       }
     ],
     shopList: [],
@@ -100,6 +114,15 @@ Page({
     token: true,
     userInfo: {}
   },
+  setMerchant() {
+    if (this.data.isMerchant) {
+      let list = JSON.parse(JSON.stringify(this.data.btList))
+      list[2] = shop;
+      this.setData({
+        btList: list
+      })
+    }
+  },
   tapDialogButton(e) {
     this.setData({
       dialogShow: false,
@@ -107,8 +130,10 @@ Page({
     if (e.detail.item.token) {
       this.setData({
         token: false,
+        isMerchant: !!e.detail.item.userInfo.is_agent,
         userInfo: e.detail.item.userInfo
       })
+      this.setMerchant()
     }
   },
   getInfo() {
@@ -203,6 +228,13 @@ Page({
       this.setData({
         dialogShow: true
       })
+    } else {
+      if (wx.getStorageSync('userInfo').is_agent == 1) {
+        this.setData({
+          isMerchant: true,
+        })
+        this.setMerchant()
+      }
     }
     this.setData({
       token: wx.getStorageSync('token') ? false : true,

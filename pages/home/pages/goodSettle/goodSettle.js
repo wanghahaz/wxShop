@@ -30,9 +30,19 @@ Page({
       is_jifen: !this.data.is_jifen
     })
   },
+  // 设置是否自提
   setPick(e) {
     let list = JSON.parse(JSON.stringify(this.data.goodsList))
-    list[e.currentTarget.dataset.index].isPick = !e.currentTarget.dataset.check;
+    list[e.currentTarget.dataset.index].delivery = e.currentTarget.dataset.check;
+    if (e.currentTarget.dataset.check == 2) {
+      this.setData({
+        totalPrice: this.data.totalPrice - list[e.currentTarget.dataset.index].shiping_fee
+      })
+    } else {
+      this.setData({
+        totalPrice: this.data.totalPrice + list[e.currentTarget.dataset.index].shiping_fee
+      })
+    }
     this.setData({
       goodsList: list
     })
@@ -71,6 +81,7 @@ Page({
         content: '您还没有设置收货地址，请先添加收货地址！',
         success(res) {}
       })
+      return;
     }
     let data = {
       address_id: this.data.address.id, //地址id
@@ -82,9 +93,10 @@ Page({
     let list = JSON.parse(JSON.stringify(this.data.goodsList))
     list.forEach((item, index) => {
       data.goods_info.push({
+        address_id: item.delivery == 1 ? this.data.address.id : 0,
         store_id: item.store.store_id,
         msg: `${item.store.msg}`,
-        delivery: 1,
+        delivery: item.delivery,
         goods: []
       })
       item.goods.forEach(value => {
@@ -96,20 +108,38 @@ Page({
         })
       })
     })
-    // console.log(until.base64_encode(JSON.stringify(data)))
+    console.log(data)
     let str = until.base64_encode(encodeURI(JSON.stringify(data)));
     http.postReq('/order/submit', {
       order: str
     }, true).then(res => {
-      // console.log(res)
+      let isDelivery = list.some(item => item.delivery == 2); //是否存在自提订单
       if (res.code == 200) {
+        let ids = res.data;
         until.toast({
           title: '支付成功'
         });
-        setTimeout(() => {
-          wx.navigateBack();
-        }, 1000)
+        if (isDelivery) {
+          if (list.length > 1) {
+            setTimeout(() => {
+              wx.redirectTo({
+                url: `/pages/myMsg/pages/pickList/pickList`,
+              })
+            }, 1000)
+          } else {
+            setTimeout(() => {
+              wx.redirectTo({
+                url: `/pages/home/pages/orderDealis/orderDealis?id=${ids[0]}`,
+              })
+            }, 1000)
+          }
+        } else {
+          setTimeout(() => {
+            wx.navigateBack();
+          }, 1000)
+        }
       } else if (res.code == 300) {
+        let ids = res.order_ids;
         wx.requestPayment({
           timeStamp: res.data.timeStamp,
           nonceStr: res.data.nonceStr,
@@ -117,7 +147,25 @@ Page({
           signType: res.data.signType,
           paySign: res.data.paySign,
           success: (res) => {
-            wx.navigateBack()
+            if (isDelivery) {
+              if (list.length > 1) {
+                setTimeout(() => {
+                  wx.redirectTo({
+                    url: `/pages/myMsg/pages/pickList/pickList`,
+                  })
+                }, 1000)
+              } else {
+                setTimeout(() => {
+                  wx.redirectTo({
+                    url: `/pages/home/pages/orderDealis/orderDealis?id=${ids[0]}`,
+                  })
+                }, 1000)
+              }
+            } else {
+              setTimeout(() => {
+                wx.navigateBack();
+              }, 1000)
+            }
           },
           fail: function(err) {
             wx.redirectTo({
@@ -146,6 +194,9 @@ Page({
   },
   onLoad: function(options) {
     let that = this;
+    that.getAdress()
+    that.getChit()
+    // console.log(app.globalData.goodsList)
     let list = JSON.parse(JSON.stringify(app.globalData.goodsList));
     let strList = JSON.parse(JSON.stringify(app.globalData.goodsList));
     let goods_info = []
@@ -167,65 +218,70 @@ Page({
     })
     let str = until.base64_encode(encodeURI(JSON.stringify(goods_info)));
     let unitsNum = 0;
-    // http.postReq('/order/order_fee', {
-    //   goods_info: str
-    // }, true).then(res => {
-    //   let data = res.data;
-    //   list.forEach(item => {
-    //     item.store.msg = '';
-    //     let check = item.goods.some(val => val.check);
-    //     item.store.check = check;
-    //     item.isPick = false;
-    //     item.goods.forEach(value => {
-    //       unitsNum += value.goods_num / 1;
-    //     })
+    http.postReq('/order/order_fee', {
+      goods_info: str
+    }, true).then(res => {
+      if (res.code == 200) {
+        let data = res.data;
+        list.forEach(item => {
+          item.store.msg = '';
+          item.delivery = 1
+          let check = item.goods.some(val => val.check);
+          item.store.check = check;
+          item.isPick = false;
+          item.goods.forEach(value => {
+            unitsNum += value.goods_num / 1;
+          })
 
-    //   })
-    //   list.forEach(item => {
-    //     data.order_fee.forEach(value => {
-    //       if (item.store.store_id == value.store_id) {
-    //         item.goods_amount = value.goods_amount.toFixed(2)
-    //         item.shiping_fee = value.shipping_fee.toFixed(2)
-    //         item.sum = value.total_fee.toFixed(2)
-    //       }
-    //     })
-    //   })
-    //   that.setData({
-    //     goodsList: list,
-    //     totalPrice: (data.goods_amount / 1 + data.shipping_fee / 1),
-    //     shipping_fee: data.shipping_fee.toFixed(2),
-    //     unitsNum: unitsNum
-    //   })
-    // })
-
-    let totalPrice = 0;
-    let fee = '包邮';
-    list.forEach(item => {
-      item.store.msg = '';
-      let check = item.goods.some(val => val.check);
-      item.store.check = check;
-      let sum = 0;
-      let max = item.goods[0].tmpl_rule ? item.goods[0].tmpl_rule.tmpl_rule.default_money.split(".")[0] : item.goods[0].freight_fee.split(".")[0]
-      item.goods.forEach((value, ind) => {
-        sum += value.goods_num * value.goods_price;
-      })
-      item.sum = sum.toFixed(2);
-      totalPrice += item.sum / 1;
-      let fee_money = item.store.store_tmpl_strategy_money || item.store_tmpl_strategy.money;
-      if ((item.store.store_tmpl_strategy_type || item.store_tmpl_strategy.type) == 1) {
-        item.fee = `${max}元`
-      } else if ((item.store.store_tmpl_strategy_type || item.store_tmpl_strategy.type) == 2) {
-        item.fee = "包邮"
+        })
+        list.forEach(item => {
+          data.order_fee.forEach(value => {
+            if (item.store.store_id == value.store_id) {
+              item.goods_amount = value.goods_amount / 1
+              item.shiping_fee = value.shipping_fee / 1
+              item.sum = value.total_fee / 1
+            }
+          })
+        })
+        that.setData({
+          goodsList: list,
+          totalPrice: (data.goods_amount / 1 + data.shipping_fee / 1),
+          shipping_fee: data.shipping_fee / 1,
+          unitsNum: unitsNum
+        })
       } else {
-        item.fee = item.sum > fee_money.split(".")[0] ? `${max}元` : '包邮'
+        until.toast({
+          title: '加载失败'
+        })
       }
+
     })
-    that.setData({
-      goodsList: list,
-      totalPrice: options.type ? totalPrice.toFixed(2) : app.globalData.totalPrice
-    })
-    that.getAdress()
-    that.getChit()
+    // let totalPrice = 0;
+    // let fee = '包邮';
+    // list.forEach(item => {
+    //   item.store.msg = '';
+    //   let check = item.goods.some(val => val.check);
+    //   item.store.check = check;
+    //   let sum = 0;
+    //   let max = item.goods[0].tmpl_rule ? item.goods[0].tmpl_rule.tmpl_rule.default_money.split(".")[0] : item.goods[0].freight_fee.split(".")[0]
+    //   item.goods.forEach((value, ind) => {
+    //     sum += value.goods_num * value.goods_price;
+    //   })
+    //   item.sum = sum.toFixed(2);
+    //   totalPrice += item.sum / 1;
+    //   let fee_money = item.store.store_tmpl_strategy_money || item.store_tmpl_strategy.money;
+    //   if ((item.store.store_tmpl_strategy_type || item.store_tmpl_strategy.type) == 1) {
+    //     item.fee = `${max}元`
+    //   } else if ((item.store.store_tmpl_strategy_type || item.store_tmpl_strategy.type) == 2) {
+    //     item.fee = "包邮"
+    //   } else {
+    //     item.fee = item.sum > fee_money.split(".")[0] ? `${max}元` : '包邮'
+    //   }
+    // })
+    // that.setData({
+    //   goodsList: list,
+    //   totalPrice: options.type ? totalPrice.toFixed(2) : app.globalData.totalPrice
+    // })
   },
 
   /**

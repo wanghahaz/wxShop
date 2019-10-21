@@ -1,22 +1,15 @@
 <!--index.wxml-->
 <view class="container">
- 
-  <view class="flex title flex_sa">
-    <text data-index="-1" bindtap="bindchange" class="{{titleIndex=='-1'?'active':''}} tc">全部</text>
-    <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">待付款</text>
-    <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">待提货</text>
-    <text data-index="8" bindtap="bindchange" class="{{titleIndex==8?'active':''}} tc">待评价</text>
-  </view>
   <view style="margin:30rpx 0 10px 0" class="flex flex_c_m column" wx:if="{{goodsList.length==0&&!isLoading}}">
     <image class="noGoods" src="../../image/no_order.png"></image>
     <view class="noMore">您还没有订单哦~</view>
   </view>
-  <block wx:if="{{titleIndex=='-1'}}">
+  <block>
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
         <view class="title_name flex flex_lr">
           <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
+          <text class="fs_14 fcF1">待提货</text>
         </view>
         <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
         <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
@@ -42,197 +35,15 @@
           <text class="fs_16">合计：￥{{item.goods_amount}}</text>
         </view>
         <view class="btn count flex fs_13">
-          <text wx:if='{{item.status==0}}' data-id="{{item.id}}" data-type="2" data-toast="取消订单成功" data-model="订单还未付款,确定要取消吗?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">取消订单</text>
-          <text wx:if='{{item.status==1}}' data-id="{{item.id}}" data-type="5" data-toast="已提醒卖家发货！" data-model="提醒发货?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">提醒发货</text>
-          <text wx:if='{{item.status==2}}' data-id="{{item.id}}" data-type="1" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">确认收货</text>
-          <text wx:if='{{item.status==0}}' data-jifen="{{item.is_jifen}}" data-id="{{item.id}}" data-type="4" data-toast="付款成功" data-model="{{item.is_jifen?'您有冻结的代金券，是否使用':'您是否确认付款'}}?" catchtap="editStatus" class="evaluation fcF1">立即付款</text>
-          <text wx:if='{{item.status==9||item.status==10}}' data-id="{{item.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">删除订单</text>
-          <text wx:if='{{item.status==8}}' data-id="{{item.id}}" catchtap="toRouter" data-path="/pages/home/pages/goodSevaluation/goodSevaluation" class="evaluation fcF1">评价</text>
-          <text wx:if='{{item.status==9||item.status==10||item.status==1||item.status==2||item.status==3}}' class="evaluation fcF1">查看订单</text>
-        </view>
-      </view>
-    </block>
-  </block>
-  <block wx:elif="{{titleIndex==0}}">
-    <block wx:for="{{goodsList}}" wx:key="{{index}}">
-      <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
-        <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
-        </view>
-        <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
-          <view class="goodsDealis">
-            <view class="flex flex_lr">
-              <text class="clamp_2 fs_14">{{value.goods_name}}</text>
-              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
-                <text class="fs_11 ter">×{{value.goods_num}}</text>
-              </view>
-            </view>
-            <view class="fs_12 flex flex_lr refund_type">
-              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
-            </view>
-
-          </view>
-        </view>
-
-        <view class="flex count flex_end">
-          <text class="fs_12 fcb2" style="margin-right:30rpx">共{{item.orderdata.length}}件商品</text>
-          <text class="fs_16">合计：￥{{item.goods_amount}}</text>
-        </view>
-        <view class="btn count flex fs_13">
-          <text data-id="{{item.id}}" data-type="2" data-toast="取消订单成功" data-model="订单还未付款,确定要取消吗?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">取消订单</text>
-          <text data-id="{{item.id}}" data-jifen="{{item.is_jifen}}" data-type="4" data-toast="付款成功" data-model="{{item.is_jifen?'您有冻结的代金券，是否使用':'您是否确认付款'}}?" catchtap="editStatus" class="evaluation fcF1">立即付款</text>
-        </view>
-      </view>
-    </block>
-  </block>
-  <block wx:elif="{{titleIndex==1}}">
-    <block wx:for="{{goodsList}}" wx:key="{{index}}">
-      <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
-        <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
-        </view>
-        <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
-          <view class="goodsDealis">
-            <view class="flex flex_lr">
-              <text class="clamp_2 fs_14">{{value.goods_name}}</text>
-              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
-                <text class="fs_11 ter">×{{value.goods_num}}</text>
-              </view>
-            </view>
-            <view class="fs_12 flex flex_lr refund_type">
-              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
-            </view>
-            <view class="fs_12 flex flex_lr refund_type">
-              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
-            </view>
-          </view>
-        </view>
-
-        <view class="flex count flex_end">
-          <text class="fs_12 fcb2" style="margin-right:30rpx">共{{item.orderdata.length}}件商品</text>
-          <text class="fs_16">合计：￥{{item.goods_amount}}</text>
-        </view>
-        <view class="btn count flex fs_13">
-          <text wx:if='{{item.status==1}}' data-id="{{item.id}}" data-type="5" data-toast="已提醒卖家发货！" data-model="提醒发货?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">提醒发货</text>
           <text class="evaluation fcF1">查看订单</text>
         </view>
       </view>
     </block>
   </block>
-  <block wx:elif="{{titleIndex==2}}">
-    <block wx:for="{{goodsList}}" wx:key="{{index}}">
-      <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
-        <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
-        </view>
-        <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
-          <view class="goodsDealis">
-            <view class="flex flex_lr">
-              <text class="clamp_2 fs_14">{{value.goods_name}}</text>
-              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
-                <text class="fs_11 ter">×{{value.goods_num}}</text>
-              </view>
-            </view>
-            <view class="fs_12 flex flex_lr refund_type">
-              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
-            </view>
-
-          </view>
-        </view>
-
-        <view class="flex count flex_end">
-          <text class="fs_12 fcb2" style="margin-right:30rpx">共{{item.orderdata.length}}件商品</text>
-          <text class="fs_16">合计：￥{{item.goods_amount}}</text>
-        </view>
-        <view class="btn count flex fs_13">
-          <text wx:if='{{item.status==2}}' data-id="{{item.id}}" data-type="1" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">确认收货</text>
-          <text wx:if='{{item.status==9||item.status==10||item.status==1||item.status==2}}' class="evaluation fcF1">查看订单</text>
-        </view>
-      </view>
-    </block>
-  </block>
-  <block wx:elif="{{titleIndex==8}}">
-    <block wx:for="{{goodsList}}" wx:key="{{index}}">
-      <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
-        <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
-        </view>
-        <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
-          <view class="goodsDealis">
-            <view class="flex flex_lr">
-              <text class="clamp_2 fs_14">{{value.goods_name}}</text>
-              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
-                <text class="fs_11 ter">×{{value.goods_num}}</text>
-              </view>
-            </view>
-            <view class="fs_12 flex flex_lr refund_type">
-              <text class="fcb2 clamp_1" style="width:50%">{{value.spec_name}}</text>
-              <text class="fcF1">{{refund_type[value.refund_status]}}</text>
-            </view>
-
-          </view>
-        </view>
-
-        <view class="flex count flex_end">
-          <text class="fs_12 fcb2" style="margin-right:30rpx">共{{item.orderdata.length}}件商品</text>
-          <text class="fs_16">合计：￥{{item.goods_amount}}</text>
-        </view>
-        <view class="btn count flex fs_13">
-          <text wx:if='{{item.status==9||item.status==10}}' data-id="{{item.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation" style="border-color:#B2B2B2">删除订单</text>
-          <text wx:if='{{item.status==8}}' data-id="{{item.id}}" catchtap="toRouter" data-path="/pages/home/pages/goodSevaluation/goodSevaluation" class="evaluation fcF1">评价</text>
-        </view>
-      </view>
-    </block>
-  </block>
-  <!-- <block wx:elif="{{titleIndex==4}}">
-    <block wx:for="{{goodsList}}" wx:key="{{index}}">
-      <view class="dealis_order width94 box_zing">
-        <view style="margin-bottom:24rpx" class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-        </view>
-        <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
-          <image class="goodsImg flex_nosize" src="{{value.goods_thumb}}"></image>
-          <view class="goodsDealis">
-            <view class="flex">
-              <text class="clamp_2 fs_14">我是第{{ind}}商品我是第{{ind}}商品我是第{{ind}}商品商品我是第{{ind}}商品</text>
-              <view style="width:130rpx" class="flex column flex_nosize flex_lr">
-                <text class="fs_12 ter clamp_1">￥{{value.goods_price}}</text>
-                <text class="fs_11 ter">×{{value.goods_num}}</text>
-              </view>
-            </view>
-            <text class="fs_12 fcb2">134号牛油果绿  L</text>
-            <view class="btn flex fs_13">
-              <text data-path="/pages/home/pages/selectSales/selectSales" bindtap="toRouter" class="evaluation fcF1">申请售后</text>
-            </view>
-          </view>
-        </view>
-      </view>
-    </block>
-  </block> -->
   <view wx:if="{{isLoading}}">
     <view class="downLoding"></view>
     <view style="height:50rpx"></view>
   </view>
-  <view style="margin-top:-10px" class="noMore" wx:if="{{goodsList.length>0&&!isLoading}}">已加载全部</view>
+  <view class="noMore" wx:if="{{goodsList.length>0&&!isLoading}}">已加载全部</view>
 
 </view>

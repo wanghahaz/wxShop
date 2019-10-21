@@ -49,10 +49,6 @@ open-data[type="userAvatarUrl"] {
   border-radius: 18rpx;
 }
 
-.mt {
-  margin-top: 28rpx;
-}
-
 .members text {
   display: inline-block;
 }
@@ -101,6 +97,7 @@ open-data[type="userAvatarUrl"] {
 }
 
 .orderList {
+  height: 100rpx;
   margin-top: 22rpx;
 }
 
@@ -112,37 +109,24 @@ open-data[type="userAvatarUrl"] {
   font-size: 58rpx;
 }
 
-.money {
-  width: 42rpx;
-  height: 42rpx;
-}
-
 .collection {
   width: 42rpx;
   height: 40rpx;
 }
 
-.adress {
-  width: 36rpx;
-  height: 46rpx;
-}
-
-.people {
-  width: 40rpx;
-  height: 38rpx;
-}
-
 .btList {
-  padding:30rpx 0 14rpx 0; 
+  padding: 30rpx 0 14rpx 0;
   border-radius: 18rpx;
   background: #fff;
 }
 
 .btList>view, .btList>button {
   width: 25%;
+  height: 86rpx;
+  margin: 0;
+  padding: 0;
 }
 
-.btList text {
-  font-size: 24rpx;
-  margin: 16rpx 0;
+.btList .mt {
+  margin: 42rpx 0 18rpx 0;
 }

@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="title fs_18 flex flex_sa">
+  <!-- <view class="title fs_18 flex flex_sa">
     <text data-index="0" bindtap="bindchange" class="{{titleIndex==0?'active':''}} tc">商品</text>
     <text data-index="1" bindtap="bindchange" class="{{titleIndex==1?'active':''}} tc">店铺</text>
-  </view>
+  </view> -->
   <view style="margin:90rpx 0 10px 0" class="flex flex_c_m" wx:if="{{list.length==0&&isLoading==false}}">
     <image wx:if="{{titleIndex==0}}" class="noGoods" src="../../image/no_good.png"></image>
     <image wx:else class="noShop" src="../../image/no_shop.png"></image>

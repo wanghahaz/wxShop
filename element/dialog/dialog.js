@@ -222,7 +222,7 @@ module.exports =
           buttonTap: function buttonTap(e) {
             var index = e.currentTarget.dataset.index;
             let that = this;
-            if (index == 0) {
+            if (index == 1) {
               wx.getUserInfo({
                 success: function(res) {
                   http.postReq('/login', {

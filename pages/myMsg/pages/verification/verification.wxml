@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="container" wx:if="{{dealis.id}}">
+  <view class="dealis width94 box_zing">
+    <block wx:for="{{dealis.orderdata}}" wx:key="{{index}}">
+      <view class="flex goods_size">
+        <image class="goods_img flex_nosize" src="{{item.goods_thumb}}"></image>
+        <view class="fs_12 flex column box_zing flex_lr goods_dealis">
+          <text style=" line-height: 1.5" class="clamp_2">{{item.goods_name}}</text>
+          <view class="flex flex_lr">
+            <text class="fcF1">￥{{item.goods_price}}</text>
+            <text>×{{item.goods_num}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="sums box_zing flex flex_end">
+      <text style="margin: 6rpx 40rpx 0 0" class="fs_11 fcb2">共{{sums}}件商品</text>
+      <text class="fs_15">合计：￥{{dealis.goods_amount}}</text>
+    </view>
+  </view>
+  <view catchtap="submit" class="tc submit">确认核销</view>
+  <view class="fs_11 fcb2 tc tip">订单核销后不可撤销</view>
+</view>

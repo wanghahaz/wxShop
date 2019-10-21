@@ -1,7 +1,8 @@
 <!--index.wxml-->
 <view class="container" wx:if="{{dealis.id}}" style="padding-bottom:100rpx">
   <view class="status width94  box_zing">
-    {{statusObj[dealis.status]}}
+    <text wx:if="{{statusObj[dealis.status]=='待发货'}}">{{dealis.delivery==1?statusObj[dealis.status]:'待提货'}}</text>
+    <text wx:else>{{statusObj[dealis.status]}}</text>
   </view>
   <!-- <view data-path="/pages/home/pages/logistics/logistics" catchtap="toRouter" class="adress adress_box width94 flex flex_m box_zing">
     <text class="./iconfont/iconwuliu:before icon flex_nosize" style="font-size:64rpx"></text>
@@ -11,19 +12,26 @@
     </view>
     <text class="./iconfont/iconarrow-right-copy:before icon flex_nosize" style="font-size:40rpx"></text>
   </view> -->
-  <view class="user adress_box width94 flex flex_m box_zing">
+  <view wx:if="{{dealis.delivery==1}}" class="user adress_box width94 flex flex_m box_zing">
     <image class="gps flex_nosize" src="../../../../image/gps.png"></image>
     <view class="fs_14 flex column flex_sa width90">
       <text>收货人：{{dealis.address.name}}    {{dealis.address.phone}} </text>
       <text class="clamp_1">收货地址：{{dealis.address.address_info}} </text>
     </view>
   </view>
+  <view wx:else class="user adress_box width94 flex flex_m box_zing">
+    <view class="fs_14 flex column flex_sa width90">
+      <text class="clamp_1">提货地址：{{dealis.store.store_address}}</text>
+      <text wx:if="{{dealis.store.store_open_at}}">营业时间：{{dealis.store.store_open_at}} </text>
 
-  <view class="qr width94 goodspDealis box_zing flex column">
+    </view>
+  </view>
+
+  <view wx:if="{{dealis.delivery==2&&dealis.status==1}}" class="qr width94 goodspDealis box_zing flex column">
     <view class="tc fs_14">未核销</view>
-    <image class="qr_qr" src="http://7.pic.pc6.com/up/2016-12/20161213153647219.png"></image>
+    <image class="qr_qr" src="{{dealis.code_path}}"></image>
     <view class="fs_10 tc" style="color:red;margin:10px 0">未提货前，请勿将提货码告知他人，以保证资金安全</view>
-    <view class="fs_13 tc fcb2">有效期：2019.10.10-2019.10.16</view>
+    <view class="fs_13 tc fcb2">有效期：{{pickTime}}</view>
   </view>
   <view class="goodspDealis width94 box_zing">
     <block>
@@ -58,9 +66,9 @@
         </view>
       </view>
     </block>
-    <view class="com flex flex_lr fs_14 box_zing">
+    <view wx:if="{{dealis.status==1}}" class="com flex flex_lr fs_14 box_zing">
       <text>运费</text>
-      <text>￥{{dealis.shipping_fee}}</text>
+      <text > {{dealis.shipping_fee=='0.00'?'免运费':'￥'+dealis.shipping_fee}}</text>
     </view>
     <!-- <view class="com flex flex_lr fs_14 box_zing">
       <text>代金券</text>
@@ -86,7 +94,7 @@
     </view>
     <text class="fcb2">创建时间：{{dealis.created_at}}</text>
     <text wx:if="{{dealis.pay_time}}" class="fcb2">付款时间：{{dealis.pay_time}}</text>
-    <text wx:if="{{dealis.express_time}}" class="fcb2">发货时间：{{dealis.express_time}}</text>
+    <text wx:if="{{dealis.express_time&&dealis.status==1}}" class="fcb2">发货时间：{{dealis.express_time}}</text>
     <text wx:if="{{dealis.check_time}}" class="fcb2">成交时间：{{dealis.check_time}}</text>
   </view>
   <view class="width94 flex callShop fs_14">
@@ -99,7 +107,7 @@
     </view>
     <view style="flex:1.5" class="flex flex_m flex_end">
       <text wx:if='{{dealis.status==0}}' data-id="{{dealis.id}}" data-type="2" data-toast="取消订单成功" data-model="订单还未付款,确定要取消吗?" catchtap="editStatus" class="evaluation">取消订单</text>
-      <text wx:if='{{dealis.status==1}}' data-id="{{dealis.id}}" data-type="5" data-toast="已提醒卖家发货！" data-model="提醒发货?" catchtap="editStatus" class="evaluation">提醒发货</text>
+      <text wx:if='{{dealis.status==1&&dealis.delivery==1}}' data-id="{{dealis.id}}" data-type="5" data-toast="已提醒卖家发货！" data-model="提醒发货?" catchtap="editStatus" class="evaluation">提醒发货</text>
       <text wx:if='{{dealis.status==2}}' data-id="{{dealis.id}}" data-type="1" data-toast="收货成功！" data-model="您确认收货么?" catchtap="editStatus" class="evaluation">确认收货</text>
       <text wx:if='{{dealis.status==0}}' data-jifen="{{dealis.order_jifen}}" data-id="{{dealis.id}}" data-type="4" data-toast="付款成功" data-model="{{dealis.order_jifen!='0.00'?'您有冻结的代金券，是否使用':'您是否确认付款'}}?" catchtap="editStatus" class="evaluation fcF1">立即支付</text>
       <text wx:if='{{dealis.status==9||dealis.status==10}}' data-id="{{dealis.id}}" data-type="3" data-toast="已删除订单" data-model="您确认删除订单么?" catchtap="editStatus" class="evaluation">删除订单</text>

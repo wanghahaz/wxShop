@@ -114,6 +114,8 @@ Page({
       store: {
         store_name: this.data.showObj.store.store_name,
         store_id: this.data.showObj.store.id,
+        store_address: this.data.showObj.store.store_address,
+        store_open_at: this.data.showObj.store.store_open_at,
         check: true
       },
       goods: [{
@@ -256,17 +258,20 @@ Page({
     }).catch(err => {})
   },
   // 切换title
-  bindchange(e) {
+  // bindchange(e) {
+  //   this.setData({
+  //     titleIndex: e.currentTarget.dataset.index || e.detail.current,
+  //     isLoading: true,
+  //     list: [],
+  //     page: 1
+  //   })
+  //   this.getGoodsColl()
+  // },
+  onLoad: function(option) {
     this.setData({
-      titleIndex: e.currentTarget.dataset.index || e.detail.current,
-      isLoading: true,
-      list: [],
-      page: 1
+      titleIndex: option.type
     })
-    this.getGoodsColl()
-  },
-  onLoad: function() {
-    console.log(wx.getStorageSync('userInfo'))
+
   },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function(e) {

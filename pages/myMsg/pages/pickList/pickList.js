@@ -30,104 +30,14 @@ Page({
       '3': '拒绝售后'
     },
     isLoading: true,
-    titleIndex: -1,
     page: 1,
     goodsList: [],
-    orderType: {},
   },
-  setType() {
-    let _this = this;
-    let data = {
-      type: this.data.orderType.type
-    }
-    if (this.data.orderType.type == 4) {
-      data.use_jifen = this.data.orderType.jifen
-    }
-    http.postReq(`/order/deal/${this.data.orderType.id}`, data).then(res => {
-      if (res.code == 300) {
-        wx.requestPayment({
-          timeStamp: res.data.timeStamp,
-          nonceStr: res.data.nonceStr,
-          package: res.data.package,
-          signType: res.data.signType,
-          paySign: res.data.paySign,
-          success: (re) => {
-            _this.setData({
-              isLoading: true,
-              page: 1,
-              goodsList: []
-            })
-            _this.getMyOrder()
-          },
-          fail: function(err) {
-            console.log(err, 2)
-          }
-        })
-      } else if (res.code == 200) {
-        until.toast({
-          icon: 'success',
-          title: this.data.orderType.toast
-        })
 
-        setTimeout(() => {
-          if (this.data.orderType.type == 1) {
-            let list = this.data.goodsList.filter(item => item.id == this.data.orderType.id)
-            app.globalData.commentList = list[0].orderdata;
-            wx.redirectTo({
-              url: `/pages/home/pages/sureGoods/sureGoods?id=${this.data.orderType.id}`,
-            })
-          } else {
-            this.setData({
-              isLoading: true,
-              page: 1,
-              goodsList: []
-            })
-            this.getMyOrder()
-          }
-        }, 1000)
-
-      } else {
-        until.toast({
-          title: res.msg || '操作失败'
-        })
-      }
-    })
-  },
-  // 操作订单
-  editStatus(e) {
-    // type 1:确认收货 2:取消订单 3:删除订单 4:立即付款  5:提醒发货
-    this.setData({
-      orderType: e.currentTarget.dataset
-    });
-    until.modal({
-      content: e.currentTarget.dataset.model,
-      confirmText: e.currentTarget.dataset.jifen ? '使用' : '',
-      cancelText: e.currentTarget.dataset.jifen ? '不使用' : ''
-    }).then(res => {
-      if (e.currentTarget.dataset.jifen == 1) {
-        let data = JSON.parse(JSON.stringify(this.data.orderType))
-        data.jifen = 1;
-        this.setData({
-          orderType: data
-        });
-      }
-      this.setType()
-    }).catch(err => {
-      if (e.currentTarget.dataset.jifen == 1) {
-        let data = JSON.parse(JSON.stringify(this.data.orderType))
-        data.jifen = 0;
-        this.setData({
-          orderType: data
-        });
-        this.setType()
-      }
-    })
-  },
   // 获取订单列表
   getMyOrder() {
-    http.getReq('/order/order_list', {
+    http.getReq('/order/delivery', {
       page: this.data.page,
-      type: this.data.titleIndex
     }, true).then(res => {
       if (res.code == 200) {
         let list = res.data.data;
@@ -173,23 +83,10 @@ Page({
       })
     }
   },
-  bindchange(e) {
-    this.setData({
-      titleIndex: e.currentTarget.dataset.index || e.detail.current,
-      isLoading: true,
-      page: 1,
-      goodsList: []
-    })
-    this.getMyOrder()
-  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    this.setData({
-      titleIndex: options.index
-    })
-  },
+  onLoad: function(options) {},
 
 
   /**

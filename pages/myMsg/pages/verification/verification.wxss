@@ -1,0 +1,41 @@
+.dealis {
+  margin-top: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding:0 24rpx 28rpx 24rpx;
+}
+
+.goods_dealis {
+  padding: 6rpx 10rpx;
+}
+
+.goods_size {
+  padding:48rpx 0;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.sums {
+  padding: 30rpx 20rpx 10rpx 20rpx;
+}
+
+.goods_img {
+  width: 176rpx;
+  height: 176rpx;
+}
+
+.submit {
+  position: fixed;
+  color: #fff;
+  background: #f18e1e;
+  width: 76%;
+  left: 12%;
+  border-radius: 18rpx;
+  bottom: 80rpx;
+  line-height: 86rpx;
+}
+
+.tip {
+  position: fixed;
+  width: 100%;
+  bottom: 40rpx;
+}

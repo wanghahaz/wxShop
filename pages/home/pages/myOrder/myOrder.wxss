@@ -1,7 +1,7 @@
 .noGoods {
   width: 124rpx;
   height: 130rpx;
-  margin: 90rpx auto 30rpx auto
+  margin: 90rpx auto 30rpx auto;
 }
 
 .title .active {
@@ -104,4 +104,10 @@
 
 .title_name {
   margin-bottom: 20rpx;
+}
+
+.pickStyle {
+  margin-right: 8rpx;
+  width: 54rpx;
+  height: 24rpx;
 }

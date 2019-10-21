@@ -12,8 +12,8 @@
     <view class="weui-dialog__ft">
       <block wx:if="{{buttons && buttons.length}}">
         <block wx:for="{{buttons}}" wx:key="{{index}}">
-          <button wx:if="{{index==1}}" hover-class="none" class="weui-dialog__btn {{item.className}} {{item.extClass}}" data-index="{{index}}" bindtap="buttonTap">{{item.text}}</button>
-          <button wx:else openType="getUserInfo" bindgetuserinfo="buttonTap" hover-class="none" class="weui-dialog__btn {{item.className}} {{item.extClass}}" data-index="{{index}}" >{{item.text}}</button>
+          <button wx:if="{{index==0}}" hover-class="none" class="weui-dialog__btn {{item.className}} {{item.extClass}}" data-index="{{index}}" bindtap="buttonTap">{{item.text}}</button>
+          <button wx:else openType="getUserInfo" bindgetuserinfo="buttonTap" hover-class="none" class="weui-dialog__btn {{item.className}} {{item.extClass}}" data-index="{{index}}">{{item.text}}</button>
         </block>
         <!-- <view class="weui-dialog__btn" bindtap="confirm">确认</view> -->
       </block>

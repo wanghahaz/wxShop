@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="help_search">
+    <input bindconfirm="bindconfirm" confirm-type="search" bindinput="bindinput" class="fs_12"></input>
+    <view wx:if="{{content==''}}" class="search_icon flex flex_c_m">
+      <text class="./iconfont/iconsousuo:before icon" style="font-size:36rpx;color:#B2B2B2"></text>
+      <text class="fs_12" style="color:#B2B2B2;margin-left:20rpx">搜一下</text>
+    </view>
+  </view>
+  <block wx:for="{{issue}}" wx:key="{{index}}">
+    <view class="fs_12 flex flex_lr issue_one flex_m box_zing">
+      <text>{{item}}</text>
+      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:32rpx"></text>
+    </view>
+  </block>
+  <view></view>
+</view>

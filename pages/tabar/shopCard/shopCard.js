@@ -10,6 +10,8 @@ Page({
    */
   data: {
     buttons: [{
+      text: '取消'
+    }, {
       text: '确定'
     }],
     shopList: [],

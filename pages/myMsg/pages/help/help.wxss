@@ -1,0 +1,59 @@
+.often, .more {
+  background: #fff;
+  margin: 20rpx 0;
+}
+
+.often >view {
+  box-sizing: border-box;
+  padding: 0 30rpx;
+}
+
+.often .title, .more .title {
+  line-height: 80rpx;
+}
+
+.often .one_list {
+  border-top: 1px solid #e4e4e4;
+  line-height: 70rpx;
+}
+
+.more {
+  margin-bottom: 0;
+}
+
+.more .title {
+  padding: 0 30rpx;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.more_box {
+  background: #fff;
+  margin-bottom: 10rpx;
+}
+
+.more_box>view {
+  height: 170rpx;
+  box-sizing: border-box;
+}
+
+.more_box .box_left {
+  width: 25%;
+}
+
+.more_box .box_right {
+  padding: 20rpx 30rpx;
+}
+
+.more_box .box_right >view {
+  width: 50%;
+  line-height: 70rpx;
+}
+
+.more_box .box_right >view:nth-of-type(odd), .more_box .box_left {
+  border-right: 1px solid #e4e4e4;
+}
+
+.more_box .box_right >view:nth-of-type(1),
+.more_box .box_right >view:nth-of-type(2) {
+  border-bottom: 1px solid #e4e4e4;
+}

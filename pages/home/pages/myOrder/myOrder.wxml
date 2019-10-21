@@ -18,8 +18,12 @@
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
         <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
+          <view class="flex flex_m">
+            <image class="pickStyle" wx:if="{{item.delivery==2}}" src="../../image/ziti.png"></image>
+            <image class="pickStyle" wx:else src="../../image/wuliu.png"></image>
+            <text>{{item.store.store_name}}</text>
+          </view>
+          <text class="fs_14 flex_nosize fcF1">{{statusObj[item.status]}}</text>
         </view>
         <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
         <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
@@ -60,8 +64,12 @@
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
         <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
+          <view class="flex flex_m">
+            <image class="pickStyle" wx:if="{{item.delivery==2}}" src="../../image/ziti.png"></image>
+            <image class="pickStyle" wx:else src="../../image/wuliu.png"></image>
+            <text>{{item.store.store_name}}</text>
+          </view>
+          <text class="fs_14 flex_nosize fcF1">{{statusObj[item.status]}}</text>
         </view>
         <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
         <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
@@ -97,8 +105,12 @@
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
         <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
+          <view class="flex flex_m">
+            <image class="pickStyle" wx:if="{{item.delivery==2}}" src="../../image/ziti.png"></image>
+            <image class="pickStyle" wx:else src="../../image/wuliu.png"></image>
+            <text>{{item.store.store_name}}</text>
+          </view>
+          <text class="fs_14 flex_nosize fcF1">{{statusObj[item.status]}}</text>
         </view>
         <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
         <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
@@ -137,8 +149,12 @@
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
         <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
+          <view class="flex flex_m">
+            <image class="pickStyle" wx:if="{{item.delivery==2}}" src="../../image/ziti.png"></image>
+            <image class="pickStyle" wx:else src="../../image/wuliu.png"></image>
+            <text>{{item.store.store_name}}</text>
+          </view>
+          <text class="fs_14 flex_nosize fcF1">{{statusObj[item.status]}}</text>
         </view>
         <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
         <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>
@@ -174,8 +190,12 @@
     <block wx:for="{{goodsList}}" wx:key="{{index}}">
       <view class="dealis_order width94 box_zing" data-path="/pages/home/pages/orderDealis/orderDealis" data-id="{{item.id}}" bindtap="toRouter">
         <view class="title_name flex flex_lr">
-          <text>{{item.store.store_name}}</text>
-          <text class="fs_14 fcF1">{{statusObj[item.status]}}</text>
+          <view class="flex flex_m">
+            <image class="pickStyle" wx:if="{{item.delivery==2}}" src="../../image/ziti.png"></image>
+            <image class="pickStyle" wx:else src="../../image/wuliu.png"></image>
+            <text>{{item.store.store_name}}</text>
+          </view>
+          <text class="fs_14 flex_nosize fcF1">{{statusObj[item.status]}}</text>
         </view>
         <!-- <view class="coding fs_14">订单编号:E123456789</view> -->
         <view class="goods_Dealis flex flex_nosize" wx:for="{{item.orderdata}}" wx:for-item="value" wx:for-index="ind" wx:key='{{ind}}'>

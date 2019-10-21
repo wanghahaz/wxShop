@@ -11,6 +11,8 @@ Page({
    */
   data: {
     buttons: [{
+      text: '取消'
+    }, {
       text: '确定'
     }],
     isTop: false, //下拉刷新

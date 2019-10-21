@@ -35,7 +35,8 @@ Page({
     },
     dealis: {},
     id: null,
-    orderType: {}
+    orderType: {},
+    pickTime: ''
   },
   call(e) {
     if (this.data.dealis.store.phone) {
@@ -71,6 +72,8 @@ Page({
       let list = [{
         store: {
           store_name: this.data.dealis.store.store_name,
+          store_address: this.data.dealis.store.store_address,
+          store_open_at: this.data.dealis.store.store_open_at,
           store_id: this.data.dealis.store.id,
           store_thumb: this.data.dealis.store.store_thumb,
           store_tmpl_strategy_type: this.data.dealis.store_tmpl_strategy.type,
@@ -104,6 +107,14 @@ Page({
         data.order_data.forEach(item => {
           item.type = `${item.is_refund}_${item.refund_type}`
         })
+        if (data.pay_time) {
+          let date = new Date(data.pay_time.replace(/-/g,'/'));
+          date.setDate(date.getDate() + 7);
+          date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+          this.setData({
+            pickTime: `${data.pay_time.slice(0, 10).replace(/-/g, ".")} - ${date.replace(/-/g, ".")}`
+          })
+        }
         this.setData({
           dealis: data
         })
@@ -188,7 +199,6 @@ Page({
       this.setData({
         orderType: data
       });
-      console.log(111)
       if (e.currentTarget.dataset.jifen && e.currentTarget.dataset.jifen != '0.00') {
         this.setType()
       }
