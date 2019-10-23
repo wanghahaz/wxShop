@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="box_big">
+    <image src="../../image/recruit.png"></image>
+  </view>
+</view>

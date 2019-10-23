@@ -18,6 +18,7 @@ Page({
     isTop: false, //下拉刷新
     scrollTop: 0,
     bannerList: [],
+    length: 0,
     dots_index: 0,
     navList: [],
     page: 1,
@@ -169,7 +170,8 @@ Page({
   getBanner() {
     http.getReq('/index/slide', {}, true).then(res => {
       this.setData({
-        bannerList: res.data
+        bannerList: res.data,
+        lenght: res.data.lenght
       })
     })
   },

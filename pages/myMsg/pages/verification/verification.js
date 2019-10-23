@@ -11,7 +11,8 @@ Page({
   data: {
     id: '',
     params: '',
-    dealis: {}
+    dealis: {},
+    type: 1
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -28,6 +29,7 @@ Page({
   getDealis() {
     // order_id: 183,
     // params: 'e85f9dd6db520055'
+    let that = this;
     http.getReq('/store_tools/scan/info', {
       order_id: this.data.id,
       params: this.data.params
@@ -48,11 +50,24 @@ Page({
           content: res.msg || '请与买家核实订单信息',
           confirmText: '确定',
           success(res) {
-            wx.navigateBack()
+            that.settime()
           }
         })
       }
     })
+  },
+  settime() {
+    if (this.data.type == 1) {
+      setTimeout(() => {
+        wx.switchTab({
+          url: '/pages/tabar/index/index',
+        })
+      }, 1500)
+    } else {
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 1500)
+    }
   },
   submit() {
     http.postReq(`/store_tools/scan/check_order/${this.data.id}`, {}).then(res => {
@@ -60,9 +75,7 @@ Page({
         until.toast({
           title: '您已核销订单'
         })
-        setTimeout(() => {
-          wx.navigateBack()
-        }, 1500)
+        this.settime()
       } else {
         until.toast({
           title: res.msg || '操作失败'
@@ -77,19 +90,21 @@ Page({
     console.log(options)
     let that = this;
     let id = '',
-      params = '';
+      params = '',
+      type = 1;
     if (options.scene) {
+      type = 1;
       var scene = decodeURIComponent(options.scene)
       id = scene.split("&")[0].split('=')[1];
       params = scene.split('&')[1].split('=')[1];
     } else {
+      type = 2;
       id = options.id;
       params = options.params;
     }
-    console.log(id)
-    console.log(params)
     this.setData({
       id: id,
+      type: type,
       params: params
     })
     this.getDealis()

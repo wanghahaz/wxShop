@@ -6,9 +6,11 @@
   width: 118rpx;
   height: 118rpx;
   border-radius: 50%;
-  margin: 0 30rpx 0 0;
+  margin: 0 20rpx 0 0;
 }
-
+.max_width{
+  width: 78%;
+}
 .titleBox {
   position: relative;
   height: 270rpx;
@@ -18,7 +20,7 @@
 .webscoket {
   position: relative;
   top: 30rpx;
-  left: 14rpx;
+  left: 4rpx;
 }
 
 .titleBox>view {

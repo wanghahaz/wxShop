@@ -1,0 +1,14 @@
+/* pages/home//pages/recruit/recruit.wxss */
+
+.box_big {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.box_big  img {
+  width: 100%;
+  height: 100%;
+}

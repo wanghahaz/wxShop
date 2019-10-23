@@ -6,7 +6,7 @@
   <view class="swiper_box">
     <swiper autoplay="true" interval="2000" duration="200" circular='true' style="height:760rpx">
       <block wx:for="{{goodsData.row.goods_images}}" wx:key="{{index}}">
-        <swiper-item>
+        <swiper-item catchtap="previewImage" data-path="{{item}}">
           <image mode="aspectFit" src="{{item}}" class="slide-image"></image>
         </swiper-item>
       </block>
@@ -93,9 +93,9 @@
   <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" class="goodsDealis shopDealis flex box_zing">
     <image class="flex_nosize" src="{{goodsData.store.store_thumb}}"></image>
     <view style="margin-left:10px" class="flex column flex_sa box_zing">
-      <view class="flex">
-        <text style="width:50%">{{goodsData.store.store_name}}</text>
-        <view class="flex flex_m flex_end fcb2 fs_13">
+      <view class="flex flex_lr">
+        <text class="clamp_1" style="flex:1;max-width:400rpx;">{{goodsData.store.store_name}}</text>
+        <view style="flex:0.3" class="flex flex_m flex_end fcb2 fs_13">
           <text>进店逛逛</text>
           <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
         </view>
@@ -104,7 +104,7 @@
     </view>
   </view>
   <view class="goodsDealis  flex column  box_zing">
-    <text style="padding:10rpx 0 6rpx 0">商品详情</text>
+    <text style="padding:10rpx 0 20rpx 0">商品详情</text>
     <rich-text nodes="{{goods_body}}"></rich-text>
   </view>
   <view class="fs_13 tc recommended">

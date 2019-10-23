@@ -9,7 +9,7 @@
   <view class="often">
     <view class="fs_14 title">常见问题</view>
     <block wx:for="{{oftenList}}" wx:key="{{index}}">
-      <view class="one_list fs_11 flex flex_m flex_lr">
+      <view catchtap="toRouter" data-path="/pages/myMsg/pages/helpDealis/helpDealis" class="help_search" class="one_list fs_11 flex flex_m flex_lr">
         <text class="clamp_1">{{index+1}}、{{item}}</text>
         <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:32rpx"></text>
       </view>
@@ -20,7 +20,7 @@
   </view>
   <block wx:for="{{moreList}}" wx:key="{{index}}">
     <view class="more_box flex">
-      <view catchtap="toRouter" data-path="{{item.path}}" class="box_left flex_line_c_m">
+      <view catchtap="toRouter" data-path="/pages/myMsg/pages/helpList/helpList" class="box_left flex_line_c_m">
         <view class="flex flex_c_m">
           <text class="fs_12">{{item.name}}</text>
           <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:24rpx"></text>
@@ -28,7 +28,7 @@
       </view>
       <view class="box_right flex flex_wrap">
         <block wx:for="{{item.list}}" wx:for-item="value" wx:for-index="ind" wx:key="{{ind}}">
-          <view class="box_zing tc fs_12" wx:if="{{ind<4}}">{{value}}</view>
+          <view catchtap="toRouter" data-path="/pages/myMsg/pages/helpDealis/helpDealis" class="box_zing tc fs_12" wx:if="{{ind<4}}">{{value}}</view>
         </block>
       </view>
     </view>

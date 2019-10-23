@@ -32,6 +32,7 @@
         "pages/logistics/logistics",
         "pages/orderDealis/orderDealis",
         "pages/seckill/seckill",
+        "pages/recruit/recruit",
         "pages/sureGoods/sureGoods"
       ]
     },
@@ -76,6 +77,12 @@
         "iconPath": "/image/classfiy.png",
         "selectedIconPath": "/image/classfiyAc.png",
         "text": "分类"
+      },
+      {
+        "pagePath": "pages/tabar/advertising/advertising",
+        "iconPath": "/image/banner.png",
+        "selectedIconPath": "/image/bannerAc.png",
+        "text": "广告"
       },
       {
         "pagePath": "pages/tabar/shopCard/shopCard",

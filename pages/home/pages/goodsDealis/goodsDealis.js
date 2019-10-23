@@ -34,6 +34,12 @@ Page({
     goods_thumb: '',
     expressFee: ''
   },
+  previewImage(e) {
+    wx.previewImage({
+      current: e.currentTarget.dataset.path, // 当前显示图片的http链接
+      urls: this.data.goodsData.row.goods_images // 需要预览的图片http链接列表
+    })
+  },
   // 组件返回值
   tapDialogButton(e) {
     // console.log('dialog', e.detail)
@@ -160,7 +166,7 @@ Page({
       if (res.code == 200) {
         this.setData({
           goodsData: res.data,
-          goods_body: res.data.row.goods_body.replace(/\<img/g, '<img style="width:100%;height:auto;display:block;margin:10px 0 10px 0" '),
+          goods_body: res.data.row.goods_body.replace(/\<img/g, '<img style="width:100%;height:auto;display:block" '),
           is_collect: res.data.is_collect,
           goods_storage: res.data.row.goods_storage,
           goods_price: res.data.row.goods_price,

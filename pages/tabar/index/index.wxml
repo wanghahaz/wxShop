@@ -18,7 +18,7 @@
         </swiper-item>
       </block>
     </swiper>
-    <view class="indicator_dots" style="width:{{bannerList.length*20}}rpx">
+    <view class="indicator_dots" style="width:{{bannerList.length*24}}rpx">
       <text wx:for="{{bannerList}}" class="{{dots_index==index?'dotsAc':''}}" wx:key="{{index}}"></text>
     </view>
   </view>
