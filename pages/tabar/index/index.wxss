@@ -102,7 +102,7 @@ swiper image {
   width: 86rpx;
   height: 86rpx;
   border-radius: 50%;
-  background: linear-gradient(#f49a96, #e5004f);
+  /* background: linear-gradient(#f49a96, #e5004f); */
 }
 
 .seckillList {

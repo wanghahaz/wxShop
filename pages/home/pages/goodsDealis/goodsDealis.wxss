@@ -2,7 +2,20 @@
   padding-bottom: 120rpx;
 }
 
-.hideContainer {
+.serve_list {
+  background: #fff;
+  padding: 20rpx 3%;
+}
+
+.attributes_list {
+  margin: 10rpx 0 0 0 ;
+  padding: 0 3%;
+  overflow-y: auto;
+}
+
+.attributes_list >view {
+  border-bottom: 1px solid #E4E4E4;
+  padding: 20rpx 10rpx;
 }
 
 .box_Big>view, .box_Big>text, .shop_box {
@@ -147,13 +160,17 @@
   box-sizing: border-box;
   margin: 20rpx 0 16rpx 0;
 }
-
 .sureBtn {
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   line-height: 90rpx;
   color: white;
   background: #f18e1e;
+}
+.fiexd{
+  position:fixed;
+  top: 0;
+  left: 0
 }

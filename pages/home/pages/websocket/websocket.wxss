@@ -79,10 +79,22 @@ input {
 }
 
 .goods {
+  position: relative;
   width: 84%;
   margin: 30rpx auto;
   padding: 26rpx;
   background: #fff;
+}
+
+.goods .send {
+  position: absolute;
+  background: #f18e1e;
+  width: 80rpx;
+  line-height: 50rpx;
+  border-radius: 10rpx;
+  bottom: 18rpx;
+  right: 32rpx;
+  color: #fff;
 }
 
 .goods image {
@@ -94,7 +106,6 @@ input {
   margin-left: 20rpx;
   height: 134rpx;
   /* align-items:  */
-
 }
 
 .goods .gdealis text {

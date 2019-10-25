@@ -1,14 +1,114 @@
-/* pages/home//pages/recruit/recruit.wxss */
-
-.box_big {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+page {
+  background-color: #f1f1f1;
 }
 
-.box_big  img {
-  width: 100%;
-  height: 100%;
+.chat-notice {
+  margin: 24rpx 0;
+}
+
+.inputRoom {
+  width: 100vw;
+  height: 16vw;
+  border-top: 1px solid #cdcdcd;
+  background-color: #f1f1f1;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  z-index: 20;
+}
+
+input {
+  width: 60vw;
+  height: 9.33vw;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin-left: 2vw;
+  padding: 0 3vw;
+  font-size: 28rpx;
+  color: #444;
+}
+
+.leftMsg {
+  color: #444;
+  padding: 2vw 2.5vw;
+  background-color: #fff;
+  margin-left: -1.6vw;
+}
+
+.leftMsg, .rightMsg {
+  word-wrap: break-word;
+  border-radius: 10rpx;
+  z-index: 10;
+  width: 65%;
+  line-height: 7vw;
+}
+
+.rightMsg {
+  color: #444;
+  padding: 2vw 2.5vw;
+  background-color: #96eb6a;
+  margin-right: -1.6vw;
+}
+
+.left {
+  position: absolute;
+  top: 10rpx;
+  left: -10rpx;
+}
+
+.right {
+  position: absolute;
+  top: 10rpx;
+  right: -10rpx;
+  transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+
+.addImg {
+  margin: auto 10rpx auto 30rpx;
+}
+
+.sub {
+  height: 9.33vw;
+  width: 15vw;
+  line-height: 9.33vw;
+  border-radius: 10rpx;
+  border: 1px solid #1afa29;
+  color: #1afa29;
+}
+
+.goods {
+  position: relative;
+  width: 84%;
+  margin: 30rpx auto;
+  padding: 26rpx;
+  background: #fff;
+}
+
+.goods .send {
+  position: absolute;
+  background: #f18e1e;
+  width: 80rpx;
+  line-height: 50rpx;
+  border-radius: 10rpx;
+  bottom: 18rpx;
+  right: 32rpx;
+  color: #fff;
+}
+
+.goods image {
+  width: 134rpx;
+  height: 134rpx;
+}
+
+.goods .gdealis {
+  margin-left: 20rpx;
+  height: 134rpx;
+  /* align-items:  */
+}
+
+.goods .gdealis text {
+  width: 60%;
+  line-height: 1.6;
 }

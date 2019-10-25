@@ -1,6 +1,10 @@
 // 域名
 let req_url = 'https://www.lyjp.shop/api';
-// http://mall.com/api
+let img_url = "https://www.lyjp.shop"
+// let img_url = "http://mall.com"
+// let req_url = 'http://mall.com/api';
+
+// 
 // get请求
 let getReq = function(url, data, show) {
   if (show) {
@@ -22,7 +26,12 @@ let getReq = function(url, data, show) {
         if (res.data.code == '401') {
           wx.showModal({
             content: res.data.msg,
-            showCancel: false
+            showCancel: false,
+            success: function(res) {
+              wx.switchTab({
+                url: '/pages/tabar/index/index',
+              })
+            }
           })
           wx.removeStorageSync('token')
           wx.removeStorageSync('userInfo')
@@ -90,4 +99,5 @@ module.exports = {
   req_url: req_url,
   getReq: getReq,
   postReq: postReq,
+  img_url
 }

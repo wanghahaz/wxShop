@@ -54,6 +54,8 @@
         "pages/tool/tool",
         "pages/verification/verification",
         "pages/help/help",
+        "pages/userList/userList",
+        "pages/userChat/userChat",
         "pages/helpList/helpList",
         "pages/helpDealis/helpDealis"
       ]

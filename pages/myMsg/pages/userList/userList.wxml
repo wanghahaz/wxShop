@@ -1,6 +1,18 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="box_big">
-    <image src="../../image/recruit.png"></image>
-  </view>
+<view class="container box">
+  <block wx:for="{{list}}" wx:key="{{index}}">
+    <view class="user box_zing flex" data-avatar="{{item.user.avatar}}" data-path="/pages/myMsg/pages/userChat/userChat" data-name="{{item.user.username}}" data-id="{{item.user.id}}" catchtap="toRouter">
+      <image class="img flex_nosize" src="{{item.user.avatar}}"></image>
+      <view wx:if="{{item.status==0}}" class="badge"></view>
+      <view class="flex column user_right flex_lr box_zing">
+        <view class="flex flex_lr box_zing">
+          <text style="max-width:240rpx" class="fs_12 clamp_1">{{item.user.username}}</text>
+          <text class="fs_10">{{item.created_at}}</text>
+        </view>
+        <text style="width:400rpx" wx:if="{{item.msg_type==1}}" class="fs_10 clamp_1">{{item.content}}</text>
+        <text style="width:400rpx" wx:else class="fs_10 clamp_1">您有消息待查看..</text>
+      </view>
+    </view>
+  </block>
+  <view class="tc fs_12" style="margin:20rpx 0" wx:if="{{isLoding}}">没有更多信息了~</view>
 </view>

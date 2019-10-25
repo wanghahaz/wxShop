@@ -8,15 +8,15 @@
     <view class="shopTitle width94 flex flex_lr flex_m ">
       <view class="flex max_width" style="position: relative">
         <image src="{{shopObj.store_thumb}}" class="slide-image flex_nosize"></image>
-        <text style="max-width:100%;margin:auto 0"  class="fs_18 clamp_1">{{shopObj.store_name}}</text>
+        <text style="max-width:100%;margin:auto 0" class="clamp_1">{{shopObj.store_name}}</text>
         <text data-bindUser="{{shopObj.bind_user}}" data-path="/pages/home/pages/websocket/websocket" data-id="{{shopId}}" data-thumb="{{shopObj.store_thumb}}" data-name="{{shopObj.store_name}}" catchtap="toRouter" class="./iconfont/iconxiaoxi:before icon webscoket"
           style="font-size:38rpx"></text>
       </view>
       <text class="collect flex_nosize fs_14 tc" catchtap="collectGoods">{{is_collect?'取消收藏':'收藏'}}</text>
     </view>
     <view class="titleSelect flex width90 flex_sa fs_17">
-      <text bindtap="selectTitle" data-index="1" class="{{titleIndex==1?'fcF1':''}} tc">热销</text>
-      <text bindtap="selectTitle" data-index="2" class="{{titleIndex==2?'fcF1':''}} tc">新品</text>
+      <text bindtap="selectTitle" data-index="1" class="fs_15 {{shopObj.store_bgimg?'':'block'}}   {{titleIndex==1?'fcF1':''}} tc">热销</text>
+      <text bindtap="selectTitle" data-index="2" class="fs_15 {{shopObj.store_bgimg?'':'block'}} {{titleIndex==2?'fcF1':''}} tc">新品</text>
     </view>
   </view>
   <!-- 商品列表 -->

@@ -121,10 +121,23 @@ open-data[type="userAvatarUrl"] {
 }
 
 .btList>view, .btList>button {
+  position: relative;
   width: 25%;
   height: 86rpx;
   margin: 0;
   padding: 0;
+}
+
+.btList>button .badge {
+  
+  z-index: 99;
+  position: absolute;
+  top: 0rpx;
+  left: 96rpx;
+  width:12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: red;
 }
 
 .btList .mt {

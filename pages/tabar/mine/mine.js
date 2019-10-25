@@ -3,12 +3,73 @@
 const app = getApp();
 import until from "../../../utils/util.js";
 import http from "../../../common/js/http.js";
-let shop = {
-  name: '商家工具',
-  path: '/pages/myMsg/pages/tool/tool',
-  style: 'width:40rpx;height:40rpx',
-  src: '../../../image/tool.png'
-}
+let btList = [{
+    name: '我的代金券',
+    path: '/pages/myMsg/pages/myChit/myChit',
+    style: 'width:42rpx;height:34rpx',
+    src: '../../../image/money.png'
+  }, {
+    name: '邀请有礼',
+    path: '/pages/myMsg/pages/invitation/invitation',
+    clas: "adress",
+    style: 'width:42rpx;height:40rpx',
+    src: '../../../image/invita.png'
+  },
+  {
+    name: '收货地址',
+    path: '/pages/myMsg/pages/adressList/adressList',
+    clas: "people",
+    style: 'width:34rpx;height:40rpx',
+    src: '../../../image/adressL.png'
+  },
+  {
+    name: '自提订单',
+    path: '/pages/myMsg/pages/pickList/pickList',
+    style: 'width:40rpx;height:38rpx',
+    src: '../../../image/ziti.png'
+  },
+  {
+    name: '商品收藏',
+    path: "/pages/myMsg/pages/myCollect/myCollect?type=0",
+    clas: "collection",
+    style: 'width:46rpx;height:40rpx',
+    src: '../../../image/goodsC.png'
+  },
+  {
+    name: '店铺收藏',
+    path: "/pages/myMsg/pages/myCollect/myCollect?type=1",
+    clas: "collection",
+    style: 'width:44rpx;height:42rpx',
+    src: '../../../image/shopC.png'
+  },
+  {
+    name: '帮助中心',
+    path: '/pages/myMsg/pages/help/help',
+    clas: "people",
+    style: 'width:40rpx;height:42rpx',
+    src: '../../../image/help.png'
+  },
+
+  {
+    name: '联系我们',
+    path: '',
+    clas: "people",
+    style: 'width:42rpx;height:40rpx',
+    src: '../../../image/helpP.png'
+  }
+];
+let shop = [{
+  name: '扫一扫',
+  path: '/pages/myMsg/pages/pickList/pickList',
+  style: 'width:40rpx;height:38rpx',
+  src: '../../../image/pick.png'
+}, {
+  name: '在线客服',
+  path: '/pages/myMsg/pages/userList/userList',
+  clas: "people",
+  style: 'width:40rpx;height:44rpx',
+  src: '../../../image/qr.jpg'
+}]
 Page({
 
   /**
@@ -53,61 +114,7 @@ Page({
       src: '../../../image/shouhou.png',
       style: 'width:54rpx;height:50rpx'
     }],
-    btList: [{
-        name: '我的代金券',
-        path: '/pages/myMsg/pages/myChit/myChit',
-        style: 'width:42rpx;height:34rpx',
-        src: '../../../image/money.png'
-      }, {
-        name: '邀请有礼',
-        path: '/pages/myMsg/pages/invitation/invitation',
-        clas: "adress",
-        style: 'width:42rpx;height:40rpx',
-        src: '../../../image/invita.png'
-      },
-      {
-        name: '收货地址',
-        path: '/pages/myMsg/pages/adressList/adressList',
-        clas: "people",
-        style: 'width:36rpx;height:40rpx',
-        src: '../../../image/adressL.png'
-      },
-      {
-        name: '自提订单',
-        path: '/pages/myMsg/pages/pickList/pickList',
-        style: 'width:40rpx;height:38rpx',
-        src: '../../../image/pick.png'
-      },
-      {
-        name: '商品收藏',
-        path: "/pages/myMsg/pages/myCollect/myCollect?type=0",
-        clas: "collection",
-        style: 'width:46rpx;height:40rpx',
-        src: '../../../image/goodsC.png'
-      },
-      {
-        name: '店铺收藏',
-        path: "/pages/myMsg/pages/myCollect/myCollect?type=1",
-        clas: "collection",
-        style: 'width:44rpx;height:42rpx',
-        src: '../../../image/shopC.png'
-      },
-      {
-        name: '帮助中心',
-        path: '/pages/myMsg/pages/help/help',
-        clas: "people",
-        style: 'width:40rpx;height:42rpx',
-        src: '../../../image/help.png'
-      },
-
-      {
-        name: '我的客服',
-        path: '',
-        clas: "people",
-        style: 'width:42rpx;height:40rpx',
-        src: '../../../image/helpP.png'
-      }
-    ],
+    btList: [],
     shopList: [],
     isPullDownRefresh: true,
     page: 1,
@@ -116,10 +123,8 @@ Page({
   },
   setMerchant() {
     if (this.data.isMerchant) {
-      let list = JSON.parse(JSON.stringify(this.data.btList))
-      list[2] = shop;
       this.setData({
-        btList: list
+        btList: [...btList, ...shop]
       })
     }
   },
@@ -158,9 +163,10 @@ Page({
           })
           that.setData({
             token: re.data.token ? false : true,
-            userInfo: app.globalData.userInfo
+            userInfo: app.globalData.userInfo,
+            isMerchant: re.data.user.is_agent == 1 ? true : false
           })
-
+          that.setMerchant()
         })
       },
       fail: function(res) {
@@ -193,13 +199,35 @@ Page({
     this.getGoods()
   },
   toRouter(e) {
-    if (e.currentTarget.dataset.path != "/pages/home/pages/goodsDealis/goodsDealis") {
+    if (e.currentTarget.dataset.path != "/pages/home/pages/goodsDealis/goodsDealis" || e.currentTarget.dataset.path != '/pages/myMsg/pages/help/help') {
       if (!wx.getStorageSync('token')) {
         this.setData({
           dialogShow: true
         })
         return false;
       }
+    }
+    if (e.currentTarget.dataset.name == "扫一扫") {
+      wx.scanCode({
+        onlyFromCamera: true,
+        success(res) {
+          console.log(res)
+          var path = res.path
+          path = path.split('?');
+          var scene = String(path[1]);
+          let str = scene.split('scene=')[1]
+          scene = str.split("&")
+          var obj = {};
+          for (var i = 0; i < scene.length; i++) {
+            var b = scene[i].split("=");
+            obj[b[0]] = b[1];
+          }
+          wx.navigateTo({
+            url: `/pages/myMsg/pages/verification/verification?id=${obj.id}&params=${obj.params}`,
+          })
+        }
+      })
+      return;
     }
     let data = until.cutShift(e.currentTarget.dataset);
     if (data) {
@@ -226,6 +254,7 @@ Page({
   onShow: function() {
     if (!wx.getStorageSync('token')) {
       this.setData({
+        btList: btList,
         dialogShow: true
       })
     } else {

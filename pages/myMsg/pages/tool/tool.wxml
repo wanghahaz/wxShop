@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="flex big_box">
-    <view wx:if="{{index==0}}" catchtap="qr" data-path="{{item.path}}" class="fs_12 size_box flex_line_c flex_lr" wx:for="{{list}}" wx:key="{{index}}">
+    <view catchtap="qr" data-path="{{item.path}}" class="fs_12 size_box flex_line_c flex_lr" wx:for="{{list}}" wx:key="{{index}}">
       <image src="{{item.src}}" style="{{item.style}}"></image>
       <text>{{item.name}}</text>
     </view>

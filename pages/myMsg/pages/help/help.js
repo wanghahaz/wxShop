@@ -9,20 +9,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    oftenList: ['下单后商家迟迟没有发货怎么办', '下单后商家迟迟没有发货怎么办', '下单后商家迟迟没有发货怎么办', '下单后商家迟迟没有发货怎么办'],
-    moreList: [{
-      name: '订单问题',
-      path: '/pages/myMsg/pages/helpList/helpList',
-      list: ['修改订单', '修改订单', '修改订单', '修改订单', '修改订单']
-    }, {
-      name: '订单问题',
-      path: '/pages/myMsg/pages/helpList/helpList',
-      list: ['修改订单', '修改订单', '修改订单', '修改订单', '修改订单']
-    }, {
-      name: '订单问题',
-      path: '/pages/myMsg/pages/helpList/helpList',
-      list: ['修改订单', '修改订单', '修改订单', '修改订单', '修改订单']
-    }]
+    status: {
+      '双倍收益卡': "card",
+      '订单问题': 'order',
+      '服务政策': 'server',
+      '代金券问题': 'money',
+      '售后问题': 'sale',
+      '物流问题': 'phy'
+    },
+    oftenList: [],
+    moreList: []
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -36,11 +32,27 @@ Page({
       })
     }
   },
+  getDealis() {
+    http.getReq('/helper', {}, true).then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        this.setData({
+          oftenList: res.data.topics,
+          moreList: res.data.cate
+        })
+      } else {
+        wx.showModal({
+          content: res.msg || '网络出错',
+          showCancel: false
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getDealis()
   },
 
   /**

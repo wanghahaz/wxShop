@@ -48,7 +48,7 @@ Page({
           store_cate: res.data.store_cate
         })
       } else {
-        until.taost({
+        until.toast({
           title: res.msg || '获取数据失败，请您重新获取'
         })
       }

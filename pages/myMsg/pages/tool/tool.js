@@ -15,7 +15,7 @@ Page({
       path: '',
       name: '扫一扫',
     }, {
-      path: '/pages/myMsg/pages/verification/verification',
+      path: '/pages/myMsg/pages/userList/userList',
       style: 'width:42rpx;height:40rpx',
       src: '../../../../image/helpP.png',
       name: '客服'

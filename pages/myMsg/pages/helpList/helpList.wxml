@@ -8,10 +8,10 @@
     </view>
   </view>
   <block wx:for="{{issue}}" wx:key="{{index}}">
-    <view class="fs_12 flex flex_lr issue_one flex_m box_zing">
-      <text>{{item}}</text>
+    <view data-id="{{item.id}}" catchtap="toRouter" data-path="/pages/myMsg/pages/helpDealis/helpDealis" class="fs_12 flex flex_lr issue_one flex_m box_zing">
+      <text class="clamp_1" style="width:80%">{{index+1}}、{{item.title}}</text>
       <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:32rpx"></text>
     </view>
   </block>
-  <view></view>
+  <view wx:if="{{issue.length>0&&isLoding==false}}" class="noMore">没有更多数据了</view>
 </view>

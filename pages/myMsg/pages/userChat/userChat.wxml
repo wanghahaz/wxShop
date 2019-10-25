@@ -1,6 +1,41 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="box_big">
-    <image src="../../image/recruit.png"></image>
+<view>
+  <scroll-view bindscrolltoupper="bindscrolltoupper" scroll-y id="scrollMsg" scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
+    <block wx:key wx:for='{{msgList}}' wx:for-index="index">
+      <view class="tc fs_13" style="margin:40rpx 0 10rpx 0">{{item.time}}</view>
+      <!-- 单个消息1 客服发出（左） -->
+      <view wx:if='{{item.is_my=="0"}}' id='msg-{{index}}' style='display: flex; padding: 2vw 11vw 2vw 2vw;' class="box_zing">
+        <view style='width: 11vw; height: 11vw;'>
+          <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='{{thumb}}'></image>
+        </view>
+        <view style='width: 4vw; height: 11vw; margin-left: 0.5vw; display: flex; align-items: center; z-index: 9; position: relative'>
+          <text wx:if="{{item.msg_type=='1'}}" class="./iconfont/iconzuojiantou:before icon left" style="font-size:40rpx; color:#fff"></text>
+        </view>
+        <view wx:if="{{item.msg_type=='1'}}" class='leftMsg'>{{item.msg}}</view>
+        <image catchtap="lookImg" data-src="{{item.msg}}" mode="widthFix" wx:elif="{{item.msg_type=='3'}}" src="{{item.msg}}" style="width:220rpx"></image>
+      </view>
+
+      <!-- 单个消息2 用户发出（右） -->
+      <view wx:else id='msg-{{index}}' style='display: flex; justify-content: flex-end; padding: 2vw 2vw 2vw 11vw;' class="box_zing">
+        <view wx:if="{{item.msg_type=='1'}}" class='rightMsg'>{{item.msg}}</view>
+        <image catchtap="lookImg" data-src="{{item.msg}}" mode="widthFix" wx:elif="{{item.msg_type=='3'}}" src="{{item.msg}}" style="width:220rpx"></image>
+        <view style='width: 4vw; height: 11vw; margin-right: 0.5vw; display: flex; align-items: center; z-index: 9;position: relative'>
+          <text wx:if="{{item.msg_type=='1'}}" class="./iconfont/iconzuojiantou:before icon right" style="font-size:40rpx; color:#96eb6a"></text>
+        </view>
+        <view style='width: 11vw; height: 11vw;'>
+          <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='{{cusHeadIcon}}'></image>
+        </view>
+      </view>
+
+    </block>
+    <!-- </view> -->
+
+    <!-- 占位 -->
+    <view  style='width: 100%; height: 18vw;'></view>
+  </scroll-view>
+
+  <view class='inputRoom' style='bottom: {{inputBottom}}'>
+    <text catchtap="addImg" class="./iconfont/.icontupian:before icon addImg" style="font-size:40rpx;"></text>
+    <input bindconfirm='sendClick' bindinput="bindinput" adjust-position='{{false}}' value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur'></input>
+    <button class="sub box_zing fs_13" catchtap="sendClick">发送</button>
   </view>
 </view>

@@ -32,11 +32,12 @@
 
   <view style="margin:-30rpx auto 40rpx auto" class="width90 flex flex_wrap btList">
     <block wx:for="{{btList}}" wx:key="{{index}}">
-      <button hover-class="none" class="{{index>3?'mt':''}} flex_line_c flex_lr" open-type="contact" wx:if="{{item.name=='我的客服'}}">
+      <button hover-class="none" class="{{index>3?'mt':''}} flex_line_c flex_lr" open-type="contact" wx:if="{{item.name=='联系我们'}}">
         <image style="{{item.style}};margin:0 auto" src="{{item.src}}"></image>
         <text style="width:140rpx" class="fs_11 tc">{{item.name}}</text>
       </button>
-      <button wx:else hover-class="none" data-path="{{item.path}}" bindtap="toRouter" class="flex_line_c flex_lr {{index>3?'mt':''}}">
+      <button wx:else data-name="{{item.name}}" hover-class="none" data-path="{{item.path}}" bindtap="toRouter" class="flex_line_c flex_lr {{index>3?'mt':''}}">
+        <view wx:if="{{item.name=='在线客服'}}" class="badge"></view>
         <image style="{{item.style}}" src="{{item.src}}"></image>
         <text class="fs_11 tc">{{item.name}}</text>
       </button>

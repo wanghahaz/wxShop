@@ -34,27 +34,38 @@
       <text wx:if="{{is_collect==1}}" catchtap="collectGoods" class="./iconfont/iconxin:before icon" style="font-size:52rpx; color:#F44444"></text>
       <text wx:else catchtap="collectGoods" class="./iconfont/iconxin1:before icon" style="font-size:52rpx; color:#F44444"></text>
     </view>
-    <!-- <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" style="margin-top:14rpx;padding:0rpx 3% 20rpx 3%;" class="flex flex_lr shop_box fs_14">
-      <text style="width:50%">{{goodsData.store.store_name}}</text>
-      <view class="flex flex_m flex_end ">
-        <text>进店逛逛</text>
-        <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
-      </view>
-    </view> -->
     <view style="height:18rpx;background:#f8f6f7"></view>
-    <view data-type="2" style="margin:30rpx 0 20rpx 0 ;" class="flex flex_lr fs_12">
+    <view style="margin:20rpx 0 ;" class="flex flex_lr fs_12">
       <text class="fcb2">运费  <text class="text_right">{{expressFee}}</text></text>
       <text class="fcb2" style="padding:0 20rpx 0 0 ">已售：{{goodsData.row.goods_virtual_sales_num}}</text>
     </view>
-    <view wx:if="{{goods_service}}" data-type="3" bindtap="showModel" style="margin:10rpx 0;" class="flex flex_lr fs_12">
-      <text class="fcb2">服务 <text class="text_right">{{goodsData.row.goods_service[0]}}</text></text>
+    <view style="height:18rpx;background:#f8f6f7"></view>
+  </view>
+  <view class="serve_list box_zing">
+    <view wx:if="{{goodsData.row.product_attributes}}" data-type="2" bindtap="showModel" class="flex flex_lr fs_12">
+      <view class="flex flex_m" style="width:50%">
+        <text class="fcb2">参数</text>
+        <text style="width:50%" class="clamp_1 text_right">{{goodsData.row.product_attributes[0].key}}  {{goodsData.row.product_attributes[0].keywords}}</text>
+      </view>
+
       <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
     </view>
-    <view data-type="1" bindtap="showModel" style="margin:10rpx 0 18rpx 0;padding:0rpx 3% 16rpx 3%" class="flex flex_lr fs_12">
-      <text class="fcb2">选择 <text class="text_right">选择商品规格</text> </text>
+    <view wx:if="{{goods_service}}" data-type="3" style="margin:6rpx 0" bindtap="showModel" class="flex flex_lr fs_12">
+      <view class="flex flex_m" style="width:50%">
+        <text class="fcb2">服务</text>
+        <text class="text_right">{{goodsData.row.goods_service[0]}}</text>
+      </view>
+      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
+    </view>
+    <view data-type="1" bindtap="showModel" class="flex flex_lr fs_12">
+      <view class="flex flex_m" style="width:50%">
+        <text class="fcb2">选择</text>
+        <text class="text_right">选择商品规格</text>
+      </view>
       <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
     </view>
   </view>
+  <view style="height:18rpx;background:#f8f6f7"></view>
   <view class="goodsDealis flex column box_zing">
     <view catchtap="toRouter" data-id="{{dataObj.id}}" data-path="/pages/home/pages/evaluateList/evaluateList" class="fs_14 flex flex_lr">
       <text style="width:50%">评价（{{commentList.length>99?'99+':commentList.length}}）</text>
@@ -90,9 +101,9 @@
       </view>
     </block>
   </view>
-  <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" class="goodsDealis shopDealis flex box_zing">
+  <view bindtap="toRouter" data-id="{{goodsData.store.id}}" data-path="/pages/home/pages/shopDetails/shopDetails" class="goodsDealis shopDealis flex flex_m box_zing">
     <image class="flex_nosize" src="{{goodsData.store.store_thumb}}"></image>
-    <view style="margin-left:10px" class="flex column flex_sa box_zing">
+    <view style="margin-left:10px" class="flex column flex_lr box_zing">
       <view class="flex flex_lr">
         <text class="clamp_1" style="flex:1;max-width:400rpx;">{{goodsData.store.store_name}}</text>
         <view style="flex:0.3" class="flex flex_m flex_end fcb2 fs_13">
@@ -100,7 +111,14 @@
           <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:38rpx"></text>
         </view>
       </view>
-      <view class="fs_11 fcb2">{{goodsData.store.store_address}}</view>
+      <view style="margin-top:10rpx;" class="fs_11 fcb2 flex ">
+        <image class="flex_nosize" style="width:24rpx;height:30rpx;margin-right:12rpx" src="../../image/i_gps.png"></image>
+        <text>{{goodsData.store.store_address}}</text>
+      </view>
+      <view style="margin-top:10rpx;" class="fs_11 fcb2 flex ">
+        <image class="flex_nosize" style="width:22rpx;height:28rpx;margin-right:14rpx" src="../../image/i_tel.png"></image>
+        <text>{{goodsData.store.phone}}</text>
+      </view>
     </view>
   </view>
   <view class="goodsDealis  flex column  box_zing">
@@ -180,14 +198,23 @@
       <text catchtap="addBuy" class="tc">立即购买</text>
     </view>
   </view>
-  <view class="{{!showMask&&showType==2?'maskContentAc':''}} maskContent maskSize box_zing">
-    <text class="serve fs_14">免运费</text>
+  <view  class="{{!showMask&&showType==2?'maskContentAc':''}} maskContent maskSize box_zing">
+    <view style="max-height:790rpx;" class="attributes_list box_zing">
+      <block wx:for="{{goodsData.row.product_attributes}}" wx:key="{{index}}">
+        <view class="box_zing fs_14 flex">
+          <text class="fcb2 flex_nosize" style="width:120rpx;margin-right:5px">{{item.key}}:</text>
+          <text>{{item.keywords}}</text>
+        </view>
+      </block>
+    </view>
     <view class="sureBtn tc fs_15" catchtap="showModel">确认</view>
   </view>
   <view class="{{!showMask&&showType==3?'maskContentAc':''}} maskContent maskSize box_zing">
+    <view style="height:10rpx"></view>
     <text class="serve fs_14">{{goods_service}}</text>
     <view class="sureBtn tc fs_15" catchtap="showModel">确认</view>
   </view>
+
   <!-- 吸顶 -->
   <view catchtap="suckTop" wx:if="{{scrollTop>clientHeight}}" class="suckTop">
     <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:46rpx;color:#fff"></text>

@@ -1,4 +1,4 @@
-// var url = 'ws://192.168.0.108:9501'; //服务器地址
+// var url = 'ws://mall.com/ws'; //服务器地址
 let url = 'wss://www.lyjp.shop/wss';
 let socketOpen = false;
 
@@ -29,6 +29,7 @@ function connect(func) {
   });
 
   wx.onSocketError(function(res) {
+    console.log(res)
     wx.hideLoading();
     socketOpen = false;
     wx.showToast({
@@ -41,7 +42,7 @@ function connect(func) {
 
 //发送消息
 function send(msg) {
-  console.log(msg)
+  // console.log(msg)
   if (socketOpen) {
     wx.sendSocketMessage({
       data: JSON.stringify(msg)

@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isLoding: false,
+    list: []
   },
   toRouter(e) {
     let data = until.cutShift(e.currentTarget.dataset);
@@ -21,7 +22,19 @@ Page({
       })
     }
   },
-
+  getList() {
+    http.getReq('/im_msg', {}, true).then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        this.setData({
+          list: res.data
+        })
+      }
+      this.setData({
+        isLoding: true
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -40,7 +53,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getList()
   },
 
   /**

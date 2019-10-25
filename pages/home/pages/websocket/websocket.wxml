@@ -1,40 +1,48 @@
 <view>
-  <scroll-view scroll-top="{{scrollTop}}" scroll-y id="scrollMsg" scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
+  <scroll-view bindscrolltoupper="bindscrolltoupper"  scroll-y id="scrollMsg" scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
     <view class="chat-notice fs_14 tc">系统消息: 欢迎来到{{shopName}}</view>
-    <view catchtap="toRouter" data-id="{{goods.goods_id}}" data-skuId="{{goods.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" class="goods box_zing flex" wx:if="{{goods.goods_id}}">
+    <view data-type="2" bindtap="toRouter" data-id="{{goods.goods_id}}" data-skuId="{{goods.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" class="goods box_zing flex" wx:if="{{goods.goods_id}}">
       <image class="flex_nosize" src="{{goods.goods_thumb}}"></image>
       <view class="fs_13 gdealis flex_tb">
         <text class="clamp_2">{{goods.goods_name}}</text>
         <text class="fcF1">￥{{goods.goods_price}}</text>
       </view>
+      <view catchtap="sendGoods" class="fs_11 tc send">发送</view>
     </view>
     <block wx:key wx:for='{{msgList}}' wx:for-index="index">
 
-      <view class="tc fs_13" style="margin:40rpx 0 10rpx 0">{{item.created_at}}</view>
+      <view class="tc fs_13" style="margin:40rpx 0 10rpx 0">{{item.time}}</view>
       <!-- 单个消息1 客服发出（左） -->
-      <view wx:if='{{item.ziji=="0"}}' id='msg-{{index}}' style='display: flex; padding: 2vw 11vw 2vw 2vw;' class="box_zing">
+      <view wx:if='{{item.is_my=="0"&&item.msg_type!="4"}}' id='msg-{{index}}' style='display: flex; padding: 2vw 11vw 2vw 2vw;' class="box_zing">
         <view style='width: 11vw; height: 11vw;'>
           <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='{{thumb}}'></image>
         </view>
         <view style='width: 4vw; height: 11vw; margin-left: 0.5vw; display: flex; align-items: center; z-index: 9; position: relative'>
-          <text class="./iconfont/iconzuojiantou:before icon left" style="font-size:40rpx; color:#fff"></text>
+          <text wx:if="{{item.msg_type=='1'}}" class="./iconfont/iconzuojiantou:before icon left" style="font-size:40rpx; color:#fff"></text>
         </view>
-        <view wx:if="{{item.type=='1'}}" class='leftMsg'>{{item.message}}</view>
-        <image catchtap="lookImg" data-src="{{item.message}}" mode="widthFix" wx:elif="{{item.type=='3'}}" src="{{item.message}}" style="width:220rpx"></image>
+        <view wx:if="{{item.msg_type=='1'}}" class='leftMsg'>{{item.msg}}</view>
+        <image catchtap="lookImg" data-src="{{item.msg}}" mode="widthFix" wx:elif="{{item.msg_type=='3'}}" src="{{item.msg}}" style="width:220rpx"></image>
       </view>
 
       <!-- 单个消息2 用户发出（右） -->
-      <view wx:else id='msg-{{index}}' style='display: flex; justify-content: flex-end; padding: 2vw 2vw 2vw 11vw;' class="box_zing">
-        <view wx:if="{{item.type=='1'}}" class='rightMsg'>{{item.message}}</view>
-        <image catchtap="lookImg" data-src="{{item.message}}" mode="widthFix" wx:elif="{{item.type=='3'}}" src="{{item.message}}" style="width:220rpx"></image>
+      <view wx:elif='{{item.is_my=="1"&&item.msg_type!="4"}}' id='msg-{{index}}' style='display: flex; justify-content: flex-end; padding: 2vw 2vw 2vw 11vw;' class="box_zing">
+        <view wx:if="{{item.msg_type=='1'}}" class='rightMsg'>{{item.msg}}</view>
+        <image catchtap="lookImg" data-src="{{item.msg}}" mode="widthFix" wx:elif="{{item.msg_type=='3'}}" src="{{item.msg}}" style="width:220rpx"></image>
         <view style='width: 4vw; height: 11vw; margin-right: 0.5vw; display: flex; align-items: center; z-index: 9;position: relative'>
-          <text wx:if="{{item.type=='1'}}" class="./iconfont/iconzuojiantou:before icon right" style="font-size:40rpx; color:#96eb6a"></text>
+          <text wx:if="{{item.msg_type=='1'}}" class="./iconfont/iconzuojiantou:before icon right" style="font-size:40rpx; color:#96eb6a"></text>
         </view>
         <view style='width: 11vw; height: 11vw;'>
           <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='{{cusHeadIcon}}'></image>
         </view>
       </view>
 
+      <view data-type="1" wx:else bindtap="toRouter" data-id="{{item.msg.id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" class="goods box_zing flex">
+        <image class="flex_nosize" src="{{item.msg.goods_thumb}}"></image>
+        <view class="fs_13 gdealis flex_tb">
+          <text class="clamp_2">{{item.msg.goods_name}}</text>
+          <text class="fcF1">￥{{item.msg.goods_price}}</text>
+        </view>
+      </view>
     </block>
     <!-- </view> -->
 
