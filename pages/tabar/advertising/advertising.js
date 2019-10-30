@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    buttons: [ {
+    buttons: [{
       text: '确定'
     }],
     dialogShow: false,
@@ -63,14 +63,16 @@ Page({
         logsList: res.data
       })
 
-      var length = this.data.logsList.length * 60; //文字长度
-      let windowWidth = this.data.height - 878
-      this.setData({
-        length: length,
-        windowWidth: windowWidth,
-        marquee2_margin: length < windowWidth ? windowWidth - length : this.data.marquee2_margin //当文字长度小于屏幕长度时，需要增加补白
-      });
-      this.run2()
+      if (this.data.logsList.length > 0) {
+        var length = this.data.logsList.length * 60; //文字长度
+        let windowWidth = this.data.height - 878
+        this.setData({
+          length: length,
+          windowWidth: windowWidth,
+          marquee2_margin: length < windowWidth ? windowWidth - length : this.data.marquee2_margin //当文字长度小于屏幕长度时，需要增加补白
+        });
+        this.run2()
+      }
     })
   },
   getIndex() {

@@ -22,7 +22,7 @@
         <block wx:if="{{item.sub.length>0}}">
           <view class="flex flex_wrap goodsList">
             <view style="width:33%" class="flex column flex_c_m" wx:for="{{item.sub}}" wx:key="{{ind}}" wx:for-item="value" wx:for-index="ind" data-id="{{value.id}}" data-name="{{value.name}}" data-path="/pages/home/pages/classfyGoods/classfyGoods" bindtap="toRouter">
-              <image style="width:75rpx;height:86rpx" class="flex_nosize" src="{{value.icon}}"></image>
+              <image mode="aspectFit" style="height:86rpx" class="flex_nosize" src="{{value.icon}}"></image>
               <text style="margin:10rpx 4rpx 24rpx 0;" class="fs_12">{{value.name}}</text>
             </view>
           </view>

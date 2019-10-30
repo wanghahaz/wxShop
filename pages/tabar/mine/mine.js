@@ -252,6 +252,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.setData({
+      token: wx.getStorageSync('token') ? false : true,
+      userInfo: app.globalData.userInfo
+    })
     if (!wx.getStorageSync('token')) {
       this.setData({
         btList: btList,
@@ -263,12 +267,12 @@ Page({
           isMerchant: true,
         })
         this.setMerchant()
+      } else {
+        this.setData({
+          btList: btList
+        })
       }
     }
-    this.setData({
-      token: wx.getStorageSync('token') ? false : true,
-      userInfo: app.globalData.userInfo
-    })
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
