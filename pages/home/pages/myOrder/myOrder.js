@@ -61,13 +61,10 @@ Page({
           paySign: res.data.paySign,
           success: (re) => {
             _this.setData({
-              isLoading: true,
-              page: 1,
-              goodsList: []
+              goodsList: [],
             })
-            _this.getMyOrder()
           },
-          fail: function(err) {
+          fail: function (err) {
             console.log(err, 2)
           }
         })
@@ -147,7 +144,7 @@ Page({
         this.setData({
           goodsList: [...this.data.goodsList, ...list]
         })
-
+        console.log(this.data.goodsList)
         if (res.data.last_page == this.data.page) {
           this.setData({
             isLoading: false
@@ -202,7 +199,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     if (options.index > 2) {
       this.setData({
         scrollLeft: 100
@@ -213,7 +210,7 @@ Page({
     })
     let that = this;
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         let clientHeight = res.windowHeight;
         let clientWidth = res.windowWidth;
         let ratio = 750 / clientWidth;
@@ -229,12 +226,15 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {},
+  onReady: function () { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
+    console.log(1)
+    console.log(this.data.hasOnShow)
+    console.log(this.data.goodsList)
     if (this.data.hasOnShow) {
       return
     }
@@ -250,7 +250,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
     this.setData({
       isLoading: true,
       page: 1,
@@ -261,21 +261,21 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function(e) {
+  onReachBottom: function (e) {
     if (this.data.isLoading) {
       this.getMyOrder()
     }
