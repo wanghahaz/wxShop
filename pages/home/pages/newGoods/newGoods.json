@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "y_goods": "../../element/yGoods/yGoods"
+  },
+  "navigationBarTitleText": ""
+}

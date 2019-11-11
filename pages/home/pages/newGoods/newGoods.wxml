@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="container box_tainer">
+  <view class="shop_list box_zing">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
+      <y_goods data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" obj="{{item}}"></y_goods>
+    </block>
+  </view>
+</view>

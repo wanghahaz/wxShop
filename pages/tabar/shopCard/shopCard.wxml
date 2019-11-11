@@ -50,12 +50,12 @@
       <image src="../../../image/card.png"></image>
       <text class="fs_19">购物车空空如也~</text>
     </view>
-    <view class="fs_13 tc recommended">
+    <view class="fs_15 tc recommended">
       <view class="flex flex_m">
         <image class="left_1" src="../../../image/left_1.png"></image>
         <image class="left_2" src="../../../image/left_2.png"></image>
       </view>
-      <text style="color:#B2B2B2">猜你喜欢</text>
+     <text style="color:#F27D1E">猜你喜欢</text>
       <view class="flex flex_m">
         <image class="left_2" src="../../../image/left_2.png"></image>
         <image class="left_1" src="../../../image/left_1.png"></image>

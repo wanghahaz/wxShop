@@ -1,0 +1,53 @@
+.y_goods {
+  margin-top: 36rpx;
+  width: 100%;
+  display: flex;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.y_goods .goods_img {
+  flex-shrink: 0;
+  width: 238rpx;
+  height: 240rpx;
+  border-radius: 10rpx;
+  margin-right: 30rpx;
+}
+
+.y_goods .goods_dealis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.y_goods .goods_dealis>view {
+  display: flex;
+  flex-direction: column;
+}
+
+.y_goods .good_name {
+  width: 50%;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.y_goods .good_remark {
+  margin: 6rpx 0 0 0;
+  width: 60%;
+  color: #999;
+  display: block;
+  font-size: 24rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clamp_1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

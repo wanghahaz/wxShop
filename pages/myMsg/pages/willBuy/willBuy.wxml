@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="search_box width90 flex">
+    <view class="search">
+      <text class="./iconfont/iconsousuo:before icon" style="font-size:32rpx"></text>
+      <text class="border"></text>
+      <input type="text" bindinput="bindinput" class="fs_15" placeholder="搜索您想要的商品清单"></input>
+    </view>
+  </view>
+  <view class="select width90 flex fs_13">
+    <block wx:for="{{typeList}}" wx:key="{{index}}">
+      <text catchtap="secectType" data-index="{{index}}" class="tc {{typeInd==index?'actype':''}}">{{item}}</text>
+    </block>
+  </view>
+  <!-- 推荐列表-->
+  <view class="fiy width90 flex box_zing">
+    <block>
+    </block>
+  </view>
+  <view class=" flex_wrap width90" style="width:92%">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
+      <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+    </block>
+  </view>
+</view>

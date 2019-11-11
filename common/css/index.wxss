@@ -5,20 +5,23 @@
   top: 0;
   left: 0;
 }
+
 /* 帮助搜索 */
-.help_search{
+
+.help_search {
   width: 92%;
   margin: 20rpx 4%;
   background: #fff;
-  height:74rpx;
-  border-radius:36rpx;
-  position: relative; 
+  height: 74rpx;
+  border-radius: 36rpx;
+  position: relative;
 }
-.help_search .search_icon{
+
+.help_search .search_icon {
   position: absolute;
   height: 100%;
   left: 0;
-  top: 0
+  top: 0;
 }
 
 /* 代金券图标 */
@@ -474,11 +477,12 @@ image {
 /* 两行文字溢出... */
 
 .clamp_2 {
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 }
 
 /* 怪异盒子 */

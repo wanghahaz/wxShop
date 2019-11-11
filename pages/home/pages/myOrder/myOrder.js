@@ -61,11 +61,8 @@ Page({
           paySign: res.data.paySign,
           success: (re) => {
             _this.setData({
-              isLoading: true,
-              page: 1,
-              goodsList: []
+              goodsList: [],
             })
-            _this.getMyOrder()
           },
           fail: function(err) {
             console.log(err, 2)
@@ -147,7 +144,7 @@ Page({
         this.setData({
           goodsList: [...this.data.goodsList, ...list]
         })
-
+        console.log(this.data.goodsList)
         if (res.data.last_page == this.data.page) {
           this.setData({
             isLoading: false
@@ -235,6 +232,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    console.log(1)
+    console.log(this.data.hasOnShow)
+    console.log(this.data.goodsList)
     if (this.data.hasOnShow) {
       return
     }

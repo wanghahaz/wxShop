@@ -42,12 +42,6 @@ Page({
       dots_index: e.detail.current
     })
   },
-  tolink(e) {
-    wx.navigateTo({
-      url: `${e.currentTarget.dataset.link}`,
-    })
-    console.log(e)
-  },
   onPageScroll(e) {
     this.setData({
       scrollTop: e.scrollTop
@@ -160,11 +154,30 @@ Page({
   },
   // 首页导航
   getNav() {
-    http.getReq('/index/nav', {}, true).then(res => {
-      this.setData({
-        navList: res.data
-      })
+    this.setData({
+      navList: [{
+        name: '新品上线',
+        link_url: '/pages/home/pages/newGoods/newGoods',
+        icon: 'http://www.lyjp.shop/uploads/2019-10-31/OtpQyzUixulG4jmftX3lrjjrCaFAhlIO0SafTK4r.png'
+      }, {
+        name: '必买清单',
+        link_url: '/pages/myMsg/pages/willBuy/willBuy',
+        icon: 'http://www.lyjp.shop/uploads/2019-10-31/4bUHucQDIyOCB2TWcAoumxZClIYxIhlF6A4YUpSi.png'
+      }, {
+        name: '低价折扣',
+        link_url: '',
+        icon: 'http://www.lyjp.shop/uploads/2019-10-31/9FZpSmABuWTqBHjS9KhCiUUlmGJJysoEt9IBGRaS.png'
+      }, {
+        name: '排行榜',
+          link_url: '/pages/myMsg/pages/ranking/ranking',
+        icon: 'http://www.lyjp.shop/uploads/2019-10-31/M4Z2wbASoPltn9fmqpj3TuKmfEctxBRqJC3GERIL.png'
+      }]
     })
+    // http.getReq('/index/nav', {}, true).then(res => {
+    //   this.setData({
+    //     navList: res.data
+    //   })
+    // })
   },
   // 首页轮播图
   getBanner() {

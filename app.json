@@ -33,7 +33,8 @@
         "pages/orderDealis/orderDealis",
         "pages/seckill/seckill",
         "pages/recruit/recruit",
-        "pages/sureGoods/sureGoods"
+        "pages/sureGoods/sureGoods",
+        "pages/newGoods/newGoods"
       ]
     },
     {
@@ -57,7 +58,9 @@
         "pages/userList/userList",
         "pages/userChat/userChat",
         "pages/helpList/helpList",
-        "pages/helpDealis/helpDealis"
+        "pages/helpDealis/helpDealis",
+        "pages/willBuy/willBuy",
+        "pages/ranking/ranking"
       ]
     }
   ],

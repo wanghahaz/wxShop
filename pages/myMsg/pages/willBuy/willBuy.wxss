@@ -1,0 +1,19 @@
+.search_box {
+  margin: 20rpx auto 10rpx auto;
+}
+
+.select {
+  background: #fff;
+  box-shadow: 0px 1px 43px 0px rgba(230, 230, 230, 0.75);
+  margin: 30rpx auto 10rpx auto;
+}
+
+.select text {
+  color: #DADADA;
+  flex: 1;
+  line-height: 70rpx;
+}
+.select .actype{
+  color: #fff;
+  background: #F27D1E
+}

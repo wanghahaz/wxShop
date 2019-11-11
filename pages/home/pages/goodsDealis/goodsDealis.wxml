@@ -125,12 +125,12 @@
     <text style="padding:10rpx 0 20rpx 0">商品详情</text>
     <rich-text nodes="{{goods_body}}"></rich-text>
   </view>
-  <view class="fs_13 tc recommended">
+  <view class="fs_15 tc recommended">
     <view class="flex flex_m">
       <image class="left_1" src="../../../../image/left_1.png"></image>
       <image class="left_2" src="../../../../image/left_2.png"></image>
     </view>
-    <text style="color:#B2B2B2">猜你喜欢</text>
+    <text style="color:#F27D1E">猜你喜欢</text>
     <view class="flex flex_m">
       <image class="left_2" src="../../../../image/left_2.png"></image>
       <image class="left_1" src="../../../../image/left_1.png"></image>
@@ -198,7 +198,7 @@
       <text catchtap="addBuy" class="tc">立即购买</text>
     </view>
   </view>
-  <view  class="{{!showMask&&showType==2?'maskContentAc':''}} maskContent maskSize box_zing">
+  <view class="{{!showMask&&showType==2?'maskContentAc':''}} maskContent maskSize box_zing">
     <view style="max-height:790rpx;" class="attributes_list box_zing">
       <block wx:for="{{goodsData.row.product_attributes}}" wx:key="{{index}}">
         <view class="box_zing fs_14 flex">

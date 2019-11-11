@@ -1,4 +1,94 @@
-<!--index.wxml-->
+<view class="container container_box">
+  <view bindtap="toRouter" data-path="/pages/home/pages/search/search" class="search width94">
+    <text class="./iconfont/iconsousuo:before icon" style="font-size:32rpx"></text>
+    <text class="border"></text>
+    <text class="seaText fs_15">请输入关键词</text>
+  </view>
+  <swiper autoplay next-margin="20rpx" previous-margin="20rpx" interval="2000" duration="200" bindchange="changedots" circular class="swiper_ab">
+    <block wx:for="{{bannerList}}" wx:key="{{index}}">
+      <swiper-item class="swiper-item" data-path="{{item.link_url}}" catchtap="toRouter">
+        <image mode="aspectFill" src="{{item.thumb}}" class="slide-image {{dots_index==index?'img_swiper':''}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="indicator_dots" style="width:{{bannerList.length*24}}rpx">
+    <text wx:for="{{bannerList}}" class="{{dots_index==index?'dotsAc':''}}" wx:key="{{index}}"></text>
+  </view>
+  <!-- 分类 -->
+  <view class="flex flex_sa seckill width94 flex_wrap">
+    <block wx:for="{{navList}}" wx:key="{{index}}">
+      <view data-path="{{item.link_url}}" data-name="{{item.name}}" catchtap="toRouter" class="seckillList flex flex_nosize">
+        <image class="image" src="{{item.icon}}"></image>
+        <text class="fs_13 clamp_1 tc" style="color:rgba(0,0,0,0.4);margin:20rpx 0 0 0;width:95%">{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="look_video">
+    <image src="../../../image/look_video.png"></image>
+  </view>
+  <!-- 分类列表 -->
+  <view class="width94 fiy_list">
+    <view class="box_list flex">
+      <block wx:for="{{3}}" wx:key="{{index}}">
+        <view style="width:33.33%" class="flex column flex_m">
+          <image style="height:150rpx;" mode="aspectFit" src="http://www.lyjp.shop/uploads/2019-10-28/FCJ8yXRo3oDOL3Nwr2RXpkNFh6KLDe6ERaRae9Oa.png"></image>
+          <text class="fs_15 text_dot clamp_1" style="color:#010101">曼秀雷曼秀雷敦洁面曼秀雷敦洁面曼秀雷敦洁面敦洁面</text>
+          <view class="flex fs_11 flex_c">
+            <text class="fcb2">RMB </text>
+            <text class="fcF1" style="margin-left:10rpx">89.00</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="fiy_smt fs_12 tc">
+      每日优惠 立即抢购
+    </view>
+  </view>
+  <!-- 平台推荐 -->
+  <view class="fs_15 terrace box_zing flex flex_lr">
+    <view>
+      <text class="fcF1">平台推荐</text>
+    </view>
+    <view>
+      <text class="fcF1">每日好货</text>
+    </view>
+  </view>
+  <!-- 抢购 -->
+  <view class="rushGood flex box_zing">
+    <!-- <view style="width:100%" class="rush_list flex"> -->
+    <block wx:for="{{6}}" wx:key="{{index}}">
+      <view class="rush_box flex column flex_m">
+        <image style="height:170rpx;margin-top:20rpx" mode="aspectFit" src="http://www.lyjp.shop/uploads/2019-10-28/FCJ8yXRo3oDOL3Nwr2RXpkNFh6KLDe6ERaRae9Oa.png"></image>
+        <text class="fs_12 clamp_1 text_dot" style="color:#010101;margin:10rpx 0 4rpx 0">曼秀曼秀雷敦洁面曼秀雷敦洁面曼秀雷敦洁面雷敦洁面</text>
+        <view class="fs_10 tc fcb2">
+          RMB 89.00
+        </view>
+        <view class="tc sub fs_12">立即抢购</view>
+      </view>
+      <view style="width:3.5%"></view>
+    </block>
+    <!-- </view> -->
+  </view>
+  <!-- 猜你喜欢 -->
+  <view class="fs_15 tc recommended">
+    <view class="flex flex_m">
+      <image class="left_1" src="../../../image/left_1.png"></image>
+      <image class="left_2" src="../../../image/left_2.png"></image>
+    </view>
+    <text style="color:#F27D1E">猜你喜欢</text>
+    <view class="flex flex_m">
+      <image class="left_2" src="../../../image/left_2.png"></image>
+      <image class="left_1" src="../../../image/left_1.png"></image>
+    </view>
+  </view>
+  <view class="shop_list flex_wrap width90" style="width:92%">
+    <block wx:for="{{shopList}}" wx:key="{{index}}">
+      <one_shop data-id="{{item.id}}" data-skuId="{{item.sku_id}}" data-path="/pages/home/pages/goodsDealis/goodsDealis" bindtap="toRouter" class="{{index%2==0?'oneList ml':'oneList'}}" obj="{{item}}"></one_shop>
+    </block>
+  </view>
+  <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
+</view>
+<!-- 
 <view class="container container_box">
   <mp-dialog title="提示" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
     <view>当前操作需要登陆后进行,请您立即登陆~</view>
@@ -13,7 +103,7 @@
     </view>
     <swiper autoplay="true" interval="2000" duration="200" bindchange="changedots" circular class="swiper_ab">
       <block wx:for="{{bannerList}}" wx:key="{{index}}">
-        <swiper-item data-link="{{item.link_url}}" catchtap="tolink">
+        <swiper-item data-path="{{item.link_url}}" catchtap="toRouter">
           <image src="{{item.thumb}}" onerror="" class="slide-image"></image>
         </swiper-item>
       </block>
@@ -24,7 +114,7 @@
   </view>
   <view class="flex flex_sa seckill width94 flex_wrap">
     <block wx:for="{{navList}}" wx:key="{{index}}">
-      <view data-link="{{item.link_url}}" catchtap="tolink" class="seckillList flex flex_nosize">
+      <view data-path="{{item.link_url}}" catchtap="toRouter" class="seckillList flex flex_nosize">
         <image class="image" src="{{item.icon}}"></image>
         <text class="fs_13 clamp_1 tc" style="color:#F18E1E;margin:4rpx 0 0 0;width:95%">{{item.name}}</text>
       </view>
@@ -50,4 +140,4 @@
     </block>
   </view>
   <view class="noMore" wx:if="{{!isPullDownRefresh}}">没有更多数据了...</view>
-</view>
+</view> -->

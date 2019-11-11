@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<view class="container box_container">
+  <image class="sales" src="../../image/sales.png"></image>
+  <view class="select width90 flex fs_13">
+    <block wx:for="{{typeList}}" wx:key="{{index}}">
+      <text catchtap="secectType" data-index="{{index}}" class="tc {{typeInd==index?'actype':''}}">{{item}}</text>
+    </block>
+  </view>
+  <view class="list width90">
+    <block wx:for="{{goodsList}}" wx:key="{{index}}">
+      <view class="flex one_goods">
+        <text class="coding flex_nosize tc">{{index}}</text>
+        <image mode="aspectFill" class="goods_img flex_nosize" src="{{item.goods_thumb}}"></image>
+        <view class="flex column">
+          <text class="fs_14 goods_name">{{item.goods_name}}</text>
+          <text class="fs_18">20000</text>
+        </view>
+        <view class="flex column flex_c_m link">
+          <text class="fs_15">96</text>
+          <text wx:if="{{index%2==0}}" catchtap="collectGoods" class="./iconfont/iconxin:before icon" style="font-size:30rpx; color:#F44444"></text>
+          <text wx:else catchtap="collectGoods" class="./iconfont/iconxin1:before icon" style="font-size:30rpx; color:#F44444"></text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+</view>
