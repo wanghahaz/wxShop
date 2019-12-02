@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    scroll_top: 0,
     sIndex: 0,
     userList: [],
     ads: {},
@@ -20,10 +21,16 @@ Page({
       showMask: !this.data.showMask
     })
   },
+  bindscrolltolower() {
+    if (this.data.isBottom) {
+      this.getShare_list()
+    }
+  },
   selectIndex(e) {
     this.setData({
       isBottom: true,
       page: 1,
+      scroll_top: 0,
       userList: [],
       sIndex: e.currentTarget.dataset.index
     })
@@ -101,6 +108,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let that = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        let clientHeight = res.windowHeight;
+        let clientWidth = res.windowWidth;
+        let ratio = 750 / clientWidth;
+        let height = clientHeight * ratio;
+        console.log(height)
+        that.setData({
+          height: height - 104 - 340
+        });
+      }
+    });
     this.getImgList()
     this.getShare_list()
     this.getRule()
@@ -143,9 +163,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    if (this.data.isBottom) {
-      this.getShare_list()
-    }
+
   },
 
   /**

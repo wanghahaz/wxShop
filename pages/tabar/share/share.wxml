@@ -1,17 +1,21 @@
 <!--index.wxml-->
 <view class="container">
-  <image class="box_bg" src="../../../image/intavl.png"></image>
-  <view class="box_img">
-    <image class="inta_si" src="../../../image/inta_si.png"></image>
-    <image class="inta_bi" src="../../../image/inta_bi.png"></image>
-    <view class="msg fs_14 flex column">
-      <text>看视频，领代金券，多看多得</text>
-      <text>同城快递，一步到达</text>
-      <text>全城商品，0元购</text>
+  <view class="box_top">
+    <view class="top_height" style="padding-top:{{top_height}}px"></view>
+    <view class="title tc">邀请好友得双倍收益卡</view>
+    <view class="fs_11 flex flex_c_m top_arrows">
+      <image src="../../../image/arrows.png"></image>
+      <text>每成功邀请1位好友可获得一张双倍收益卡</text>
+      <image src="../../../image/arrows.png"></image>
     </view>
-    <view data-path="/pages/tabar/index/index" catchtap="switchTab" class="to flex flex_end">
-      <text class="fs_22">进入首页</text>
-      <text class="./iconfont/iconarrow-right-copy:before icon" style="font-size:46rpx;"></text>
+    <view class="step">
+      <image src="../../../image/step_bg.png"></image>
     </view>
+  </view>
+  <view class="box_bottom">
+    <view class="text_box tc fs_12">同城快递，一步到达 </view>
+    <view class="text_box tc fs_12">全城商品，0元购 </view>
+    <view class="text_box tc fs_12">看视频 领代金劵 多看多得</view>
+    <view data-path="/pages/tabar/index/index" catchtap="switchTab" class="to_index tc">进入首页</view>
   </view>
 </view>

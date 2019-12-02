@@ -1,52 +1,60 @@
-<!--index.wxml-->
 <view class="container">
-  <image class="friend" src="{{ads.ads.thumb}}"></image>
-  <view bindtap="showModel" class="rule tc fs_14">活动规则</view>
-  <view class="invaBox flex column flex_sa box_zing">
-    <image src="../../image/invaBox.png"></image>
-    <view class="fcF1 flex ">
-      <view data-index="0" bindtap="selectIndex" class="flex column num_box flex_m flex_sa box_zing">
-        <text class="{{sIndex==0?'fs_24':'fs_20'}}">{{ads.share_num}}</text>
-        <text class="{{sIndex==0?'fs_18':''}}">成功邀请好友</text>
-      </view>
-      <view data-index="1" bindtap="selectIndex" class="flex column num_box flex_m flex_sa box_zing ">
-        <text class="{{sIndex==1?'fs_24':'fs_20'}}">{{ads.gift_card_num}}</text>
-        <text class="{{sIndex==1?'fs_18':''}}">我的双倍收益卡</text>
-      </view>
+  <view class="scroll_title flex fs_10">
+    <view catchtap="selectIndex" data-index="0" class="flex_line_c_m {{sIndex==0?'active':''}}">
+      <image wx:if="{{sIndex==0}}" class="friend" src="../../image/friend_ac.png"></image>
+      <image wx:else class="friend" src="../../image/friend.png"></image>
+      <text>成功邀请好友</text>
     </view>
-    <!--open-type="share"  -->
-    <!--  data-path="/pages/tabar/share/share"  catchtap="toRouter" -->
-    <button style="margin:0 0 12rpx 0" open-type="share" hover-class='none' class="invita fs_16 tc">发邀请领双倍收益卡</button>
+    <view catchtap="selectIndex" data-index="1" class="flex_line_c_m {{sIndex==1?'active':''}}">
+      <image wx:if="{{sIndex==1}}" class="card" src="../../image/card_ac.png"></image>
+      <image wx:else class="card" src="../../image/card.png"></image>
+      <text>我的双倍收益卡</text>
+    </view>
   </view>
-  <view class="tc recommended" style="color:#B2B2B2">{{sIndex==0?'邀请的朋友':'双倍收益卡'}}</view>
-  <view wx:if="{{userList.length==0}}" class="noInva flex column flex_m">
-    <image src="../../image/noInva.png"></image>
-    <text wx:if="{{sIndex==0&&userList.length==0&&!isBottom}}" style="margin:30rpx 0 0 0" class="fs_15 fcb2">还没有邀请朋友哦~</text>
-    <text wx:if="{{sIndex==1&&userList.length==0&&!isBottom}}" style="margin:30rpx 0 0 0" class="fs_15 fcb2">还没有双倍收益卡哦~</text>
-  </view>
-  <view wx:if="{{sIndex==0}}" class="width90">
-    <block wx:for="{{userList}}" wx:key="{{index}}">
-      <view class="fs_15 userList flex flex_lr flex_m">
-        <view class="flex flex_m">
-          <image src="{{item.user.avatar}}"></image>
-          <text style="margin:0 0 0 20rpx">{{item.user.username}}</text>
+  <scroll-view scroll-top="{{scroll_top}}"  style="height:{{height}}rpx" class="scroll_box" scroll-y bindscrolltolower="bindscrolltolower">
+    <view wx:if="{{userList.length==0}}" class="noInva flex column flex_m">
+      <image src="../../image/noInva.png"></image>
+      <text wx:if="{{sIndex==0&&userList.length==0&&!isBottom}}" style="margin:30rpx 0 0 0" class="fs_15 fcb2">还没有邀请朋友哦~</text>
+      <text wx:if="{{sIndex==1&&userList.length==0&&!isBottom}}" style="margin:30rpx 0 0 0" class="fs_15 fcb2">还没有双倍收益卡哦~</text>
+    </view>
+    <view wx:if="{{sIndex==0}}" class="width94">
+      <block wx:for="{{userList}}" wx:key="{{index}}">
+        <view class="fs_15 userList box_zing flex flex_lr flex_m">
+          <view class="flex flex_m">
+            <image src="{{item.user.avatar}}"></image>
+            <text style="margin:0 0 0 20rpx">{{item.user.username}}</text>
+          </view>
+          <text class="flex_nosize">{{item.created_at}}</text>
         </view>
-        <text class="flex_nosize">{{item.created_at}}</text>
+      </block>
+    </view>
+    <block wx:else>
+      <view wx:for="{{userList}}" wx:key="{{index}}" class="card_box width94">
+        <view class="flex flex_lr_m">
+          <text class="card_text">视频双倍收益卡</text>
+          <text class="card_btn tc fs_13">未使用</text>
+        </view>
+        <view class="flex flex_m">
+          <text class="fs_13 card_time">有效期：{{item.left_days}}天</text>
+        </view>
       </view>
     </block>
-  </view>
-  <block wx:else>
-    <view wx:for="{{userList}}" wx:key="{{index}}" class="card_box">
-      <image src="../../image/card_box.png"></image>
-      <text style="top:30rpx" class="fs_12">双倍收益卡</text>
-      <text style="top:70rpx" class="fs_10">有效期：{{item.left_days}}天</text>
+    <view wx:if="{{isBottom}}">
+      <view class="downLoding"></view>
+      <view style="height:50rpx"></view>
     </view>
-  </block>
-  <view wx:if="{{isBottom}}">
-    <view class="downLoding"></view>
-    <view style="height:50rpx"></view>
+    <view wx:if="{{isBottom==false&&userList.length!=0}}" class="noMore">已加载全部！</view>
+  </scroll-view>
+
+  <view class="bottom_box flex_line_c">
+    <!--open-type="share"  -->
+    <!-- data-path="/pages/tabar/share/share"  catchtap="toRouter" -->
+    <button open-type="share" hover-class='none' class="invita fs_16 tc">邀请好友</button>
+    <view bindtap="showModel" class="rule flex_c_m flex">
+      <text class="./iconfont/icontishi:before icon" style="font-size:30rpx"></text>
+      <text class="fs_13">活动规则</text>
+    </view>
   </view>
-  <view wx:if="{{isBottom==false&&userList.length!=0}}" class="noMore">已加载全部！</view>
   <view bindtap="showModel" catch:touchmove hidden="{{showMask}}" class="mask">
   </view>
   <view class="ruleModel {{!showMask?'activeRule':''}}">

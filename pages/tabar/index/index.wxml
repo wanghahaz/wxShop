@@ -40,10 +40,11 @@
         </view>
       </block>
     </view>
+    <view class="box_show"></view>
+  </view>
     <view class="fiy_smt fs_12 tc">
       每日优惠 立即抢购
     </view>
-  </view>
   <!-- 平台推荐 -->
   <view class="fs_15 terrace box_zing flex flex_lr">
     <view>
@@ -68,6 +69,9 @@
       <view style="width:3.5%"></view>
     </block>
     <!-- </view> -->
+  </view>
+  <view class="banner_index box_zing">
+    <image src="../../../image/banner_index.png"></image>
   </view>
   <!-- 猜你喜欢 -->
   <view class="fs_15 tc recommended">

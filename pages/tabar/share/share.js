@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    top_height: ''
   },
   switchTab(e) {
     wx.switchTab({
@@ -20,6 +20,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.getSystemInfo({
+      success: e => {
+        this.setData({
+          top_height: e.platform == 'android' ? e.statusBarHeight + 50 : e.statusBarHeight + 45
+        })
+        // this.globalData.StatusBar = e.statusBarHeight;
+        // this.globalData.CustomBar =
+      }
+    });
     wx.setStorage({
       key: "share_id",
       data: options.share_id
