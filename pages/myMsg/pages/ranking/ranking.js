@@ -10,14 +10,6 @@ Page({
    */
   data: {
     goodsList: [],
-    typeList: [
-      '推荐',
-      '女装',
-      '洗护',
-      '电器',
-      '婴儿用品',
-      '其他'
-    ],
     typeInd: 0
   },
   bindinput(e) {

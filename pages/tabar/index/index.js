@@ -26,6 +26,9 @@ Page({
     clientHeight: app.globalData.clientHeight / 2,
     shopList: [],
     isPullDownRefresh: true,
+    s: '23',
+    m: '59',
+    h: '08'
   },
   tapDialogButton(e) {
     this.setData({
@@ -169,7 +172,7 @@ Page({
         icon: 'http://www.lyjp.shop/uploads/2019-10-31/9FZpSmABuWTqBHjS9KhCiUUlmGJJysoEt9IBGRaS.png'
       }, {
         name: '排行榜',
-          link_url: '/pages/myMsg/pages/ranking/ranking',
+        link_url: '/pages/myMsg/pages/ranking/ranking',
         icon: 'http://www.lyjp.shop/uploads/2019-10-31/M4Z2wbASoPltn9fmqpj3TuKmfEctxBRqJC3GERIL.png'
       }]
     })
